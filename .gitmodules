@@ -1,0 +1,20 @@
+[submodule "framework/nunitextensions"]
+	path = framework/nunitextensions
+	url = ../RJCP.DLL.CodeQuality.git
+	branch = master
+	ignore = untracked
+[submodule "framework/commandline"]
+	path = framework/commandline
+	url = ../RJCP.DLL.CommandLine.git
+	branch = master
+	ignore = untracked
+[submodule "framework/crashreporter"]
+	path = framework/crashreporter
+	url = ../RJCP.DLL.CrashReporter.git
+	branch = master
+	ignore = untracked
+[submodule "framework/volumedevinfo"]
+	path = framework/volumedevinfo
+	url = ../RJCP.DLL.VolumeDeviceInfo.git
+	branch = master
+	ignore = untracked

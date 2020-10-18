@@ -1,0 +1,9 @@
+*~
+/distribute
+/Tools
+/packages
+/.vs
+/installer/.vs
+/CrashDumps
+/rjcp.rjlog.html
+/rjcp.rjlog
