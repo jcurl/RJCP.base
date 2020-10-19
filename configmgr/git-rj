@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# A shell bootstrap script that looks for the python3 binary. On Windows, it's
+# called 'python'. On Linux, it's called 'python3'. Problem is, that on Linux,
+# the binary 'python' is the wrong version. So we have to run the interpreter
+# to find the correct version.
+#
+# The script is intended to be run with 'git', as 'git rj version'. The python
+# interpreter isn't run under Windows to find the right version, as this script
+# must be called 'git-rj' (we can't add the .py extension, else git won't find
+# it).
+
+test_python()
+{
+    COMMAND=$1
+    shift 1
+    PARAMS=$@
+
+    PYTHON=`command -v $COMMAND`
+    if [ x"$PYTHON" != x"" ] ; then
+        VERFULLPY=`"$PYTHON" -V 2>/dev/null`
+        PREPY=${VERFULLPY:0:6}
+        if [ x"$PREPY" == x"Python" ] ; then
+            VERPY=${VERFULLPY##Python}
+            VERMAJ=${VERPY%%.*}
+            if [ $VERMAJ == 3 ] ; then
+                "$PYTHON" $PARAMS
+                exit $?
+            fi
+        fi
+    fi
+}
+
+BASENAME=$(basename "$0")
+BASEDIR=$(dirname "$0")
+PYTHONSC="$BASEDIR/$BASENAME.py"
+if [ ! -f $PYTHONSC ] ; then
+    READLINK=`readlink "$0"`
+    if [ x"$READLINK" != x"" ] ; then
+        # This is a link, get the path to what's next to it instead
+        BASENAME=$(basename "$READLINK")
+        BASEDIR=$(dirname "$READLINK")
+        PYTHONSC="$BASEDIR/$BASENAME.py"
+    else
+        PYTHONSC=$BASENAME.py
+    fi
+fi
+
+test_python python3 $PYTHONSC $@
+test_python python $PYTHONSC $@
