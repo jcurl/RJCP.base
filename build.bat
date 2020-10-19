@@ -30,6 +30,7 @@ set RELEASE=
 set DIRTY=
 set DOTIME=
 set LATEST=
+set FORCE=
 
 for %%a in (%*) do (
   if /I "%%a" EQU "/CHECK"     set CHECK=true
@@ -42,6 +43,7 @@ for %%a in (%*) do (
   if /I "%%a" EQU "/DIRTY"     set DIRTY=true
   if /I "%%a" EQU "/TIME"      set DOTIME=true
   if /I "%%a" EQU "/LATEST"    set LATEST=true
+  if /I "%%a" EQU "/FORCE"     set FORCE=true
 )
 
 REM No options performs a build and test by default.
@@ -86,7 +88,7 @@ REM  build and package            BUILDFLAG=/T /P
 REM  build and test and package   BUILDFLAG=/P
 set BUILDFLAG=
 if "%BUILD%" EQU "true" (
-  if "%TEST%" NEQ "true" set "BUILDFLAG=/T"
+  if "%TEST%" NEQ "true" set BUILDFLAG=/T
   if "%PACKAGE%" EQU "true" (
     set "BUILDFLAG=/P"
     if "%TEST%" NEQ "true" set "BUILDFLAG=/T /P"
@@ -99,9 +101,12 @@ if "%BUILD%" EQU "true" (
   set PACKAGE=
 )
 
-if "%DIRTY%" EQU "true" set "DIRTYFLAG=/d"
+if "%DIRTY%" EQU "true" set DIRTYFLAG=/d
 
-set "TESTFLAG=/i"
+set TESTFLAG=/i
+
+set TESTFORCE=
+if "%FORCE%" EQU "true" set TESTFORCE=/f
 
 REM ----------------------------------------------------------------------------
 REM Set up the build environment
@@ -213,7 +218,7 @@ if "%BUILD%" NEQ "true" goto :TEST
 echo ==============================================================================
 echo RJBUILD build
 echo ==============================================================================
-"%RJBUILD%" build %BUILDFLAG% %DIRTYFLAG% %TESTFLAG% %RELFLAG% "%PROJECT%" || goto :FINISH
+"%RJBUILD%" build %BUILDFLAG% %DIRTYFLAG% %TESTFLAG% %TESTFORCE% %RELFLAG% "%PROJECT%" || goto :FINISH
 echo.
 
 :TEST
@@ -221,7 +226,7 @@ if "%TEST%" NEQ "true" goto :PACKAGE
 echo ==============================================================================
 echo RJBUILD test
 echo ==============================================================================
-"%RJBUILD%" test %DIRTYFLAG% %TESTFLAG% "%PROJECT%" || goto :FINISH
+"%RJBUILD%" test %DIRTYFLAG% %TESTFLAG% %TESTFORCE% "%PROJECT%" || goto :FINISH
 echo.
 
 :PACKAGE
