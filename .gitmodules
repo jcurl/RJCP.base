@@ -18,3 +18,8 @@
 	url = ../RJCP.DLL.VolumeDeviceInfo.git
 	branch = master
 	ignore = untracked
+[submodule "framework/textutils"]
+	path = framework/textutils
+	url = ../RJCP.DLL.Text
+	branch = master
+	ignore = untracked
