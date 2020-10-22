@@ -244,7 +244,7 @@ echo Generate documentation
 echo ==============================================================================
 echo For .NET 4.5
 echo ------------------------------------------------------------------------------
-"%RJBUILD_BUILDPROVIDER%" rjcp-net45.shfbproj /t:Rebuild /verbosity:minimal /p:Configuration=Release /p:OutputPath="%CD%\distribute\Help\net45" /nologo
+"%RJBUILD_BUILDPROVIDER%" rjcp.shfbproj /t:Rebuild /verbosity:minimal /p:Configuration=Release /p:OutputPath="%CD%\distribute\Help\net45" /nologo
 echo.
 
 :FINISH
