@@ -10,7 +10,7 @@ import sys
 import threading
 
 # Global Configuration
-VERSION = "1.0-alpha.20201016.1"
+VERSION = "1.0-alpha.20201028"
 GITDEBUGLEVEL = 0
 MAX_WORKERS = 8
 
@@ -279,7 +279,7 @@ class GitModule:
     def get_current_branch(self):
         try:
             git = GitExe.run(
-                ["rev-parse", "--abbrev-ref", "HEAD"],
+                ["branch", "--show-current"],
                 cwd=self.top_level()
             )
             return git.stdout[0]
@@ -391,6 +391,8 @@ class GitModule:
                 ["for-each-ref", "--format=%(upstream:short)", ref],
                 cwd=self.top_level()
             )
+            if (len(git_remote_ref.stdout) == 0):
+                return None
             return git_remote_ref.stdout[0]
         except subprocess.CalledProcessError:
             return None
@@ -1029,6 +1031,8 @@ class StatusCommand:
             current_branch = module.get_current_branch()
             if (current_branch != None):
                 current_hash = module.get_current_hash()
+                if (current_hash == None):
+                    current_hash = "0000000000000000000000000000000000000000"
                 return (current_hash, current_branch)
             return None
 
