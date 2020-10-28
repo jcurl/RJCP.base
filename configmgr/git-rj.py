@@ -282,6 +282,8 @@ class GitModule:
                 ["branch", "--show-current"],
                 cwd=self.top_level()
             )
+            if (len(git.stdout) == 0):
+                return None
             return git.stdout[0]
         except subprocess.CalledProcessError:
             # We can get here if executed in an empty repository.
@@ -1029,12 +1031,13 @@ class StatusCommand:
 
         def _get_current_branch(module):
             current_branch = module.get_current_branch()
-            if (current_branch != None):
-                current_hash = module.get_current_hash()
-                if (current_hash == None):
-                    current_hash = "0000000000000000000000000000000000000000"
-                return (current_hash, current_branch)
-            return None
+            current_hash = module.get_current_hash()
+            if (current_branch == None and current_hash == None):
+                return None
+
+            if (current_hash == None):
+                current_hash = "0000000000000000000000000000000000000000"
+            return (current_hash, current_branch)
 
         def _get_destination_branch(module):
             if (module.default_branch == None):
