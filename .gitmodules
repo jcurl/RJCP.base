@@ -1,8 +1,3 @@
-[submodule "framework/nunitextensions"]
-	path = framework/nunitextensions
-	url = ../RJCP.DLL.CodeQuality.git
-	branch = master
-	ignore = untracked
 [submodule "framework/commandline"]
 	path = framework/commandline
 	url = ../RJCP.DLL.CommandLine.git
@@ -13,13 +8,28 @@
 	url = ../RJCP.DLL.CrashReporter.git
 	branch = master
 	ignore = untracked
+[submodule "framework/datastructures"]
+	path = framework/datastructures
+	url = ../RJCP.DLL.Datastructures.git
+	branch = master
+	ignore = untracked
+[submodule "framework/nunitextensions"]
+	path = framework/nunitextensions
+	url = ../RJCP.DLL.CodeQuality.git
+	branch = master
+	ignore = untracked
+[submodule "framework/textutils"]
+	path = framework/textutils
+	url = ../RJCP.DLL.Text.git
+	branch = master
+	ignore = untracked
 [submodule "framework/volumedevinfo"]
 	path = framework/volumedevinfo
 	url = ../RJCP.DLL.VolumeDeviceInfo.git
 	branch = master
 	ignore = untracked
-[submodule "framework/textutils"]
-	path = framework/textutils
-	url = ../RJCP.DLL.Text
+[submodule "framework/xml"]
+	path = framework/xml
+	url = ../RJCP.DLL.Xml.git
 	branch = master
 	ignore = untracked

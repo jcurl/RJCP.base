@@ -99,6 +99,28 @@
         </release>
       </project>
 
+      <project name="RJCP.DLL.CommandLine" dir="framework/commandline">
+        <buildtarget name="net40,net40-checked">
+          <lib dir="code">
+            <csproj>RJCP.Core.CommandLine.csproj</csproj>
+            <target>RJCP.Core.CommandLine.dll</target>
+            <nuspec target="net40">RJCP.Core.CommandLine.nuspec</nuspec>
+          </lib>
+          <deploy>
+            <path>LICENSE.md</path>
+            <path>README.md</path>
+          </deploy>
+          <test name="RJCP.DLL.CommandLineTest" dir="test" type="nunit">
+            <csproj>RJCP.Core.CommandLineTest.csproj</csproj>
+            <package>packages.config</package>
+            <target>RJCP.Core.CommandLineTest.dll</target>
+          </test>
+        </buildtarget>
+        <release>
+          <tag version="0.8.0">release/v0.8.0</tag>
+        </release>
+      </project>
+
       <project name="RJCP.DLL.CrashReporter" dir="framework/crashreporter">
         <buildtarget name="net40,net40-checked">
           <lib dir="CrashReporter">
@@ -149,26 +171,22 @@
         </release>
       </project>
 
-      <project name="RJCP.DLL.CommandLine" dir="framework/commandline">
+      <project name="RJCP.DLL.Datastructures" dir="framework/datastructures">
         <buildtarget name="net40,net40-checked">
-          <lib dir="code">
-            <csproj>RJCP.Core.CommandLine.csproj</csproj>
-            <target>RJCP.Core.CommandLine.dll</target>
-            <nuspec target="net40">RJCP.Core.CommandLine.nuspec</nuspec>
+          <lib dir="Datastructures">
+            <csproj>RJCP.Core.Datastructures.csproj</csproj>
+            <target>RJCP.Core.Datastructures.dll</target>
+            <nuspec target="net40">RJCP.Core.Datastructures.nuspec</nuspec>
           </lib>
           <deploy>
             <path>LICENSE.md</path>
-            <path>README.md</path>
           </deploy>
-          <test name="RJCP.DLL.CommandLineTest" dir="test" type="nunit">
-            <csproj>RJCP.Core.CommandLineTest.csproj</csproj>
+          <test name="RJCP.DLL.DatastructuresTest" dir="DatastructuresTest" type="nunit3">
+            <csproj>RJCP.Core.DatastructuresTest.csproj</csproj>
             <package>packages.config</package>
-            <target>RJCP.Core.CommandLineTest.dll</target>
+            <target>RJCP.Core.DatastructuresTest.dll</target>
           </test>
         </buildtarget>
-        <release>
-          <tag version="0.8.0">release/v0.8.0</tag>
-        </release>
       </project>
 
       <project name="RJCP.DLL.Text" dir="framework/textutils">
@@ -180,7 +198,6 @@
           </lib>
           <deploy>
             <path>LICENSE.md</path>
-            <!-- <path>README.md</path> -->
           </deploy>
           <test name="RJCP.DLL.TextTest" dir="test" type="nunit3">
             <csproj>RJCP.TextTest.csproj</csproj>
@@ -199,7 +216,6 @@
           </lib>
           <deploy>
             <path>LICENSE.md</path>
-            <!-- <path>README.md</path> -->
           </deploy>
           <test name="RJCP.DLL.VolumeDeviceInfoTest" dir="VolumeDeviceInfoTest" type="nunit3">
             <csproj>RJCP.IO.VolumeDeviceInfoTest.csproj</csproj>
@@ -209,6 +225,24 @@
           <test name="RJCP.App.VolumeInfo" dir="VolumeInfo" type="none">
             <csproj>VolumeInfo.csproj</csproj>
             <target>VolumeInfo.exe</target>
+          </test>
+        </buildtarget>
+      </project>
+
+      <project name="RJCP.DLL.Xml" dir="framework/xml">
+        <buildtarget name="net40,net40-checked">
+          <lib dir="Xml">
+            <csproj>RJCP.Core.Xml.csproj</csproj>
+            <target>RJCP.Core.Xml.dll</target>
+            <nuspec target="net40">RJCP.Core.Xml.nuspec</nuspec>
+          </lib>
+          <deploy>
+            <path>LICENSE.md</path>
+          </deploy>
+          <test name="RJCP.DLL.TextTest" dir="XmlTest" type="nunit3">
+            <csproj>RJCP.Core.XmlTest.csproj</csproj>
+            <package>packages.config</package>
+            <target>RJCP.Core.XmlTest.dll</target>
           </test>
         </buildtarget>
       </project>
