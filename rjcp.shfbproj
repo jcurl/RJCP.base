@@ -53,15 +53,20 @@
     <MSHelpViewerSdkLinkType>Msdn</MSHelpViewerSdkLinkType>
     <DocumentationSources>
       <DocumentationSource sourceFile="distribute\RJCP.DLL.CodeQuality\lib\net40\RJCP.CodeQuality.xml" />
-<DocumentationSource sourceFile="distribute\RJCP.DLL.CodeQuality\lib\net40\RJCP.CodeQuality.dll" />
-<DocumentationSource sourceFile="distribute\RJCP.DLL.CommandLine\lib\net40\RJCP.Core.CommandLine.dll" />
-<DocumentationSource sourceFile="distribute\RJCP.DLL.CommandLine\lib\net40\RJCP.Core.CommandLine.xml" />
-<DocumentationSource sourceFile="distribute\RJCP.DLL.CrashReporter\lib\net45\RJCP.Diagnostics.CrashReporter.dll" />
-<DocumentationSource sourceFile="distribute\RJCP.DLL.CrashReporter\lib\net45\RJCP.Diagnostics.CrashReporter.xml" />
-<DocumentationSource sourceFile="distribute\RJCP.DLL.Text\lib\net40\RJCP.Text.dll" />
-<DocumentationSource sourceFile="distribute\RJCP.DLL.Text\lib\net40\RJCP.Text.xml" />
-<DocumentationSource sourceFile="distribute\RJCP.DLL.VolumeDeviceInfo\lib\net40\RJCP.IO.VolumeDeviceInfo.xml" />
-<DocumentationSource sourceFile="distribute\RJCP.DLL.VolumeDeviceInfo\lib\net40\RJCP.IO.VolumeDeviceInfo.dll" /></DocumentationSources>
+      <DocumentationSource sourceFile="distribute\RJCP.DLL.CodeQuality\lib\net40\RJCP.CodeQuality.dll" />
+      <DocumentationSource sourceFile="distribute\RJCP.DLL.CommandLine\lib\net40\RJCP.Core.CommandLine.dll" />
+      <DocumentationSource sourceFile="distribute\RJCP.DLL.CommandLine\lib\net40\RJCP.Core.CommandLine.xml" />
+      <DocumentationSource sourceFile="distribute\RJCP.DLL.CrashReporter\lib\net45\RJCP.Diagnostics.CrashReporter.dll" />
+      <DocumentationSource sourceFile="distribute\RJCP.DLL.CrashReporter\lib\net45\RJCP.Diagnostics.CrashReporter.xml" />
+      <DocumentationSource sourceFile="distribute\RJCP.DLL.VolumeDeviceInfo\lib\net40\RJCP.IO.VolumeDeviceInfo.xml" />
+      <DocumentationSource sourceFile="distribute\RJCP.DLL.VolumeDeviceInfo\lib\net40\RJCP.IO.VolumeDeviceInfo.dll" />
+      <DocumentationSource sourceFile="distribute\RJCP.DLL.Text\lib\net40\RJCP.Core.Text.xml" />
+      <DocumentationSource sourceFile="distribute\RJCP.DLL.Text\lib\net40\RJCP.Core.Text.dll" />
+      <DocumentationSource sourceFile="distribute\RJCP.DLL.Xml\lib\net40\RJCP.Core.Xml.xml" />
+      <DocumentationSource sourceFile="distribute\RJCP.DLL.Xml\lib\net40\RJCP.Core.Xml.dll" />
+      <DocumentationSource sourceFile="distribute\RJCP.DLL.Datastructures\lib\net40\RJCP.Core.Datastructures.xml" />
+      <DocumentationSource sourceFile="distribute\RJCP.DLL.Datastructures\lib\net40\RJCP.Core.Datastructures.dll" />
+    </DocumentationSources>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, TypeParameter, AutoDocumentDispose</MissingTags>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform

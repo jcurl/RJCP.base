@@ -37,9 +37,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrashReportApp-net40", "fra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RJCP.Text", "RJCP.Text", "{72484217-F801-4410-80B0-586118156782}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJCP.Text", "framework\textutils\code\RJCP.Text.csproj", "{F9D056A3-DB23-4E4B-9D3C-E08151472923}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJCP.Core.Text", "framework\textutils\code\RJCP.Core.Text.csproj", "{F9D056A3-DB23-4E4B-9D3C-E08151472923}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJCP.TextTest", "framework\textutils\test\RJCP.TextTest.csproj", "{EB153A07-A8CB-4343-B235-984F4E23C23E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJCP.Core.TextTest", "framework\textutils\test\RJCP.Core.TextTest.csproj", "{EB153A07-A8CB-4343-B235-984F4E23C23E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RJCP.Xml", "RJCP.Xml", "{C54ABDBE-5352-4DC1-9561-50EC2783861C}"
 EndProject

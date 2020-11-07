@@ -192,17 +192,17 @@
       <project name="RJCP.DLL.Text" dir="framework/textutils">
         <buildtarget name="net40,net40-checked">
           <lib dir="code">
-            <csproj>RJCP.Text.csproj</csproj>
-            <target>RJCP.Text.dll</target>
-            <nuspec target="net40">RJCP.Text.nuspec</nuspec>
+            <csproj>RJCP.Core.Text.csproj</csproj>
+            <target>RJCP.Core.Text.dll</target>
+            <nuspec target="net40">RJCP.Core.Text.nuspec</nuspec>
           </lib>
           <deploy>
             <path>LICENSE.md</path>
           </deploy>
           <test name="RJCP.DLL.TextTest" dir="test" type="nunit3">
-            <csproj>RJCP.TextTest.csproj</csproj>
+            <csproj>RJCP.Core.TextTest.csproj</csproj>
             <package>packages.config</package>
-            <target>RJCP.TextTest.dll</target>
+            <target>RJCP.Core.TextTest.dll</target>
           </test>
         </buildtarget>
       </project>
