@@ -96,6 +96,7 @@
           <tag version="0.4.3">release/v0.4.3</tag> <!-- RJCP.NUnitExtensions.dll for this version and earlier -->
           <tag version="0.5.0">release/v0.5.0</tag>
           <tag version="0.5.0.1">release/v0.5.0.1</tag>
+          <tag version="0.5.1">release/v0.5.1</tag>
         </release>
       </project>
 
@@ -118,6 +119,7 @@
         </buildtarget>
         <release>
           <tag version="0.8.0">release/v0.8.0</tag>
+          <tag version="0.8.1">release/v0.8.1</tag>
         </release>
       </project>
 
@@ -168,6 +170,7 @@
           <tag version="0.4.0.1">release/v0.4.0.1</tag>
           <tag version="0.4.1">release/v0.4.1</tag>
           <tag version="0.4.2">release/v0.4.2</tag>
+          <tag version="0.4.3">release/v0.4.3</tag>
         </release>
       </project>
 
