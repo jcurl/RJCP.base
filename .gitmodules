@@ -33,3 +33,8 @@
 	url = ../RJCP.DLL.Xml.git
 	branch = master
 	ignore = untracked
+[submodule "framework/cpuid"]
+	path = framework/cpuid
+	url = ../RJCP.DLL.CpuId.git
+	branch = master
+	ignore = untracked

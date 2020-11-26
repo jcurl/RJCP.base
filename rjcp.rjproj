@@ -123,6 +123,31 @@
         </release>
       </project>
 
+      <project name="RJCP.DLL.CpuId" dir="framework/cpuid">
+        <buildtarget name="net40,net40-checked">
+          <lib dir="CpuId">
+            <csproj>RJCP.Diagnostics.CpuId.csproj</csproj>
+            <target>RJCP.Diagnostics.CpuId.dll</target>
+          </lib>
+          <deploy>
+            <path>README.md</path>
+          </deploy>
+          <test name="RJCP.DLL.CpuIdTest" dir="CpuIdTest" type="nunit3">
+            <csproj>RJCP.Diagnostics.CpuIdTest.csproj</csproj>
+            <package>packages.config</package>
+            <target>RJCP.Diagnostics.CpuIdTest.dll</target>
+          </test>
+          <test name="RJCP.App.CpuIdWin" dir="CpuIdWin" type="none">
+            <csproj>CpuIdWin.csproj</csproj>
+            <target>CpuIdWin.exe</target>
+          </test>
+          <test name="RJCP.App.CpuIdCon" dir="CpuIdCon" type="none">
+            <csproj>CpuIdCon.csproj</csproj>
+            <target>CpuIdCon.exe</target>
+          </test>
+        </buildtarget>
+      </project>
+
       <project name="RJCP.DLL.CrashReporter" dir="framework/crashreporter">
         <buildtarget name="net40,net40-checked">
           <lib dir="CrashReporter">
