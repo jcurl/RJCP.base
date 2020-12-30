@@ -66,6 +66,8 @@
       <DocumentationSource sourceFile="distribute\RJCP.DLL.Xml\lib\net40\RJCP.Core.Xml.dll" />
       <DocumentationSource sourceFile="distribute\RJCP.DLL.Datastructures\lib\net40\RJCP.Core.Datastructures.xml" />
       <DocumentationSource sourceFile="distribute\RJCP.DLL.Datastructures\lib\net40\RJCP.Core.Datastructures.dll" />
+      <DocumentationSource sourceFile="distribute\RJCP.DLL.CpuId\lib\net40\RJCP.Diagnostics.CpuId.dll" />
+      <DocumentationSource sourceFile="distribute\RJCP.DLL.CpuId\lib\net40\RJCP.Diagnostics.CpuId.xml" />
     </DocumentationSources>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, TypeParameter, AutoDocumentDispose</MissingTags>
   </PropertyGroup>

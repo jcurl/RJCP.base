@@ -128,6 +128,7 @@
           <lib dir="CpuId">
             <csproj>RJCP.Diagnostics.CpuId.csproj</csproj>
             <target>RJCP.Diagnostics.CpuId.dll</target>
+            <nuspec target="net40">RJCP.Diagnostics.CpuId.nuspec</nuspec>
           </lib>
           <deploy>
             <path>README.md</path>
