@@ -22,7 +22,7 @@
       <outputdir>net40-checked</outputdir>
       <buildoptions>
         <arguments step="clean">/m</arguments>
-        <arguments step="build">/p:TreatWarningsAsErrors=true /p:CheckForOverflowUnderflow=true /m</arguments>
+        <arguments step="build">/p:TreatWarningsAsErrors=true /p:CheckForOverflowUnderflow=true /p:CertificateThumbprint=2fda16f7adf7153e17d4bf3d36adc514a736cdf4 /m</arguments>
       </buildoptions>
     </build>
 
@@ -34,7 +34,7 @@
       <outputdir>net40</outputdir>
       <buildoptions>
         <arguments step="clean">/m</arguments>
-        <arguments step="build">/p:TreatWarningsAsErrors=true /m</arguments>
+        <arguments step="build">/p:TreatWarningsAsErrors=true /p:CertificateThumbprint=2fda16f7adf7153e17d4bf3d36adc514a736cdf4 /m</arguments>
       </buildoptions>
     </build>
 
@@ -46,7 +46,7 @@
       <outputdir>net45-checked</outputdir>
       <buildoptions>
         <arguments step="clean">/m</arguments>
-        <arguments step="build">/p:TreatWarningsAsErrors=true /p:CheckForOverflowUnderflow=true /m</arguments>
+        <arguments step="build">/p:TreatWarningsAsErrors=true /p:CheckForOverflowUnderflow=true /p:CertificateThumbprint=2fda16f7adf7153e17d4bf3d36adc514a736cdf4 /m</arguments>
       </buildoptions>
     </build>
 
@@ -58,7 +58,7 @@
       <outputdir>net45</outputdir>
       <buildoptions>
         <arguments step="clean">/m</arguments>
-        <arguments step="build">/p:TreatWarningsAsErrors=true /m</arguments>
+        <arguments step="build">/p:TreatWarningsAsErrors=true /p:CertificateThumbprint=2fda16f7adf7153e17d4bf3d36adc514a736cdf4 /m</arguments>
       </buildoptions>
     </build>
 
