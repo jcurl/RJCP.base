@@ -2,7 +2,7 @@
 SETLOCAL ENABLEEXTENSIONS
 SETLOCAL ENABLEDELAYEDEXPANSION
 
-set TOOLSVERSION=0.2.6-beta.20201120
+set TOOLSVERSION=0.2.7-beta.20210308
 
 echo ==============================================================================
 echo RJBUILD
