@@ -693,6 +693,7 @@ class GitError(Exception):
     def __init__(self, message, errors=None):
         super(GitError, self).__init__(message)
         self.error = errors
+        self.message = message
 
     def __str__(self):
         # Make the error code more readable. Instead of something like:
@@ -708,7 +709,9 @@ class GitError(Exception):
             if (len(self.error.stderr) > 0):
                 message += "\nSTDERR: {}".format(self.error.stderr.rstrip())
             return message
-        return str(self.error)
+        if (not (self.error is None)):
+            return str(self.error)
+        return str(self.message)
 
 
 class VersionCommand:
