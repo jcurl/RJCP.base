@@ -6,23 +6,18 @@ The RJCP Framework is a collection of libraries for use with other projects.
 
 ### The Target Framework
 
-The target frameworks are the Desktop version of .NET 4.0 to .NET 4.8. There is
-no plan to migrate to `dotnet` at this time, as my tooling doesn't support this
-(yet) and this is non-paid work.
+The target frameworks are the Desktop version of .NET (version 4.0 to 4.8) and
+.NET Core (.NET Standard 2.1).
 
 ### Documentation
 
-Documentation is generally created using the Mark Down format. Look throught the
+Documentation is generally created using the Mark Down format. Look through the
 directories for files ending with the extension `.md`.
-
-For instructions on building, see `README.RjBuild.md`.
 
 ### Compiling
 
-Generally, the projects can be loaded and compiled with Visual Studio 2019. I've
-written some specialized tooling called `RjBuild`, that adds extra checks on top
-of the solution files, creating NuGet packages, checking dependencies and
-automatically running test cases.
+Generally, the projects can be loaded and compiled with Visual Studio 2019. It
+uses the `dotnet` tool for building.
 
 ### NuGet Packages
 

@@ -13,7 +13,7 @@
     <RootNamespace>Documentation</RootNamespace>
     <Name>Documentation</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>.NET Framework 4.0</FrameworkVersion>
+    <FrameworkVersion>.NET Framework 4.8</FrameworkVersion>
     <OutputPath>.\Help\</OutputPath>
     <HtmlHelpName>rjcp_framework</HtmlHelpName>
     <Language>en-US</Language>
@@ -34,7 +34,7 @@
     <NamespaceGrouping>False</NamespaceGrouping>
     <MaximumGroupParts>2</MaximumGroupParts>
     <Preliminary>False</Preliminary>
-    <CopyrightText>%28C%29 2014-2020, Jason Curl</CopyrightText>
+    <CopyrightText>%28C%29 2014-2021, Jason Curl</CopyrightText>
     <FeedbackEMailAddress>jcurl%40arcor.de</FeedbackEMailAddress>
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <HtmlSdkLinkType>Msdn</HtmlSdkLinkType>
@@ -52,22 +52,22 @@
     <TopicVersion>100</TopicVersion>
     <MSHelpViewerSdkLinkType>Msdn</MSHelpViewerSdkLinkType>
     <DocumentationSources>
-      <DocumentationSource sourceFile="distribute\RJCP.DLL.CodeQuality\lib\net40\RJCP.CodeQuality.xml" />
-      <DocumentationSource sourceFile="distribute\RJCP.DLL.CodeQuality\lib\net40\RJCP.CodeQuality.dll" />
-      <DocumentationSource sourceFile="distribute\RJCP.DLL.CommandLine\lib\net40\RJCP.Core.CommandLine.dll" />
-      <DocumentationSource sourceFile="distribute\RJCP.DLL.CommandLine\lib\net40\RJCP.Core.CommandLine.xml" />
-      <DocumentationSource sourceFile="distribute\RJCP.DLL.CrashReporter\lib\net45\RJCP.Diagnostics.CrashReporter.dll" />
-      <DocumentationSource sourceFile="distribute\RJCP.DLL.CrashReporter\lib\net45\RJCP.Diagnostics.CrashReporter.xml" />
-      <DocumentationSource sourceFile="distribute\RJCP.DLL.VolumeDeviceInfo\lib\net40\RJCP.IO.VolumeDeviceInfo.xml" />
-      <DocumentationSource sourceFile="distribute\RJCP.DLL.VolumeDeviceInfo\lib\net40\RJCP.IO.VolumeDeviceInfo.dll" />
-      <DocumentationSource sourceFile="distribute\RJCP.DLL.Text\lib\net40\RJCP.Core.Text.xml" />
-      <DocumentationSource sourceFile="distribute\RJCP.DLL.Text\lib\net40\RJCP.Core.Text.dll" />
-      <DocumentationSource sourceFile="distribute\RJCP.DLL.Xml\lib\net40\RJCP.Core.Xml.xml" />
-      <DocumentationSource sourceFile="distribute\RJCP.DLL.Xml\lib\net40\RJCP.Core.Xml.dll" />
-      <DocumentationSource sourceFile="distribute\RJCP.DLL.Datastructures\lib\net40\RJCP.Core.Datastructures.xml" />
-      <DocumentationSource sourceFile="distribute\RJCP.DLL.Datastructures\lib\net40\RJCP.Core.Datastructures.dll" />
-      <DocumentationSource sourceFile="distribute\RJCP.DLL.CpuId\lib\net40\RJCP.Diagnostics.CpuId.dll" />
-      <DocumentationSource sourceFile="distribute\RJCP.DLL.CpuId\lib\net40\RJCP.Diagnostics.CpuId.xml" />
+      <DocumentationSource sourceFile="framework\commandline\code\bin\Release\net40\RJCP.Core.CommandLine.dll" />
+      <DocumentationSource sourceFile="framework\commandline\code\bin\Release\net40\RJCP.Core.CommandLine.xml" />
+      <DocumentationSource sourceFile="framework\cpuid\CpuId\bin\Release\net40\RJCP.Diagnostics.CpuId.dll" />
+      <DocumentationSource sourceFile="framework\cpuid\CpuId\bin\Release\net40\RJCP.Diagnostics.CpuId.xml" />
+      <DocumentationSource sourceFile="framework\crashreporter\CrashReporter\bin\Release\net461\RJCP.Diagnostics.CrashReporter.dll" />
+      <DocumentationSource sourceFile="framework\crashreporter\CrashReporter\bin\Release\net461\RJCP.Diagnostics.CrashReporter.xml" />
+      <DocumentationSource sourceFile="framework\datastructures\Datastructures\bin\Release\net40\RJCP.Core.Datastructures.xml" />
+      <DocumentationSource sourceFile="framework\datastructures\Datastructures\bin\Release\net40\RJCP.Core.Datastructures.dll" />
+      <DocumentationSource sourceFile="framework\nunitextensions\CodeQuality\bin\Release\net40\RJCP.CodeQuality.xml" />
+      <DocumentationSource sourceFile="framework\nunitextensions\CodeQuality\bin\Release\net40\RJCP.CodeQuality.dll" />
+      <DocumentationSource sourceFile="framework\textutils\code\bin\Release\net40\RJCP.Core.Text.xml" />
+      <DocumentationSource sourceFile="framework\textutils\code\bin\Release\net40\RJCP.Core.Text.dll" />
+      <DocumentationSource sourceFile="framework\xml\Xml\bin\Release\net40\RJCP.Core.Xml.xml" />
+      <DocumentationSource sourceFile="framework\xml\Xml\bin\Release\net40\RJCP.Core.Xml.dll" />
+      <DocumentationSource sourceFile="framework\volumedevinfo\VolumeDeviceInfo\bin\Release\net40\RJCP.IO.VolumeDeviceInfo.xml" />
+      <DocumentationSource sourceFile="framework\volumedevinfo\VolumeDeviceInfo\bin\Release\net40\RJCP.IO.VolumeDeviceInfo.dll" />
     </DocumentationSources>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, TypeParameter, AutoDocumentDispose</MissingTags>
   </PropertyGroup>
@@ -76,18 +76,6 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Win32' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Win32' ">
   </PropertyGroup>
   <!-- Import the SHFB build targets -->
   <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
