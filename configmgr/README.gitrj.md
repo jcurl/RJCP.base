@@ -13,6 +13,7 @@ repositories (submodules) at once. It supports the following:
 * `git rj cobr`: Check out a branch on all repositories
 * `git rj shbr`: Show all branches on the repositories
 * `git rj rmbr`: Remove branches from the repositories
+* `git rj build`: Build from the root of the repository
 
 Table of Contents
 
@@ -26,7 +27,7 @@ Table of Contents
       - [1.4.2 Linking under Windows](#142-linking-under-windows)
     - [1.5 Checking the Version](#15-checking-the-version)
     - [1.6 Getting Help](#16-getting-help)
-  - [2.0 General Usage](#20-general-usage)
+  - [2.0 General Usage for GIT Repository Management](#20-general-usage-for-git-repository-management)
     - [2.1 Initializing the Repository](#21-initializing-the-repository)
       - [2.1.1 Resetting the Repository to a Known State](#211-resetting-the-repository-to-a-known-state)
     - [2.2 Updating (Pulling) the Repositories to the Latest Commit](#22-updating-pulling-the-repositories-to-the-latest-commit)
@@ -48,6 +49,12 @@ Table of Contents
     - [2.8 Removing Branches](#28-removing-branches)
       - [2.8.1 Pruning](#281-pruning)
       - [2.8.2 Removing Local and Remote Branches](#282-removing-local-and-remote-branches)
+  - [3.0 Automating Builds](#30-automating-builds)
+    - [3.1 Building in Developer Mode](#31-building-in-developer-mode)
+    - [3.2 Build in Release Mode](#32-build-in-release-mode)
+    - [3.3 The .gitrjbuild Configuration File](#33-the-gitrjbuild-configuration-file)
+      - [3.3.1 The "dev" and "release" section](#331-the-dev-and-release-section)
+      - [3.3.2 Expansion Variables](#332-expansion-variables)
 
 ## 1.0 Introduction
 
@@ -57,12 +64,16 @@ maintainable. Python has advanced over time and also provides very useful
 features. Threading functionality is used in this script to execute git commands
 in parallel to boost performance, especially on Windows.
 
+It also serves as an entry point to building the software in the repository,
+simplifying common commands. Its use for building is optional and is indicated
+by the presence of the `.gitrjbuild` file.
+
 Documentation is written for the version of the script as of version
-1.0-alpha.20201016.1
+1.0-alpha.20210731.1
 
 ### 1.1 Requirements
 
-The script requires installation of Python 3.6.x or later. Git 2.13 or later
+The script requires installation of Python 3.7.x or later. Git 2.13 or later
 should be used.
 
 From the git shell, add the script to your path, e.g.
@@ -168,7 +179,7 @@ git rj version
 
 ```text
 git rj
-  Version: 1.0-alpha.20201016.1
+  Version: 1.0-alpha.20210731.1
   Python: 3.9.0-final
   GIT: git version 2.13.2.windows.1
 ```
@@ -187,7 +198,7 @@ To get help for a specific command, issue that command and use the option `-h`.
 git rj status -h
 ```
 
-## 2.0 General Usage
+## 2.0 General Usage for GIT Repository Management
 
 All the subcommands support the option `-h` to get help information on that
 subcommand and options that can be used.
@@ -763,8 +774,8 @@ init` is to enable pruning branches when fetching. This will remove the remote
 references, but the local branches remain. It gets tedious to identify these
 branches (even if `git rj shbr` helps), and then to remove the branches.
 
-A simple mechanism to remove *all* branches that were once being tracked, but their
-remote tracking branch no longer exists, is to use the command:
+A simple mechanism to remove *all* branches that were once being tracked, but
+their remote tracking branch no longer exists, is to use the command:
 
 ```sh
 git rj rmbr -p
@@ -780,8 +791,8 @@ pushed.
 
 It does this by looking for all local branches in all repositories. If there is
 a default remote for that branch (found through the command `git config --local
-branch.{branch}.remote`), and that remote branch no longer exists, then the local
-branch is removed.
+branch.{branch}.remote`), and that remote branch no longer exists, then the
+local branch is removed.
 
 If you wish to only prune specific branches, specify the branches on the command
 line. The branch will only be removed if the branch is given on the command line
@@ -801,3 +812,160 @@ git rj rmbr -lr branch1 [branch2 ...]
 One can add the option to prune `-p` in addition, in which case the list of
 branches are used to remove locally and/or remotely, and all branches that can
 be pruned will be removed.
+
+## 3.0 Automating Builds
+
+If the repository contains a valid `.gitrjbuild` file, the command
+
+```sh
+git rj build
+```
+
+can be used to build software on the current platform. The `.gitrjbuild` file
+contains instructions on how to build the software dependent on the current
+platform. It can instantiate new scripts, or do the work directly from Python.
+
+The advantage of having the `git-rj` command as an entry point for building is
+consistency and simplification for the developer making builds, without having
+to worry about the commands required to build (which may be complex), and in
+some cases may simplify creation of build scripts.
+
+Not every platform has Powershell or supports Batch files, and not likewise, not
+every platform supports shell scripts. But at least Python 3 must be installed
+for this script to work, which can do some of the basic legwork to start builds.
+
+### 3.1 Building in Developer Mode
+
+To start a normal developer build, which will run the "build" and "test" commands:
+
+```sh
+git rj build
+```
+
+### 3.2 Build in Release Mode
+
+The command to build in release mode is given by
+
+```sh
+git rj build --release
+```
+
+The `.gitrjbuild` command has the opportunity to provide different commands when
+building in release mode. This can do extra checks, etc. depending on the build
+scripts.
+
+### 3.3 The .gitrjbuild Configuration File
+
+This file is stored in the base of the repository, where the build commands
+shall be run. It is called `.gitrjbuild` and is a text file following the JSON
+file format.
+
+The top level element in the configuration file is the configuration (as
+determined by Python). The two most common configurations are:
+
+* Windows
+* Linux
+
+Within the platform system name are up to three blocks
+
+* "dev" for development builds;
+* "release" for release builds; and
+* "expansion" for variable expansion
+
+The "dev" and "release" may also contain a section called "expansion" which is
+the same, but for that specific configuration only when used.
+
+#### 3.3.1 The "dev" and "release" section
+
+The "dev" section is used in the absence of the `--release` option. Else when
+the `--release` option is given, then the "release" section is used. Otherwise
+the descriptions of the sections are identical. It is intended that different
+compiler flags might be given between the two.
+
+Inside this section are up to four commands:
+
+* "build": the command to build the software
+* "test": the command to run unit tests for the software
+* "pack": the command to generate packages for the software
+* "doc": the command to generate documentation for the software
+
+Each command is the command that should be given to the Operating System to
+start a new process. You must be careful, that these commands are secure and do
+not provide unintended side effects.
+
+Each command is treated literally, except when an expansion sequence is seen. An
+expansion sequence is defined as `${xxxx}`, where `xxxx` is the expansion
+variable. Note, this is not the same as normal shell expansion. The `git rj
+build` command will process this before giving to the operating system for
+execution.
+
+#### 3.3.2 Expansion Variables
+
+When a command contains an expansion, the expansion is first looked for in the
+following order:
+
+* An existing system environment variable (e.g. `${ProgramFiles}` or `${HOME}`);
+  then
+* In the "expansion" block, under "env", and then the key is sought for a
+  variable
+
+  ```json
+  "expansion": {
+    "env": {
+      "xxxx": "value"
+    }
+  }
+  ```
+
+* In the "expansion" block, under "tools", which is a list of directories to
+  look for a specific tool
+
+  ```json
+  "expansion": {
+    "tools": {
+      "toolname": {
+        "exe": "msbuild.exe",
+        "x86": {
+          "path": [
+            "${ProgramFiles}\\Visual Studio 2019\\BuildTools\\Bin",
+            "${ProgramFiles}\\Visual Studio 2019\\Community\\Bin",
+            "${ProgramFiles}\\Visual Studio 2019\\Professional\\Bin",
+            "${ProgramFiles}\\Visual Studio 2019\\Enterprise\\Bin"
+          ]
+        },
+        "AMD64": {
+          "path": [
+            "${ProgramFiles(x86)}\\Visual Studio 2019\\BuildTools\\Bin",
+            "${ProgramFiles(x86)}\\Visual Studio 2019\\Community\\Bin",
+            "${ProgramFiles(x86)}\\Visual Studio 2019\\Professional\\Bin",
+            "${ProgramFiles(x86)}\\Visual Studio 2019\\Enterprise\\Bin"
+          ]
+        }
+      }
+    }
+  }
+  ```
+
+  The tools section is more flexible, it defines the name of the tool, e.g.
+  `${toolname}` in the command. The system will look for "exe" in the list of
+  paths dependent on the system architecture of the platform in the order
+  specified. This allows the user to not have to explicitly load a script that
+  sets up the default paths, and the paths may be per tool.
+
+  Values for the architecture are in the table below. This is derived from the
+  values that Python3 returns directly (via the `platform.system()` and
+  `platform.machine()` calls).
+
+  | `platform.system()` | 32-bit Intel | 64-bit Intel |
+  | ------------------- | ------------ | ------------ |
+  | Windows             |              | `AMD64`      |
+  | Linux               |              | `x86_64`     |
+
+The section "expansion" may be under the configuration (e.g. "dev" or
+"release"), or under the system platform (e.g. "Windows" or "Linux"). Where it
+is placed defines the precedence (the order of which expansion is used first).
+This allows common variables to be placed for the system, and build specific
+variables to override the default for the current system.
+
+Expansions are recursive. You can place expansions within expansions, and
+they're expanded.

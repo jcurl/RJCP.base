@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 import argparse
+import asyncio
 import concurrent.futures
+import json
 import os
 import platform
 import re
@@ -10,13 +12,92 @@ import sys
 import threading
 
 # Global Configuration
-VERSION = "1.0-alpha.20201028"
+VERSION = "1.0-alpha.20210731"
 GITDEBUGLEVEL = 0
 MAX_WORKERS = 8
 
 DEFAULT_BRANCH = "master"
 RELEASE_BRANCH = "release/"
 DEFAULT_REMOTE = "origin"
+
+
+class ProcessPipe(threading.Thread):
+    """Print output from processes"""
+    # https://gist.github.com/alfredodeza/dcea71d5c0234c54d9b1
+
+    def __init__(self, prefix=""):
+        threading.Thread.__init__(self)
+        self.daemon = False
+        self.fdRead, self.fdWrite = os.pipe()
+        self.pipeReader = os.fdopen(self.fdRead)
+        self.process = None
+        self.prefix=prefix
+        self.start()
+
+    def fileno(self):
+        return self.fdWrite
+
+    def run(self):
+        for line in iter(self.pipeReader.readline, ''):
+            print("{}{}".format(self.prefix, line.strip('\n')), flush=True)
+
+        self.pipeReader.close()
+
+    def close(self):
+        os.close(self.fdWrite)
+
+    def stop(self):
+        self._stop = True
+        self.close()
+
+    def __del__(self):
+        try:
+            self.stop()
+        except:
+            pass
+
+        try:
+            del self.fdRead
+            del self.fdWrite
+        except:
+            pass
+
+class ProcessExe:
+    """Execute a command"""
+
+    def __init__(self, cmd, cwd=None, check=True):
+        shell = False
+        if platform.system() == "Linux":
+            shell = True
+
+        pipeout = ProcessPipe("OUT| ")
+        pipeerr = ProcessPipe("ERR| ")
+        try:
+            process = subprocess.Popen(
+                cmd, cwd=cwd,
+                stdout=pipeout, stderr=pipeerr,
+                universal_newlines=True, shell=shell
+            )
+        except:
+            self.returncode = -1
+            pipeout.close()
+            pipeerr.close()
+            raise
+
+        self.returncode = process.wait()
+        pipeout.close()
+        pipeerr.close()
+
+        if (check and self.returncode != 0):
+            raise subprocess.CalledProcessError(
+                returncode=process.returncode, cmd=cmd
+            )
+
+    @ staticmethod
+    def run(cmd, cwd=None, check=True):
+        """Run the command"""
+        process = ProcessExe(cmd, cwd, check)
+        return process
 
 
 class GitExe:
@@ -26,6 +107,7 @@ class GitExe:
         self.args = ["git"]
         for arg in args:
             self.args.append(arg)
+
         # Python 3.7
         #   process = subprocess.run(
         #       self.args, capture_output=True,
@@ -734,6 +816,148 @@ class GitError(Exception):
         if (not (self.error is None)):
             return str(self.error)
         return str(self.message)
+
+
+class Expansion:
+    """Handle expansion blocks"""
+
+    def __init__(self, expansion, defexpansion):
+        self.expansion = expansion
+        self.defexpansion = defexpansion
+
+    def expand(self, expstring):
+        # Parse the expstring. If we find ${xxx} where 'xxx' is in the range
+        # a-z, A-Z, and then '(', ')', _, 0-9, this is considered an expansion
+        # variable. If the $ is escaped with \$ (in JSON, this needs to be \\$),
+        # we treat the next text literally.
+        #
+        # A dictionary of expansion variables is maintained when expanding, so
+        # we can abort if the expansion variables become recursive, forming a
+        # cyclic graph.
+
+        def _validchar(symbolpos, char) -> bool:
+            if (char >= 'a' and char <= 'z') or (char >= 'A' and char <= 'Z'):
+                return True
+
+            if symbolpos == 0:
+                return False
+
+            if (char >= '0' and char <= '9') or char == '_' or char == '(' or char == ')':
+                return True
+
+            return False
+
+        def _envLookup(symbol):
+            if self.expansion != None and "env" in self.expansion:
+                if symbol in self.expansion["env"]:
+                    return self.expansion["env"][symbol]
+
+            if self.defexpansion != None and "env" in self.defexpansion:
+                if symbol in self.defexpansion["env"]:
+                    return self.defexpansion["env"][symbol]
+
+            return None
+
+        def _toolLookup(symbol):
+            block = None
+            if self.expansion != None and "tools" in self.expansion:
+                if symbol in self.expansion["tools"]:
+                    block = self.expansion["tools"][symbol]
+
+            if self.defexpansion != None and "tools" in self.defexpansion:
+                if symbol in self.defexpansion["tools"]:
+                    block = self.defexpansion["tools"][symbol]
+
+            if block == None:
+                raise CommandError(f"No tools defined for '{symbol}'")
+
+            if not "exe" in block:
+                raise CommandError(f"No exe defined for tool '{symbol}'")
+            exename = block["exe"]
+
+            machine = platform.machine()
+            if machine in block:
+                archblock = block[machine]
+            elif "any" in block:
+                archblock = block["any"]
+            else:
+                raise CommandError(f"No valid machine '{machine}' defined for tool '{symbol}'")
+
+            if not "path" in archblock:
+                raise CommandError(f"No paths for machine '{machine}' defined for tool '{symbol}'")
+
+            for path in archblock["path"]:
+                localfound = dict()
+                exppath = _parse(localfound, path)
+                if exppath != None:
+                    testpath = f"{exppath}{exename}"
+                    if os.path.isfile(testpath):
+                        return f"\"{testpath}\""
+
+            return exename
+
+        def _parse(symbolsfound, expstring):
+            symbolstart = None
+            resultstring = ""
+            charpos = 0
+
+            for c in expstring:
+                if symbolstart == None:
+                    if c == '$':
+                        symbolstart = charpos
+                    else:
+                        resultstring = resultstring + c
+                else:
+                    symbollen = charpos - symbolstart
+                    if symbollen == 1:
+                        if c != '{':
+                            # Expect to start with ${
+                            resultstring = resultstring + expstring[symbolstart:(charpos + 1)]
+                            symbolstart = None
+                    elif c == '}':
+                        # We've got ${...}
+                        if symbollen == 2:
+                            # There is no 'variable', so it's invalid
+                            resultstring = resultstring + expstring[symbolstart:(charpos + 1)]
+                            symbolstart = None
+                            raise CommandError(f"Empty expansion in '{expstring}'")
+                        else:
+                            variable = expstring[(symbolstart + 2):charpos]
+                            if variable in symbolsfound:
+                                symbolstart = None
+                                raise CommandError(f"Recursive variable expansion found for '{variable}'")
+
+                            symbolstart = None
+
+                            var = os.getenv(variable)
+                            if (var != None):
+                                # We don't expand environment strings further
+                                resultstring = resultstring + var
+                            else:
+                                # Assume this variable must be expanded
+                                symbolsfound[variable] = True
+
+                                # Simple substitution
+                                newexpstring = _envLookup(variable)
+                                if (newexpstring != None):
+                                    resultstring = resultstring + _parse(symbolsfound, newexpstring)
+                                else:
+                                    # Or tool lookup
+                                    newexpstring = _toolLookup(variable)
+                                    if newexpstring != None:
+                                        resultstring = resultstring + newexpstring
+
+                    elif not _validchar(charpos - symbolstart + 2, c):
+                        # The variable has invalid characters
+                        resultstring = resultstring + expstring[symbolstart:(charpos + 1)]
+                        symbolstart = None
+
+                charpos = charpos + 1
+
+            return resultstring
+
+        found = dict()
+        return _parse(found, expstring)
 
 
 class VersionCommand:
@@ -1570,6 +1794,145 @@ class RmbrCommand:
                                 name=module[1], branches=branches)
 
 
+class BuildCommand:
+    """Build from the current directory using a configuration file."""
+
+    def __init__(self, arguments):
+        argparser = argparse.ArgumentParser(
+            prog="git rj build",
+            description="Build the contents of this repository"
+        )
+        argparser.add_argument(
+            "-c", "--clean", action="store_true",
+            help="Run the clean target.")
+        argparser.add_argument(
+            "-b", "--build", action="store_true",
+            help="Build the contents of the repository.")
+        argparser.add_argument(
+            "-t", "--test", action="store_true",
+            help="Execute the test suites.")
+        argparser.add_argument(
+            "-p", "--pack", action="store_true",
+            help="Generate packages.")
+        argparser.add_argument(
+            "-d", "--doc", action="store_true",
+            help="Generate documentation.")
+        argparser.add_argument(
+            "-r", "--release", action="store_true",
+            help="Build, Test, Pack, Docs in release mode")
+
+        self.arguments = argparser.parse_args(arguments)
+
+        if self.arguments.release:
+            if self.arguments.build or self.arguments.test or self.arguments.pack or self.arguments.doc:
+                raise CommandError("Release mode is exclusive to build, test, pack and doc modes")
+
+            # Release mode builds everything
+            self.arguments.clean = True
+            self.arguments.build = True
+            self.arguments.test = True
+            self.arguments.pack = True
+            self.arguments.doc = True
+
+        if not (self.arguments.clean or self.arguments.build or self.arguments.test or self.arguments.pack or self.arguments.doc):
+            self.arguments.build = True
+            self.arguments.test = True
+
+        if (self.arguments.clean and self.arguments.test):
+            # If we clean, make sure we build before we test
+            self.arguments.build = True
+
+    def execute(self):
+        if (not os.path.isfile(".gitrjbuild")):
+            raise CommandError("Execute from the top-most directory, or ensure the '.gitrjbuild' file exists.")
+
+        try:
+            with open(".gitrjbuild") as configFile:
+                config = json.load(configFile)
+                configFile.close()
+        except json.decoder.JSONDecodeError as ex:
+            raise CommandError(f"Error loading .gitrjbuild - {ex.msg} (Line:{ex.lineno}, Col:{ex.colno})")
+
+        cplatform = platform.system()
+        if not cplatform in config:
+            raise CommandError(f"Platform '{cplatform}' not present in the configuration file '.gitrjbuild'.")
+
+        if self.arguments.release:
+            if not "release" in config[cplatform]:
+                raise CommandError(f"Configuration 'release' not defined in '{cplatform}'")
+            cmdconfigstr = "release"
+        else:
+            if not "dev" in config[cplatform]:
+                raise CommandError(f"Configuration 'dev' not defined in '{cplatform}'")
+            cmdconfigstr = "dev"
+
+        cmdconfig = config[cplatform][cmdconfigstr]
+
+        expplatform = config[cplatform]["expansion"] if "expansion" in config[cplatform] else None
+        expconfig = cmdconfig["expansion"] if "expansion" in cmdconfig else None
+        expansion = Expansion(expconfig, expplatform)
+
+        if self.arguments.clean and not "clean" in cmdconfig:
+            raise CommandError(f"Cannot clean, command not defined in '{cplatform}/{cmdconfigstr}'")
+        if self.arguments.build and not "build" in cmdconfig:
+            raise CommandError(f"Cannot build, command not defined in '{cplatform}/{cmdconfigstr}'")
+        if self.arguments.test and not "test" in cmdconfig:
+            raise CommandError(f"Cannot test, command not defined in '{cplatform}/{cmdconfigstr}'")
+        if self.arguments.pack and not "pack" in cmdconfig:
+            raise CommandError(f"Cannot pack, command not defined in '{cplatform}/{cmdconfigstr}'")
+        if self.arguments.doc and not "doc" in cmdconfig:
+            raise CommandError(f"Cannot provide documentation, command not defined in '{cplatform}/{cmdconfigstr}'")
+
+        try:
+            if self.arguments.clean:
+                print("----------------------------------------------------------------------")
+                print("-- Cleaning:")
+                print("-- Command:", expansion.expand(cmdconfig["clean"]))
+                print("----------------------------------------------------------------------")
+                print(flush=True)
+                ProcessExe.run(expansion.expand(cmdconfig["clean"]))
+                print(flush=True)
+            if self.arguments.build:
+                print("----------------------------------------------------------------------")
+                print("-- Building:")
+                print("-- Command:", expansion.expand(cmdconfig["build"]))
+                print("----------------------------------------------------------------------")
+                print(flush=True)
+                ProcessExe.run(expansion.expand(cmdconfig["build"]))
+                print(flush=True)
+            if self.arguments.test:
+                print("----------------------------------------------------------------------")
+                print("-- Testing")
+                print("-- Command:", expansion.expand(cmdconfig["test"]))
+                print("----------------------------------------------------------------------")
+                print(flush=True)
+                ProcessExe.run(expansion.expand(cmdconfig["test"]))
+                print(flush=True)
+            if self.arguments.pack:
+                print("----------------------------------------------------------------------")
+                print("-- Packaging")
+                print("-- Command:", expansion.expand(cmdconfig["pack"]))
+                print("----------------------------------------------------------------------")
+                print(flush=True)
+                ProcessExe.run(expansion.expand(cmdconfig["pack"]))
+                print(flush=True)
+            if self.arguments.doc:
+                print("----------------------------------------------------------------------")
+                print("-- Generating Documentation")
+                print("-- Command:", expansion.expand(cmdconfig["doc"]))
+                print("----------------------------------------------------------------------")
+                print(flush=True)
+                ProcessExe.run(expansion.expand(cmdconfig["doc"]))
+                print(flush=True)
+        except subprocess.CalledProcessError as ex:
+            print("")
+            print("----------------------------------------------------------------------")
+            print("-- Error")
+            print("-- Command:", ex.cmd)
+            print("-- Returned:", ex.returncode)
+            print("----------------------------------------------------------------------")
+            print("")
+
 class Command:
     """Parse the arguments on the command line."""
 
@@ -1597,6 +1960,8 @@ class Command:
             self.argument = ShbrCommand(sys.argv[2:])
         elif (self.command == "remove-branch" or self.command == "rmbr"):
             self.argument = RmbrCommand(sys.argv[2:])
+        elif (self.command == "build"):
+            self.argument = BuildCommand(sys.argv[2:])
         else:
             raise ArgumentError(
                 f"Unknown command {self.command} given on the command line")

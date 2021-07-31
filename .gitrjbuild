@@ -1,0 +1,47 @@
+{
+    "Windows": {
+        "dev": {
+            "clean": "dotnet clean -c Debug --nologo RJCP.Framework.sln",
+            "build": "dotnet build -c Debug --nologo RJCP.Framework.sln",
+            "test": "dotnet test -c Debug --no-build --logger \"trx\" --nologo RJCP.Framework.sln",
+            "pack": "dotnet pack -c Debug --include-source --nologo RJCP.Framework.sln"
+        },
+        "release": {
+            "clean": "dotnet clean -c Release --nologo RJCP.Framework.sln",
+            "build": "dotnet build -c Release --nologo RJCP.Framework.sln",
+            "test": "dotnet test -c Release --no-build --logger \"trx\" --results-directory \"distribute\\TestResults\" --nologo RJCP.Framework.sln",
+            "pack": "dotnet pack -c Release --include-source -o distribute\\nuget --nologo RJCP.Framework.sln",
+            "doc": "${msbuild} rjcp.shfbproj /t:Rebuild /verbosity:minimal /p:Configuration=Release /p:OutputPath=\"distribute\\Help\" /nologo"
+        },
+        "expansion": {
+            "tools": {
+                "msbuild": {
+                    "exe": "msbuild.exe",
+                    "x86": {
+                        "path": [
+                            "${ProgramFiles}\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles}\\Microsoft Visual Studio\\2019\\Community\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles}\\Microsoft Visual Studio\\2019\\Professional\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles}\\Microsoft Visual Studio\\2019\\Enterprise\\MSBuild\\Current\\Bin\\"
+                        ]
+                    },
+                    "AMD64": {
+                        "path": [
+                            "${ProgramFiles(x86)}\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles(x86)}\\Microsoft Visual Studio\\2019\\Community\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles(x86)}\\Microsoft Visual Studio\\2019\\Professional\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles(x86)}\\Microsoft Visual Studio\\2019\\Enterprise\\MSBuild\\Current\\Bin\\"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "Linux": {
+        "dev": {
+            "clean": "dotnet clean -c Debug --nologo RJCP.Framework-Linux.sln",
+            "build": "dotnet build -c Debug --nologo RJCP.Framework-Linux.sln",
+            "test": "dotnet test -c Debug --no-build --logger \"trx\" -v=q --nologo RJCP.Framework-Linux.sln"
+        }
+    }
+}

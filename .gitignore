@@ -1,6 +1,7 @@
 /.vs/
 /packages/
-/Help
+/Help/
+/distribute/
 bin/
 obj/
 *~
