@@ -1,3 +1,4 @@
 {
-    "omnisharp.enableEditorConfigSupport": true
+    "omnisharp.enableEditorConfigSupport": true,
+    "dotnet-test-explorer.testProjectPath": "RJCP.Framework.sln"
 }

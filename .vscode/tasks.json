@@ -9,6 +9,14 @@
             "windows": {
                 "command": "python ${workspaceFolder}\\configmgr\\git-rj.py build --build"
             },
+            "linux": {
+                "command": [
+                    "python3",
+                    "${workspaceFolder}/configmgr/git-rj.py",
+                    "build",
+                    "--build"
+                ]
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -20,10 +28,18 @@
             "windows": {
                 "command": "python ${workspaceFolder}\\configmgr\\git-rj.py build"
             },
+            "linux": {
+                "command": [
+                    "python3",
+                    "${workspaceFolder}/configmgr/git-rj.py",
+                    "build"
+                ]
+            },
             "group": {
                 "kind": "test",
                 "isDefault": true
-            }
-        },
+            },
+            "problemMatcher": []
+        }
     ]
 }
