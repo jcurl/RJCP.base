@@ -1004,6 +1004,7 @@ class HelpCommand:
         print("  git rj cobr - Check out a branch")
         print("  git rj shbr - Show branches")
         print("  git rj rmbr - Remove branches")
+        print("  git rj build - Build from .gitrjbuild description")
         print()
         print("Get information about the command with the -h option, e.g.")
         print("  git rj status -h")
