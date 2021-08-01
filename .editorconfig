@@ -98,7 +98,7 @@ csharp_prefer_simple_using_statement = false:suggestion
 
 # Expression-level preferences
 csharp_prefer_simple_default_expression = true:suggestion
-csharp_style_pattern_local_over_anonymous_function = true:suggestion
+csharp_style_pattern_local_over_anonymous_function = false:silent
 csharp_style_prefer_index_operator = true:suggestion
 csharp_style_prefer_range_operator = true:suggestion
 csharp_style_unused_value_assignment_preference = discard_variable:suggestion
