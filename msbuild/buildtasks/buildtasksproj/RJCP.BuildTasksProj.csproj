@@ -2,6 +2,8 @@
 
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="build\x509sign.targets" />
+
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Exe</OutputType>
@@ -38,20 +40,11 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <X509SigningCert>02EAAE_CodeSign.crt</X509SigningCert>
+    <X509TimeStampUri>http://timestamp.digicert.com</X509TimeStampUri>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>
-
-  <UsingTask TaskName="RJCP.MSBuildTasks.X509SignAuthenticode"
-             AssemblyFile="..\buildtasks\bin\Debug\netstandard2.1\RJCP.MSBuildTasks.dll" />
-
-  <Target Name="X509SignAuthenticode" AfterTargets="Build"
-          Condition="'$(OS)' == 'Windows_NT' and '$(X509SigningCert)' != ''">
-    <X509SignAuthenticode CertPath="$(X509SigningCert)"
-                          TimeStampUri="http://timestamp.digicert.com"
-                          InputAssembly="$(TargetDir)$(TargetName)$(TargetExt)" />
-  </Target>
 
 </Project>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>RJCP.MSBuildTasks</id>
+    <version>0.1.0</version>
+    <authors>Jason Curl</authors>
+    <description>MSBuild Tasks for RJCP Framework Libraries.</description>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/jcurl</projectUrl>
+    <dependencies>
+      <group targetFramework=".NETStandard1.0" />
+      <group targetFramework=".NETFramework4.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="package\lib\_._" target="lib\netstandard1.0\" />
+    <file src="package\lib\_._" target="lib\net40\" />
+    <file src="package\build\RJCP.MSBuildTasks.targets" target="build\" />
+    <file src="bin\Release\netstandard2.1\RJCP.MSBuildTasks.dll" target="build\" />
+  </files>
+</package>

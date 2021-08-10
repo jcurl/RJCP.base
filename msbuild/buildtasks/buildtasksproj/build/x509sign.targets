@@ -1,0 +1,15 @@
+<Project>
+  <UsingTask TaskName="RJCP.MSBuildTasks.X509SignAuthenticode"
+             AssemblyFile="..\..\buildtasks\bin\Debug\netstandard2.1\RJCP.MSBuildTasks.dll" />
+
+  <Target Name="X509SignAuthenticode" AfterTargets="Compile"
+          Condition="'$(OS)' == 'Windows_NT' and '$(X509SigningCert)' != ''">
+    <X509SignAuthenticode CertPath="$(X509SigningCert)"
+                          TimeStampUri="$(X509TimeStampUri)"
+                          InputAssembly="$(IntermediateOutputPath)$(TargetName)$(TargetExt)" />
+    <X509SignAuthenticode CertPath="$(X509SigningCert)"
+                          TimeStampUri="$(X509TimeStampUri)"
+                          InputAssembly="$(AppHostIntermediatePath)"
+                          Condition="'$(UseAppHost)' == 'true'" />
+  </Target>
+</Project>

@@ -35,6 +35,8 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release'">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
+    <X509SigningCert>signcert.crt</X509SigningCert>
+    <X509TimeStampUri>http://timestamp.digicert.com</X509TimeStampUri>
   </PropertyGroup>
 
   <ItemGroup>
@@ -70,13 +72,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\LICENSE.md" Pack="true" PackagePath="\" />
-    <None Include="..\README.md" Pack="true" PackagePath="\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="16.10.0" />
     <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.10.0" />
   </ItemGroup>
+
+  <!-- This task is specific to this project. First build the debug version, then
+       build the release version to have it signed with the debug version. -->
+  <UsingTask TaskName="RJCP.MSBuildTasks.X509SignAuthenticode"
+             AssemblyFile="bin\Debug\netstandard2.1\\RJCP.MSBuildTasks.dll" />
+
+  <Target Name="X509SignAuthenticode" AfterTargets="Compile"
+          Condition="'$(OS)' == 'Windows_NT' and '$(X509SigningCert)' != ''">
+    <X509SignAuthenticode CertPath="$(X509SigningCert)"
+                          TimeStampUri="$(X509TimeStampUri)"
+                          InputAssembly="$(IntermediateOutputPath)$(TargetName)$(TargetExt)" />
+    <X509SignAuthenticode CertPath="$(X509SigningCert)"
+                          TimeStampUri="$(X509TimeStampUri)"
+                          InputAssembly="$(AppHostIntermediatePath)"
+                          Condition="'$(UseAppHost)' == 'true'" />
+  </Target>
 
 </Project>
