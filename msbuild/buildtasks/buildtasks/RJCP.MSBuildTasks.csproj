@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <OutputType>Library</OutputType>
+    <Configurations>Debug;Release</Configurations>
+    <NeutralLanguage>en-US</NeutralLanguage>
+
+    <AssemblyName>RJCP.MSBuildTasks</AssemblyName>
+    <AssemblyTitle>RJCP.MSBuildTasks</AssemblyTitle>
+    <Product>RJCP.MSBuildTasks</Product>
+    <RootNamespace>RJCP.MSBuildTasks</RootNamespace>
+
+    <Authors>Jason Curl</Authors>
+    <Copyright>(C) 2018-2021, Jason Curl</Copyright>
+    <Company></Company>
+    <Description>MSBuild Tasks for RJCP Framework Libraries.</Description>
+    <Version>0.1.0</Version>
+
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>Default</AnalysisMode>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug'">
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release'">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Infrastructure\IO\AsyncResult.cs" />
+    <Compile Include="Infrastructure\Process\ConsoleDataEventArgs.cs" />
+    <Compile Include="Infrastructure\Process\Executable.cs" />
+    <Compile Include="Infrastructure\Process\Internal\IProcessWorker.cs" />
+    <Compile Include="Infrastructure\Process\Internal\ProcessSim.cs" />
+    <Compile Include="Infrastructure\Process\Internal\ProcessWorker.cs" />
+    <Compile Include="Infrastructure\Process\ProcessExitedEventArgs.cs" />
+    <Compile Include="Infrastructure\Process\RunProcess.cs" />
+    <Compile Include="Infrastructure\Threading\Tasks\AsyncManualResetEvent.cs" />
+    <Compile Include="Infrastructure\Threading\Tasks\AsyncValue.cs" />
+    <Compile Include="Infrastructure\Threading\Tasks\AsyncSemaphore.cs" />
+    <Compile Include="Infrastructure\Tools\IToolFactory.cs" />
+    <Compile Include="Infrastructure\Tools\SignTool.cs" />
+    <Compile Include="Infrastructure\Tools\ToolFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="X509SignAuthenticode.cs" />
+    <Compile Include="X509ThumbPrint.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.md" Pack="true" PackagePath="\" />
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="16.10.0" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.10.0" />
+  </ItemGroup>
+
+</Project>

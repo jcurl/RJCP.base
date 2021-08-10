@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Library</OutputType>
+    <IsPackable>false</IsPackable>
+    <Configurations>Debug;Release</Configurations>
+
+    <AssemblyName>RJCP.MSBuildTasksTest</AssemblyName>
+    <AssemblyTitle>RJCP.MSBuildTasksTest</AssemblyTitle>
+    <Product>RJCP.MSBuildTasks</Product>
+    <RootNamespace>RJCP.MSBuildTasks</RootNamespace>
+
+    <Authors>Jason Curl</Authors>
+    <Copyright>(C) 2018-2021, Jason Curl</Copyright>
+    <Company></Company>
+    <Description>Test harness RJCP.MSBuildTasks.</Description>
+    <Version>1.0.0</Version>
+
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>Default</AnalysisMode>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <EnableDefaultItems>false</EnableDefaultItems>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug'">
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release'">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
+    <PackageReference Include="Moq" Version="4.16.1" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
+    <PackageReference Include="NUnit.Analyzers" Version="3.1.0" />
+    <PackageReference Include="NUnit.ConsoleRunner" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
+    <ProjectReference Include="..\buildtasks\RJCP.MSBuildTasks.csproj" />
+    <ProjectReference Include="..\..\..\framework\nunitextensions\CodeQuality\RJCP.CodeQuality.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="BuildEngineMock.cs" />
+    <Compile Include="Infrastructure\Process\GetDirSimProcess.cs" />
+    <Compile Include="Infrastructure\Process\RunProcessCmdLineWinTest.cs" />
+    <Compile Include="Infrastructure\Process\RunProcessTest.cs" />
+    <Compile Include="Infrastructure\Tools\SignToolSimProcess.cs" />
+    <Compile Include="Infrastructure\Process\TimeoutSimProcess.cs" />
+    <Compile Include="Infrastructure\Threading\Tasks\AsyncManualResetEventTest.cs" />
+    <Compile Include="Infrastructure\Threading\Tasks\AsyncSemaphoreTest.cs" />
+    <Compile Include="Infrastructure\Threading\Tasks\AsyncValueTest.cs" />
+    <Compile Include="Infrastructure\Tools\SignToolMock.cs" />
+    <Compile Include="Infrastructure\Tools\TestToolsFactory.cs" />
+    <Compile Include="Infrastructure\Tools\ToolCreatedEventArgs.cs" />
+    <Compile Include="X509SignAuthenticodeTest.cs" />
+    <Compile Include="X509ThumbPrintTest.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="TestResource\02EAAE_CodeSign.crt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestResource\InputSignArtifact.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="TestResource\InvalidCert.crt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

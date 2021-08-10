@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+    <Configurations>Debug;Release</Configurations>
+    <NeutralLanguage>en-US</NeutralLanguage>
+
+    <AssemblyName>RJCP.MSBuildProj</AssemblyName>
+    <AssemblyTitle>RJCP.MSBuildProj</AssemblyTitle>
+    <Product>RJCP.MSBuildTasks</Product>
+    <RootNamespace>RJCP.MSBuidlProj</RootNamespace>
+
+    <Authors>Jason Curl</Authors>
+    <Copyright>(C) 2018-2021, Jason Curl</Copyright>
+    <Company></Company>
+
+    <Description>Test Application using RJCP.MSBuildTasks.</Description>
+    <Version>1.0.0</Version>
+
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>Default</AnalysisMode>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <X509SigningCert>02EAAE_CodeSign.crt</X509SigningCert>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+  </ItemGroup>
+
+  <UsingTask TaskName="RJCP.MSBuildTasks.X509SignAuthenticode"
+             AssemblyFile="..\buildtasks\bin\Debug\netstandard2.1\RJCP.MSBuildTasks.dll" />
+
+  <Target Name="X509SignAuthenticode" AfterTargets="Build"
+          Condition="'$(OS)' == 'Windows_NT' and '$(X509SigningCert)' != ''">
+    <X509SignAuthenticode CertPath="$(X509SigningCert)"
+                          TimeStampUri="http://timestamp.digicert.com"
+                          InputAssembly="$(TargetDir)$(TargetName)$(TargetExt)" />
+  </Target>
+
+</Project>
