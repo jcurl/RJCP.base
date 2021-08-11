@@ -16,6 +16,23 @@ directories for files ending with the extension `.md`.
 
 ### Compiling
 
+#### Preconditions
+
+Before compiling, you'll need .NET Core installed of course. Special
+requirements include:
+
+* Update your NuGet repository path to include `RJCP.MSBuildTasks.nupkg`
+
+When performing release builds on Windows:
+
+* Ensure that `signtool.exe` is in your path for release builds;
+* The file `signcert.crt` is the certificate that is sought for in the
+  certificate store of Windows. Update this file to match the signing
+  certificate to use (it's the public portion only). Ensure to import the
+  private portion certificate separately.
+
+#### Using RJ BUILD
+
 Generally, the projects can be loaded and compiled with Visual Studio 2019. It
 uses the `dotnet` tool for building.
 
@@ -47,8 +64,8 @@ on Windows.
 ### NuGet Packages
 
 The output of the build in this repository are project binaries and NuGet
-packages. You can use these NuGet packages in your own repositories. You
-should *not* upload them to NuGet.
+packages. You can use these NuGet packages in your own repositories. You should
+*not* upload them to NuGet.
 
 ## Questions
 

@@ -62,6 +62,7 @@ class ProcessPipe(threading.Thread):
         except:
             pass
 
+
 class ProcessExe:
     """Execute a command"""
 
@@ -1869,6 +1870,7 @@ class BuildCommand:
 
         cmdconfig = config[cplatform][cmdconfigstr]
 
+        os.environ["CDIR"] = os.getcwd()
         expplatform = config[cplatform]["expansion"] if "expansion" in config[cplatform] else None
         expconfig = cmdconfig["expansion"] if "expansion" in cmdconfig else None
         expansion = Expansion(expconfig, expplatform)
@@ -1933,6 +1935,7 @@ class BuildCommand:
             print("-- Returned:", ex.returncode)
             print("----------------------------------------------------------------------")
             print("")
+
 
 class Command:
     """Parse the arguments on the command line."""
