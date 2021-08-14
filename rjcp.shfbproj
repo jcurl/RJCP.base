@@ -64,6 +64,8 @@
       <DocumentationSource sourceFile="framework\nunitextensions\CodeQuality\bin\Release\net40\RJCP.CodeQuality.dll" />
       <DocumentationSource sourceFile="framework\textutils\code\bin\Release\net40\RJCP.Core.Text.xml" />
       <DocumentationSource sourceFile="framework\textutils\code\bin\Release\net40\RJCP.Core.Text.dll" />
+	  <DocumentationSource sourceFile="framework\trace\Trace\bin\Release\net40\RJCP.Diagnostics.Trace.xml" />
+	  <DocumentationSource sourceFile="framework\trace\Trace\bin\Release\net40\RJCP.Diagnostics.Trace.dll" />
       <DocumentationSource sourceFile="framework\xml\Xml\bin\Release\net40\RJCP.Core.Xml.xml" />
       <DocumentationSource sourceFile="framework\xml\Xml\bin\Release\net40\RJCP.Core.Xml.dll" />
       <DocumentationSource sourceFile="framework\volumedevinfo\VolumeDeviceInfo\bin\Release\net40\RJCP.IO.VolumeDeviceInfo.xml" />

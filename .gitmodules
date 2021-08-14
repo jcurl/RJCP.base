@@ -23,6 +23,11 @@
 	url = ../RJCP.DLL.Text.git
 	branch = master
 	ignore = untracked
+[submodule "framework/trace"]
+	path = framework/trace
+	url = ../RJCP.DLL.Trace.git
+	branch = master
+	ignore = untracked
 [submodule "framework/volumedevinfo"]
 	path = framework/volumedevinfo
 	url = ../RJCP.DLL.VolumeDeviceInfo.git
