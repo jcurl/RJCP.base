@@ -41,10 +41,16 @@ class ProcessPipe(threading.Thread):
         for line in iter(self.pipeReader.readline, ''):
             print("{}{}".format(self.prefix, line.strip('\n')), flush=True)
 
-        self.pipeReader.close()
+        try:
+            self.pipeReader.close()
+        except:
+            pass
 
     def close(self):
-        os.close(self.fdWrite)
+        try:
+            os.close(self.fdWrite)
+        except:
+            pass
 
     def stop(self):
         self._stop = True
