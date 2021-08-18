@@ -13,6 +13,11 @@
 	url = ../RJCP.DLL.Datastructures.git
 	branch = master
 	ignore = untracked
+[submodule "framework/environment"]
+	path = framework/environment
+	url = ../RJCP.DLL.Environment.git
+	branch = master
+	ignore = untracked
 [submodule "framework/nunitextensions"]
 	path = framework/nunitextensions
 	url = ../RJCP.DLL.CodeQuality.git

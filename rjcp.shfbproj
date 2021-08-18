@@ -60,6 +60,8 @@
       <DocumentationSource sourceFile="framework\crashreporter\CrashReporter\bin\Release\net461\RJCP.Diagnostics.CrashReporter.xml" />
       <DocumentationSource sourceFile="framework\datastructures\Datastructures\bin\Release\net40\RJCP.Core.Datastructures.xml" />
       <DocumentationSource sourceFile="framework\datastructures\Datastructures\bin\Release\net40\RJCP.Core.Datastructures.dll" />
+      <DocumentationSource sourceFile="framework\environment\Environment\bin\Release\net40\RJCP.Environment.xml" />
+      <DocumentationSource sourceFile="framework\environment\Environment\bin\Release\net40\RJCP.Environment.dll" />
       <DocumentationSource sourceFile="framework\nunitextensions\CodeQuality\bin\Release\net40\RJCP.CodeQuality.xml" />
       <DocumentationSource sourceFile="framework\nunitextensions\CodeQuality\bin\Release\net40\RJCP.CodeQuality.dll" />
       <DocumentationSource sourceFile="framework\textutils\code\bin\Release\net40\RJCP.Core.Text.xml" />
