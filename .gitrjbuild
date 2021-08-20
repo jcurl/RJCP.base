@@ -2,15 +2,15 @@
     "Windows": {
         "dev": {
             "clean": "dotnet clean -c Debug --nologo RJCP.Framework.sln",
-            "build": "dotnet build -c Debug --nologo RJCP.Framework.sln",
+            "build": "dotnet build -c Debug --nologo RJCP.Framework.sln /p:CheckForOverflowUnderflow=true",
             "test": "dotnet test -c Debug --no-build --logger \"trx\" --nologo RJCP.Framework.sln",
-            "pack": "dotnet pack -c Debug --include-source --nologo RJCP.Framework.sln"
+            "pack": "dotnet pack -c Debug --include-source --nologo RJCP.Framework.sln /p:CheckForOverflowUnderflow"
         },
         "release": {
             "clean": "dotnet clean -c Release --nologo RJCP.Framework.sln",
-            "build": "dotnet build -c Release --nologo RJCP.Framework.sln /p:X509SigningCert=${CDIR}\\signcert.crt /p:X509TimeStampUri=http://timestamp.digicert.com",
+            "build": "dotnet build -c Release --nologo RJCP.Framework.sln /p:X509SigningCert=${CDIR}\\signcert.crt /p:X509TimeStampUri=http://timestamp.digicert.com /p:TreatWarningsAsErrors=true",
             "test": "dotnet test -c Release --no-build --logger \"trx\" --results-directory \"distribute\\TestResults\" --nologo RJCP.Framework.sln",
-            "pack": "dotnet pack -c Release --include-source -o distribute\\nuget --nologo RJCP.Framework.sln /p:X509SigningCert=${CDIR}\\signcert.crt /p:X509TimeStampUri=http://timestamp.digicert.com",
+            "pack": "dotnet pack -c Release --include-source -o distribute\\nuget --nologo RJCP.Framework.sln /p:X509SigningCert=${CDIR}\\signcert.crt /p:X509TimeStampUri=http://timestamp.digicert.com /p:TreatWarningsAsErrors=true",
             "doc": "${msbuild} rjcp.shfbproj /t:Rebuild /verbosity:minimal /p:Configuration=Release /p:OutputPath=\"distribute\\Help\" /nologo"
         },
         "expansion": {
@@ -40,7 +40,7 @@
     "Linux": {
         "dev": {
             "clean": "dotnet clean -c Debug --nologo RJCP.Framework-Linux.sln",
-            "build": "dotnet build -c Debug --nologo RJCP.Framework-Linux.sln",
+            "build": "dotnet build -c Debug --nologo RJCP.Framework-Linux.sln /p:CheckForOverflowUnderflow=true",
             "test": "dotnet test -c Debug --no-build --logger \"trx\" -v=q --nologo RJCP.Framework-Linux.sln"
         }
     }
