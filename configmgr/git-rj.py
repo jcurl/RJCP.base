@@ -38,8 +38,11 @@ class ProcessPipe(threading.Thread):
         return self.fdWrite
 
     def run(self):
-        for line in iter(self.pipeReader.readline, ''):
-            print("{}{}".format(self.prefix, line.strip('\n')), flush=True)
+        try:
+            for line in iter(self.pipeReader.readline, ''):
+                print("{}{}".format(self.prefix, line.strip('\n')), flush=True)
+        except:
+            pass
 
         try:
             self.pipeReader.close()
