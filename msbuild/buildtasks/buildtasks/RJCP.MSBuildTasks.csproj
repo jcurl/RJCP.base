@@ -30,6 +30,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug'">
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release'">
@@ -37,6 +38,8 @@
     <Optimize>true</Optimize>
     <X509SigningCert>signcert.crt</X509SigningCert>
     <X509TimeStampUri>http://timestamp.digicert.com</X509TimeStampUri>
+    <NuSpecFile>RJCP.MSBuildTasks.nuspec</NuSpecFile>
+    <NuSpecProperties>id=$(AssemblyTitle);version=$(Version);authors=$(Authors);description=$(Description)</NuSpecProperties>
   </PropertyGroup>
 
   <ItemGroup>
