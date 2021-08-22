@@ -202,7 +202,6 @@ class GitModule:
         self._username = None
         self._useremail = None
 
-        self._feature_branch_showcurrent = None
         self.default_branch = DEFAULT_BRANCH
         self.url = None
 
@@ -371,37 +370,13 @@ class GitModule:
             raise GitError(exception, errors=exception)
 
     def get_current_branch(self):
-        if (self._feature_branch_showcurrent != None and self._feature_branch_showcurrent == True):
-            try:
-                # When on a branch that has no commits, the command `git
-                # rev-parse --abbrev-ref HEAD` returns an error. This needed to
-                # be replaced with `git branch --show-current` which works on
-                # GIT 2.22 and later.
-                git = GitExe.run(
-                    ["branch", "--show-current"],
-                    cwd=self.top_level()
-                )
-                if (len(git.stdout) == 0):
-                    return None
-                self._feature_branch_showcurrent = True
-                return git.stdout[0]
-            except subprocess.CalledProcessError:
-                # We can get here if executed in an empty repository.
-                if (self._feature_branch_showcurrent == None):
-                    self._feature_branch_showcurrent = False
-                else:
-                    return None
-        try:
-            git = GitExe.run(
-                ["rev-parse", "--abbrev-ref", "HEAD"],
-                cwd=self.top_level()
-            )
-            if (len(git.stdout) == 0):
-                return None
+        git = GitExe.run(
+            ["symbolic-ref", "-q", "--short", "HEAD"],
+            cwd=self.top_level(), check=False
+        )
+        if (git.returncode == 0 and len(git.stdout) > 0):
             return git.stdout[0]
-        except subprocess.CalledProcessError:
-            # We can get here if executed in an empty repository.
-            return None
+        return None
 
     def get_current_hash(self):
         try:
@@ -566,17 +541,10 @@ class GitModule:
 
     def get_is_dirty(self):
         git_dirty = GitExe.run(
-            ["diff", "-s", "--exit-code", "--", "."],
+            ["diff-index", "--quiet", "HEAD", "--", "."],
             cwd=self.top_level(), check=False
         )
-        if (git_dirty.returncode):
-            return True
-
-        git_dirty_cached = GitExe.run(
-            ["diff", "-s", "--exit-code", "--cached", "--", "."],
-            cwd=self.top_level(), check=False
-        )
-        if (git_dirty_cached.returncode):
+        if (git_dirty.returncode != 0):
             return True
         return False
 
