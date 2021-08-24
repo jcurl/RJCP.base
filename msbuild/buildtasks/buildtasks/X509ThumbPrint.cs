@@ -4,7 +4,6 @@
     using System.IO;
     using System.Security.Cryptography.X509Certificates;
     using Microsoft.Build.Framework;
-    using Microsoft.Build.Utilities;
 
     /// <summary>
     /// The X509ThumbPrint Task.

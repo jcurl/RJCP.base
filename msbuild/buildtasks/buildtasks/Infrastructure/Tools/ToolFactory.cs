@@ -1,6 +1,7 @@
 ﻿namespace RJCP.MSBuildTasks.Infrastructure.Tools
 {
     using System;
+    using System.Threading.Tasks;
     using Infrastructure.Process;
 
     internal class ToolFactory : IToolFactory
@@ -48,11 +49,14 @@
         /// <param name="tool">The tool to create an instance for.</param>
         /// <returns>An <see cref="Executable"/> for the tool requested.</returns>
         /// <exception cref="ArgumentException">Un unknown tool was requested.</exception>
-        public Executable GetTool(string tool)
+        /// <exception cref="InvalidOperationException">The tool is not available.</exception>
+        public async Task<Executable> GetToolAsync(string tool)
         {
             switch (tool) {
             case SignTool:
-                return new SignTool();
+                SignTool signTool = new SignTool();
+                await signTool.FindExecutableAsync(true);
+                return signTool;
             default:
                 throw new ArgumentException(Resources.Infra_Tools_InvalidTool);
             }

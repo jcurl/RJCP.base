@@ -142,24 +142,6 @@ namespace RJCP.MSBuildTasks {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} certificates matching the thumbprint {1} were found in {2} / {3}.
-        /// </summary>
-        internal static string Infra_X509_AmbiguousSearch {
-            get {
-                return ResourceManager.GetString("Infra_X509_AmbiguousSearch", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Thumbprint not defined.
-        /// </summary>
-        internal static string Infra_X509_ThumbPrintNotDefined {
-            get {
-                return ResourceManager.GetString("Infra_X509_ThumbPrintNotDefined", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The signtool.exe could not be found.
         /// </summary>
         internal static string SignTool_ToolsNotAvailable {
@@ -214,15 +196,6 @@ namespace RJCP.MSBuildTasks {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot find certificate with hash {0} in {1} / {2}..
-        /// </summary>
-        internal static string X509_Cert_NotFound {
-            get {
-                return ResourceManager.GetString("X509_Cert_NotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Error Signing {0} with {1}: {2}..
         /// </summary>
         internal static string X509_Cert_SignError {
@@ -273,15 +246,6 @@ namespace RJCP.MSBuildTasks {
         internal static string X509_SignTool_Found {
             get {
                 return ResourceManager.GetString("X509_SignTool_Found", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The signtool cannot be found in the path..
-        /// </summary>
-        internal static string X509_SignTool_NotFound {
-            get {
-                return ResourceManager.GetString("X509_SignTool_NotFound", resourceCulture);
             }
         }
         

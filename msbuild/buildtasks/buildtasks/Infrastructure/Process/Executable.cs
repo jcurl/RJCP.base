@@ -175,7 +175,19 @@
             return FindExecutableAsync(false);
         }
 
-        private async Task<bool> FindExecutableAsync(bool throwOnError)
+        /// <summary>
+        /// Search for the binary to be executed and check that it is valid.
+        /// </summary>
+        /// <param name="throwOnError">
+        /// Set to <see langword="true"/> if an exception should be thrown if the tool can't be found, instead of
+        /// returning <see langword="false"/>.
+        /// </param>
+        /// <returns>
+        /// Returns <see langword="true"/> if the executable could be found as it suitable for use,
+        /// <see langword="false"/> otherwise.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">The tool cannot be found.</exception>
+        public async Task<bool> FindExecutableAsync(bool throwOnError)
         {
             if (m_Initialized) {
                 if (throwOnError && m_BinaryPath == null)

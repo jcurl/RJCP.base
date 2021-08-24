@@ -116,13 +116,8 @@
             if (signCert == null) throw new ArgumentNullException(nameof(signCert));
             if (inputAssembly == null) throw new ArgumentNullException(nameof(inputAssembly));
 
-            Executable signTool = ToolFactory.Instance.GetTool(ToolFactory.SignTool);
-            if (!await signTool.FindExecutableAsync()) {
-                Log.LogError(Resources.X509_SignTool_NotFound);
-                return false;
-            } else {
-                Log.LogMessage(Resources.X509_SignTool_Found, signTool.BinaryPath);
-            }
+            Executable signTool = await ToolFactory.Instance.GetToolAsync(ToolFactory.SignTool);
+            Log.LogMessage(Resources.X509_SignTool_Found, signTool.BinaryPath);
 
             List<string> signToolArgs = new List<string>() {
                 "sign", "/fd", "sha256", "/sha1", signCert.Thumbprint

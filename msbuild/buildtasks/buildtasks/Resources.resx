@@ -165,15 +165,6 @@
   <data name="Infra_Tools_InvalidTool" xml:space="preserve">
     <value>Invalid Tool</value>
   </data>
-  <data name="Infra_X509_AmbiguousSearch" xml:space="preserve">
-    <value>{0} certificates matching the thumbprint {1} were found in {2} / {3}</value>
-  </data>
-  <data name="Infra_X509_ThumbPrintNotDefined" xml:space="preserve">
-    <value>Thumbprint not defined</value>
-  </data>
-  <data name="X509_Cert_NotFound" xml:space="preserve">
-    <value>Cannot find certificate with hash {0} in {1} / {2}.</value>
-  </data>
   <data name="X509_Cert_SignError" xml:space="preserve">
     <value>Error Signing {0} with {1}: {2}.</value>
   </data>
@@ -188,9 +179,6 @@
   </data>
   <data name="X509_SignTool_Found" xml:space="preserve">
     <value>SignTool found at '{0}'.</value>
-  </data>
-  <data name="X509_SignTool_NotFound" xml:space="preserve">
-    <value>The signtool cannot be found in the path.</value>
   </data>
   <data name="X509_SignTool_Success" xml:space="preserve">
     <value>SignTool completed with exit code 0.</value>

@@ -1,9 +1,10 @@
 ﻿namespace RJCP.MSBuildTasks.Infrastructure.Tools
 {
+    using System.Threading.Tasks;
     using Infrastructure.Process;
 
     internal interface IToolFactory
     {
-        Executable GetTool(string tool);
+        Task<Executable> GetToolAsync(string tool);
     }
 }
