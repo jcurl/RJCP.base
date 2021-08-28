@@ -1,9 +1,14 @@
-# Advanced Usage Documentation
+# Advanced Usage Documentation <!-- omit in toc -->
 
 This information is reference for using the tasks if you do not wish to use the
 targets file, and wish to use the DLL directly for different signing use cases.
 
-## Using this assembly within MSBuild
+- [1. Using this assembly within MSBuild](#1-using-this-assembly-within-msbuild)
+- [2. Certificates](#2-certificates)
+  - [2.1. New Task: X509ThumbPrint](#21-new-task-x509thumbprint)
+  - [2.2. New Task: X509SignAuthenticode](#22-new-task-x509signauthenticode)
+
+## 1. Using this assembly within MSBuild
 
 Your MSBuild should reference the assembly providing these tasks.
 
@@ -12,9 +17,9 @@ Your MSBuild should reference the assembly providing these tasks.
            AssemblyFile="..\buildtasks\bin\Debug\netstandard2.1\RJCP.MSBuildTasks.dll" />
 ```
 
-## Certificates
+## 2. Certificates
 
-### New Task: X509ThumbPrint
+### 2.1. New Task: X509ThumbPrint
 
 The `X509ThumbPrint` extracts a SHA1 thumb print from an existing public
 certificate. The extracted thumb print can then be used by other tools, such as
@@ -43,7 +48,7 @@ against).
   </Target>
 ```
 
-### New Task: X509SignAuthenticode
+### 2.2. New Task: X509SignAuthenticode
 
 The `X509SignAuthenticode` extends the existing Microsoft `SignFile` task. It
 completely reimplements the task to:

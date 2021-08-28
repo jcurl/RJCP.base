@@ -1,6 +1,13 @@
-# Building and Testing the RJCP.MSBuildTasks
+# Building and Testing the RJCP.MSBuildTasks  <!-- omit in toc -->
 
-## Building
+- [1. Building](#1-building)
+- [2. Packaging](#2-packaging)
+- [3. Testing](#3-testing)
+  - [3.1. Unit Tests](#31-unit-tests)
+  - [3.2. Integration Tests](#32-integration-tests)
+- [4. Signing Certificates](#4-signing-certificates)
+
+## 1. Building
 
 These instructions show how to build the `RJCP.MSBuildTasks` project and how to
 create a NuGet package that can then be used for inclusion in your own project.
@@ -49,7 +56,7 @@ create a NuGet package that can then be used for inclusion in your own project.
    dotnet build -c Release /p:X509SigningCert=c:\full\path\to\mysigncert.crt
    ```
 
-## Packaging
+## 2. Packaging
 
 Packaging is done with the `dotnet pack -c Release` command. Packaging the debug
 version is disabled. Ensure you've build the debug version first, which is used
@@ -58,11 +65,11 @@ to sign the build task using authenticode with itself.
 The details for the NuGet file are obtained from `RJCP.MSBuildTasks.nuspec`,
 information used in the `RJCP.MSBuildTasks.csproj` file are ignored.
 
-## Testing
+## 3. Testing
 
 There are two types of tests - the unit tests and the integration tests.
 
-### Unit Tests
+### 3.1. Unit Tests
 
 To run the unit tests, which simulates the task and execution of the
 `signtool.exe`, execute the command from where the `RJCP.MSBuildTasks.sln` file
@@ -76,14 +83,14 @@ Please be sure to run the unit tests under Windows. Other environments, such as
 MSYS2 might have similar commands, like `timeout.exe` that have different
 behaviour under PowerShell for Windows.
 
-### Integration Tests
+### 3.2. Integration Tests
 
 Integration tests are run as part of doing the release build. The integration
 test is quite simply that the `RJCP.MSBuildTasks.csproj` file has instructions
 to use tasks from the Debug build, and to execute the task while building
 itself.
 
-## Signing Certificates
+## 4. Signing Certificates
 
 You'll need to get a certificate and import this into the Certificate store. My
 signing certificate is from the volunteer certificate authority CACert. The root

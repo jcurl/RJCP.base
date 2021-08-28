@@ -1,4 +1,10 @@
-# Signing Executables
+# Signing Executables <!-- omit in toc -->
+
+- [1. Usage](#1-usage)
+- [2. Preconditions before building](#2-preconditions-before-building)
+- [3. Overriding the Certificate](#3-overriding-the-certificate)
+
+## 1. Usage
 
 Signing executables only works for Windows, as it requires the native
 `signtool.exe` available on Windows. This task will not execute on Linux.
@@ -16,14 +22,14 @@ In this case, the signing certificate should be in the same location as your
 `.csproj` file, and it's called `signcert.crt`. It will be signed only for
 releases.
 
-## Preconditions before building
+## 2. Preconditions before building
 
 Signing only works on Windows. Ensure that the `signtool.exe` is in your path.
 The signing certificate with the private key should already be in your
 certificate store. From the certificate store it's easy to export only the
 public portion to your project.
 
-## Overriding the Certificate
+## 3. Overriding the Certificate
 
 For a Continuous Server, or a final build system, you might need to use a
 different certificate. In this case you would have the certificate installed in

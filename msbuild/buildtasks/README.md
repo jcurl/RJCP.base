@@ -7,6 +7,7 @@ These Build Tasks are intended to support building the RJCP Framework Library.
 - [2. Using this Library via NuGet](#2-using-this-library-via-nuget)
 - [3. Functionality Provided](#3-functionality-provided)
 - [4. Reference Documentation](#4-reference-documentation)
+- [5. Design Documentation](#5-design-documentation)
 
 ## 1. Functionality Provided by this Package
 
@@ -49,3 +50,7 @@ binary on build or publish using the .NET SDK package format.
 ## 4. Reference Documentation
 
 - [Signing](docs/reference/signing.md)
+
+## 5. Design Documentation
+
+- [Signing](docs/design/signing.md)

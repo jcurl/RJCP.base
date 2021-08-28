@@ -1,8 +1,14 @@
-# Design Documentation
+# Design Documentation - Signing <!-- omit in toc -->
 
-## Microsoft Build SDK
+- [1. Microsoft Build SDK](#1-microsoft-build-sdk)
+  - [1.1. Results from 'dotnet build' on Windows](#11-results-from-dotnet-build-on-windows)
 
-### Results from 'dotnet build' on Windows
+## 1. Microsoft Build SDK
+
+This section covers important information used to write the task for signing a
+file. Important is to determine which files should be signed.
+
+### 1.1. Results from 'dotnet build' on Windows
 
 The `.target` file should figure out how to automatically sign a target project
 when included. If the user doesn't want this, then they should not use the
