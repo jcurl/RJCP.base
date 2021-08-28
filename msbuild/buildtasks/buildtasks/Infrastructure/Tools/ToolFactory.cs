@@ -11,6 +11,11 @@
         /// </summary>
         public const string SignTool = nameof(SignTool);
 
+        /// <summary>
+        /// Get the GIT executable.
+        /// </summary>
+        public const string GitTool = nameof(GitTool);
+
         private static readonly object s_Lock = new object();
         private static IToolFactory s_ToolFactory;
 
@@ -18,7 +23,7 @@
         /// Gets or sets the global instance of this tool factory.
         /// </summary>
         /// <value>A global instance of a <see cref="IToolFactory"/> to get executable tools.</value>
-        /// <exception cref="ArgumentNullException">The value given is <see langword="null"/></exception>
+        /// <exception cref="ArgumentNullException">The value given is <see langword="null"/>.</exception>
         public static IToolFactory Instance
         {
             get
@@ -52,14 +57,20 @@
         /// <exception cref="InvalidOperationException">The tool is not available.</exception>
         public async Task<Executable> GetToolAsync(string tool)
         {
+            Executable exe;
             switch (tool) {
             case SignTool:
-                SignTool signTool = new SignTool();
-                await signTool.FindExecutableAsync(true);
-                return signTool;
+                exe = new SignTool();
+                break;
+            case GitTool:
+                exe = new GitTool();
+                break;
             default:
                 throw new ArgumentException(Resources.Infra_Tools_InvalidTool);
             }
+
+            await exe.FindExecutableAsync(true);
+            return exe;
         }
     }
 }

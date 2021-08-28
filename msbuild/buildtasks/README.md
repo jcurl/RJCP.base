@@ -54,3 +54,4 @@ binary on build or publish using the .NET SDK package format.
 ## 5. Design Documentation
 
 - [Signing](docs/design/signing.md)
+- [Revision Control](docs/design/revision.md)

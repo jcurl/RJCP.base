@@ -61,6 +61,60 @@ namespace RJCP.MSBuildTasks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to GIT returned error {0}.
+        /// </summary>
+        internal static string Git_Error {
+            get {
+                return ResourceManager.GetString("Git_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GIT ISO8601 format unrecognized.
+        /// </summary>
+        internal static string Git_InvalidIso8601 {
+            get {
+                return ResourceManager.GetString("Git_InvalidIso8601", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GIT &apos;log&apos; returned no commits for path &apos;{0}&apos;.
+        /// </summary>
+        internal static string Git_LogNoCommits {
+            get {
+                return ResourceManager.GetString("Git_LogNoCommits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GIT &apos;log&apos; returned unexpected output for path &apos;{0}&apos;.
+        /// </summary>
+        internal static string Git_LogUnexpectedOutput {
+            get {
+                return ResourceManager.GetString("Git_LogUnexpectedOutput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GIT tools not available.
+        /// </summary>
+        internal static string Git_ToolsNotAvailable {
+            get {
+                return ResourceManager.GetString("Git_ToolsNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GIT returned unexpected output.
+        /// </summary>
+        internal static string Git_UnexpectedOutput {
+            get {
+                return ResourceManager.GetString("Git_UnexpectedOutput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End operation type was different than Begin.
         /// </summary>
         internal static string Infra_IO_AsyncResult_EndInvalidOperation {
@@ -120,6 +174,15 @@ namespace RJCP.MSBuildTasks {
         internal static string Infra_Process_RunProcess_ExecuteTwice {
             get {
                 return ResourceManager.GetString("Infra_Process_RunProcess_ExecuteTwice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown source provider.
+        /// </summary>
+        internal static string Infra_Source_UnknownProvider {
+            get {
+                return ResourceManager.GetString("Infra_Source_UnknownProvider", resourceCulture);
             }
         }
         

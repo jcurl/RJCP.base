@@ -44,6 +44,7 @@
 
   <ItemGroup>
     <Compile Include="Infrastructure\IO\AsyncResult.cs" />
+    <Compile Include="Infrastructure\Platform.cs" />
     <Compile Include="Infrastructure\Process\ConsoleDataEventArgs.cs" />
     <Compile Include="Infrastructure\Process\Executable.cs" />
     <Compile Include="Infrastructure\Process\Internal\IProcessWorker.cs" />
@@ -51,9 +52,18 @@
     <Compile Include="Infrastructure\Process\Internal\ProcessWorker.cs" />
     <Compile Include="Infrastructure\Process\ProcessExitedEventArgs.cs" />
     <Compile Include="Infrastructure\Process\RunProcess.cs" />
+    <Compile Include="Infrastructure\SourceProvider\GitProvider.cs" />
+    <Compile Include="Infrastructure\SourceProvider\GitSourceFactory.cs" />
+    <Compile Include="Infrastructure\SourceProvider\ISourceControl.cs" />
+    <Compile Include="Infrastructure\SourceProvider\ISourceFactory.cs" />
+    <Compile Include="Infrastructure\SourceProvider\SourceFactory.cs" />
+    <Compile Include="Infrastructure\SourceProvider\SourceProviderException.cs" />
+    <Compile Include="Infrastructure\SourceProvider\UnknownSourceProviderException.cs" />
+    <Compile Include="Infrastructure\Threading\Tasks\AsyncCache.cs" />
     <Compile Include="Infrastructure\Threading\Tasks\AsyncManualResetEvent.cs" />
     <Compile Include="Infrastructure\Threading\Tasks\AsyncValue.cs" />
     <Compile Include="Infrastructure\Threading\Tasks\AsyncSemaphore.cs" />
+    <Compile Include="Infrastructure\Tools\GitTool.cs" />
     <Compile Include="Infrastructure\Tools\IToolFactory.cs" />
     <Compile Include="Infrastructure\Tools\SignTool.cs" />
     <Compile Include="Infrastructure\Tools\ToolFactory.cs" />

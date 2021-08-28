@@ -192,4 +192,25 @@
   <data name="X509_TimeStamp_Invalid" xml:space="preserve">
     <value>The timestamp URI '{0}' is not valid.</value>
   </data>
+  <data name="Infra_Source_UnknownProvider" xml:space="preserve">
+    <value>Unknown source provider</value>
+  </data>
+  <data name="Git_ToolsNotAvailable" xml:space="preserve">
+    <value>GIT tools not available</value>
+  </data>
+  <data name="Git_UnexpectedOutput" xml:space="preserve">
+    <value>GIT returned unexpected output</value>
+  </data>
+  <data name="Git_Error" xml:space="preserve">
+    <value>GIT returned error {0}</value>
+  </data>
+  <data name="Git_LogUnexpectedOutput" xml:space="preserve">
+    <value>GIT 'log' returned unexpected output for path '{0}'</value>
+  </data>
+  <data name="Git_LogNoCommits" xml:space="preserve">
+    <value>GIT 'log' returned no commits for path '{0}'</value>
+  </data>
+  <data name="Git_InvalidIso8601" xml:space="preserve">
+    <value>GIT ISO8601 format unrecognized</value>
+  </data>
 </root>

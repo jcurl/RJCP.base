@@ -8,18 +8,23 @@
     {
         public bool SignToolAvailable { get; set; } = true;
 
+        public bool GitToolAvailable { get; set; } = true;
+
         public async Task<Executable> GetToolAsync(string tool)
         {
             Executable newTool;
             switch (tool) {
             case ToolFactory.SignTool:
                 newTool = new SignToolMock(SignToolAvailable);
-                await newTool.FindExecutableAsync(true);
+                break;
+            case ToolFactory.GitTool:
+                newTool = new GitToolMock(GitToolAvailable);
                 break;
             default:
                 throw new ArgumentException(Resources.Infra_Tools_InvalidTool);
             }
 
+            await newTool.FindExecutableAsync(true);
             OnToolCreated(this, newTool);
             return newTool;
         }
