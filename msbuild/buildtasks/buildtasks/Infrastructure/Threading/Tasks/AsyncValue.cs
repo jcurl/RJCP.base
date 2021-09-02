@@ -60,19 +60,27 @@
             get
             {
                 if (m_Complete == null) {
-                    int done = m_Set;
+                    bool done = IsComplete;
 
                     // Allocate a new structure, but in a thread safe manner. If we get here, we always create a new
                     // object, but it is only assigned if the original object m_Complete is not yet assigned. If it is
                     // assigned in another thread, we just throw it away.
-                    AsyncManualResetEvent mre = new AsyncManualResetEvent();
+                    AsyncManualResetEvent mre = new AsyncManualResetEvent(done);
                     if (Interlocked.CompareExchange(ref m_Complete, mre, null) == null) {
-                        if (done != IsCompleted && m_Set == IsCompleted) {
+                        if (!done && IsComplete) {
                             m_Complete.Set();
                         }
                     }
                 }
                 return m_Complete;
+            }
+        }
+
+        private bool IsComplete
+        {
+            get
+            {
+                return Thread.VolatileRead(ref m_Set) == IsCompleted;
             }
         }
 
@@ -143,7 +151,7 @@
         /// </remarks>
         public async Task<TValue> GetAsync()
         {
-            if (Thread.VolatileRead(ref m_Set) != IsCompleted) await Complete.WaitAsync();
+            if (!IsComplete) await Complete.WaitAsync();
             if (m_Exception != null) throw m_Exception;
             return m_Value;
         }
@@ -159,7 +167,7 @@
         /// </remarks>
         public TValue Get()
         {
-            if (Thread.VolatileRead(ref m_Set) != IsCompleted) Complete.Wait();
+            if (!IsComplete) Complete.Wait();
             if (m_Exception != null) throw m_Exception;
             return m_Value;
         }
