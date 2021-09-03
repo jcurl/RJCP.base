@@ -12,6 +12,7 @@ required to your project.
 - [3. Revision Control](#3-revision-control)
   - [3.1. Getting Revision Control Information](#31-getting-revision-control-information)
   - [3.2. Caching](#32-caching)
+    - [3.2.1. Disabling Caching for an Invocation](#321-disabling-caching-for-an-invocation)
 
 ## 1. Using this assembly within MSBuild
 
@@ -89,3 +90,21 @@ The task caches the results of the query between calls for the given path. If
 the task is called the same time for the same path, then the same results are
 returned. For some systems (especially those with virus scanners or auditing
 software) can slow down significantly when small processes are called often.
+
+Sometimes this can be a problem. For example, when starting Visual Studio Code
+with the C# plugin, running `dotnet build` from within a PowerShell window will
+reuse stale data. This is because there's an instance of `dotnet` that runs in
+the background of Visual Studio Code, until it ends.
+
+#### 3.2.1. Disabling Caching for an Invocation
+
+One can avoid caching explicitly be setting the `Cached` property to `false`
+when executing the target. This provides reliable results, but may be slower as
+the path information must be obtained for every invocation (especially for each
+time a new build occurs for multiple targets).
+
+```xml
+    <RevisionControl Type="git" Path="$(MSBuildProjectDirectory)"
+                     Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)"
+                     Cached="false">
+```

@@ -43,6 +43,14 @@
         private bool StrictMode { get; set; }
 
         /// <summary>
+        /// Gets or sets if caching should be used. The default is to enable caching.
+        /// </summary>
+        /// <value>If caching should be used.</value>
+        public string Cached { get; set; }
+
+        private bool CachedMode { get; set; }
+
+        /// <summary>
         /// Gets the type of the revision control that was detected.
         /// </summary>
         /// <value>The type of the revision control that was detected.</value>
@@ -151,42 +159,67 @@
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(Strict)) {
-                StrictMode = false;
-            } else {
-                switch (Strict.Trim().ToLowerInvariant()) {
-                case "yes":
-                case "true":
-                case "enabled":
-                    StrictMode = true;
-                    break;
-                case "no":
-                case "false":
-                case "disabled":
-                    StrictMode = false;
-                    break;
-                default:
-                    Log.LogError(Resources.RevisionControl_UnknownStrictMode);
-                    return false;
-                }
+            try {
+                StrictMode = CheckBoolean(Strict, false);
+            } catch (ArgumentException) {
+                Log.LogError(Resources.RevisionControl_UnknownStrictMode);
+                return false;
+            }
+
+            try {
+                CachedMode = CheckBoolean(Cached, true);
+            } catch (ArgumentException) {
+                Log.LogError(Resources.RevisionControl_UnknownCachedMode);
+                return false;
             }
 
             return true;
         }
 
+        private static bool CheckBoolean(string value, bool defaultValue)
+        {
+            if (string.IsNullOrWhiteSpace(value)) {
+                return defaultValue;
+            } else {
+                switch (value.Trim().ToLowerInvariant()) {
+                case "yes":
+                case "true":
+                case "enabled":
+                    return true;
+                case "no":
+                case "false":
+                case "disabled":
+                    return false;
+                default:
+                    throw new ArgumentException(Resources.Arg_UnknownValue, nameof(value));
+                }
+            }
+        }
+
+        private async Task<ISourceControl> GetProviderAsync(string sourceType, string path)
+        {
+            try {
+                ISourceControl foundProvider =
+                    await SourceFactory.Instance.CreateAsync(sourceType, path);
+                if (foundProvider == null) return null;
+                return foundProvider;
+            } catch (UnknownSourceProviderException ex) {
+                Log.LogError(ex.Message);
+                return null;
+            }
+        }
+
         private async Task<bool> ExecuteAsync()
         {
-            ISourceControl provider = await Providers.GetSetAsync((SourceType, Path), async () => {
-                try {
-                    ISourceControl foundProvider =
-                        await SourceFactory.Instance.CreateAsync(SourceType, Path);
-                    if (foundProvider == null) return null;
-                    return foundProvider;
-                } catch (UnknownSourceProviderException ex) {
-                    Log.LogError(ex.Message);
-                    return null;
-                }
-            });
+            ISourceControl provider;
+
+            if (CachedMode) {
+                provider = await Providers.GetSetAsync((SourceType, Path), () => {
+                    return GetProviderAsync(SourceType, Path);
+                });
+            } else {
+                provider = await GetProviderAsync(SourceType, Path);
+            }
 
             if (provider == null) {
                 Log.LogError(Resources.RevisionControl_CantInstantiateProvider);

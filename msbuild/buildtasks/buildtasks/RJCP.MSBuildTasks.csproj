@@ -132,7 +132,7 @@
   </PropertyGroup>
 
   <Target Name="CoreRevisionControlCheck" BeforeTargets="$(BeforeRevisionControl)" Condition="'$(Configuration)' == 'Release' and '$(RevisionControl)' != ''">
-    <RevisionControl Type="$(RevisionControl)" Path="$(MSBuildProjectDirectory)" Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)">
+    <RevisionControl Type="$(RevisionControl)" Path="$(MSBuildProjectDirectory)" Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)" Cached="disabled">
       <Output TaskParameter="RevisionControlType" PropertyName="RevisionControlType" />
       <Output TaskParameter="RevisionControlBranch" PropertyName="RevisionControlBranch" />
       <Output TaskParameter="RevisionControlCommit" PropertyName="RevisionControlCommit" />

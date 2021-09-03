@@ -61,6 +61,15 @@ namespace RJCP.MSBuildTasks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unknown value provided.
+        /// </summary>
+        internal static string Arg_UnknownValue {
+            get {
+                return ResourceManager.GetString("Arg_UnknownValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GIT returned error {0}.
         /// </summary>
         internal static string Git_Error {
@@ -327,6 +336,15 @@ namespace RJCP.MSBuildTasks {
         internal static string RevisionControl_RevisionControlTypeNotDefined {
             get {
                 return ResourceManager.GetString("RevisionControl_RevisionControlTypeNotDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Cached mode isn&apos;t recognized..
+        /// </summary>
+        internal static string RevisionControl_UnknownCachedMode {
+            get {
+                return ResourceManager.GetString("RevisionControl_UnknownCachedMode", resourceCulture);
             }
         }
         

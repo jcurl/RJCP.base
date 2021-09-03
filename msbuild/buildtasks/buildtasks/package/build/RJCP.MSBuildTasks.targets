@@ -32,7 +32,8 @@
 
   <Target Name="CoreRevisionControlCheck" >
     <RevisionControl Type="$(RevisionControl)" Path="$(MSBuildProjectDirectory)"
-                     Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)">
+                     Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)"
+                     Cached="disabled">
       <Output TaskParameter="RevisionControlType" PropertyName="RevisionControlType" />
       <Output TaskParameter="RevisionControlBranch" PropertyName="RevisionControlBranch" />
       <Output TaskParameter="RevisionControlCommit" PropertyName="RevisionControlCommit" />
