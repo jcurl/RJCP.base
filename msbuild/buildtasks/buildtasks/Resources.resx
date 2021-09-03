@@ -231,4 +231,37 @@
   <data name="Infra_SemVer_MustBePositive" xml:space="preserve">
     <value>{0} field must be a positive integer</value>
   </data>
+  <data name="RevisionControl_PathNotDefined" xml:space="preserve">
+    <value>Path must be provided (it can't be empty).</value>
+  </data>
+  <data name="RevisionControl_PathMustBeDirectory" xml:space="preserve">
+    <value>Path provided is a file, it must be a directory.</value>
+  </data>
+  <data name="RevisionControl_PathDirectoryDoesntExist" xml:space="preserve">
+    <value>Path provided doesn't exist.</value>
+  </data>
+  <data name="RevisionControl_UnknownStrictMode" xml:space="preserve">
+    <value>The Strict mode isn't recognized.</value>
+  </data>
+  <data name="RevisionControl_RevisionControlTypeNotDefined" xml:space="preserve">
+    <value>The Revision Control Type is not defined.</value>
+  </data>
+  <data name="RevisionControl_CantInstantiateProvider" xml:space="preserve">
+    <value>Couldn't determine the source provider.</value>
+  </data>
+  <data name="RevisionControl_IsDirty" xml:space="preserve">
+    <value>Revision Control Filesystem indicates files have been modified. Please check in. Path is '{0}'.</value>
+  </data>
+  <data name="RevisionControl_NotLabelled" xml:space="preserve">
+    <value>Label '{0}' not found in Revision Control, or contents have changed. Path is '{1}'.</value>
+  </data>
+  <data name="RevisionControl_LabelNotDefined" xml:space="preserve">
+    <value>No label provided in project file and strict mode is enabled.</value>
+  </data>
+  <data name="SemVer_VersionNotProvided" xml:space="preserve">
+    <value>The version parameter is empty.</value>
+  </data>
+  <data name="SemVer_VersionNotSupported" xml:space="preserve">
+    <value>The version '{0}' is not supported.</value>
+  </data>
 </root>

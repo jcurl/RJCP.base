@@ -24,17 +24,10 @@
         // See comments in GitSimProcess for the virtual repositories and the expected behaviour, which is used in these
         // test cases.
 
-        private static TestToolFactory InitToolFactory()
-        {
-            TestToolFactory factory = new TestToolFactory();
-            ToolFactory.Instance = factory;
-            return factory;
-        }
-
-        private static ScratchPad GetRepo(string repo, out string path)
+        internal static ScratchPad GetRepo(string repo, out string path)
         {
             GitToolMock git;
-            TestToolFactory factory = InitToolFactory();
+            TestToolFactory factory = TestToolFactory.InitToolFactory();
 
             ScratchPad scratch = null;
             try {
@@ -70,7 +63,7 @@
         public void GetGitProviderUnavailable()
         {
             GitToolMock git;
-            TestToolFactory factory = InitToolFactory();
+            TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.GitToolAvailable = false;
             factory.ToolCreatedEvent += (s, e) => {
                 git = (GitToolMock)e.Tool;
@@ -369,7 +362,7 @@
         public async Task GitProviderQueryTwiceNoTag()
         {
             GitToolMock git = null;
-            TestToolFactory factory = InitToolFactory();
+            TestToolFactory factory = TestToolFactory.InitToolFactory();
             using (ScratchPad scratch = Deploy.ScratchPad()) {
                 // We do the initialization here as we need the 'GitToolMock' object, which is only available after the
                 // callback.
@@ -463,7 +456,7 @@
         public async Task GitProviderQueryTwiceWithTag()
         {
             GitToolMock git = null;
-            TestToolFactory factory = InitToolFactory();
+            TestToolFactory factory = TestToolFactory.InitToolFactory();
             using (ScratchPad scratch = Deploy.ScratchPad()) {
                 // We do the initialization here as we need the 'GitToolMock' object, which is only available after the
                 // callback.

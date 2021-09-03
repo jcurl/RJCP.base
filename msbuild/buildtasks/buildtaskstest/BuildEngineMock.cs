@@ -8,6 +8,7 @@
     internal class BuildEngineMock
     {
         private readonly List<string> m_Messages = new List<string>();
+        private readonly List<BuildWarningEventArgs> m_Warnings = new List<BuildWarningEventArgs>();
         private readonly List<BuildErrorEventArgs> m_Errors = new List<BuildErrorEventArgs>();
         private readonly Mock<IBuildEngine> m_BuildEngineMock = new Mock<IBuildEngine>();
 
@@ -20,6 +21,7 @@
                 });
             m_BuildEngineMock.Setup(m => m.LogWarningEvent(It.IsAny<BuildWarningEventArgs>()))
                 .Callback<BuildWarningEventArgs>(args => {
+                    m_Warnings.Add(args);
                     m_Messages.Add(args.Message);
                 });
             m_BuildEngineMock.Setup(m => m.LogErrorEvent(It.IsAny<BuildErrorEventArgs>()))
@@ -37,6 +39,11 @@
         public IReadOnlyList<BuildErrorEventArgs> BuildErrorEventArgs
         {
             get { return m_Errors; }
+        }
+
+        public IReadOnlyList<BuildWarningEventArgs> BuildWarningEventArgs
+        {
+            get { return m_Warnings; }
         }
 
         public void DumpErrorEvents()

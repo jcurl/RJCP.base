@@ -1,0 +1,15 @@
+<Project>
+
+  <PropertyGroup>
+    <BeforeRevisionControl>
+      BeforeCompile;
+      CoreCompile;
+      GetAssemblyVersion;
+      GenerateNuspec
+    </BeforeRevisionControl>
+    <RevisionControlDependsOn>
+      CoreRevisionControlCheck
+    </RevisionControlDependsOn>
+  </PropertyGroup>
+
+</Project>

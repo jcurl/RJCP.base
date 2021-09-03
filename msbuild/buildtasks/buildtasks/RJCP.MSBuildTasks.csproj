@@ -17,7 +17,7 @@
     <Copyright>(C) 2018-2021, Jason Curl</Copyright>
     <Company></Company>
     <Description>MSBuild Tasks for RJCP Framework Libraries.</Description>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
 
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -25,6 +25,9 @@
     <AnalysisLevel>latest</AnalysisLevel>
     <EnableDefaultItems>false</EnableDefaultItems>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <RevisionControl>git</RevisionControl>
+    <RevisionControlLabel>release/buildtasks/v$(Version)</RevisionControlLabel>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug'">
@@ -39,7 +42,8 @@
     <X509SigningCert>signcert.crt</X509SigningCert>
     <X509TimeStampUri>http://timestamp.digicert.com</X509TimeStampUri>
     <NuSpecFile>RJCP.MSBuildTasks.nuspec</NuSpecFile>
-    <NuSpecProperties>id=$(AssemblyTitle);version=$(Version);authors=$(Authors);description=$(Description)</NuSpecProperties>
+    <!-- Note, the properties are set in the RevisionControl Task -->
+    <RevisionControlStrict>true</RevisionControlStrict>
   </PropertyGroup>
 
   <ItemGroup>
@@ -75,6 +79,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RevisionControl.cs" />
+    <Compile Include="SemVer.cs" />
     <Compile Include="X509SignAuthenticode.cs" />
     <Compile Include="X509ThumbPrint.cs" />
   </ItemGroup>
@@ -91,10 +97,11 @@
     <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.10.0" />
   </ItemGroup>
 
-  <!-- This task is specific to this project. First build the debug version, then
-       build the release version to have it signed with the debug version. -->
+  <!-- This task is specific to this project. First build the debug version,
+       then build the release version to have it signed with the debug version.
+       -->
   <UsingTask TaskName="RJCP.MSBuildTasks.X509SignAuthenticode"
-             AssemblyFile="bin\Debug\netstandard2.1\\RJCP.MSBuildTasks.dll" />
+             AssemblyFile="bin\Debug\netstandard2.1\RJCP.MSBuildTasks.dll" />
 
   <Target Name="X509SignAuthenticode" AfterTargets="Compile"
           Condition="'$(OS)' == 'Windows_NT' and '$(X509SigningCert)' != ''">
@@ -105,6 +112,76 @@
                           TimeStampUri="$(X509TimeStampUri)"
                           InputAssembly="$(AppHostIntermediatePath)"
                           Condition="'$(UseAppHost)' == 'true'" />
+  </Target>
+
+  <!-- Provide specific revision control information for this project. Your
+       project doesn't need all this, it pulls it in from the .targets file. It
+       only runs in release mode, otherwise we have a cyclic dependency. -->
+  <UsingTask TaskName="RJCP.MSBuildTasks.RevisionControl"
+             AssemblyFile="bin\Debug\netstandard2.1\RJCP.MSBuildTasks.dll" />
+  <UsingTask TaskName="RJCP.MSBuildTasks.SemVer"
+             AssemblyFile="bin\Debug\netstandard2.1\RJCP.MSBuildTasks.dll" />
+
+  <PropertyGroup>
+    <BeforeRevisionControl>
+      BeforeCompile;
+      CoreCompile;
+      GetAssemblyVersion;
+      GenerateNuspec
+    </BeforeRevisionControl>
+  </PropertyGroup>
+
+  <Target Name="CoreRevisionControlCheck" BeforeTargets="$(BeforeRevisionControl)" Condition="'$(Configuration)' == 'Release' and '$(RevisionControl)' != ''">
+    <RevisionControl Type="$(RevisionControl)" Path="$(MSBuildProjectDirectory)" Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)">
+      <Output TaskParameter="RevisionControlType" PropertyName="RevisionControlType" />
+      <Output TaskParameter="RevisionControlBranch" PropertyName="RevisionControlBranch" />
+      <Output TaskParameter="RevisionControlCommit" PropertyName="RevisionControlCommit" />
+      <Output TaskParameter="RevisionControlCommitShort" PropertyName="RevisionControlCommitShort" />
+      <Output TaskParameter="RevisionControlDateTime" PropertyName="RevisionControlDateTime" />
+      <Output TaskParameter="RevisionControlDirty" PropertyName="RevisionControlDirty" />
+      <Output TaskParameter="RevisionControlTagged" PropertyName="RevisionControlTagged" />
+      <Output TaskParameter="RevisionControlHost" PropertyName="RevisionControlHost" />
+      <Output TaskParameter="RevisionControlUser" PropertyName="RevisionControlUser" />
+    </RevisionControl>
+
+    <PropertyGroup>
+      <SourceRevisionId Condition="'$(SourceRevisionId)' == ''">g$(RevisionControlCommitShort)</SourceRevisionId>
+      <_RJCP_ReleaseBuild Condition="'$(Configuration)' == 'Release' and '$(RevisionControlDirty)' != 'true' and '$(RevisionControlTagged)' == 'true'">True</_RJCP_ReleaseBuild>
+    </PropertyGroup>
+
+    <SemVer Version="$(Version)">
+      <Output TaskParameter="VersionBase" PropertyName="RevisionControlVersionBase" />
+      <Output TaskParameter="VersionSuffix" PropertyName="RevisionControlVersionSuffix" />
+      <Output TaskParameter="VersionMeta" PropertyName="RevisionControlVersionMeta" />
+    </SemVer>
+
+    <PropertyGroup Condition="'$(_RJCP_ReleaseBuild)' != 'True'">
+      <Version Condition="'$(RevisionControlVersionSuffix)' == ''">$(RevisionControlVersionBase)-alpha.$(RevisionControlDateTime)</Version>
+      <Version Condition="'$(RevisionControlVersionSuffix)' != ''">$(RevisionControlVersionBase)-$(RevisionControlVersionSuffix).$(RevisionControlDateTime)</Version>
+      <PackageVersion>$(Version)</PackageVersion>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <!-- This must be set after the version information is obtained, else the
+           wrong PackageVersion is used. -->
+      <NuSpecProperties>id=$(AssemblyTitle);version=$(PackageVersion);authors=$(Authors);description=$(Description)</NuSpecProperties>
+    </PropertyGroup>
+
+    <Message Importance="High" Text="RevisionControl:" />
+    <Message Importance="High" Text=" * Type           = $(RevisionControlType)" />
+    <Message Importance="High" Text=" * Branch         = $(RevisionControlBranch)" />
+    <Message Importance="High" Text=" * Commit         = $(RevisionControlCommit)" />
+    <Message Importance="High" Text=" * CommitShort    = $(RevisionControlCommitShort)" />
+    <Message Importance="High" Text=" * DateTime       = $(RevisionControlDateTime)" />
+    <Message Importance="High" Text=" * Dirty          = $(RevisionControlDirty)" />
+    <Message Importance="High" Text=" * Tagged         = $(RevisionControlTagged)" />
+    <Message Importance="High" Text=" * Host           = $(RevisionControlHost)" />
+    <Message Importance="High" Text=" * User           = $(RevisionControlUser)" />
+    <Message Importance="High" Text=" * VersionBase    = $(RevisionControlVersionBase)" />
+    <Message Importance="High" Text=" * VersionSuffix  = $(RevisionControlVersionSuffix)" />
+    <Message Importance="High" Text=" * VersionMeta    = $(RevisionControlVersionMeta)" />
+    <Message Importance="High" Text=" * Version        = $(Version)" />
+    <Message Importance="High" Text=" * PackageVersion = $(PackageVersion)" />
   </Target>
 
 </Project>

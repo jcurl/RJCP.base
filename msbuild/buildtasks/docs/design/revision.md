@@ -3,8 +3,8 @@
 - [1. The SourceProvider](#1-the-sourceprovider)
   - [1.1. Class Structure](#11-class-structure)
     - [1.1.1. Top Level Factory](#111-top-level-factory)
-  - [1.2. The GitProvider](#12-the-gitprovider)
-  - [1.3. Extending with a new Provider (e.g. Mercurial or Subversion)](#13-extending-with-a-new-provider-eg-mercurial-or-subversion)
+- [2. The GitProvider](#2-the-gitprovider)
+- [3. Extending with a new Provider (e.g. Mercurial or Subversion)](#3-extending-with-a-new-provider-eg-mercurial-or-subversion)
 
 ## 1. The SourceProvider
 
@@ -33,7 +33,7 @@ The `providername` can be one of:
 * `auto` for automatic detection. At the moment this can only know about git.
 * `git` for a git controlled revision control system.
 
-### 1.2. The GitProvider
+## 2. The GitProvider
 
 The `GitProvider` knows how to query GIT (the command `git` must be installed
 and in the path) to get information required for knowing if there are changes to
@@ -75,7 +75,7 @@ calls for an instance of the `GitProvider` class. This is the purpose of the
 execute the internal function only once, while waiting for it to complete when
 called twice or return cached values for subsequent calls.
 
-### 1.3. Extending with a new Provider (e.g. Mercurial or Subversion)
+## 3. Extending with a new Provider (e.g. Mercurial or Subversion)
 
 The provider should be created as a new class. Fill in the details that knows
 how to actually get the details required for a given path.

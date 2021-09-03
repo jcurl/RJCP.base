@@ -1,38 +1,16 @@
 <Project>
-  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    Authenticode Signing
-   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <UsingTask TaskName="RJCP.MSBuildTasks.X509SignAuthenticode"
-             AssemblyFile="$(MSBuildThisFileDirectory)RJCP.MSBuildTasks.dll" />
-
-  <Target Name="X509SignAuthenticode" AfterTargets="Compile"
-          Condition="'$(OS)' == 'Windows_NT' and '$(X509SigningCert)' != ''">
-      <X509SignAuthenticode CertPath="$(X509SigningCert)"
-                            TimeStampUri="$(X509TimeStampUri)"
-                            InputAssembly="$(IntermediateOutputPath)$(TargetName)$(TargetExt)" />
-
-      <X509SignAuthenticode CertPath="$(X509SigningCert)"
-                            TimeStampUri="$(X509TimeStampUri)"
-                            InputAssembly="$(AppHostIntermediatePath)"
-                            Condition="'$(UseAppHost)' == 'true'" />
-  </Target>
-
-  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    Revision Control Meta-data
-   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <UsingTask TaskName="RJCP.MSBuildTasks.RevisionControl"
-             AssemblyFile="$(MSBuildThisFileDirectory)RJCP.MSBuildTasks.dll" />
+             AssemblyFile="..\..\buildtasks\bin\Debug\netstandard2.1\RJCP.MSBuildTasks.dll" />
   <UsingTask TaskName="RJCP.MSBuildTasks.SemVer"
-             AssemblyFile="$(MSBuildThisFileDirectory)RJCP.MSBuildTasks.dll" />
+             AssemblyFile="..\..\buildtasks\bin\Debug\netstandard2.1\RJCP.MSBuildTasks.dll" />
 
   <!-- The main target to hook into the build system automatically -->
-  <Target Name="RevisionControlCheck" DependsOnTargets="$(RevisionControlDependsOn)"
-          BeforeTargets="$(BeforeRevisionControl)" Condition="'$(RevisionControl)' != ''" />
+  <Target Name="RevisionControlCheck" DependsOnTargets="$(RevisionControlDependsOn)" BeforeTargets="$(BeforeRevisionControl)" Condition="'$(RevisionControl)' != ''" />
 
   <Target Name="CoreRevisionControlCheck" >
-    <RevisionControl Type="$(RevisionControl)" Path="$(MSBuildProjectDirectory)"
-                     Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)">
+    <Message Importance="High" Text="CoreRevisionControlCheck" />
+    <RevisionControl Type="$(RevisionControl)" Path="$(MSBuildProjectDirectory)" Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)">
       <Output TaskParameter="RevisionControlType" PropertyName="RevisionControlType" />
       <Output TaskParameter="RevisionControlBranch" PropertyName="RevisionControlBranch" />
       <Output TaskParameter="RevisionControlCommit" PropertyName="RevisionControlCommit" />
@@ -60,6 +38,8 @@
       <Version Condition="'$(RevisionControlVersionSuffix)' != ''">$(RevisionControlVersionBase)-$(RevisionControlVersionSuffix).$(RevisionControlDateTime)</Version>
       <PackageVersion>$(Version)</PackageVersion>
     </PropertyGroup>
-  </Target>
 
+    <Message Importance="High" Text=" _RJCP_ReleaseBuild           = $(_RJCP_ReleaseBuild)" />
+    <Message Importance="High" Text=" Version                      = $(Version)" />
+  </Target>
 </Project>

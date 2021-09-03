@@ -259,6 +259,105 @@ namespace RJCP.MSBuildTasks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t determine the source provider..
+        /// </summary>
+        internal static string RevisionControl_CantInstantiateProvider {
+            get {
+                return ResourceManager.GetString("RevisionControl_CantInstantiateProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Revision Control Filesystem indicates files have been modified. Please check in. Path is &apos;{0}&apos;..
+        /// </summary>
+        internal static string RevisionControl_IsDirty {
+            get {
+                return ResourceManager.GetString("RevisionControl_IsDirty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No label provided in project file and strict mode is enabled..
+        /// </summary>
+        internal static string RevisionControl_LabelNotDefined {
+            get {
+                return ResourceManager.GetString("RevisionControl_LabelNotDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Label &apos;{0}&apos; not found in Revision Control, or contents have changed. Path is &apos;{1}&apos;..
+        /// </summary>
+        internal static string RevisionControl_NotLabelled {
+            get {
+                return ResourceManager.GetString("RevisionControl_NotLabelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path provided doesn&apos;t exist..
+        /// </summary>
+        internal static string RevisionControl_PathDirectoryDoesntExist {
+            get {
+                return ResourceManager.GetString("RevisionControl_PathDirectoryDoesntExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path provided is a file, it must be a directory..
+        /// </summary>
+        internal static string RevisionControl_PathMustBeDirectory {
+            get {
+                return ResourceManager.GetString("RevisionControl_PathMustBeDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path must be provided (it can&apos;t be empty)..
+        /// </summary>
+        internal static string RevisionControl_PathNotDefined {
+            get {
+                return ResourceManager.GetString("RevisionControl_PathNotDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Revision Control Type is not defined..
+        /// </summary>
+        internal static string RevisionControl_RevisionControlTypeNotDefined {
+            get {
+                return ResourceManager.GetString("RevisionControl_RevisionControlTypeNotDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Strict mode isn&apos;t recognized..
+        /// </summary>
+        internal static string RevisionControl_UnknownStrictMode {
+            get {
+                return ResourceManager.GetString("RevisionControl_UnknownStrictMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The version parameter is empty..
+        /// </summary>
+        internal static string SemVer_VersionNotProvided {
+            get {
+                return ResourceManager.GetString("SemVer_VersionNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The version &apos;{0}&apos; is not supported..
+        /// </summary>
+        internal static string SemVer_VersionNotSupported {
+            get {
+                return ResourceManager.GetString("SemVer_VersionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The signtool.exe could not be found.
         /// </summary>
         internal static string SignTool_ToolsNotAvailable {

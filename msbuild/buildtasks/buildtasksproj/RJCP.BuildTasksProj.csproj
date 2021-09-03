@@ -2,12 +2,12 @@
 
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="build\x509sign.targets" />
+  <Import Project="build\revisioncontrol.props" />
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Exe</OutputType>
-    <IsPackable>false</IsPackable>
+    <!-- <IsPackable>false</IsPackable> -->
     <Configurations>Debug;Release</Configurations>
     <NeutralLanguage>en-US</NeutralLanguage>
 
@@ -29,6 +29,9 @@
     <AnalysisLevel>latest</AnalysisLevel>
     <EnableDefaultItems>false</EnableDefaultItems>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
+
+    <RevisionControl>git</RevisionControl>
+    <RevisionControlLabel>release/v$(Version)</RevisionControlLabel>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
@@ -41,10 +44,36 @@
     <Optimize>true</Optimize>
     <X509SigningCert>02EAAE_CodeSign.crt</X509SigningCert>
     <X509TimeStampUri>http://timestamp.digicert.com</X509TimeStampUri>
+    <RevisionControlStrict>true</RevisionControlStrict>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>
+
+  <Target Name="BeforeRevisionControlCheck" BeforeTargets="CoreRevisionControlCheck">
+    <Message Importance="High" Text="BeforeRevisionControlCheck" />
+  </Target>
+
+  <Target Name="AfterRevisionControlCheck" AfterTargets="CoreRevisionControlCheck">
+    <Message Importance="High" Text="AfterRevisionControlCheck" />
+    <Message Importance="High" Text=" Configuration                = $(Configuration)" />
+    <Message Importance="High" Text=" TargetFramework              = $(TargetFramework)" />
+    <Message Importance="High" Text=" RevisionControlType          = $(RevisionControlType)" />
+    <Message Importance="High" Text=" RevisionControlBranch        = $(RevisionControlBranch)" />
+    <Message Importance="High" Text=" RevisionControlCommit        = $(RevisionControlCommit)" />
+    <Message Importance="High" Text=" RevisionControlCommitShort   = $(RevisionControlCommitShort)" />
+    <Message Importance="High" Text=" RevisionControlDateTime      = $(RevisionControlDateTime)" />
+    <Message Importance="High" Text=" RevisionControlDirty         = $(RevisionControlDirty)" />
+    <Message Importance="High" Text=" RevisionControlTagged        = $(RevisionControlTagged)" />
+    <Message Importance="High" Text=" RevisionControlHost          = $(RevisionControlHost)" />
+    <Message Importance="High" Text=" RevisionControlUser          = $(RevisionControlUser)" />
+    <Message Importance="High" Text=" RevisionControlVersionBase   = $(RevisionControlVersionBase)" />
+    <Message Importance="High" Text=" RevisionControlVersionSuffix = $(RevisionControlVersionSuffix)" />
+    <Message Importance="High" Text=" RevisionControlVersionMeta   = $(RevisionControlVersionMeta)" />
+  </Target>
+
+  <Import Project="build\x509sign.targets" />
+  <Import Project="build\revisioncontrol.targets" />
 
 </Project>

@@ -65,6 +65,8 @@
     <Compile Include="Infrastructure\Tools\SignToolSimProcess.cs" />
     <Compile Include="Infrastructure\Tools\TestToolsFactory.cs" />
     <Compile Include="Infrastructure\Tools\ToolCreatedEventArgs.cs" />
+    <Compile Include="RevisionControlTest.cs" />
+    <Compile Include="SemVerTest.cs" />
     <Compile Include="X509SignAuthenticodeTest.cs" />
     <Compile Include="X509ThumbPrintTest.cs" />
   </ItemGroup>

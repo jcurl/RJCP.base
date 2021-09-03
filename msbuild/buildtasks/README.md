@@ -46,10 +46,12 @@ binary on build or publish using the .NET SDK package format.
 ## 3. Functionality Provided
 
 - [Signing (Windows only)](docs/signing.md)
+- [Revision Control](docs/revision.md)
 
 ## 4. Reference Documentation
 
 - [Signing](docs/reference/signing.md)
+- [Revision Control](docs/revision.md)
 
 ## 5. Design Documentation
 

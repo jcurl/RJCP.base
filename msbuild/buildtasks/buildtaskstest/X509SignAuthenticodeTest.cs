@@ -13,20 +13,13 @@
         private static readonly string SignArtifact = Path.Combine(Deploy.TestDirectory, "TestResource", "InputSignArtifact.txt");
         private static readonly string InexistentArtifact = Path.Combine(Deploy.TestDirectory, "TestResource", "FileNotFound.txt");
 
-        private static TestToolFactory InitToolFactory()
-        {
-            TestToolFactory factory = new TestToolFactory();
-            ToolFactory.Instance = factory;
-            return factory;
-        }
-
         [TestCase(true, TestName = "ExecuteSignDefault")]
         [TestCase(false, TestName = "SignToolNotFound")]
         public void ExecuteSignDefault(bool available)
         {
             BuildEngineMock buildEngine = new BuildEngineMock();
             SignToolMock signTool;
-            TestToolFactory factory = InitToolFactory();
+            TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.SignToolAvailable = available;
             factory.ToolCreatedEvent += (s, e) => {
                 signTool = (SignToolMock)e.Tool;
@@ -48,7 +41,7 @@
         {
             BuildEngineMock buildEngine = new BuildEngineMock();
             SignToolMock signTool;
-            TestToolFactory factory = InitToolFactory();
+            TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
                 signTool = (SignToolMock)e.Tool;
                 signTool.ExpectedThumbPrint = "2fda16f7adf7153e17d4bf3d36adc514a736cdf4";
@@ -71,7 +64,7 @@
         {
             BuildEngineMock buildEngine = new BuildEngineMock();
             SignToolMock signTool;
-            TestToolFactory factory = InitToolFactory();
+            TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
                 signTool = (SignToolMock)e.Tool;
                 signTool.ExpectedStoreName = StoreName.Root;
@@ -94,7 +87,7 @@
         {
             BuildEngineMock buildEngine = new BuildEngineMock();
             SignToolMock signTool;
-            TestToolFactory factory = InitToolFactory();
+            TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
                 signTool = (SignToolMock)e.Tool;
                 signTool.ExpectedStoreLocation = StoreLocation.LocalMachine;
@@ -117,7 +110,7 @@
         {
             BuildEngineMock buildEngine = new BuildEngineMock();
             SignToolMock signTool;
-            TestToolFactory factory = InitToolFactory();
+            TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
                 signTool = (SignToolMock)e.Tool;
                 signTool.ExpectedStoreLocation = StoreLocation.LocalMachine;
@@ -142,7 +135,7 @@
         {
             BuildEngineMock buildEngine = new BuildEngineMock();
             SignToolMock signTool;
-            TestToolFactory factory = InitToolFactory();
+            TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
                 signTool = (SignToolMock)e.Tool;
                 signTool.ExpectedThumbPrint = "SignToolThumbPrintUnknown";
@@ -163,7 +156,7 @@
         {
             BuildEngineMock buildEngine = new BuildEngineMock();
             SignToolMock signTool;
-            TestToolFactory factory = InitToolFactory();
+            TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
                 signTool = (SignToolMock)e.Tool;
                 signTool.ExpectedThumbPrint = "2fda16f7adf7153e17d4bf3d36adc514a736cdf4";
@@ -184,7 +177,7 @@
         {
             BuildEngineMock buildEngine = new BuildEngineMock();
             SignToolMock signTool;
-            TestToolFactory factory = InitToolFactory();
+            TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
                 signTool = (SignToolMock)e.Tool;
                 signTool.ExpectedThumbPrint = "2fda16f7adf7153e17d4bf3d36adc514a736cdf4";
@@ -205,7 +198,7 @@
         {
             BuildEngineMock buildEngine = new BuildEngineMock();
             SignToolMock signTool;
-            TestToolFactory factory = InitToolFactory();
+            TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
                 signTool = (SignToolMock)e.Tool;
                 signTool.ExpectedThumbPrint = "2fda16f7adf7153e17d4bf3d36adc514a736cdf4";
@@ -226,7 +219,7 @@
         {
             BuildEngineMock buildEngine = new BuildEngineMock();
             SignToolMock signTool;
-            TestToolFactory factory = InitToolFactory();
+            TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
                 signTool = (SignToolMock)e.Tool;
                 signTool.ExpectedThumbPrint = "2fda16f7adf7153e17d4bf3d36adc514a736cdf4";
@@ -247,7 +240,7 @@
         {
             BuildEngineMock buildEngine = new BuildEngineMock();
             SignToolMock signTool;
-            TestToolFactory factory = InitToolFactory();
+            TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
                 signTool = (SignToolMock)e.Tool;
                 signTool.ExpectedThumbPrint = "2fda16f7adf7153e17d4bf3d36adc514a736cdf4";

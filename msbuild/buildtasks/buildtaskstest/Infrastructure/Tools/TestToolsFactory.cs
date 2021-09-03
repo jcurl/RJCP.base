@@ -6,6 +6,13 @@
 
     internal sealed class TestToolFactory : IToolFactory
     {
+        public static TestToolFactory InitToolFactory()
+        {
+            TestToolFactory factory = new TestToolFactory();
+            ToolFactory.Instance = factory;
+            return factory;
+        }
+
         public bool SignToolAvailable { get; set; } = true;
 
         public bool GitToolAvailable { get; set; } = true;

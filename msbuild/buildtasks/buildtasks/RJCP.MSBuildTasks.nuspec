@@ -15,6 +15,7 @@
   <files>
     <file src="package\lib\_._" target="lib\netstandard1.0\" />
     <file src="package\lib\_._" target="lib\net40\" />
+    <file src="package\build\RJCP.MSBuildTasks.props" target="build\" />
     <file src="package\build\RJCP.MSBuildTasks.targets" target="build\" />
     <file src="bin\Release\netstandard2.1\RJCP.MSBuildTasks.dll" target="build\" />
   </files>
