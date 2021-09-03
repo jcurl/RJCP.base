@@ -151,6 +151,15 @@ namespace RJCP.MSBuildTasks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Object type not compatible.
+        /// </summary>
+        internal static string Infra_ObjectTypeNotCompatible {
+            get {
+                return ResourceManager.GetString("Infra_ObjectTypeNotCompatible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid operation: Must first locate the executable.
         /// </summary>
         internal static string Infra_Process_ExeNotFound {
@@ -174,6 +183,51 @@ namespace RJCP.MSBuildTasks {
         internal static string Infra_Process_RunProcess_ExecuteTwice {
             get {
                 return ResourceManager.GetString("Infra_Process_RunProcess_ExecuteTwice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Illegal character in metadata field.
+        /// </summary>
+        internal static string Infra_SemVer_IllegalCharInMetaData {
+            get {
+                return ResourceManager.GetString("Infra_SemVer_IllegalCharInMetaData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Illegal character in prerelease field.
+        /// </summary>
+        internal static string Infra_SemVer_IllegalCharInPreRelease {
+            get {
+                return ResourceManager.GetString("Infra_SemVer_IllegalCharInPreRelease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid version.
+        /// </summary>
+        internal static string Infra_SemVer_InvalidVersion {
+            get {
+                return ResourceManager.GetString("Infra_SemVer_InvalidVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid version, leading zeroes are not allowed.
+        /// </summary>
+        internal static string Infra_SemVer_InvalidVersionLeadingZero {
+            get {
+                return ResourceManager.GetString("Infra_SemVer_InvalidVersionLeadingZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} field must be a positive integer.
+        /// </summary>
+        internal static string Infra_SemVer_MustBePositive {
+            get {
+                return ResourceManager.GetString("Infra_SemVer_MustBePositive", resourceCulture);
             }
         }
         

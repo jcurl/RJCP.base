@@ -53,6 +53,7 @@
     <Compile Include="Infrastructure\Process\RunProcessCmdLineWinTest.cs" />
     <Compile Include="Infrastructure\Process\RunProcessTest.cs" />
     <Compile Include="Infrastructure\Process\TimeoutSimProcess.cs" />
+    <Compile Include="Infrastructure\SemVer2Test.cs" />
     <Compile Include="Infrastructure\SourceProvider\GitProviderTest.cs" />
     <Compile Include="Infrastructure\Threading\Tasks\AsyncManualResetEventTest.cs" />
     <Compile Include="Infrastructure\Threading\Tasks\AsyncSemaphoreTest.cs" />

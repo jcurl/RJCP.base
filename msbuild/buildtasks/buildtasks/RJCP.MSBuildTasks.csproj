@@ -52,6 +52,8 @@
     <Compile Include="Infrastructure\Process\Internal\ProcessWorker.cs" />
     <Compile Include="Infrastructure\Process\ProcessExitedEventArgs.cs" />
     <Compile Include="Infrastructure\Process\RunProcess.cs" />
+    <Compile Include="Infrastructure\SemVer2.cs" />
+    <Compile Include="Infrastructure\SemVerHelper.cs" />
     <Compile Include="Infrastructure\SourceProvider\GitProvider.cs" />
     <Compile Include="Infrastructure\SourceProvider\GitSourceFactory.cs" />
     <Compile Include="Infrastructure\SourceProvider\ISourceControl.cs" />

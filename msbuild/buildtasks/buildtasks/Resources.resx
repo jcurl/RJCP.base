@@ -213,4 +213,22 @@
   <data name="Git_InvalidIso8601" xml:space="preserve">
     <value>GIT ISO8601 format unrecognized</value>
   </data>
+  <data name="Infra_ObjectTypeNotCompatible" xml:space="preserve">
+    <value>Object type not compatible</value>
+  </data>
+  <data name="Infra_SemVer_IllegalCharInMetaData" xml:space="preserve">
+    <value>Illegal character in metadata field</value>
+  </data>
+  <data name="Infra_SemVer_IllegalCharInPreRelease" xml:space="preserve">
+    <value>Illegal character in prerelease field</value>
+  </data>
+  <data name="Infra_SemVer_InvalidVersion" xml:space="preserve">
+    <value>Invalid version</value>
+  </data>
+  <data name="Infra_SemVer_InvalidVersionLeadingZero" xml:space="preserve">
+    <value>Invalid version, leading zeroes are not allowed</value>
+  </data>
+  <data name="Infra_SemVer_MustBePositive" xml:space="preserve">
+    <value>{0} field must be a positive integer</value>
+  </data>
 </root>
