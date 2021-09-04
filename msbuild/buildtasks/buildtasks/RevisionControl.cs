@@ -1,6 +1,7 @@
 ﻿namespace RJCP.MSBuildTasks
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Threading.Tasks;
     using Infrastructure.SourceProvider;
@@ -114,6 +115,41 @@
         public string RevisionControlUser { get; private set; }
 
         /// <summary>
+        /// Clears the providers cache completely.
+        /// </summary>
+        public static void ClearProviders()
+        {
+            Providers = new AsyncCache<(string, string), ISourceControl>();
+        }
+
+        /// <summary>
+        /// Clears a specific source provider from the cache.
+        /// </summary>
+        /// <param name="path">The path that should be removed.</param>
+        /// <returns>
+        /// Returns <see langword="true"/> if at least one cache entry was found with a matching
+        /// <paramref name="path"/>, <see langword="false"/> otherwise.
+        /// </returns>
+        public static bool ClearProviders(string path)
+        {
+            List<(string, string)> keys = new List<(string, string)>();
+            bool found = Providers.Enumerate((e) => {
+                if (e.Item2.Equals(path)) {
+                    keys.Add(e);
+                    return true;
+                }
+                return false;
+            });
+
+            if (found) {
+                foreach (var key in keys) {
+                    Providers.Remove(key);
+                }
+            }
+            return found;
+        }
+
+        /// <summary>
         /// Executes the task to gather revision control information.
         /// </summary>
         /// <returns>Returns <see langword="true"/>, if successful</returns>
@@ -133,7 +169,7 @@
         // that the revision control system doesn't change for this path. MSBuild will instantiate a new task every time
         // it is run, but this cache is constant between all isntances. This can help speed up builds where the task is
         // run multiple times for the same project, e.g. with multiple target frameworks.
-        private static readonly AsyncCache<(string, string), ISourceControl> Providers =
+        private static AsyncCache<(string, string), ISourceControl> Providers =
             new AsyncCache<(string, string), ISourceControl>();
 
         private bool CheckInputs()

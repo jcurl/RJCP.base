@@ -80,6 +80,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="RevisionControl.cs" />
+    <Compile Include="RevisionControlClearCache.cs" />
     <Compile Include="SemVer.cs" />
     <Compile Include="X509SignAuthenticode.cs" />
     <Compile Include="X509ThumbPrint.cs" />
@@ -121,6 +122,8 @@
              AssemblyFile="bin\Debug\netstandard2.1\RJCP.MSBuildTasks.dll" />
   <UsingTask TaskName="RJCP.MSBuildTasks.SemVer"
              AssemblyFile="bin\Debug\netstandard2.1\RJCP.MSBuildTasks.dll" />
+  <UsingTask TaskName="RJCP.MSBuildTasks.RevisionControlClearCache"
+             AssemblyFile="bin\Debug\netstandard2.1\RJCP.MSBuildTasks.dll" />
 
   <PropertyGroup>
     <BeforeRevisionControl>
@@ -131,8 +134,18 @@
     </BeforeRevisionControl>
   </PropertyGroup>
 
+  <!-- Because RevisionControl caches its findings, we need to make sure that
+       when we start the build, our cache is clear.-->
+  <Target Name="ClearRevisionControlCheck" BeforeTargets="DispatchToInnerBuilds;BeforeBuild" Condition="'$(Configuration)' == 'Release'" >
+    <MSBuild Projects="$(MSBuildProjectFile)" Targets="ClearRevisionControlCheckInner" Properties="TargetFramework=once" />
+  </Target>
+
+  <Target Name="ClearRevisionControlCheckInner">
+    <RevisionControlClearCache/>
+  </Target>
+
   <Target Name="CoreRevisionControlCheck" BeforeTargets="$(BeforeRevisionControl)" Condition="'$(Configuration)' == 'Release' and '$(RevisionControl)' != ''">
-    <RevisionControl Type="$(RevisionControl)" Path="$(MSBuildProjectDirectory)" Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)" Cached="disabled">
+    <RevisionControl Type="$(RevisionControl)" Path="$(ProjectDir)" Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)" Cached="$(RevisionControlCached)">
       <Output TaskParameter="RevisionControlType" PropertyName="RevisionControlType" />
       <Output TaskParameter="RevisionControlBranch" PropertyName="RevisionControlBranch" />
       <Output TaskParameter="RevisionControlCommit" PropertyName="RevisionControlCommit" />

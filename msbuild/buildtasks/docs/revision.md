@@ -11,7 +11,7 @@ SDK project file to modify or add metadata based on this information.
   - [4.1. Performing Actions Immediately Before the Revision Control Check](#41-performing-actions-immediately-before-the-revision-control-check)
   - [4.2. Performing Actions Immediately After the Revision Control Check](#42-performing-actions-immediately-after-the-revision-control-check)
     - [4.2.1. NuSpec Properties](#421-nuspec-properties)
-- [5. Known Problems](#5-known-problems)
+- [5. Potential Problems](#5-potential-problems)
   - [5.1. Caching](#51-caching)
 
 ## 1. Usage
@@ -193,7 +193,7 @@ important that the property, like below, is set after the
 If this property is set at the top, in the project wide properties, it will be
 an incorrect version.
 
-## 5. Known Problems
+## 5. Potential Problems
 
 ### 5.1. Caching
 
@@ -203,7 +203,14 @@ is started and remains persistent, it may be possible that updates to the
 revision control system are not noticed. You should disable MSBuild being
 resident in memory.
 
-A common issue occurs when using Visual Studio Code, that the properties of the
-version information remains constant between builds, even though new commits
-have been made and committed. To over come this, close Visual Studio and redo
-the build from the command line.
+The file `RJCP.MSBuildTasks.dll` contains `RevisionControlClearCache` which
+attempts to invalidate the cache at the beginning of every invocation. It
+appears to work well with the .NET SDK 3.1 and 5.0.400 and MSBuild
+16.11.0+0538acc04 for .NET. But as the GIT information is cached in memory
+within the current process for MSBuild, if there is a migration from one MSBuild
+instance to another MSBuild instance during a build, there may be invalid cache
+information.
+
+To work around this problem, define
+`<RevisionControlCached>false</RevisionControlCached>` in your project file or
+set the property on the command line.

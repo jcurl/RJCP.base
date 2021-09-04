@@ -25,15 +25,28 @@
              AssemblyFile="$(MSBuildThisFileDirectory)RJCP.MSBuildTasks.dll" />
   <UsingTask TaskName="RJCP.MSBuildTasks.SemVer"
              AssemblyFile="$(MSBuildThisFileDirectory)RJCP.MSBuildTasks.dll" />
+  <UsingTask TaskName="RJCP.MSBuildTasks.RevisionControlClearCache"
+             AssemblyFile="$(MSBuildThisFileDirectory)RJCP.MSBuildTasks.dll" />
 
   <!-- The main target to hook into the build system automatically -->
   <Target Name="RevisionControlCheck" DependsOnTargets="$(RevisionControlDependsOn)"
           BeforeTargets="$(BeforeRevisionControl)" Condition="'$(RevisionControl)' != ''" />
 
+  <!-- Clear the revision control cache for this project once, no matter how
+       many frameworks we build at the start of building. -->
+  <Target Name="ClearRevisionControlCheck" BeforeTargets="DispatchToInnerBuilds;BeforeBuild">
+    <MSBuild Projects="$(MSBuildThisFileDirectory)$(MSBuildThisFile)"
+             Targets="ClearRevisionControlCheckInner" Properties="TargetFramework=once" />
+  </Target>
+
+  <Target Name="ClearRevisionControlCheckInner">
+    <RevisionControlClearCache/>
+  </Target>
+
   <Target Name="CoreRevisionControlCheck" >
-    <RevisionControl Type="$(RevisionControl)" Path="$(MSBuildProjectDirectory)"
+    <RevisionControl Type="$(RevisionControl)" Path="$(ProjectDir)"
                      Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)"
-                     Cached="disabled">
+                     Cached="$(RevisionControlCached)">
       <Output TaskParameter="RevisionControlType" PropertyName="RevisionControlType" />
       <Output TaskParameter="RevisionControlBranch" PropertyName="RevisionControlBranch" />
       <Output TaskParameter="RevisionControlCommit" PropertyName="RevisionControlCommit" />

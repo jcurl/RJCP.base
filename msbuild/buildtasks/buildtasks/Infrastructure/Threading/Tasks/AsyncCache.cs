@@ -87,5 +87,37 @@
             }
             return found;
         }
+
+        /// <summary>
+        /// Removes the specified key from the cached values.
+        /// </summary>
+        /// <param name="key">The key that should be removed.</param>
+        /// <returns>
+        /// <see langword="true"/> if the entry was cached and is now removed, <see langword="false"/> otherwise.
+        /// </returns>
+        public bool Remove(TKey key)
+        {
+            lock (m_Dict) {
+                return m_Dict.Remove(key);
+            }
+        }
+
+        /// <summary>
+        /// Enumerates the collection of values, calling an enumeration function on each
+        /// </summary>
+        /// <param name="checkFunction">The check function.</param>
+        /// <returns><see langword="true"/> if any entries were processed, <see langword="false"/> otherwise.</returns>
+        public bool Enumerate(Func<TKey, bool> checkFunction)
+        {
+            bool found = false;
+            lock (m_Dict) {
+                foreach (var entry in m_Dict) {
+                    if (checkFunction(entry.Key)) {
+                        found = true;
+                    }
+                }
+            }
+            return found;
+        }
     }
 }
