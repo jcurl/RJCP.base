@@ -13,6 +13,7 @@ SDK project file to modify or add metadata based on this information.
     - [4.2.1. NuSpec Properties](#421-nuspec-properties)
 - [5. Potential Problems](#5-potential-problems)
   - [5.1. Caching](#51-caching)
+  - [5.2. PackageVersion is not used](#52-packageversion-is-not-used)
 
 ## 1. Usage
 
@@ -214,3 +215,24 @@ information.
 To work around this problem, define
 `<RevisionControlCached>false</RevisionControlCached>` in your project file or
 set the property on the command line.
+
+### 5.2. PackageVersion is not used
+
+When building for a single target framework,
+`<TargetFramework>netstandard2.1</TargetFramework>`, the
+`CoreRevisionControlCheck` task sets the property `PackageVersion`. When
+building a package, this version is part of that package.
+
+But when targetting multiple frameworks, the value is not used.
+
+This might be considered a bug, but is proper behaviour. The
+`CoreRevisionControlCheck` runs per framework, genrating data, that can be used
+by your project to set the properties of the binary generated for that
+framework. So your generated assembly will have the correct information from
+GIT.
+
+However, for multiple frameworks, this is not the case, a single version should
+be used, and it is not clear which should be used. The .NET build system uses
+the `PackageVersion` based on the `Version` field that you defined at the scope
+of your project. This is why the package version does *not* contain GIT
+information for multiple framework targetted projects.
