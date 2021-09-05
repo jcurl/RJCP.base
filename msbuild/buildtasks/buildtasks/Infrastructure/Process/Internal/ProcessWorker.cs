@@ -9,6 +9,10 @@
     {
         private readonly Process m_Process;
 
+        private bool m_Started;
+        private bool m_DisposePending;
+        private readonly object m_DisposeSync = new object();
+
         public ProcessWorker(string command, string workingDir, string arguments)
         {
             m_Process = new Process();
@@ -31,6 +35,13 @@
             m_Process.Start();
             m_Process.BeginOutputReadLine();
             m_Process.BeginErrorReadLine();
+
+            // If ProcessExitEvent calls Dispose() while we still haven't finished Start(), then we need to now dispose
+            // the object.
+            lock (m_DisposeSync) {
+                m_Started = true;
+                if (m_DisposePending) m_Process.Dispose();
+            }
         }
 
         public bool Wait(int timeout)
@@ -131,6 +142,14 @@
 
         public void Dispose()
         {
+            // If the user calls Dispose() while Start() is running (e.g. because they're calling it from within the
+            // ProcessExitEvent), then we need to delay the dispose until we've finished the actual start.
+            lock (m_DisposeSync) {
+                if (!m_Started) {
+                    m_DisposePending = true;
+                    return;
+                }
+            }
             m_Process.Dispose();
         }
     }
