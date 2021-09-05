@@ -8,9 +8,9 @@
         },
         "release": {
             "clean": "dotnet clean -c Release --nologo RJCP.Framework.sln",
-            "build": "dotnet build -c Release --nologo RJCP.Framework.sln /p:X509SigningCert=${CDIR}\\signcert.crt /p:X509TimeStampUri=http://timestamp.digicert.com /p:TreatWarningsAsErrors=true",
+            "build": "dotnet build -c Release --nologo RJCP.Framework.sln /warnaserror /p:X509SigningCert=${CDIR}\\signcert.crt /p:X509TimeStampUri=http://timestamp.digicert.com",
             "test": "dotnet test -c Release --no-build --logger \"trx\" --results-directory \"distribute\\TestResults\" --nologo RJCP.Framework.sln",
-            "pack": "dotnet pack -c Release --include-source -o distribute\\nuget --nologo RJCP.Framework.sln /p:X509SigningCert=${CDIR}\\signcert.crt /p:X509TimeStampUri=http://timestamp.digicert.com /p:TreatWarningsAsErrors=true",
+            "pack": "dotnet pack -c Release --include-source -o distribute\\nuget --nologo RJCP.Framework.sln /warnaserror /p:X509SigningCert=${CDIR}\\signcert.crt /p:X509TimeStampUri=http://timestamp.digicert.com",
             "doc": "${msbuild} rjcp.shfbproj /t:Rebuild /verbosity:minimal /p:Configuration=Release /p:OutputPath=\"distribute\\Help\" /nologo"
         },
         "expansion": {
