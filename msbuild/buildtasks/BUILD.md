@@ -17,6 +17,7 @@ create a NuGet package that can then be used for inclusion in your own project.
    is then used to sign the `Release` build.
 
    ```cmd
+   cd msbuild\buildtasks\buildtasks
    dotnet build
    ```
 
@@ -28,6 +29,9 @@ create a NuGet package that can then be used for inclusion in your own project.
    Ensure that `signtool.exe` is in your path. If you're using PowerShell,
    adding it to the path might be a command such as (assuming you've installed
    the Windows Kit):
+
+   You of course have `git` installed, because the repository we're building
+   from is in git.
 
    ```cmd
    $Env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64"
@@ -71,13 +75,21 @@ There are two types of tests - the unit tests and the integration tests.
 
 ### 3.1. Unit Tests
 
-To run the unit tests, which simulates the task and execution of the
-`signtool.exe`, execute the command from where the `RJCP.MSBuildTasks.sln` file
-is kept:
+The unit tests depends on `RJCP.DLL.CodeQuality`, which uses the NuGet package
+`RJCP.MSBuildTasks.nupkg` provided here. This is why you might not be able to
+build and run the tests in a single step.
 
-```cmd
-dotnet test
-```
+1. First build the `RJCP.MSBuildTasks.0.2.0.nupkg` library and put in a local
+   feed. The instructions for doing this are provided if the NuGet package isn't
+   already available.
+2. To run the unit tests, which simulates the task and execution of the
+   `signtool.exe`, execute the command from where the `RJCP.MSBuildTasks.sln`
+   file is kept:
+
+   ```cmd
+   cd msbuild\buildtasks\buildtaskstest
+   dotnet test
+   ```
 
 Please be sure to run the unit tests under Windows. Other environments, such as
 MSYS2 might have similar commands, like `timeout.exe` that have different
