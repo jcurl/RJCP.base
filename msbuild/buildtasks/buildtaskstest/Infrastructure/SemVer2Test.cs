@@ -6,6 +6,7 @@
 
     [SuppressMessage("Assertion", "NUnit2010:Use EqualConstraint for better assertion messages in case of failure", Justification = "Direct testing of operators")]
     [SuppressMessage("Assertion", "NUnit2043:Use ComparisonConstraint for better assertion messages in case of failure", Justification = "Direct testing of operators")]
+    [TestFixture]
     public class SemVer2Test
     {
         [TestCase("0.1.0", 0, 1, 0)]
