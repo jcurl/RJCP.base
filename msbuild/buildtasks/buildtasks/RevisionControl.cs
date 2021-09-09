@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Text;
     using System.Threading.Tasks;
+    using Infrastructure.Process;
     using Infrastructure.SourceProvider;
     using Infrastructure.Threading.Tasks;
     using Microsoft.Build.Framework;
@@ -159,7 +161,27 @@
 
             try {
                 return ExecuteAsync().GetAwaiter().GetResult();
-            } catch (InvalidOperationException ex) {
+            } catch (RunProcessException ex) {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(ex.Message)
+                    .Append("\n ExitCode=").Append(ex.ExitCode)
+                    .Append("\n Command=").Append(ex.Command)
+                    .Append("\n WorkDir=").Append(ex.WorkingDirectory);
+                Log.LogError(sb.ToString());
+                sb.Clear().Append("Console:");
+                if (ex.StdOut.Count > 0) {
+                    foreach (string line in ex.StdOut) {
+                        sb.Append("\n StdOut=").Append(line);
+                    }
+                }
+                if (ex.StdErr.Count > 0) {
+                    foreach (string line in ex.StdErr) {
+                        sb.Append("\n StdErr=").Append(line);
+                    }
+                }
+                Log.LogMessage(sb.ToString());
+                return false;
+            } catch (Exception ex) {
                 Log.LogError(ex.Message);
                 return false;
             }

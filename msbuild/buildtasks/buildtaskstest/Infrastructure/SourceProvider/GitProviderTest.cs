@@ -3,6 +3,7 @@
     using System;
     using System.IO;
     using System.Threading.Tasks;
+    using Infrastructure.Process;
     using Infrastructure.Tools;
     using NUnit.Framework;
     using RJCP.CodeQuality.NUnitExtensions;
@@ -59,21 +60,21 @@
                     await SourceFactory.Instance.CreateAsync("git", repo);
 
                 Assert.That(async () => { _ = await gitprovider.GetCommitAsync("."); },
-                    Throws.TypeOf<InvalidOperationException>());
+                    Throws.TypeOf<InvalidOperationException>().Or.TypeOf<RunProcessException>());
 
                 Assert.That(async () => { _ = await gitprovider.GetCommitShortAsync("."); },
-                    Throws.TypeOf<InvalidOperationException>());
+                    Throws.TypeOf<InvalidOperationException>().Or.TypeOf<RunProcessException>());
 
                 Assert.That(async () => { _ = await gitprovider.GetCommitDateTimeAsync("."); },
-                    Throws.TypeOf<InvalidOperationException>());
+                    Throws.TypeOf<InvalidOperationException>().Or.TypeOf<RunProcessException>());
 
                 Assert.That(async () => { _ = await gitprovider.GetCurrentBranchAsync("."); },
-                    Throws.TypeOf<InvalidOperationException>());
+                    Throws.TypeOf<InvalidOperationException>().Or.TypeOf<RunProcessException>());
 
                 Assert.That(await gitprovider.IsDirtyAsync("."), Is.True);
 
                 Assert.That(async () => { _ = await gitprovider.IsTaggedAsync("tag", "."); },
-                    Throws.TypeOf<InvalidOperationException>());
+                    Throws.TypeOf<InvalidOperationException>().Or.TypeOf<RunProcessException>());
             }
         }
 
@@ -85,13 +86,13 @@
                     await SourceFactory.Instance.CreateAsync("git", repo);
 
                 Assert.That(async () => { _ = await gitprovider.GetCommitAsync("."); },
-                    Throws.TypeOf<InvalidOperationException>());
+                    Throws.TypeOf<InvalidOperationException>().Or.TypeOf<RunProcessException>());
 
                 Assert.That(async () => { _ = await gitprovider.GetCommitShortAsync("."); },
-                    Throws.TypeOf<InvalidOperationException>());
+                    Throws.TypeOf<InvalidOperationException>().Or.TypeOf<RunProcessException>());
 
                 Assert.That(async () => { _ = await gitprovider.GetCommitDateTimeAsync("."); },
-                    Throws.TypeOf<InvalidOperationException>());
+                    Throws.TypeOf<InvalidOperationException>().Or.TypeOf<RunProcessException>());
 
                 Assert.That(await gitprovider.GetCurrentBranchAsync("."),
                     Is.EqualTo("master"));

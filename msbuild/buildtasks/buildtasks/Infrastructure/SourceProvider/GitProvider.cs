@@ -75,17 +75,18 @@
         private async Task SetTopLevelPathAsync()
         {
             m_TopLevelPath = await GetTopLevelPathAsync(m_Path);
-            if (string.IsNullOrWhiteSpace(m_TopLevelPath))
-                throw new InvalidOperationException(Resources.Git_UnexpectedOutput);
         }
 
         private async Task<string> GetTopLevelPathAsync(string path)
         {
             RunProcess git = await m_Git.RunFromAsync(path, "rev-parse", "--show-toplevel");
             if (git.ExitCode != 0)
-                throw new InvalidOperationException(string.Format(Resources.Git_Error, git.ExitCode));
+                throw new RunProcessException(Resources.Git_Error, git);
             if (git.StdOut.Count != 1)
-                throw new InvalidOperationException(Resources.Git_UnexpectedOutput);
+                throw new RunProcessException(Resources.Git_UnexpectedOutput, git);
+            if (string.IsNullOrWhiteSpace(git.StdOut[0]))
+                throw new RunProcessException(Resources.Git_UnexpectedOutput, git);
+
             return Path.GetFullPath(git.StdOut[0]);
         }
 
@@ -114,7 +115,7 @@
             RunProcess git = await m_Git.RunFromAsync(m_TopLevelPath, "symbolic-ref", "-q", "--short", "HEAD");
             if (git.ExitCode == 1) return string.Empty;        // Not on a branch
             if (git.ExitCode != 0)
-                throw new InvalidOperationException(string.Format(Resources.Git_Error, git.ExitCode));
+                throw new RunProcessException(Resources.Git_Error, git);
 
             return git.StdOut[0];                              // The name of the branch
         }
@@ -138,14 +139,14 @@
             return m_Commits.GetSetAsync(path, async () => {
                 RunProcess git = await m_Git.RunFromAsync(m_TopLevelPath, "log", "-1", "--format=%H", "--", path);
                 if (git.ExitCode != 0)
-                    throw new InvalidOperationException(string.Format(Resources.Git_Error, git.ExitCode));
+                    throw new RunProcessException(Resources.Git_Error, git);
                 if (git.StdOut.Count == 0) {
                     string message = string.Format(Resources.Git_LogNoCommits, path);
                     throw new InvalidOperationException(message);
                 }
                 if (git.StdOut.Count != 1) {
                     string message = string.Format(Resources.Git_LogUnexpectedOutput, path);
-                    throw new InvalidOperationException(message);
+                    throw new RunProcessException(message, git);
                 }
 
                 return git.StdOut[0];
@@ -190,16 +191,20 @@
             return m_CommitDateTime.GetSetAsync(path, async () => {
                 RunProcess git = await m_Git.RunFromAsync(m_TopLevelPath, "log", "-1", "--format=%cI", "--", path);
                 if (git.ExitCode != 0)
-                    throw new InvalidOperationException(string.Format(Resources.Git_Error, git.ExitCode));
+                    throw new RunProcessException(Resources.Git_Error, git);
                 if (git.StdOut.Count == 0) {
                     string message = string.Format(Resources.Git_LogNoCommits, path);
-                    throw new InvalidOperationException(message);
+                    throw new RunProcessException(message, git);
                 }
                 if (git.StdOut.Count != 1) {
                     string message = string.Format(Resources.Git_LogUnexpectedOutput, path);
-                    throw new InvalidOperationException(message);
+                    throw new RunProcessException(message, git);
                 }
-                return ParseGitIso8601(git.StdOut[0]);
+                try {
+                    return ParseGitIso8601(git.StdOut[0]);
+                } catch (Exception ex) {
+                    throw new RunProcessException(Resources.Git_InvalidIso8601, git, ex);
+                }
             });
         }
 
@@ -255,7 +260,7 @@
                 RunProcess gitDiff = await m_Git.RunFromAsync(m_TopLevelPath, "diff-index", "--quiet", "HEAD", "--", path);
                 if (gitDiff.ExitCode == 1) return true;
                 if (gitDiff.ExitCode == 0) return false;
-                throw new InvalidOperationException(Resources.Git_UnexpectedOutput);
+                throw new RunProcessException(Resources.Git_UnexpectedOutput, gitDiff);
             });
         }
 
@@ -297,10 +302,11 @@
                 RunProcess git = await m_Git.RunFromAsync(m_TopLevelPath, "rev-parse", "HEAD");
                 if (git.ExitCode == 128) return string.Empty;
                 if (git.ExitCode == 0) {
-                    if (git.StdOut.Count != 1) throw new InvalidOperationException(Resources.Git_UnexpectedOutput);
+                    if (git.StdOut.Count != 1)
+                        throw new RunProcessException(Resources.Git_UnexpectedOutput, git);
                     return git.StdOut[0];
                 }
-                throw new InvalidOperationException(Resources.Git_UnexpectedOutput);
+                throw new RunProcessException(Resources.Git_UnexpectedOutput, git);
             });
         }
 
@@ -312,10 +318,11 @@
                 RunProcess git = await m_Git.RunFromAsync(m_TopLevelPath, "show-ref", "-s", tag);
                 if (git.ExitCode == 1) return string.Empty;
                 if (git.ExitCode == 0) {
-                    if (git.StdOut.Count != 1) throw new InvalidOperationException(Resources.Git_UnexpectedOutput);
+                    if (git.StdOut.Count != 1)
+                        throw new RunProcessException(Resources.Git_UnexpectedOutput, git);
                     return git.StdOut[0];
                 }
-                throw new InvalidOperationException(Resources.Git_UnexpectedOutput);
+                throw new RunProcessException(Resources.Git_UnexpectedOutput, git);
             });
         }
 
@@ -327,7 +334,7 @@
                 RunProcess git = await m_Git.RunFromAsync(m_TopLevelPath, "diff", "--quiet", commit1, commit2, "--", path);
                 if (git.ExitCode == 0) return false;
                 if (git.ExitCode == 1) return true;
-                throw new InvalidOperationException(Resources.Git_UnexpectedOutput);
+                throw new RunProcessException(Resources.Git_UnexpectedOutput, git);
             });
         }
     }

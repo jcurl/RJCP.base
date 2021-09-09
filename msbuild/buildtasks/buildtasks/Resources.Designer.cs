@@ -70,7 +70,7 @@ namespace RJCP.MSBuildTasks {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GIT returned error {0}.
+        ///   Looks up a localized string similar to GIT error.
         /// </summary>
         internal static string Git_Error {
             get {

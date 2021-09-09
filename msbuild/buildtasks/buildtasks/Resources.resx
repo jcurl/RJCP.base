@@ -202,7 +202,7 @@
     <value>GIT returned unexpected output</value>
   </data>
   <data name="Git_Error" xml:space="preserve">
-    <value>GIT returned error {0}</value>
+    <value>GIT error</value>
   </data>
   <data name="Git_LogUnexpectedOutput" xml:space="preserve">
     <value>GIT 'log' returned unexpected output for path '{0}'</value>
