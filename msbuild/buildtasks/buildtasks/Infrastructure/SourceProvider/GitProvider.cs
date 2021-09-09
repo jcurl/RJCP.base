@@ -161,7 +161,7 @@
         public async Task<string> GetCommitShortAsync(string path)
         {
             string commit = await GetCommitAsync(path);
-            return commit[0..7];
+            return commit.Substring(0, 7);
         }
 
         private readonly AsyncCache<string, DateTime> m_CommitDateTime = new AsyncCache<string, DateTime>();
@@ -214,14 +214,14 @@
         private static DateTime ParseGitIso8601(string datetime)
         {
             if (datetime.Length != 25) throw new ArgumentException(Resources.Git_InvalidIso8601, nameof(datetime));
-            int year = int.Parse(datetime[0..4], CultureInfo.InvariantCulture);
-            int month = int.Parse(datetime[5..7], CultureInfo.InvariantCulture);
-            int day = int.Parse(datetime[8..10], CultureInfo.InvariantCulture);
-            int hour = int.Parse(datetime[11..13], CultureInfo.InvariantCulture);
-            int min = int.Parse(datetime[14..16], CultureInfo.InvariantCulture);
-            int sec = int.Parse(datetime[17..19], CultureInfo.InvariantCulture);
-            int tzh = int.Parse(datetime[19..22], CultureInfo.InvariantCulture);
-            int tzm = int.Parse(datetime[23..25], CultureInfo.InvariantCulture);
+            int year = int.Parse(datetime.Substring(0, 4), CultureInfo.InvariantCulture);
+            int month = int.Parse(datetime.Substring(5, 2), CultureInfo.InvariantCulture);
+            int day = int.Parse(datetime.Substring(8, 2), CultureInfo.InvariantCulture);
+            int hour = int.Parse(datetime.Substring(11, 2), CultureInfo.InvariantCulture);
+            int min = int.Parse(datetime.Substring(14, 2), CultureInfo.InvariantCulture);
+            int sec = int.Parse(datetime.Substring(17, 2), CultureInfo.InvariantCulture);
+            int tzh = int.Parse(datetime.Substring(19, 3), CultureInfo.InvariantCulture);
+            int tzm = int.Parse(datetime.Substring(23, 2), CultureInfo.InvariantCulture);
 
             // All dates returned are local to UTC, as the ISO standard doesn't specify the timezone when it was
             // created, only the offset from UTC.

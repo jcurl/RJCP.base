@@ -5,10 +5,17 @@ test that it works interactively with MSBuild.
 
 ## Building and Testing
 
+Building this example works with the `dotnet` tools. The
+`RJCP.BuildTasksProj.csproj` file is configured to use the .NET Standard 2.1
+(.NET Core) library, and so will not work properly within the Visual Studio IDE
+(it requires the .NET 4.8 version). You can easily change the contents of the
+project to use the other library. Please note, that the final project will
+automatically choose the correct library based on the `MSBuildRuntimeType`.
+
 First, build the `buildtasks` project separately, from the root directory.
 
 ```sh
-dotnet build -c debug RJCP.MSBuildTasks.xln
+dotnet build -c debug RJCP.MSBuildTasks.sln
 ```
 
 This puts the resulting binary in

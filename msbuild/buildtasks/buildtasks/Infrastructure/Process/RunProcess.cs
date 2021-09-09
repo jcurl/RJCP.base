@@ -236,7 +236,7 @@
                     }
                     if (cmdLine.Length > 0) cmdLine.Append(' ');
                     if (quote) {
-                        if (arg[^1] == '\\')
+                        if (arg[arg.Length - 1] == '\\')
                             escArg.Append('\\');
                         cmdLine.Append('"').Append(escArg).Append('"');
                     } else {

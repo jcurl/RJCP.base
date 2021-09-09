@@ -24,34 +24,10 @@
         // See comments in GitSimProcess for the virtual repositories and the expected behaviour, which is used in these
         // test cases.
 
-        internal static ScratchPad GetRepo(string repo, out string path)
-        {
-            GitToolMock git;
-            TestToolFactory factory = TestToolFactory.InitToolFactory();
-
-            ScratchPad scratch = null;
-            try {
-                scratch = Deploy.ScratchPad();
-                Deploy.CreateDirectory(Path.Combine(scratch.RelativePath, repo));
-
-                string toplevel = Path.Combine(scratch.Path, repo);
-                path = toplevel;
-
-                factory.ToolCreatedEvent += (s, e) => {
-                    git = (GitToolMock)e.Tool;
-                    git.VirtualTopLevel = toplevel;
-                };
-                return scratch;
-            } catch {
-                if (scratch != null) scratch.Dispose();
-                throw;
-            }
-        }
-
         [Test]
         public async Task GetGitProvider()
         {
-            using (ScratchPad scratch = GetRepo("normal-utc", out string repo)) {
+            using (ScratchPad scratch = GitProviderRepo.GetRepo("normal-utc", out string repo)) {
                 ISourceControl gitprovider =
                     await SourceFactory.Instance.CreateAsync("git", repo);
                 Assert.That(gitprovider, Is.TypeOf<GitProvider>());
@@ -78,7 +54,7 @@
         [Test]
         public async Task GitProviderNoRepo()
         {
-            using (ScratchPad scratch = GetRepo("norepo", out string repo)) {
+            using (ScratchPad scratch = GitProviderRepo.GetRepo("norepo", out string repo)) {
                 ISourceControl gitprovider =
                     await SourceFactory.Instance.CreateAsync("git", repo);
 
@@ -104,7 +80,7 @@
         [Test]
         public async Task GitProviderEmptyRepo()
         {
-            using (ScratchPad scratch = GetRepo("emptyrepo", out string repo)) {
+            using (ScratchPad scratch = GitProviderRepo.GetRepo("emptyrepo", out string repo)) {
                 ISourceControl gitprovider =
                     await SourceFactory.Instance.CreateAsync("git", repo);
 
@@ -137,7 +113,7 @@
         [Test]
         public async Task GitProviderRepoCommitUtc()
         {
-            using (ScratchPad scratch = GetRepo("normal-utc", out string repo)) {
+            using (ScratchPad scratch = GitProviderRepo.GetRepo("normal-utc", out string repo)) {
                 ISourceControl gitprovider =
                     await SourceFactory.Instance.CreateAsync("git", repo);
 
@@ -165,7 +141,7 @@
         [Test]
         public async Task GitProviderRepoCommitUsa()
         {
-            using (ScratchPad scratch = GetRepo("normal-usa", out string repo)) {
+            using (ScratchPad scratch = GitProviderRepo.GetRepo("normal-usa", out string repo)) {
                 ISourceControl gitprovider =
                     await SourceFactory.Instance.CreateAsync("git", repo);
 
@@ -193,7 +169,7 @@
         [Test]
         public async Task GitProviderRepoCommitEu()
         {
-            using (ScratchPad scratch = GetRepo("normal-eu", out string repo)) {
+            using (ScratchPad scratch = GitProviderRepo.GetRepo("normal-eu", out string repo)) {
                 ISourceControl gitprovider =
                     await SourceFactory.Instance.CreateAsync("git", repo);
 
@@ -221,7 +197,7 @@
         [Test]
         public async Task GitProviderRepoDetachedHead()
         {
-            using (ScratchPad scratch = GetRepo("detached", out string repo)) {
+            using (ScratchPad scratch = GitProviderRepo.GetRepo("detached", out string repo)) {
                 ISourceControl gitprovider =
                     await SourceFactory.Instance.CreateAsync("git", repo);
 
@@ -249,7 +225,7 @@
         [Test]
         public async Task GitProviderRepoDirtyUnstaged()
         {
-            using (ScratchPad scratch = GetRepo("dirty-unstaged", out string repo)) {
+            using (ScratchPad scratch = GitProviderRepo.GetRepo("dirty-unstaged", out string repo)) {
                 ISourceControl gitprovider =
                     await SourceFactory.Instance.CreateAsync("git", repo);
 
@@ -277,7 +253,7 @@
         [Test]
         public async Task GitProviderRepoDirtyStaged()
         {
-            using (ScratchPad scratch = GetRepo("dirty-staged", out string repo)) {
+            using (ScratchPad scratch = GitProviderRepo.GetRepo("dirty-staged", out string repo)) {
                 ISourceControl gitprovider =
                     await SourceFactory.Instance.CreateAsync("git", repo);
 
@@ -305,7 +281,7 @@
         [Test]
         public async Task GitProviderRepoTagged()
         {
-            using (ScratchPad scratch = GetRepo("normal-tagged", out string repo)) {
+            using (ScratchPad scratch = GitProviderRepo.GetRepo("normal-tagged", out string repo)) {
                 ISourceControl gitprovider =
                     await SourceFactory.Instance.CreateAsync("git", repo);
 
@@ -333,7 +309,7 @@
         [Test]
         public async Task GitProviderRepoTaggedModified()
         {
-            using (ScratchPad scratch = GetRepo("normal-tagmod", out string repo)) {
+            using (ScratchPad scratch = GitProviderRepo.GetRepo("normal-tagmod", out string repo)) {
                 ISourceControl gitprovider =
                     await SourceFactory.Instance.CreateAsync("git", repo);
 

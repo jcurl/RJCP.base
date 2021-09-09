@@ -37,7 +37,7 @@ binary on build or publish using the .NET SDK package format.
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RJCP.MSBuildTasks" Version="0.1.0" />
+    <PackageReference Include="RJCP.MSBuildTasks" Version="0.2.1" />
   </ItemGroup>
 
 </Project>

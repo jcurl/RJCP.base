@@ -3,7 +3,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>net48;netstandard2.1</TargetFrameworks>
     <OutputType>Library</OutputType>
     <Configurations>Debug;Release</Configurations>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -17,7 +17,7 @@
     <Copyright>(C) 2018-2021, Jason Curl</Copyright>
     <Company></Company>
     <Description>MSBuild Tasks for RJCP Framework Libraries.</Description>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
 
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -47,6 +47,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Infrastructure\IO\AsyncResult.cs" />
     <Compile Include="Infrastructure\Platform.cs" />
     <Compile Include="Infrastructure\Process\ConsoleDataEventArgs.cs" />
@@ -94,15 +95,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="16.10.0" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.10.0" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="16.10.0" CopyLocal="false" Publish="false" ExcludeAssets="runtime" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.10.0" CopyLocal="false" Publish="false" ExcludeAssets="runtime" />
   </ItemGroup>
+
+  <!-- Choose where to load our debug assembly based on the version of MSBuild
+       that is being used.
+   -->
+  <PropertyGroup Condition="'$(MSBuildRuntimeType)' == 'Full' Or '$(MSBuildRuntimeType)' == 'Mono'">
+    <_RJCP_MSBuildTasksAssembly>bin\Debug\net48\RJCP.MSBuildTasks.dll</_RJCP_MSBuildTasksAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <_RJCP_MSBuildTasksAssembly Condition="'$(_RJCP_MSBuildTasksAssembly)' == ''">bin\Debug\netstandard2.1\RJCP.MSBuildTasks.dll</_RJCP_MSBuildTasksAssembly>
+  </PropertyGroup>
 
   <!-- This task is specific to this project. First build the debug version,
        then build the release version to have it signed with the debug version.
-       -->
-  <UsingTask TaskName="RJCP.MSBuildTasks.X509SignAuthenticode"
-             AssemblyFile="bin\Debug\netstandard2.1\RJCP.MSBuildTasks.dll" />
+   -->
+  <UsingTask TaskName="RJCP.MSBuildTasks.X509SignAuthenticode" AssemblyFile="$(_RJCP_MSBuildTasksAssembly)" />
 
   <Target Name="X509SignAuthenticode" AfterTargets="Compile"
           Condition="'$(OS)' == 'Windows_NT' and '$(X509SigningCert)' != ''">
@@ -118,12 +129,9 @@
   <!-- Provide specific revision control information for this project. Your
        project doesn't need all this, it pulls it in from the .targets file. It
        only runs in release mode, otherwise we have a cyclic dependency. -->
-  <UsingTask TaskName="RJCP.MSBuildTasks.RevisionControl"
-             AssemblyFile="bin\Debug\netstandard2.1\RJCP.MSBuildTasks.dll" />
-  <UsingTask TaskName="RJCP.MSBuildTasks.SemVer"
-             AssemblyFile="bin\Debug\netstandard2.1\RJCP.MSBuildTasks.dll" />
-  <UsingTask TaskName="RJCP.MSBuildTasks.RevisionControlClearCache"
-             AssemblyFile="bin\Debug\netstandard2.1\RJCP.MSBuildTasks.dll" />
+  <UsingTask TaskName="RJCP.MSBuildTasks.RevisionControl" AssemblyFile="$(_RJCP_MSBuildTasksAssembly)" />
+  <UsingTask TaskName="RJCP.MSBuildTasks.SemVer" AssemblyFile="$(_RJCP_MSBuildTasksAssembly)" />
+  <UsingTask TaskName="RJCP.MSBuildTasks.RevisionControlClearCache" AssemblyFile="$(_RJCP_MSBuildTasksAssembly)" />
 
   <PropertyGroup>
     <BeforeRevisionControl>
@@ -136,16 +144,16 @@
 
   <!-- Because RevisionControl caches its findings, we need to make sure that
        when we start the build, our cache is clear.-->
-  <Target Name="ClearRevisionControlCheck" BeforeTargets="DispatchToInnerBuilds;BeforeBuild" Condition="'$(Configuration)' == 'Release'" >
+  <Target Name="ClearRevisionControlCheck" BeforeTargets="DispatchToInnerBuilds;BeforeBuild" Condition="'$(Configuration)' == 'Release'">
     <MSBuild Projects="$(MSBuildProjectFile)" Targets="ClearRevisionControlCheckInner" Properties="TargetFramework=once" />
   </Target>
 
   <Target Name="ClearRevisionControlCheckInner">
-    <RevisionControlClearCache/>
+    <RevisionControlClearCache />
   </Target>
 
   <Target Name="CoreRevisionControlCheck" BeforeTargets="$(BeforeRevisionControl)" Condition="'$(Configuration)' == 'Release' and '$(RevisionControl)' != ''">
-    <RevisionControl Type="$(RevisionControl)" Path="$(ProjectDir)" Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)" Cached="$(RevisionControlCached)">
+    <RevisionControl Type="$(RevisionControl)" Path="$(MSBuildThisFileDirectory)" Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)" Cached="$(RevisionControlCached)">
       <Output TaskParameter="RevisionControlType" PropertyName="RevisionControlType" />
       <Output TaskParameter="RevisionControlBranch" PropertyName="RevisionControlBranch" />
       <Output TaskParameter="RevisionControlCommit" PropertyName="RevisionControlCommit" />

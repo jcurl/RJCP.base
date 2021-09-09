@@ -5,7 +5,6 @@ namespace RJCP.MSBuildTasks.Infrastructure
 {
     using System;
     using System.Globalization;
-    using System.Runtime.Serialization;
     using System.Text;
 
     // Some design information about SemVer and SemVer2.

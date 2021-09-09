@@ -1,8 +1,5 @@
 ﻿namespace RJCP.MSBuildTasks
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
     using NUnit.Framework;
 
     [TestFixture]

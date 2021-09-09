@@ -13,7 +13,7 @@
         public void GitRepository()
         {
             BuildEngineMock buildEngine = new BuildEngineMock();
-            using (ScratchPad scratch = GitProviderTest.GetRepo("normal-utc", out string repo)) {
+            using (ScratchPad scratch = GitProviderRepo.GetRepo("normal-utc", out string repo)) {
                 RevisionControl task = new RevisionControl {
                     BuildEngine = buildEngine.BuildEngine,
                     Type = "git",
@@ -40,7 +40,7 @@
         public void GitRepositoryNonUtc()
         {
             BuildEngineMock buildEngine = new BuildEngineMock();
-            using (ScratchPad scratch = GitProviderTest.GetRepo("normal-eu", out string repo)) {
+            using (ScratchPad scratch = GitProviderRepo.GetRepo("normal-eu", out string repo)) {
                 RevisionControl task = new RevisionControl {
                     BuildEngine = buildEngine.BuildEngine,
                     Type = "git",
@@ -87,7 +87,7 @@
         public void InvalidType(string revisionType)
         {
             BuildEngineMock buildEngine = new BuildEngineMock();
-            using (ScratchPad scratch = GitProviderTest.GetRepo("normal-utc", out string repo)) {
+            using (ScratchPad scratch = GitProviderRepo.GetRepo("normal-utc", out string repo)) {
                 RevisionControl task = new RevisionControl {
                     BuildEngine = buildEngine.BuildEngine,
                     Type = revisionType,
@@ -104,7 +104,7 @@
         public void InvalidStrictMode(string strict)
         {
             BuildEngineMock buildEngine = new BuildEngineMock();
-            using (ScratchPad scratch = GitProviderTest.GetRepo("normal-utc", out string repo)) {
+            using (ScratchPad scratch = GitProviderRepo.GetRepo("normal-utc", out string repo)) {
                 RevisionControl task = new RevisionControl {
                     BuildEngine = buildEngine.BuildEngine,
                     Type = "git",
@@ -131,7 +131,7 @@
         public void GitRepositoryStrictMode(string strict, bool withLabel, bool warning)
         {
             BuildEngineMock buildEngine = new BuildEngineMock();
-            using (ScratchPad scratch = GitProviderTest.GetRepo("normal-utc", out string repo)) {
+            using (ScratchPad scratch = GitProviderRepo.GetRepo("normal-utc", out string repo)) {
                 RevisionControl task = new RevisionControl {
                     BuildEngine = buildEngine.BuildEngine,
                     Type = "git",
@@ -163,7 +163,7 @@
         public void GitRepositoryNoRepo()
         {
             BuildEngineMock buildEngine = new BuildEngineMock();
-            using (ScratchPad scratch = GitProviderTest.GetRepo("norepo", out string repo)) {
+            using (ScratchPad scratch = GitProviderRepo.GetRepo("norepo", out string repo)) {
                 RevisionControl task = new RevisionControl {
                     BuildEngine = buildEngine.BuildEngine,
                     Type = "git",

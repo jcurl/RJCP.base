@@ -87,7 +87,7 @@
             int part = version.IndexOf(separator);
             if (part == -1) part = version.Length;
 
-            value = version[cursor..part];
+            value = version.Substring(cursor, part - cursor);
             cursor = part;
             return value;
         }
@@ -101,7 +101,7 @@
         /// <exception cref="ArgumentException">Illegal character in string.</exception>
         public static string ParseString(string version, ref int cursor)
         {
-            string value = version[cursor..];
+            string value = version.Substring(cursor);
             cursor = version.Length;
             return value;
         }

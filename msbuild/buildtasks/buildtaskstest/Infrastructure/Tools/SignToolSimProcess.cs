@@ -49,7 +49,7 @@
                 if (timeStampUri != null && !timeStampUri.Equals(signtool.ExpectedTimeStampUri))
                     throw new InvalidOperationException("Unexpected TimeStampUri given");
 
-                signtool.LogStdOut($"Successfully signed: {args[^1]}");
+                signtool.LogStdOut(string.Format("Successfully signed: {0}", args[args.Length - 1]));
                 return 0;
             } catch (Exception e) {
                 Console.WriteLine($"SignTool failed: {e.Message}");
@@ -71,7 +71,7 @@
         {
             bool storeOption = false;
             foreach (string arg in args) {
-                if (storeOption) return Enum.Parse<StoreName>(arg, true);
+                if (storeOption) return (StoreName)Enum.Parse(typeof(StoreName), arg, true);
                 if (arg.Equals("/s", StringComparison.Ordinal)) storeOption = true;
             }
             return StoreName.My;

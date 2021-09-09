@@ -45,7 +45,7 @@
             get { return m_StoreName.ToString(); }
             set
             {
-                m_StoreName = Enum.Parse<StoreName>(value, true);
+                m_StoreName = (StoreName)Enum.Parse(typeof(StoreName), value, true);
             }
         }
 
@@ -58,7 +58,7 @@
             get { return m_StoreLocation.ToString(); }
             set
             {
-                m_StoreLocation = Enum.Parse<StoreLocation>(value, true);
+                m_StoreLocation = (StoreLocation)Enum.Parse(typeof(StoreLocation), value, true);
             }
         }
 
