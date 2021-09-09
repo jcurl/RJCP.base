@@ -7,6 +7,7 @@
     <description>$description$</description>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/jcurl</projectUrl>
+    <developmentDependency>true</developmentDependency>
     <dependencies>
       <group targetFramework=".NETStandard1.0" />
       <group targetFramework=".NETFramework4.0" />
