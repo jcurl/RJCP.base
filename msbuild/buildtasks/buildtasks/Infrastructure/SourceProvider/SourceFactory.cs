@@ -47,15 +47,40 @@
         /// A <see cref="ISourceControl"/> object to manage the source at the <paramref name="path"/> given.
         /// </returns>
         /// <exception cref="UnknownSourceProviderException"></exception>
-        public Task<ISourceControl> CreateAsync(string provider, string path)
+        public async Task<ISourceControl> CreateAsync(string provider, string path)
         {
-            if (provider.Equals("git", StringComparison.OrdinalIgnoreCase) ||
-                provider.Equals("auto", StringComparison.OrdinalIgnoreCase)) {
-                ISourceFactory factory = new GitSourceFactory();
-                return factory.CreateAsync("git", path);
+            if (provider.Equals("auto", StringComparison.OrdinalIgnoreCase)) {
+                ISourceControl source;
+
+                source = await CreateAsync("git", path, false);
+                if (source != null) return source;
+
+                source = await CreateAsync("none", path, false);
+                if (source != null) return source;
+
+                throw new UnknownSourceProviderException(Resources.Infra_Source_UnknownProvider, provider);
+            } else {
+                return await CreateAsync(provider, path, true);
+            }
+        }
+
+        private static async Task<ISourceControl> CreateAsync(string provider, string path, bool throwOnError)
+        {
+            ISourceFactory factory;
+            if (provider.Equals("git", StringComparison.OrdinalIgnoreCase)) {
+                factory = new GitSourceFactory();
+            } else if (provider.Equals("none", StringComparison.OrdinalIgnoreCase)) {
+                factory = new NoneSourceFactory();
+            } else {
+                throw new UnknownSourceProviderException(Resources.Infra_Source_UnknownProvider, provider);
             }
 
-            throw new UnknownSourceProviderException(Resources.Infra_Source_UnknownProvider, provider);
+            try {
+                return await factory.CreateAsync(provider, path);
+            } catch {
+                if (throwOnError) throw;
+                return null;
+            }
         }
     }
 }

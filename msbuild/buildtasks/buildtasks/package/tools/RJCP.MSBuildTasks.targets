@@ -67,6 +67,11 @@
       <SourceRevisionId Condition="'$(RevisionControlDirty)' == 'true'">g$(RevisionControlCommitShort)-dirty</SourceRevisionId>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(SourceRevisionId)' == '' and '$(RevisionControlType)' == 'none'">
+      <SourceRevisionId Condition="'$(RevisionControlDirty)' != 'true'"></SourceRevisionId>
+      <SourceRevisionId Condition="'$(RevisionControlDirty)' == 'true'">dirty</SourceRevisionId>
+    </PropertyGroup>
+
     <PropertyGroup>
       <_RJCP_ReleaseBuild Condition="'$(Configuration)' == 'Release' and '$(RevisionControlDirty)' != 'true' and '$(RevisionControlTagged)' == 'true'">True</_RJCP_ReleaseBuild>
     </PropertyGroup>

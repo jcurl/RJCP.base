@@ -64,6 +64,8 @@
     <Compile Include="Infrastructure\SourceProvider\GitSourceFactory.cs" />
     <Compile Include="Infrastructure\SourceProvider\ISourceControl.cs" />
     <Compile Include="Infrastructure\SourceProvider\ISourceFactory.cs" />
+    <Compile Include="Infrastructure\SourceProvider\NoneProvider.cs" />
+    <Compile Include="Infrastructure\SourceProvider\NoneSourceFactory.cs" />
     <Compile Include="Infrastructure\SourceProvider\SourceFactory.cs" />
     <Compile Include="Infrastructure\SourceProvider\SourceProviderException.cs" />
     <Compile Include="Infrastructure\SourceProvider\UnknownSourceProviderException.cs" />
