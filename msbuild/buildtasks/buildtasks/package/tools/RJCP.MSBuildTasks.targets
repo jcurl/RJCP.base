@@ -62,8 +62,12 @@
       <Output TaskParameter="RevisionControlUser" PropertyName="RevisionControlUser" />
     </RevisionControl>
 
+    <PropertyGroup Condition="'$(SourceRevisionId)' == '' and '$(RevisionControlType)' == 'git'">
+      <SourceRevisionId Condition="'$(RevisionControlDirty)' != 'true'">g$(RevisionControlCommitShort)</SourceRevisionId>
+      <SourceRevisionId Condition="'$(RevisionControlDirty)' == 'true'">g$(RevisionControlCommitShort)-dirty</SourceRevisionId>
+    </PropertyGroup>
+
     <PropertyGroup>
-      <SourceRevisionId Condition="'$(SourceRevisionId)' == ''">g$(RevisionControlCommitShort)</SourceRevisionId>
       <_RJCP_ReleaseBuild Condition="'$(Configuration)' == 'Release' and '$(RevisionControlDirty)' != 'true' and '$(RevisionControlTagged)' == 'true'">True</_RJCP_ReleaseBuild>
     </PropertyGroup>
 
