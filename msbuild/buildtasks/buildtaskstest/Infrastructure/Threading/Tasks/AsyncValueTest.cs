@@ -129,14 +129,14 @@
             string result2;
 
             int start = Environment.TickCount;
-            Task.Run(() => {
+            Task bgTask = Task.Run(() => {
                 result1 = value.GetSet(() => {
-                    Thread.Sleep(500);
+                    Thread.Sleep(400);
                     return "Value";
                 });
             });
 
-            Thread.Sleep(200);
+            Thread.Sleep(100);
             result2 = value.GetSet(() => {
                 Thread.Sleep(1500);
                 return "Value2";
@@ -145,8 +145,9 @@
             // Measure the time. The first GetSet runs which is 500ms, so it should be about this amount of time. The
             // second GetSet sees that we're already executing the function, so will just wait and the lambda of 1000ms
             // shouldn't be executed. So we should be more than 400ms and less than 800ms.
+            bgTask.Wait();
             int timeDiff = unchecked(Environment.TickCount - start);
-            Assert.That(timeDiff, Is.GreaterThan(400).And.LessThan(800));
+            Assert.That(timeDiff, Is.GreaterThan(300).And.LessThan(700));
 
             // Because the first GetSet is run, this value wins.
             Assert.That(result1, Is.EqualTo("Value"));
