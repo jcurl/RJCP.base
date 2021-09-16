@@ -48,3 +48,6 @@
 	url = ../RJCP.DLL.CpuId.git
 	branch = master
 	ignore = untracked
+[submodule "framework/bufferio"]
+	path = framework/bufferio
+	url = ../rjcp.dll.bufferio.git
