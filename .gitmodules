@@ -51,3 +51,6 @@
 [submodule "framework/bufferio"]
 	path = framework/bufferio
 	url = ../rjcp.dll.bufferio.git
+    branch = master
+	ignore = untracked
+	
