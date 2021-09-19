@@ -48,7 +48,7 @@
   </Target>
 
   <Target Name="CoreRevisionControlCheck" >
-    <RevisionControl Type="$(RevisionControl)" Path="$(ProjectDir)"
+    <RevisionControl Type="$(RevisionControl)" Path="$(MSBuildProjectDirectory)"
                      Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)"
                      Cached="$(RevisionControlCached)">
       <Output TaskParameter="RevisionControlType" PropertyName="RevisionControlType" />

@@ -22,7 +22,7 @@
 
   <Target Name="CoreRevisionControlCheck" >
     <Message Importance="High" Text="CoreRevisionControlCheck" />
-    <RevisionControl Type="$(RevisionControl)" Path="$(ProjectDir)" Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)" Cached="$(RevisionControlCached)">
+    <RevisionControl Type="$(RevisionControl)" Path="$(MSBuildProjectDirectory)" Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)" Cached="$(RevisionControlCached)">
       <Output TaskParameter="RevisionControlType" PropertyName="RevisionControlType" />
       <Output TaskParameter="RevisionControlBranch" PropertyName="RevisionControlBranch" />
       <Output TaskParameter="RevisionControlCommit" PropertyName="RevisionControlCommit" />

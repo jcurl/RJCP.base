@@ -55,7 +55,7 @@ information relevant for the revision control system. Processing that data
 should be done by the target so it is easily customizable.
 
 ```xml
-    <RevisionControl Type="$(RevisionControl)" Path="$(ProjectDir)"
+    <RevisionControl Type="$(RevisionControl)" Path="$(MSBuildProjectDirectory)"
                      Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)">
       <Output TaskParameter="RevisionControlType" PropertyName="RevisionControlType" />
       <Output TaskParameter="RevisionControlBranch" PropertyName="RevisionControlBranch" />
@@ -104,7 +104,7 @@ the path information must be obtained for every invocation (especially for each
 time a new build occurs for multiple targets).
 
 ```xml
-    <RevisionControl Type="git" Path="$(ProjectDir)"
+    <RevisionControl Type="git" Path="$(MSBuildProjectDirectory)"
                      Label="$(RevisionControlLabel)" Strict="$(RevisionControlStrict)"
                      Cached="false">
 ```
