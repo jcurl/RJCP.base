@@ -20,6 +20,7 @@
             m_Process.StartInfo.Arguments = arguments;
             m_Process.StartInfo.ErrorDialog = false;
             m_Process.StartInfo.UseShellExecute = false;
+            m_Process.StartInfo.CreateNoWindow = true;
             if (workingDir != null) m_Process.StartInfo.WorkingDirectory = workingDir;
             m_Process.StartInfo.RedirectStandardError = true;
             m_Process.StartInfo.RedirectStandardOutput = true;
