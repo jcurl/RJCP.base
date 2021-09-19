@@ -12,7 +12,7 @@ SDK project file to modify or add metadata based on this information.
   - [4.2. Performing Actions Immediately After the Revision Control Check](#42-performing-actions-immediately-after-the-revision-control-check)
     - [4.2.1. NuSpec Properties](#421-nuspec-properties)
 - [5. Potential Problems](#5-potential-problems)
-  - [5.1. Caching](#51-caching)
+  - [5.1. No Caching and Performance Impact](#51-no-caching-and-performance-impact)
   - [5.2. PackageVersion is not used](#52-packageversion-is-not-used)
 
 ## 1. Usage
@@ -196,25 +196,20 @@ an incorrect version.
 
 ## 5. Potential Problems
 
-### 5.1. Caching
+### 5.1. No Caching and Performance Impact
 
-The task in use caches the results of the GIT commands between invocations.
-Normally MSBuild is started and it closes when builds are finished. If MSBuild
-is started and remains persistent, it may be possible that updates to the
-revision control system are not noticed. You should disable MSBuild being
-resident in memory.
+The revision control information is obtained every time the project is built,
+for each target framework and for each configuration. For projects with a large
+number of projects, this can jeopardize performance.
 
-The file `RJCP.MSBuildTasks.dll` contains `RevisionControlClearCache` which
-attempts to invalidate the cache at the beginning of every invocation. It
-appears to work well with the .NET SDK 3.1 and 5.0.400 and MSBuild
-16.11.0+0538acc04 for .NET. But as the GIT information is cached in memory
-within the current process for MSBuild, if there is a migration from one MSBuild
-instance to another MSBuild instance during a build, there may be invalid cache
-information.
+At this time, I'm not aware how to cache the results in the
+`RJCP.MSBuildTasks.targets` file that this information only needs to be obtained
+once per project.
 
-To work around this problem, define
-`<RevisionControlCached>false</RevisionControlCached>` in your project file or
-set the property on the command line.
+A previous attempt tried to cache in the .NET task in C#, but this doesn't work
+reliably, presumably because MSBuild can transfer controls to different
+processes, and MSBuild processes often remain active after the build is
+finished, thus resulting in stale information.
 
 ### 5.2. PackageVersion is not used
 

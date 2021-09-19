@@ -340,15 +340,6 @@ namespace RJCP.MSBuildTasks {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Cached mode isn&apos;t recognized..
-        /// </summary>
-        internal static string RevisionControl_UnknownCachedMode {
-            get {
-                return ResourceManager.GetString("RevisionControl_UnknownCachedMode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The Strict mode isn&apos;t recognized..
         /// </summary>
         internal static string RevisionControl_UnknownStrictMode {

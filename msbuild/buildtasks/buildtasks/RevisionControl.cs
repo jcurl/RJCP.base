@@ -1,13 +1,11 @@
 ﻿namespace RJCP.MSBuildTasks
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Text;
     using System.Threading.Tasks;
     using Infrastructure.Process;
     using Infrastructure.SourceProvider;
-    using Infrastructure.Threading.Tasks;
     using Microsoft.Build.Framework;
 
     /// <summary>
@@ -44,14 +42,6 @@
         public string Strict { get; set; }
 
         private bool StrictMode { get; set; }
-
-        /// <summary>
-        /// Gets or sets if caching should be used. The default is to enable caching.
-        /// </summary>
-        /// <value>If caching should be used.</value>
-        public string Cached { get; set; }
-
-        private bool CachedMode { get; set; }
 
         /// <summary>
         /// Gets the type of the revision control that was detected.
@@ -117,41 +107,6 @@
         public string RevisionControlUser { get; private set; }
 
         /// <summary>
-        /// Clears the providers cache completely.
-        /// </summary>
-        public static void ClearProviders()
-        {
-            Providers = new AsyncCache<(string, string), ISourceControl>();
-        }
-
-        /// <summary>
-        /// Clears a specific source provider from the cache.
-        /// </summary>
-        /// <param name="path">The path that should be removed.</param>
-        /// <returns>
-        /// Returns <see langword="true"/> if at least one cache entry was found with a matching
-        /// <paramref name="path"/>, <see langword="false"/> otherwise.
-        /// </returns>
-        public static bool ClearProviders(string path)
-        {
-            List<(string, string)> keys = new List<(string, string)>();
-            bool found = Providers.Enumerate((e) => {
-                if (e.Item2.Equals(path)) {
-                    keys.Add(e);
-                    return true;
-                }
-                return false;
-            });
-
-            if (found) {
-                foreach (var key in keys) {
-                    Providers.Remove(key);
-                }
-            }
-            return found;
-        }
-
-        /// <summary>
         /// Executes the task to gather revision control information.
         /// </summary>
         /// <returns>Returns <see langword="true"/>, if successful</returns>
@@ -187,13 +142,6 @@
             }
         }
 
-        // This cache contains the source providers while MSBuild is running and loaded this assembly. The assumption is
-        // that the revision control system doesn't change for this path. MSBuild will instantiate a new task every time
-        // it is run, but this cache is constant between all isntances. This can help speed up builds where the task is
-        // run multiple times for the same project, e.g. with multiple target frameworks.
-        private static AsyncCache<(string, string), ISourceControl> Providers =
-            new AsyncCache<(string, string), ISourceControl>();
-
         private bool CheckInputs()
         {
             if (string.IsNullOrWhiteSpace(Path)) {
@@ -224,13 +172,6 @@
                 return false;
             }
 
-            try {
-                CachedMode = CheckBoolean(Cached, true);
-            } catch (ArgumentException) {
-                Log.LogError(Resources.RevisionControl_UnknownCachedMode);
-                return false;
-            }
-
             return true;
         }
 
@@ -254,29 +195,13 @@
             }
         }
 
-        private async Task<ISourceControl> GetProviderAsync(string sourceType, string path)
-        {
-            try {
-                ISourceControl foundProvider =
-                    await SourceFactory.Instance.CreateAsync(sourceType, path);
-                if (foundProvider == null) return null;
-                return foundProvider;
-            } catch (UnknownSourceProviderException ex) {
-                Log.LogError(ex.Message);
-                return null;
-            }
-        }
-
         private async Task<bool> ExecuteAsync()
         {
-            ISourceControl provider;
-
-            if (CachedMode) {
-                provider = await Providers.GetSetAsync((SourceType, Path), () => {
-                    return GetProviderAsync(SourceType, Path);
-                });
-            } else {
-                provider = await GetProviderAsync(SourceType, Path);
+            ISourceControl provider = null;
+            try {
+                provider = await SourceFactory.Instance.CreateAsync(SourceType, Path);
+            } catch (UnknownSourceProviderException ex) {
+                Log.LogError(ex.Message);
             }
 
             if (provider == null) {

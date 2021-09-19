@@ -17,9 +17,7 @@ of executables on Windows.
 ### 1.1. Tested Environments
 
 This library has been tested to be consumed with Visual Studio 2019 installed,
-imported into the newer .NET SDK Project format. The traditional MSBuild
-environment has not been tested, but may work (slight modifications may be
-required).
+imported into the newer .NET SDK Project format.
 
 ## 2. Using this Library via NuGet
 
@@ -37,7 +35,7 @@ binary on build or publish using the .NET SDK package format.
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RJCP.MSBuildTasks" Version="0.2.1" />
+    <PackageReference Include="RJCP.MSBuildTasks" Version="0.2.2" />
   </ItemGroup>
 
 </Project>

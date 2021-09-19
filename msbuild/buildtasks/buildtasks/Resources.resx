@@ -264,9 +264,6 @@
   <data name="SemVer_VersionNotSupported" xml:space="preserve">
     <value>The version '{0}' is not supported.</value>
   </data>
-  <data name="RevisionControl_UnknownCachedMode" xml:space="preserve">
-    <value>The Cached mode isn't recognized.</value>
-  </data>
   <data name="Arg_UnknownValue" xml:space="preserve">
     <value>Unknown value provided</value>
   </data>

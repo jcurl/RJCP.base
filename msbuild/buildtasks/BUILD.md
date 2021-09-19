@@ -79,7 +79,7 @@ The unit tests depends on `RJCP.DLL.CodeQuality`, which uses the NuGet package
 `RJCP.MSBuildTasks.nupkg` provided here. This is why you might not be able to
 build and run the tests in a single step.
 
-1. First build the `RJCP.MSBuildTasks.0.2.1.nupkg` library and put in a local
+1. First build the `RJCP.MSBuildTasks.0.2.2.nupkg` library and put in a local
    feed. The instructions for doing this are provided if the NuGet package isn't
    already available.
 2. To run the unit tests, which simulates the task and execution of the

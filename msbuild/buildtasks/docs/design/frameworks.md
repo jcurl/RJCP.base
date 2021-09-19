@@ -72,5 +72,4 @@ Then when the tasks are loaded later, it uses the correct file.
   <UsingTask TaskName="RJCP.MSBuildTasks.X509SignAuthenticode" AssemblyFile="$(_RJCP_MSBuildTasksAssembly)" />
   <UsingTask TaskName="RJCP.MSBuildTasks.RevisionControl" AssemblyFile="$(_RJCP_MSBuildTasksAssembly)" />
   <UsingTask TaskName="RJCP.MSBuildTasks.SemVer" AssemblyFile="$(_RJCP_MSBuildTasksAssembly)" />
-  <UsingTask TaskName="RJCP.MSBuildTasks.RevisionControlClearCache" AssemblyFile="$(_RJCP_MSBuildTasksAssembly)" />
 ```
