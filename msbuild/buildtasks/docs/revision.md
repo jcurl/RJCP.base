@@ -213,21 +213,25 @@ finished, thus resulting in stale information.
 
 ### 5.2. PackageVersion is not used
 
-When building for a single target framework,
-`<TargetFramework>netstandard2.1</TargetFramework>`, the
-`CoreRevisionControlCheck` task sets the property `PackageVersion`. When
-building a package, this version is part of that package.
+The `PackageVersion` is not set by the default targets provided by this library.
+This allows building packages that have correct dependencies.
 
-But when targetting multiple frameworks, the value is not used.
+For example, by setting the `PackageVersion` to be the same as the project
+initially defined `Version`, all dependences from MSBuild are correctly
+calcuated and work. If the `PackageVersion` is set after
+`CoreRevisionControlCheck`, the package versions is updated, but dependencies
+are not, thus resulting in broken packages.
 
-This might be considered a bug, but is proper behaviour. The
-`CoreRevisionControlCheck` runs per framework, genrating data, that can be used
-by your project to set the properties of the binary generated for that
-framework. So your generated assembly will have the correct information from
-GIT.
+For example:
 
-However, for multiple frameworks, this is not the case, a single version should
-be used, and it is not clear which should be used. The .NET build system uses
-the `PackageVersion` based on the `Version` field that you defined at the scope
-of your project. This is why the package version does *not* contain GIT
-information for multiple framework targetted projects.
+* `PackageA` has version 1.0.0;
+* `PackageB` has version 2.0.0, and depends on `PackageA`.
+
+When building using the default target, the result is `PackageA-1.0.0.nupkg`,
+and `PackageB-2.0.0.nupkg` which depends on `PackageA-1.0.0.nupkg`. By setting
+the `PackageVersion`, it may result in:
+
+* `PackageA-1.0.0-alpha.20210919T183425.nupkg` and
+* `PackageB-2.0.0-alpha.20210919T185433.nupkg` but incorrectly depending on
+  `PackageA-1.0.0.nupkg` that doesn't exist (and is newer, so will not be
+  found).

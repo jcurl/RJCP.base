@@ -72,7 +72,6 @@
     <PropertyGroup Condition="'$(_RJCP_ReleaseBuild)' != 'True'">
       <Version Condition="'$(RevisionControlVersionSuffix)' == ''">$(RevisionControlVersionBase)-alpha.$(RevisionControlDateTime)</Version>
       <Version Condition="'$(RevisionControlVersionSuffix)' != ''">$(RevisionControlVersionBase)-$(RevisionControlVersionSuffix).$(RevisionControlDateTime)</Version>
-      <PackageVersion>$(Version)</PackageVersion>
     </PropertyGroup>
   </Target>
 
