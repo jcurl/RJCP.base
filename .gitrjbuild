@@ -4,7 +4,8 @@
             "clean": "dotnet clean -c Debug --nologo RJCP.Framework.sln",
             "build": "dotnet build -c Debug --nologo RJCP.Framework.sln /p:CheckForOverflowUnderflow=true",
             "test": "dotnet test -c Debug --no-build --logger \"trx\" --nologo RJCP.Framework.sln",
-            "pack": "dotnet pack -c Debug --include-source --nologo RJCP.Framework.sln /p:CheckForOverflowUnderflow"
+            "pack": "dotnet pack -c Debug --include-source --nologo RJCP.Framework.sln /p:CheckForOverflowUnderflow",
+            "doc": "${msbuild} rjcp.shfbproj /t:Rebuild /verbosity:minimal /p:Configuration=Debug /p:OutputPath=\"distribute\\Help\" /nologo"
         },
         "release": {
             "clean": "dotnet clean -c Release --nologo RJCP.Framework.sln",
