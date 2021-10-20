@@ -50,7 +50,11 @@
 	ignore = untracked
 [submodule "framework/bufferio"]
 	path = framework/bufferio
-	url = ../rjcp.dll.bufferio.git
-    branch = master
+	url = ../RJCP.DLL.BufferIO.git
+	branch = master
 	ignore = untracked
-	
+[submodule "framework/serialportstream"]
+	path = framework/serialportstream
+	url = ../RJCP.DLL.SerialPortStream.git
+	branch = master
+	ignore = untracked
