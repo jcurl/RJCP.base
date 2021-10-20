@@ -9,3 +9,4 @@ TestResults/
 *.user
 *.userprefs
 *.suo
+/*.snk

@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import argparse
-import asyncio
 import concurrent.futures
 import json
 import os
@@ -12,7 +11,7 @@ import sys
 import threading
 
 # Global Configuration
-VERSION = "1.0-alpha.20210731"
+VERSION = "1.0-alpha.20211020"
 GITDEBUGLEVEL = 0
 MAX_WORKERS = 8
 
@@ -1782,23 +1781,26 @@ class BuildCommand:
             description="Build the contents of this repository"
         )
         argparser.add_argument(
-            "-c", "--clean", action="store_true",
-            help="Run the clean target.")
-        argparser.add_argument(
-            "-b", "--build", action="store_true",
-            help="Build the contents of the repository.")
-        argparser.add_argument(
-            "-t", "--test", action="store_true",
-            help="Execute the test suites.")
-        argparser.add_argument(
-            "-p", "--pack", action="store_true",
-            help="Generate packages.")
-        argparser.add_argument(
-            "-d", "--doc", action="store_true",
-            help="Generate documentation.")
+            "-c", "--config", action="store", nargs='?', default=None,
+            help="configuration to build with.")
         argparser.add_argument(
             "-r", "--release", action="store_true",
-            help="Build, Test, Pack, Docs in release mode")
+            help="build, Test, Pack, Docs in release mode.")
+        argparser.add_argument(
+            "-x", "--clean", action="store_true",
+            help="run the clean target.")
+        argparser.add_argument(
+            "-b", "--build", action="store_true",
+            help="build the contents of the repository.")
+        argparser.add_argument(
+            "-t", "--test", action="store_true",
+            help="execute the test suites.")
+        argparser.add_argument(
+            "-p", "--pack", action="store_true",
+            help="generate packages.")
+        argparser.add_argument(
+            "-d", "--doc", action="store_true",
+            help="generate documentation.")
 
         self.arguments = argparser.parse_args(arguments)
 
@@ -1837,15 +1839,16 @@ class BuildCommand:
             raise CommandError(f"Platform '{cplatform}' not present in the configuration file '.gitrjbuild'.")
 
         if self.arguments.release:
-            if not "release" in config[cplatform]:
-                raise CommandError(f"Configuration 'release' not defined in '{cplatform}'")
-            cmdconfigstr = "release"
+            if self.arguments.config == None:
+                self.arguments.config = "release"
         else:
-            if not "dev" in config[cplatform]:
-                raise CommandError(f"Configuration 'dev' not defined in '{cplatform}'")
-            cmdconfigstr = "dev"
+            if self.arguments.config == None:
+                self.arguments.config = "dev"
 
-        cmdconfig = config[cplatform][cmdconfigstr]
+        if not self.arguments.config in config[cplatform]:
+            raise CommandError(f"Configuration '{self.arguments.config}' not defined in '{cplatform}'")
+
+        cmdconfig = config[cplatform][self.arguments.config]
 
         os.environ["CDIR"] = os.getcwd()
         expplatform = config[cplatform]["expansion"] if "expansion" in config[cplatform] else None
@@ -1853,20 +1856,20 @@ class BuildCommand:
         expansion = Expansion(expconfig, expplatform)
 
         if self.arguments.clean and not "clean" in cmdconfig:
-            raise CommandError(f"Cannot clean, command not defined in '{cplatform}/{cmdconfigstr}'")
+            raise CommandError(f"Cannot clean, command not defined in '{cplatform}/{self.arguments.config}'")
         if self.arguments.build and not "build" in cmdconfig:
-            raise CommandError(f"Cannot build, command not defined in '{cplatform}/{cmdconfigstr}'")
+            raise CommandError(f"Cannot build, command not defined in '{cplatform}/{self.arguments.config}'")
         if self.arguments.test and not "test" in cmdconfig:
-            raise CommandError(f"Cannot test, command not defined in '{cplatform}/{cmdconfigstr}'")
+            raise CommandError(f"Cannot test, command not defined in '{cplatform}/{self.arguments.config}'")
         if self.arguments.pack and not "pack" in cmdconfig:
-            raise CommandError(f"Cannot pack, command not defined in '{cplatform}/{cmdconfigstr}'")
+            raise CommandError(f"Cannot pack, command not defined in '{cplatform}/{self.arguments.config}'")
         if self.arguments.doc and not "doc" in cmdconfig:
-            raise CommandError(f"Cannot provide documentation, command not defined in '{cplatform}/{cmdconfigstr}'")
+            raise CommandError(f"Cannot provide documentation, command not defined in '{cplatform}/{self.arguments.config}'")
 
         try:
             if self.arguments.clean:
                 print("----------------------------------------------------------------------")
-                print("-- Cleaning:")
+                print("-- Cleaning:", cplatform, self.arguments.config)
                 print("-- Command:", expansion.expand(cmdconfig["clean"]))
                 print("----------------------------------------------------------------------")
                 print(flush=True)
@@ -1874,7 +1877,7 @@ class BuildCommand:
                 print(flush=True)
             if self.arguments.build:
                 print("----------------------------------------------------------------------")
-                print("-- Building:")
+                print("-- Building:", cplatform, self.arguments.config)
                 print("-- Command:", expansion.expand(cmdconfig["build"]))
                 print("----------------------------------------------------------------------")
                 print(flush=True)
@@ -1882,7 +1885,7 @@ class BuildCommand:
                 print(flush=True)
             if self.arguments.test:
                 print("----------------------------------------------------------------------")
-                print("-- Testing")
+                print("-- Testing", cplatform, self.arguments.config)
                 print("-- Command:", expansion.expand(cmdconfig["test"]))
                 print("----------------------------------------------------------------------")
                 print(flush=True)
@@ -1890,7 +1893,7 @@ class BuildCommand:
                 print(flush=True)
             if self.arguments.pack:
                 print("----------------------------------------------------------------------")
-                print("-- Packaging")
+                print("-- Packaging", cplatform, self.arguments.config)
                 print("-- Command:", expansion.expand(cmdconfig["pack"]))
                 print("----------------------------------------------------------------------")
                 print(flush=True)
@@ -1898,7 +1901,7 @@ class BuildCommand:
                 print(flush=True)
             if self.arguments.doc:
                 print("----------------------------------------------------------------------")
-                print("-- Generating Documentation")
+                print("-- Generating Documentation", cplatform, self.arguments.config)
                 print("-- Command:", expansion.expand(cmdconfig["doc"]))
                 print("----------------------------------------------------------------------")
                 print(flush=True)
