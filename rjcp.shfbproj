@@ -52,8 +52,8 @@
     <TopicVersion>100</TopicVersion>
     <MSHelpViewerSdkLinkType>Msdn</MSHelpViewerSdkLinkType>
     <DocumentationSources>
-      <DocumentationSource sourceFile="framework\bufferio\BufferIO\bin\$(Configuration)\net48\RJCP.IO.Buffer.dll" />
-      <DocumentationSource sourceFile="framework\bufferio\BufferIO\bin\$(Configuration)\net48\RJCP.IO.Buffer.xml" />
+      <DocumentationSource sourceFile="framework\bufferio\BufferIO\bin\$(Configuration)\net45\RJCP.IO.Buffer.dll" />
+      <DocumentationSource sourceFile="framework\bufferio\BufferIO\bin\$(Configuration)\net45\RJCP.IO.Buffer.xml" />
       <DocumentationSource sourceFile="framework\commandline\code\bin\$(Configuration)\net40\RJCP.Core.CommandLine.dll" />
       <DocumentationSource sourceFile="framework\commandline\code\bin\$(Configuration)\net40\RJCP.Core.CommandLine.xml" />
       <DocumentationSource sourceFile="framework\cpuid\CpuId\bin\$(Configuration)\net40\RJCP.Diagnostics.CpuId.dll" />
@@ -66,6 +66,10 @@
       <DocumentationSource sourceFile="framework\environment\Environment\bin\$(Configuration)\net40\RJCP.Core.Environment.dll" />
       <DocumentationSource sourceFile="framework\nunitextensions\CodeQuality\bin\$(Configuration)\net40\RJCP.CodeQuality.xml" />
       <DocumentationSource sourceFile="framework\nunitextensions\CodeQuality\bin\$(Configuration)\net40\RJCP.CodeQuality.dll" />
+      <DocumentationSource sourceFile="framework\serialportstream\code\bin\$(Configuration)\net45\RJCP.SerialPortStream.xml" />
+      <DocumentationSource sourceFile="framework\serialportstream\code\bin\$(Configuration)\net45\RJCP.SerialPortStream.dll" />
+      <DocumentationSource sourceFile="framework\serialportstream\test\SerialPortStream.Virtual\bin\$(Configuration)\net45\RJCP.SerialPortStream.Virtual.xml" />
+      <DocumentationSource sourceFile="framework\serialportstream\test\SerialPortStream.Virtual\bin\$(Configuration)\net45\RJCP.SerialPortStream.Virtual.dll" />
       <DocumentationSource sourceFile="framework\textutils\code\bin\$(Configuration)\net40\RJCP.Core.Text.xml" />
       <DocumentationSource sourceFile="framework\textutils\code\bin\$(Configuration)\net40\RJCP.Core.Text.dll" />
 	  <DocumentationSource sourceFile="framework\trace\Trace\bin\$(Configuration)\net40\RJCP.Diagnostics.Trace.xml" />
