@@ -9,6 +9,7 @@ import re
 import subprocess  # Python 3.7 or later
 import sys
 import threading
+import time
 
 # Global Configuration
 VERSION = "1.0-alpha.20211020"
@@ -93,9 +94,13 @@ class ProcessExe:
             pipeerr.close()
             raise
 
+        # We must wait as sometimes when the process.wait() returns, it's not quite finished (file outputs are not yet
+        # present), and the pipe for reading STDOUT and STDERR is not yet complete.
         self.returncode = process.wait()
+        time.sleep(0.5)
         pipeout.close()
         pipeerr.close()
+        time.sleep(0.5)
 
         if (check and self.returncode != 0):
             raise subprocess.CalledProcessError(
