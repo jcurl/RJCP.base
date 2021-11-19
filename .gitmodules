@@ -58,3 +58,8 @@
 	url = ../RJCP.DLL.SerialPortStream.git
 	branch = master
 	ignore = untracked
+[submodule "framework/path"]
+	path = framework/path
+	url = ../RJCP.DLL.Path.git
+	branch = master
+	ignore = untracked

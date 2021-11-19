@@ -66,6 +66,8 @@
       <DocumentationSource sourceFile="framework\environment\Environment\bin\$(Configuration)\net40\RJCP.Core.Environment.dll" />
       <DocumentationSource sourceFile="framework\nunitextensions\CodeQuality\bin\$(Configuration)\net40\RJCP.CodeQuality.xml" />
       <DocumentationSource sourceFile="framework\nunitextensions\CodeQuality\bin\$(Configuration)\net40\RJCP.CodeQuality.dll" />
+      <DocumentationSource sourceFile="framework\path\code\bin\$(Configuration)\net40\RJCP.IO.Path.xml" />
+      <DocumentationSource sourceFile="framework\path\code\bin\$(Configuration)\net40\RJCP.IO.Path.dll" />
       <DocumentationSource sourceFile="framework\serialportstream\code\bin\$(Configuration)\net45\RJCP.SerialPortStream.xml" />
       <DocumentationSource sourceFile="framework\serialportstream\code\bin\$(Configuration)\net45\RJCP.SerialPortStream.dll" />
       <DocumentationSource sourceFile="framework\serialportstream\test\SerialPortStream.Virtual\bin\$(Configuration)\net45\RJCP.SerialPortStream.Virtual.xml" />
