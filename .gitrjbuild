@@ -1,4 +1,12 @@
 {
+    "": {
+        "perf": {
+            "path": {
+                "net48": "framework/path/test/PathBenchmark/bin/Release/net48/RJCP.IO.PathBenchmark.exe",
+                "netcore31": "framework/path/test/PathBenchmark/bin/Release/netcoreapp3.1/RJCP.IO.PathBenchmark.dll"
+            }
+        }
+    },
     "Windows": {
         "build": {
             "dev": {

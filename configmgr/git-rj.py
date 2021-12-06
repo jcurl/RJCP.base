@@ -6,10 +6,14 @@ import json
 import os
 import platform
 import re
+import shutil
 import subprocess  # Python 3.7 or later
 import sys
 import threading
 import time
+
+from pathlib import Path
+import xml.etree.ElementTree as ET
 
 # Global Configuration
 VERSION = "1.0-alpha.20211020"
@@ -987,6 +991,7 @@ class HelpCommand:
         print("  git rj shbr - Show branches")
         print("  git rj rmbr - Remove branches")
         print("  git rj build - Build from .gitrjbuild description")
+        print("  git rj perf - Run performance tests with BenchmarkDotNet")
         print()
         print("Get information about the command with the -h option, e.g.")
         print("  git rj status -h")
@@ -1922,6 +1927,273 @@ class BuildCommand:
             print("")
 
 
+class PerfCommand:
+    """Run performance tests using BenchmarkDotNet"""
+
+    # Design:
+    #
+    # Read from the .gitrjbuild file the performance tests. The user can provide the configuration
+    # entries they want to test.
+
+    def __init__(self, arguments):
+        argparser = argparse.ArgumentParser(
+            prog="git rj perftest",
+            description="Runs performance tests built using BenchmarkDotNet for multiple "
+            "frameworks and summarize in a single location. The release versions must be "
+            "already built prior.")
+        argparser.add_argument(
+            "project", nargs="*", default=None,
+            help="List of projects to run performance tests for.")
+        argparser.add_argument(
+            "-r", "--results", action="store_true",
+            help="Don't run benchmarks, just print results from the last run")
+
+        self.arguments = argparser.parse_args(arguments)
+        self.runperfs = { }       # A dictionary of configs pointing to array of folders
+
+    def RunPerfs(self):
+        """Get the dictionary of all configurations that were run. Each entry contains
+        an array of folders with the results of the benchmarks"""
+        return self.runperfs
+
+    def execute(self):
+        if (not os.path.isfile(".gitrjbuild")):
+            raise CommandError("Execute from the top-most directory, or ensure the '.gitrjbuild' file exists.")
+
+        try:
+            with open(".gitrjbuild") as configFile:
+                config = json.load(configFile)
+                configFile.close()
+        except json.decoder.JSONDecodeError as ex:
+            raise CommandError(f"Error loading .gitrjbuild - {ex.msg} (Line:{ex.lineno}, Col:{ex.colno})")
+
+        cplatform = platform.system()
+        perfconfigglobal = None
+        perfconfiglocal = None
+
+        if "" in config:
+            if "perf" in config[""]:
+                perfconfigglobal = config[""]["perf"]
+
+        if cplatform in config:
+            if "perf" in config[cplatform]:
+                perfconfiglocal = config[cplatform]["perf"]
+
+        if len(self.arguments.project) > 0:
+            for prj in self.arguments.project:
+                if not prj in self.runperfs:
+                    if not perfconfigglobal is None and prj in perfconfigglobal:
+                        self._runperf(prj, perfconfigglobal[prj])
+                    if not perfconfiglocal is None and prj in perfconfiglocal:
+                        self._runperf(prj, perfconfiglocal[prj])
+        else:
+            if not perfconfigglobal is None and len(perfconfigglobal) > 0:
+                for prj in perfconfigglobal:
+                    if not prj in self.runperfs:
+                        self._runperf(prj, perfconfigglobal[prj])
+            if not perfconfiglocal is None and len(perfconfiglocal) > 0:
+                for prj in perfconfiglocal:
+                    if not prj in self.runperfs:
+                        self._runperf(prj, perfconfiglocal[prj])
+
+        # Collate the results and print.
+        for prj in self.runperfs:
+            perfresults = { }
+            perfsummary = { }
+            for run in self.runperfs[prj]:
+                for root, dirs, files in os.walk(run["path"]):
+                    for file in files:
+                        if file.endswith(".xml"):
+                            name = run["target"]
+                            self._parseperf(name, str(Path(root).joinpath(file)), perfresults, perfsummary)
+            if (len(perfresults) > 0):
+                self._printperf(prj, perfresults, perfsummary)
+
+    def _runperf(self, prj, config):
+        for target in config:
+            if not prj in self.runperfs:
+                self.runperfs[prj] = [ ]
+            self._runperfbinary(prj, target, config[target])
+
+    def _runperfbinary(self, prj, target, executable):
+        runfolder = str(Path("perf").joinpath(prj).joinpath(target))
+        cwd = Path(os.getcwd())
+        fullpath = cwd.joinpath(runfolder)
+        fullexe = cwd.joinpath(executable)
+
+        if (not self.arguments.results):
+            if os.path.exists(fullpath):
+                shutil.rmtree(fullpath)
+
+            if fullexe.is_file:
+                if executable.endswith(".dll"):
+                    if platform.system() == "Windows":
+                        cmd = f"dotnet {fullexe} -f * --join -e xml"
+                    else:
+                        cmd = f"dotnet {fullexe} -f '*' --join -e xml"
+                if executable.endswith(".exe"):
+                    if platform.system() == "Windows":
+                        cmd = f"{fullexe} -f * --join -e xml"
+                    else:
+                        os.chmod(fullexe, 0o777)
+                        cmd = f"{fullexe} -f '*' --join -e xml"
+
+            os.makedirs(fullpath, exist_ok=True)
+            ProcessExe.run(cmd, cwd=str(fullpath))
+
+        self.runperfs[prj].append(
+            { "target": target, "path": str(fullpath.joinpath("BenchmarkDotNet.Artifacts")) }
+        )
+
+    def _parseperf(self, name, perfxml, results, summary):
+        root = ET.parse(perfxml).getroot()
+        for c in root.findall("./Benchmarks/BenchmarkCase"):
+            type = c.find("./Type").text
+            method = c.find("./Method").text
+            mean = c.find("./Statistics/Mean").text
+            median = c.find("./Statistics/Median").text
+            stderr = c.find("./Statistics/StandardError").text
+
+            dtype = results.get(type)
+            if dtype == None:
+                results[type] = { }
+                dtype = results[type]
+            dmethod = dtype.get(method)
+            if dmethod == None:
+                dtype[method] = { }
+                dmethod = dtype[method]
+            dname = dmethod.get(name)
+            if dname == None:
+                dmethod[name] = { }
+                dname = dmethod[name]
+            dname["mean"] = "{:.2f}".format(float(mean))
+            dname["median"] = "{:.2f}".format(float(median))
+            dname["stderr"] = "{:.2f}".format(float(stderr))
+
+        summaryxml = root.find("./HostEnvironmentInfo")
+        if summary.get(name) == None:
+            summary[name] = { }
+            props = summary[name]
+            props["BenchmarkDotNetCaption"] = summaryxml.find("./BenchmarkDotNetCaption").text
+            props["BenchmarkDotNetVersion"] = summaryxml.find("./BenchmarkDotNetVersion").text
+            props["OsVersion"] = summaryxml.find("./OsVersion").text
+            props["ProcessorName"] = summaryxml.find("./ProcessorName").text
+            props["PhysicalProcessorCount"] = summaryxml.find("./PhysicalProcessorCount").text
+            props["LogicalCoreCount"] = summaryxml.find("./LogicalCoreCount").text
+            props["PhysicalCoreCount"] = summaryxml.find("./PhysicalCoreCount").text
+            props["RuntimeVersion"] = summaryxml.find("./RuntimeVersion").text
+            props["Architecture"] = summaryxml.find("./Architecture").text
+            props["HasRyuJit"] = summaryxml.find("./HasRyuJit").text
+
+    def _printperf(self, prj, results, summary):
+        # Choose from 'mean', 'media', 'stderr'
+        perffields = [ "mean", "stderr" ]
+
+        # Get the runs captures to create the header row
+        perfrun = { }
+        for type in results:
+            for method in results[type]:
+                for name in results[type][method]:
+                    if perfrun.get(name) == None:
+                        perfrun[name] = True
+
+        perftablehdr = [ f"Project '{prj}' Type", "Method" ]
+        perftablehdrlen = len(perftablehdr)
+        perfruncol = { }
+        for field in perfrun.keys():
+            fieldnamematch = re.match(r"Benchmark\.(\S+)", field)
+            if (fieldnamematch == None):
+                fieldname = field
+            else:
+                fieldname = fieldnamematch.group(1)
+
+            first = True
+            col = len(perftablehdr)
+            for stat in perffields:
+                if first:
+                    perfruncol[field] = col
+                    perftablehdr.append("{} ({})".format(stat, fieldname))
+                    first = False
+                else:
+                    perftablehdr.append(stat)
+                col += 1
+
+        # Fill in the table
+        perftable = [ ]
+        for type in results:
+            for method in results[type]:
+                row = [ None ] * len(perftablehdr)
+                row[0] = type
+                row[1] = method
+                for name in results[type][method]:
+                    col = perfruncol[name]
+                    entry = 0
+                    for field in perffields:
+                        row[col + entry] = results[type][method][name][field]
+                        entry += 1
+                perftable.append(row)
+
+        # Print the framework configuration
+        for field in perfrun.keys():
+            print("```text")
+            print(f"Results = {field}")
+            print("")
+
+            print("{}=v{} OS={}".format(
+                summary[field]["BenchmarkDotNetCaption"],
+                summary[field]["BenchmarkDotNetVersion"],
+                summary[field]["OsVersion"]
+            ))
+            print("{}, {} CPU(s), {} logical and {} physical core(s)".format(
+                summary[field]["ProcessorName"],
+                summary[field]["PhysicalProcessorCount"],
+                summary[field]["LogicalCoreCount"],
+                summary[field]["PhysicalCoreCount"]
+            ))
+
+            if summary[field]["HasRyuJit"] == "True":
+                ryu = " RyuJIT"
+            else:
+                ryu = ""
+            print("  [HOST] : {}, {}{}".format(
+                summary[field]["RuntimeVersion"],
+                summary[field]["Architecture"],
+                ryu
+            ))
+            print("```")
+            print("")
+
+        # Pretty print the table as a Markdown file
+        perfwidth = [None] * len(perftable[0])
+        for col in range(len(perftablehdr)):
+            perfwidth[col] = len(perftablehdr[col])
+
+        for row in perftable:
+            for col in range(len(row)):
+                w = len(row[col])
+                if (perfwidth[col] < w):
+                    perfwidth[col] = w
+
+        # Print the Markdown table
+        hdr = "|"
+        for col in range(len(perfwidth)):
+            hdr += " {} |".format(perftablehdr[col].ljust(perfwidth[col]))
+        print(hdr)
+
+        hdr = "|"
+        for col in range(perftablehdrlen):
+            hdr += ":{}-|".format("".ljust(perfwidth[col], "-"))
+        for col in range(perftablehdrlen, len(perftablehdr)):
+            hdr += "-{}:|".format("".ljust(perfwidth[col], "-"))
+        print(hdr)
+
+        for row in perftable:
+            line = "|"
+            for col in range(len(row)):
+                line += " {} |".format(row[col].ljust(perfwidth[col]))
+            print(line)
+
+
 class Command:
     """Parse the arguments on the command line."""
 
@@ -1951,6 +2223,8 @@ class Command:
             self.argument = RmbrCommand(sys.argv[2:])
         elif (self.command == "build"):
             self.argument = BuildCommand(sys.argv[2:])
+        elif (self.command == "perf"):
+            self.argument = PerfCommand(sys.argv[2:])
         else:
             raise ArgumentError(
                 f"Unknown command {self.command} given on the command line")

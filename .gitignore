@@ -10,3 +10,4 @@ TestResults/
 *.userprefs
 *.suo
 /*.snk
+/perf
