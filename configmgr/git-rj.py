@@ -1850,10 +1850,10 @@ class BuildCommand:
             if self.arguments.config == None:
                 self.arguments.config = "dev"
 
-        if not self.arguments.config in config[cplatform]:
+        if not self.arguments.config in config[cplatform]["build"]:
             raise CommandError(f"Configuration '{self.arguments.config}' not defined in '{cplatform}'")
 
-        cmdconfig = config[cplatform][self.arguments.config]
+        cmdconfig = config[cplatform]["build"][self.arguments.config]
 
         os.environ["CDIR"] = os.getcwd()
         expplatform = config[cplatform]["expansion"] if "expansion" in config[cplatform] else None
