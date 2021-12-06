@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJCP.Core.Datastructures", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJCP.Core.DatastructuresTest", "framework\datastructures\DatastructuresTest\RJCP.Core.DatastructuresTest.csproj", "{650D4E57-7581-4DC4-8C41-43C10FDCED09}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJCP.Core.DatastructuresBenchmark", "framework\datastructures\DatastructuresBenchmark\RJCP.Core.DatastructuresBenchmark.csproj", "{0130138A-44A1-4F05-960A-0E5F818622C8}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RJCP.Core.Text", "RJCP.Core.Text", "{92DA0F07-A356-41B5-9417-34A5D06CC77E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJCP.Core.Text", "framework\textutils\code\RJCP.Core.Text.csproj", "{DF685E7C-56CB-4E3E-AC2A-E3975C7735FD}"
@@ -279,6 +281,10 @@ Global
 		{F6306F29-4BDA-40C5-A0A9-98D30A3DB1AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6306F29-4BDA-40C5-A0A9-98D30A3DB1AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6306F29-4BDA-40C5-A0A9-98D30A3DB1AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0130138A-44A1-4F05-960A-0E5F818622C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0130138A-44A1-4F05-960A-0E5F818622C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0130138A-44A1-4F05-960A-0E5F818622C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0130138A-44A1-4F05-960A-0E5F818622C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -342,6 +348,7 @@ Global
 		{5102A9C8-2902-4C7F-A52F-F33CE527B2D1} = {2C468A6B-04E9-4CAE-9B6F-BE0A72B80CB4}
 		{E3BB60D4-E0E5-42CF-BD2A-12F135C4C866} = {5102A9C8-2902-4C7F-A52F-F33CE527B2D1}
 		{F6306F29-4BDA-40C5-A0A9-98D30A3DB1AF} = {5102A9C8-2902-4C7F-A52F-F33CE527B2D1}
+		{0130138A-44A1-4F05-960A-0E5F818622C8} = {8DE50B9A-8330-42BD-8319-B68FAF55393C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF5AFD9F-E6EE-487F-9EF1-BE7B7540BA86}
