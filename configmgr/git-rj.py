@@ -2170,6 +2170,9 @@ class PerfCommand:
 
         for row in perftable:
             for col in range(len(row)):
+                if (row[col]) is None:
+                    # There was no test result, so print it as blank.
+                    row[col] = '-'
                 w = len(row[col])
                 if (perfwidth[col] < w):
                     perfwidth[col] = w
