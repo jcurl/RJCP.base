@@ -2050,9 +2050,9 @@ class PerfCommand:
         for c in root.findall("./Benchmarks/BenchmarkCase"):
             type = c.find("./Type").text
             method = c.find("./Method").text
-            mean = c.find("./Statistics/Mean").text
-            median = c.find("./Statistics/Median").text
-            stderr = c.find("./Statistics/StandardError").text
+            mean = c.find("./Statistics/Mean").text if c.find("./Statistics/Mean") != None else None
+            median = c.find("./Statistics/Median").text if c.find("./Statistics/Median") != None else None
+            stderr = c.find("./Statistics/StandardError").text if c.find("./Statistics/StandardError") != None else None
 
             dtype = results.get(type)
             if dtype == None:
@@ -2066,9 +2066,9 @@ class PerfCommand:
             if dname == None:
                 dmethod[name] = { }
                 dname = dmethod[name]
-            dname["mean"] = "{:.2f}".format(float(mean))
-            dname["median"] = "{:.2f}".format(float(median))
-            dname["stderr"] = "{:.2f}".format(float(stderr))
+            dname["mean"] = "{:.2f}".format(float(mean)) if mean != None else "-"
+            dname["median"] = "{:.2f}".format(float(median)) if median != None else "-"
+            dname["stderr"] = "{:.2f}".format(float(stderr)) if stderr != None else "-"
 
         summaryxml = root.find("./HostEnvironmentInfo")
         if summary.get(name) == None:
