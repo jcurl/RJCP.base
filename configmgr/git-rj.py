@@ -2028,9 +2028,9 @@ class PerfCommand:
             if fullexe.is_file:
                 if executable.endswith(".dll"):
                     if platform.system() == "Windows":
-                        cmd = f"dotnet {fullexe} -f * --join -e xml"
+                        cmd = f"dotnet exec {fullexe} -f * --join -e xml"
                     else:
-                        cmd = f"dotnet {fullexe} -f '*' --join -e xml"
+                        cmd = f"dotnet exec {fullexe} -f '*' --join -e xml"
                 if executable.endswith(".exe"):
                     if platform.system() == "Windows":
                         cmd = f"{fullexe} -f * --join -e xml"
