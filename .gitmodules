@@ -66,3 +66,5 @@
 [submodule "framework/log"]
 	path = framework/log
 	url = ../RJCP.DLL.Log.git
+	branch = master
+	ignore = untracked
