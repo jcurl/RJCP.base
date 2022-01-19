@@ -2039,7 +2039,12 @@ class PerfCommand:
                         cmd = f"{fullexe} -f '*' --join -e xml"
 
             os.makedirs(fullpath, exist_ok=True)
-            ProcessExe.run(cmd, cwd=str(fullpath))
+
+            try:
+                print(f"==> {cmd} ({str(fullpath)})")
+                ProcessExe.run(cmd, cwd=str(fullpath))
+            except:
+                return
 
         self.runperfs[prj].append(
             { "target": target, "path": str(fullpath.joinpath("BenchmarkDotNet.Artifacts")) }

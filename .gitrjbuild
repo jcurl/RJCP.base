@@ -8,6 +8,10 @@
             "path": {
                 "net48": "framework/path/test/PathBenchmark/bin/Release/net48/RJCP.IO.PathBenchmark.exe",
                 "netcore31": "framework/path/test/PathBenchmark/bin/Release/netcoreapp3.1/RJCP.IO.PathBenchmark.dll"
+            },
+            "text": {
+                "net48": "framework/textutils/testbenchmark/bin/Release/net48/RJCP.Core.TextBenchmark.exe",
+                "netcore31": "framework/textutils/testbenchmark/bin/Release/netcoreapp3.1/RJCP.Core.TextBenchmark.dll"
             }
         }
     },
