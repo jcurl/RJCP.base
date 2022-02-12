@@ -93,12 +93,17 @@
                 "clean": "dotnet clean -c Release ${project}",
                 "build": "dotnet build -c Release ${project}",
                 "test": "dotnet test -c Release --no-build --logger \"trx\" ${project}"
+            }
+        },
+        "expansion": {
+            "env": {
+                "project": "--nologo RJCP.Framework-Linux.sln",
+                "sname": "/p:SignAssembly=true /p:AssemblyOriginatorKeyFile=${CDIR}/rjcp.snk",
+                "debugflag": "/p:CheckForOverflowUnderflow=true"
             },
-            "expansion": {
-                "env": {
-                    "project": "--nologo RJCP.Framework-Linux.sln",
-                    "sname": "/p:SignAssembly=true /p:AssemblyOriginatorKeyFile=${CDIR}/rjcp.snk",
-                    "debugflag": "/p:CheckForOverflowUnderflow=true"
+            "tools": {
+                "msbuild": {
+                    "exe": "msbuild"
                 }
             }
         }
