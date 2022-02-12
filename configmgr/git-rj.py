@@ -612,6 +612,14 @@ class GitModule:
         except subprocess.CalledProcessError as ex:
             raise GitError(ex, errors=ex)
 
+    def reset_hard(self, reference):
+        args = ["reset", "--hard", reference]
+
+        try:
+            GitExe.run(args, cwd=self.top_level())
+        except subprocess.CalledProcessError as ex:
+            raise GitError(ex, errors=ex)
+
     def clean(self):
         try:
             GitExe.run(
@@ -1130,20 +1138,20 @@ class PullCommand:
                 remote = module.get_tracking_branch_from_head()
                 if (remote == None):
                     raise GitError("Not on a tracking branch, can't pull")
+                branch = module.get_current_branch()
+                if (branch == None):
+                    raise GitError("No branch to pull / reset to")
 
                 if (not force):
                     # Just do a normal pull. If the command fails, we'll
                     # report the error.
                     module.pull(recurse=recurse)
                 else:
-                    branch = module.get_current_branch()
-                    if (branch == None):
-                        raise GitError("No branch to pull / reset to")
-                    module.checkout_branch(branch=branch, force=True)
-                    module.pull(recurse=recurse)
+                    module.fetch(force=True, recurse=recurse)
+                    module.reset_hard(remote)
 
                 with execute_lock:
-                    print(f"\033[35;1mModule:\033[0;35m {name}...\033[0m DONE.",
+                    print(f"\033[35;1mModule:\033[0;35m {name}...\033[0m {branch} ({remote})... DONE.",
                           flush=True)
             except GitError as ex:
                 with execute_lock:
