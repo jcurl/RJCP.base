@@ -125,6 +125,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJCP.Diagnostics.Log", "fra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJCP.Diagnostics.LogTest", "framework\log\TraceReader.Core\TraceReaderTest\RJCP.Diagnostics.LogTest.csproj", "{F6306F29-4BDA-40C5-A0A9-98D30A3DB1AF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TraceReader.Dlt", "TraceReader.Dlt", "{BF60DE32-56EA-487B-8553-29977A050137}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJCP.Diagnostics.Log.Dlt", "framework\log\TraceReader.Dlt\DltTraceReader\RJCP.Diagnostics.Log.Dlt.csproj", "{653B57CE-0FCC-483C-A6F3-D88351154AB9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJCP.Diagnostics.Log.DltTest", "framework\log\TraceReader.Dlt\DltTraceReaderTest\RJCP.Diagnostics.Log.DltTest.csproj", "{F1467EA6-3AA0-4431-A551-5E4F8D5CA8DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJCP.Diagnostics.Log.DltBenchmark", "framework\log\TraceReader.Dlt\DltTraceReaderBenchmark\RJCP.Diagnostics.Log.DltBenchmark.csproj", "{B44317F6-629C-4F3F-B955-34AB662E6F24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -291,6 +299,18 @@ Global
 		{CB82919E-CBC9-4929-A669-CF855BE738F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB82919E-CBC9-4929-A669-CF855BE738F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB82919E-CBC9-4929-A669-CF855BE738F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B44317F6-629C-4F3F-B955-34AB662E6F24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B44317F6-629C-4F3F-B955-34AB662E6F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B44317F6-629C-4F3F-B955-34AB662E6F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B44317F6-629C-4F3F-B955-34AB662E6F24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{653B57CE-0FCC-483C-A6F3-D88351154AB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{653B57CE-0FCC-483C-A6F3-D88351154AB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{653B57CE-0FCC-483C-A6F3-D88351154AB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{653B57CE-0FCC-483C-A6F3-D88351154AB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1467EA6-3AA0-4431-A551-5E4F8D5CA8DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1467EA6-3AA0-4431-A551-5E4F8D5CA8DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1467EA6-3AA0-4431-A551-5E4F8D5CA8DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1467EA6-3AA0-4431-A551-5E4F8D5CA8DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -356,6 +376,10 @@ Global
 		{E3BB60D4-E0E5-42CF-BD2A-12F135C4C866} = {5102A9C8-2902-4C7F-A52F-F33CE527B2D1}
 		{F6306F29-4BDA-40C5-A0A9-98D30A3DB1AF} = {5102A9C8-2902-4C7F-A52F-F33CE527B2D1}
 		{CB82919E-CBC9-4929-A669-CF855BE738F0} = {92DA0F07-A356-41B5-9417-34A5D06CC77E}
+		{B44317F6-629C-4F3F-B955-34AB662E6F24} = {BF60DE32-56EA-487B-8553-29977A050137}
+		{BF60DE32-56EA-487B-8553-29977A050137} = {2C468A6B-04E9-4CAE-9B6F-BE0A72B80CB4}
+		{653B57CE-0FCC-483C-A6F3-D88351154AB9} = {BF60DE32-56EA-487B-8553-29977A050137}
+		{F1467EA6-3AA0-4431-A551-5E4F8D5CA8DC} = {BF60DE32-56EA-487B-8553-29977A050137}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF5AFD9F-E6EE-487F-9EF1-BE7B7540BA86}

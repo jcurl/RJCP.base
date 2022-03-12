@@ -64,8 +64,12 @@
       <DocumentationSource sourceFile="framework\datastructures\Datastructures\bin\$(Configuration)\net40\RJCP.Core.Datastructures.dll" />
       <DocumentationSource sourceFile="framework\environment\Environment\bin\$(Configuration)\net40\RJCP.Core.Environment.xml" />
       <DocumentationSource sourceFile="framework\environment\Environment\bin\$(Configuration)\net40\RJCP.Core.Environment.dll" />
-      <!-- <DocumentationSource sourceFile="framework\log\TraceReader.Core\TraceReader\bin\$(Configuration)\netstandard2.1\RJCP.Diagnostics.Log.xml" />
-      <DocumentationSource sourceFile="framework\log\TraceReader.Core\TraceReader\bin\$(Configuration)\netstandard2.1\RJCP.Diagnostics.Log.dll" /> -->
+      <!--
+      <DocumentationSource sourceFile="framework\log\TraceReader.Core\TraceReader\bin\$(Configuration)\netstandard2.1\RJCP.Diagnostics.Log.xml" />
+      <DocumentationSource sourceFile="framework\log\TraceReader.Core\TraceReader\bin\$(Configuration)\netstandard2.1\RJCP.Diagnostics.Log.dll" />
+      <DocumentationSource sourceFile="framework\log\TraceReader.Dlt\DltTraceReader\bin\$(Configuration)\netstandard2.1\RJCP.Diagnostics.Log.Dlt.xml" />
+      <DocumentationSource sourceFile="framework\log\TraceReader.Dlt\DltTraceReader\bin\$(Configuration)\netstandard2.1\RJCP.Diagnostics.Log.Dlt.dll" />
+      -->
       <DocumentationSource sourceFile="framework\nunitextensions\CodeQuality\bin\$(Configuration)\net40\RJCP.CodeQuality.xml" />
       <DocumentationSource sourceFile="framework\nunitextensions\CodeQuality\bin\$(Configuration)\net40\RJCP.CodeQuality.dll" />
       <DocumentationSource sourceFile="framework\path\code\bin\$(Configuration)\net40\RJCP.IO.Path.xml" />
