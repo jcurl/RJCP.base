@@ -15,6 +15,9 @@
             },
             "dlt": {
                 "netcore31": "framework/log/TraceReader.Dlt/DltTraceReaderBenchmark/bin/Release/netcoreapp3.1/RJCP.Diagnostics.Log.DltBenchmark.dll"
+            },
+            "dltdump": {
+                "netcore31": "framework/log/apps/DltDump/perf/bin/Release/netcoreapp3.1/DltDumpBenchmark.dll"
             }
         }
     },
