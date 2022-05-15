@@ -2269,6 +2269,8 @@ def check_preconditions():
 
 
 def main():
+    os.system("")
+
     try:
         check_preconditions()
         command = Command()
