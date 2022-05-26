@@ -1,4 +1,4 @@
-# GIT Helper
+# GIT Helper <!-- omit in toc -->
 
 The helper tool, `git-rj`, is to assist issuing similar commands to multiple
 repositories (submodules) at once. It supports the following:
@@ -14,49 +14,54 @@ repositories (submodules) at once. It supports the following:
 * `git rj shbr`: Show all branches on the repositories
 * `git rj rmbr`: Remove branches from the repositories
 * `git rj build`: Build from the root of the repository
+* `git rj perf`: Run some microbenchmarking tools
 
 Table of Contents
 
-- [GIT Helper](#git-helper)
-  - [1.0 Introduction](#10-introduction)
-    - [1.1 Requirements](#11-requirements)
-    - [1.2 Configuring Submodules](#12-configuring-submodules)
-    - [1.3 Tested Versions](#13-tested-versions)
-    - [1.4 The Bootstrapper Script](#14-the-bootstrapper-script)
-      - [1.4.1 Linking under Linux](#141-linking-under-linux)
-      - [1.4.2 Linking under Windows](#142-linking-under-windows)
-    - [1.5 Checking the Version](#15-checking-the-version)
-    - [1.6 Getting Help](#16-getting-help)
-  - [2.0 General Usage for GIT Repository Management](#20-general-usage-for-git-repository-management)
-    - [2.1 Initializing the Repository](#21-initializing-the-repository)
-      - [2.1.1 Resetting the Repository to a Known State](#211-resetting-the-repository-to-a-known-state)
-    - [2.2 Updating (Pulling) the Repositories to the Latest Commit](#22-updating-pulling-the-repositories-to-the-latest-commit)
-    - [2.3 Fetching from all Repositories](#23-fetching-from-all-repositories)
-    - [2.4 Cleaning from all Sub-modules](#24-cleaning-from-all-sub-modules)
-    - [2.5 Get the Status](#25-get-the-status)
-      - [2.5.1 Modified Repository](#251-modified-repository)
-      - [2.5.2 Tracking Branches](#252-tracking-branches)
-      - [2.5.3 Local Branch Push Required to Server](#253-local-branch-push-required-to-server)
-      - [2.5.4 Rebase Required to Destination Branch](#254-rebase-required-to-destination-branch)
-      - [2.5.5 Commits Ahead or Behind between the Local and Destination Branches](#255-commits-ahead-or-behind-between-the-local-and-destination-branches)
-      - [2.5.6 A Word about Branches and Remotes](#256-a-word-about-branches-and-remotes)
-      - [2.5.7 The Destination Branch Selection Method](#257-the-destination-branch-selection-method)
-    - [2.6 Checking out a branch](#26-checking-out-a-branch)
-      - [2.6.1 Use Case: Feature on the master branch](#261-use-case-feature-on-the-master-branch)
-      - [2.6.2 Use Case: Feature Development on a Development Branch](#262-use-case-feature-development-on-a-development-branch)
-      - [2.6.3 Managing a Hot-Fix Branch](#263-managing-a-hot-fix-branch)
-    - [2.7 Showing all the Branches](#27-showing-all-the-branches)
-    - [2.8 Removing Branches](#28-removing-branches)
-      - [2.8.1 Pruning](#281-pruning)
-      - [2.8.2 Removing Local and Remote Branches](#282-removing-local-and-remote-branches)
-  - [3.0 Automating Builds](#30-automating-builds)
-    - [3.1 Building in Developer Mode](#31-building-in-developer-mode)
-    - [3.2 Build in Release Mode](#32-build-in-release-mode)
-    - [3.3 The .gitrjbuild Configuration File](#33-the-gitrjbuild-configuration-file)
-      - [3.3.1 The "dev" and "release" section](#331-the-dev-and-release-section)
-      - [3.3.2 Expansion Variables](#332-expansion-variables)
+- [1. Introduction](#1-introduction)
+  - [1.1. Requirements](#11-requirements)
+  - [1.2. Configuring Submodules](#12-configuring-submodules)
+  - [1.3. Tested Versions](#13-tested-versions)
+  - [1.4. The Bootstrapper Script](#14-the-bootstrapper-script)
+    - [1.4.1. Linking under Linux](#141-linking-under-linux)
+    - [1.4.2. Linking under Windows](#142-linking-under-windows)
+  - [1.5. Checking the Version](#15-checking-the-version)
+  - [1.6. Getting Help](#16-getting-help)
+- [2. General Usage for GIT Repository Management](#2-general-usage-for-git-repository-management)
+  - [2.1. Initializing the Repository](#21-initializing-the-repository)
+    - [2.1.1. Resetting the Repository to a Known State](#211-resetting-the-repository-to-a-known-state)
+  - [2.2. Updating (Pulling) the Repositories to the Latest Commit](#22-updating-pulling-the-repositories-to-the-latest-commit)
+  - [2.3. Fetching from all Repositories](#23-fetching-from-all-repositories)
+  - [2.4. Cleaning from all Sub-modules](#24-cleaning-from-all-sub-modules)
+  - [2.5. Get the Status](#25-get-the-status)
+    - [2.5.1. Modified Repository](#251-modified-repository)
+    - [2.5.2. Tracking Branches](#252-tracking-branches)
+    - [2.5.3. Local Branch Push Required to Server](#253-local-branch-push-required-to-server)
+    - [2.5.4. Rebase Required to Destination Branch](#254-rebase-required-to-destination-branch)
+    - [2.5.5. Commits Ahead or Behind between the Local and Destination Branches](#255-commits-ahead-or-behind-between-the-local-and-destination-branches)
+    - [2.5.6. A Word about Branches and Remotes](#256-a-word-about-branches-and-remotes)
+    - [2.5.7. The Destination Branch Selection Method](#257-the-destination-branch-selection-method)
+  - [2.6. Checking out a branch](#26-checking-out-a-branch)
+    - [2.6.1. Use Case: Feature on the master branch](#261-use-case-feature-on-the-master-branch)
+    - [2.6.2. Use Case: Feature Development on a Development Branch](#262-use-case-feature-development-on-a-development-branch)
+    - [2.6.3. Managing a Hot-Fix Branch](#263-managing-a-hot-fix-branch)
+  - [2.7. Showing all the Branches](#27-showing-all-the-branches)
+  - [2.8. Removing Branches](#28-removing-branches)
+    - [2.8.1. 2.8.1.Pruning](#281-281pruning)
+    - [2.8.2. Removing Local and Remote Branches](#282-removing-local-and-remote-branches)
+- [3. Automating Builds](#3-automating-builds)
+  - [3.1. Building in Developer Mode](#31-building-in-developer-mode)
+  - [3.2. Build in Release Mode](#32-build-in-release-mode)
+  - [3.3. The .gitrjbuild Configuration File](#33-the-gitrjbuild-configuration-file)
+    - [3.3.1. The "dev" and "release" section](#331-the-dev-and-release-section)
+    - [3.3.2. Expansion Variables](#332-expansion-variables)
+- [4. Performance Testing](#4-performance-testing)
+  - [4.1. Running Performance Tests](#41-running-performance-tests)
+  - [4.2. Defining a Performance Test](#42-defining-a-performance-test)
+  - [4.3. Executing a Specific Performance Tests](#43-executing-a-specific-performance-tests)
+  - [4.4. Printing the Last Results](#44-printing-the-last-results)
 
-## 1.0 Introduction
+## 1. Introduction
 
 The `git-rj` script simplifies common tasks for git repositories having many
 submodules. It uses Python 3, which allows rapid prototyping while being
@@ -71,7 +76,7 @@ by the presence of the `.gitrjbuild` file.
 Documentation is written for the version of the script as of version
 1.0-alpha.20210731.1
 
-### 1.1 Requirements
+### 1.1. Requirements
 
 The script requires installation of Python 3.7.x or later. Git 2.13 or later
 should be used.
@@ -82,7 +87,7 @@ From the git shell, add the script to your path, e.g.
 export PATH=$PATH:`pwd`/configmgr
 ```
 
-### 1.2 Configuring Submodules
+### 1.2. Configuring Submodules
 
 When you add a submodule, a file `.gitmodules` is added to your repository. By
 default, this file contains two entries, something similar to
@@ -104,14 +109,14 @@ each submodule.
     ignore = untracked
 ```
 
-### 1.3 Tested Versions
+### 1.3. Tested Versions
 
 The script was developed on Windows with Python 3.9.0 and Git for Windows
 2.13.2-windows.
 
 The script works on Ubuntu 18.04, with Python 3.6.9 and Git 2.17.1
 
-### 1.4 The Bootstrapper Script
+### 1.4. The Bootstrapper Script
 
 The entry script `git-rj` is a bootstrapper script that allows compatibility
 between working with Git Bash for Windows, Cmder for Windows and Linux. It has
@@ -124,7 +129,7 @@ To put the script in the path, you can:
 * Create a link from your `bin` directory to the `configmgr/git-rj` shell
   script.
 
-#### 1.4.1 Linking under Linux
+#### 1.4.1. Linking under Linux
 
 Under Linux, one can link directly to the Python script, but the name must strip
 the `.py` extension for it to be used as `git rj command`. This will avoid the
@@ -134,7 +139,7 @@ usage of the bootstrapper script for a slight improvement in performance.
 ln -s `pwd`/configmgr/git-rj.py ~/bin/git-rj
 ```
 
-#### 1.4.2 Linking under Windows
+#### 1.4.2. Linking under Windows
 
 Under Windows, the bootstrapper script is required. The Python script is written
 to run under Linux and Windows, requiring `python3` to work. When installing
@@ -169,7 +174,7 @@ location as `git-rj` (e.g. `%USERPROFILE%\bin`). If it isn't found, the tool
 Finally, if it isn't found, then it just runs `python git-rj.py`, but will
 likely fail if it gets that far.
 
-### 1.5 Checking the Version
+### 1.5. Checking the Version
 
 You can check the versions by running:
 
@@ -184,7 +189,7 @@ git rj
   GIT: git version 2.13.2.windows.1
 ```
 
-### 1.6 Getting Help
+### 1.6. Getting Help
 
 To get help in general, use the command
 
@@ -198,7 +203,7 @@ To get help for a specific command, issue that command and use the option `-h`.
 git rj status -h
 ```
 
-## 2.0 General Usage for GIT Repository Management
+## 2. General Usage for GIT Repository Management
 
 All the subcommands support the option `-h` to get help information on that
 subcommand and options that can be used.
@@ -244,7 +249,7 @@ Error: 'git rj pull':
  Not at the top level repository.
 ```
 
-### 2.1 Initializing the Repository
+### 2.1. Initializing the Repository
 
 Usually, when checking out the base repository, it still needs to be configured,
 and submodules need to be initialized. Run without any options:
@@ -282,7 +287,7 @@ The options are:
 * `--force`: Apply the `--force` command check checking out, and pulling. This
   can be used to help reset the state of the repository to a fresh check out.
 
-#### 2.1.1 Resetting the Repository to a Known State
+#### 2.1.1. Resetting the Repository to a Known State
 
 If all repositories are in a development state that can be discarded (e.g. the
 changes required were already merged on a different machine), and the
@@ -297,7 +302,7 @@ git rj init -bpf
 This will check out the default branch (`-b`), pull (`-p`) and discard any local
 changes (`-f`).
 
-### 2.2 Updating (Pulling) the Repositories to the Latest Commit
+### 2.2. Updating (Pulling) the Repositories to the Latest Commit
 
 As software is developed within a team, or across multiple computers, one needs
 to get the latest version of the software for the current branch.
@@ -316,7 +321,7 @@ To discard all local changes, run:
 git rj pull --force
 ```
 
-### 2.3 Fetching from all Repositories
+### 2.3. Fetching from all Repositories
 
 To fetch updates for all repositories, run the command:
 
@@ -326,7 +331,7 @@ git rj fetch [--force]
 
 The option `--force` is passed to the `git fetch` command for each repository
 
-### 2.4 Cleaning from all Sub-modules
+### 2.4. Cleaning from all Sub-modules
 
 To remove all build files, untracked directories and revert all changes for all
 repositories (which is useful to run before doing a clean build), run the
@@ -343,7 +348,7 @@ affected). To also clean the base repository, run
 git rj clean --all
 ```
 
-### 2.5 Get the Status
+### 2.5. Get the Status
 
 With multiple repositories, one needs a compact form to check the status, if a
 repository is modified, if there is a tracking branch, if the repository needs
@@ -399,7 +404,7 @@ A brief description of the information provided on each line:
   * The second `remote` is the default branch, given in `.gitmodule` for the
     repository, mapped to the default remote (e.g. `origin/master`).
 
-#### 2.5.1 Modified Repository
+#### 2.5.1. Modified Repository
 
 If the `M` flag is set, go to the module and run `git status`, to determine what
 changes are present. The changes may be unstaged, or staged.
@@ -407,7 +412,7 @@ changes are present. The changes may be unstaged, or staged.
 It's useful to know if any of the repositories are in a modified state before
 switching branches, or building and testing the software.
 
-#### 2.5.2 Tracking Branches
+#### 2.5.2. Tracking Branches
 
 When a local branch is first created using `git checkout -b feature/mytopic`,
 there is no tracking branch. This is shown with `-`.
@@ -457,7 +462,7 @@ server, such as
 git rj fetch --all
 ```
 
-#### 2.5.3 Local Branch Push Required to Server
+#### 2.5.3. Local Branch Push Required to Server
 
 If the `P` flag is set, then there is a local tracking branch, and the current
 commit differs to the remote commit. This indicates a push is required (which
@@ -480,7 +485,7 @@ local branch is ahead, this indicates that a pull is required.
 This may be useful when fetching all repositories and then individually checking
 for any activity with the current work status of the local repositories.
 
-#### 2.5.4 Rebase Required to Destination Branch
+#### 2.5.4. Rebase Required to Destination Branch
 
 If the `R` flag is set, then local branch (e.g. `feature/mytopic`) and the
 destination branch (e.g. `origin/master`) have diverged, so that merging the
@@ -490,7 +495,7 @@ branch on the destination branch first. The most common use case for this is to
 indicate that remote changes have been made on the destination branch that are
 not present on this branch (and may require rebasing and then testing).
 
-#### 2.5.5 Commits Ahead or Behind between the Local and Destination Branches
+#### 2.5.5. Commits Ahead or Behind between the Local and Destination Branches
 
 The field `(commits: a / b)` indicate how many commits the local branch is ahead
 (`a`). Some projects prefer to squash commits on a feature branch to a single
@@ -506,7 +511,7 @@ destination branch.
 The last part of the status `[branch -> remote]` provides the names of those
 branches, which the commit counts are referring to.
 
-#### 2.5.6 A Word about Branches and Remotes
+#### 2.5.6. A Word about Branches and Remotes
 
 The `.gitmodules` should contain information about the default branch for the
 submodule. For the current base repository, the default branch is always
@@ -547,7 +552,7 @@ That means, the `origin/master` has not advanced since the commit
 quite fine to push local changes still for review to a local server, to then
 push the reviewed changes to an upstream (public) server.
 
-#### 2.5.7 The Destination Branch Selection Method
+#### 2.5.7. The Destination Branch Selection Method
 
 The destination branch is obtained from the file `.gitmodules` with the config
 option `branch`.
@@ -590,7 +595,7 @@ This says that the `.gitmodules` file has `bugfix/issuex` present, but:
   * no remote branch that has been fetched of that name; or
   * or multiple remotes exist with that name and none have the remote `origin`.
 
-### 2.6 Checking out a branch
+### 2.6. Checking out a branch
 
 When developing a feature, multiple repositories might need to be modified all
 simultaneously. The checkout command makes it easy to check out a branch on all
@@ -641,7 +646,7 @@ The ultimate effect is to check out a branch (such as a branch in work), and if
 not defined, default to a second branch (such as a development or release
 branch).
 
-#### 2.6.1 Use Case: Feature on the master branch
+#### 2.6.1. Use Case: Feature on the master branch
 
 Often, just working from the `master` branch for all repositories, a feature is
 added to a library, and an application should be changed at the same time to use
@@ -664,7 +669,7 @@ will check out all repositories to `feature/abc` if they exist, else to `master`
 if they happened to be on a different branch. If the `--force` flag is used, the
 check out is forced, erasing the local changes.
 
-#### 2.6.2 Use Case: Feature Development on a Development Branch
+#### 2.6.2. Use Case: Feature Development on a Development Branch
 
 There's a development branch, which contains multiple major new features, and
 can run in parallel to `master`. The development branch might be called
@@ -691,7 +696,7 @@ checks out to the default branch `dev/xyz` or `master` depending on the
 `.gitmodules` file. If the default branch points to `dev/xyz`, but that doesn't
 exist (locally or after a fetch), then `master` is checked out.
 
-#### 2.6.3 Managing a Hot-Fix Branch
+#### 2.6.3. Managing a Hot-Fix Branch
 
 Usually the base repository only has a tag on a commit that has a release. The
 submodules reference the precise configuration of what was built through the
@@ -717,7 +722,7 @@ Thus, to check back out to the location of your hotfix, you just need to do:
 git rj cobr hotfix
 ```
 
-### 2.7 Showing all the Branches
+### 2.7. Showing all the Branches
 
 To show a list of all the branches for all the repositories, execute the command
 
@@ -761,13 +766,13 @@ Not all branches are shown, specifically branches beginning with the text
 git rj shbr --show-release
 ```
 
-### 2.8 Removing Branches
+### 2.8. Removing Branches
 
 When working on multiple repositories simultaneously, there should be a way to
 see all the branches available (as with the `git rj shbr` command), and to
 remove groups of branches.
 
-#### 2.8.1 Pruning
+#### 2.8.1. 2.8.1.Pruning
 
 When fetching from a remote repository, the default behavior set up by `git rj
 init` is to enable pruning branches when fetching. This will remove the remote
@@ -799,7 +804,7 @@ line. The branch will only be removed if the branch is given on the command line
 and the branch can be pruned. If no branches are given, then all branches are
 pruned.
 
-#### 2.8.2 Removing Local and Remote Branches
+#### 2.8.2. Removing Local and Remote Branches
 
 Often after merging a change to master, one wants to locally remove the branch.
 This can be done by specifying the name of the branch and the option to remove
@@ -813,7 +818,7 @@ One can add the option to prune `-p` in addition, in which case the list of
 branches are used to remove locally and/or remotely, and all branches that can
 be pruned will be removed.
 
-## 3.0 Automating Builds
+## 3. Automating Builds
 
 If the repository contains a valid `.gitrjbuild` file, the command
 
@@ -834,7 +839,7 @@ Not every platform has Powershell or supports Batch files, and not likewise, not
 every platform supports shell scripts. But at least Python 3 must be installed
 for this script to work, which can do some of the basic legwork to start builds.
 
-### 3.1 Building in Developer Mode
+### 3.1. Building in Developer Mode
 
 To start a normal developer build, which will run the "build" and "test" commands:
 
@@ -842,7 +847,7 @@ To start a normal developer build, which will run the "build" and "test" command
 git rj build
 ```
 
-### 3.2 Build in Release Mode
+### 3.2. Build in Release Mode
 
 The command to build in release mode is given by
 
@@ -854,7 +859,7 @@ The `.gitrjbuild` command has the opportunity to provide different commands when
 building in release mode. This can do extra checks, etc. depending on the build
 scripts.
 
-### 3.3 The .gitrjbuild Configuration File
+### 3.3. The .gitrjbuild Configuration File
 
 This file is stored in the base of the repository, where the build commands
 shall be run. It is called `.gitrjbuild` and is a text file following the JSON
@@ -875,7 +880,7 @@ Within the platform system name are up to three blocks
 The "dev" and "release" may also contain a section called "expansion" which is
 the same, but for that specific configuration only when used.
 
-#### 3.3.1 The "dev" and "release" section
+#### 3.3.1. The "dev" and "release" section
 
 The "dev" section is used in the absence of the `--release` option. Else when
 the `--release` option is given, then the "release" section is used. Otherwise
@@ -899,7 +904,7 @@ variable. Note, this is not the same as normal shell expansion. The `git rj
 build` command will process this before giving to the operating system for
 execution.
 
-#### 3.3.2 Expansion Variables
+#### 3.3.2. Expansion Variables
 
 When a command contains an expansion, the expansion is first looked for in the
 following order:
@@ -969,3 +974,74 @@ variables to override the default for the current system.
 
 Expansions are recursive. You can place expansions within expansions, and
 they're expanded.
+
+## 4. Performance Testing
+
+### 4.1. Running Performance Tests
+
+For checking and comparing microbenchmarks, and automation with
+[BenchmarkDotNet](https://benchmarkdotnet.org/articles/overview.html) has been
+implemented, through the `git rj perf` command.
+
+To run benchmarks:
+
+1. Build the software in release mode
+
+   ```
+   git rj build -c preview
+   ```
+
+   This builds the software in release mode, but doesn't sign the binaries. If
+   the build succeeds, testing should start. All test cases should pass.
+
+2. Run the benchmarks on the machine. It is recommended to do this on a desktop
+   (laptops typically throttle the CPU very quickly to constrain temperatures,
+   thus producing highly variable benchmark results)
+
+   ```
+   git rj perf
+   ```
+
+   This executes the built benchmarks.
+
+### 4.2. Defining a Performance Test
+
+The file `.gitrjbuild` contains a section called `perf` that defiens the
+performance tests and the commands to execute. For example:
+
+```json
+{
+    "": {
+        "perf": {
+            "datastructures": {
+                "net48": "framework/datastructures/DatastructuresBenchmark/bin/Release/net48/RJCP.Core.DatastructuresBenchmark.exe",
+                "netcore31": "framework/datastructures/DatastructuresBenchmark/bin/Release/netcoreapp3.1/RJCP.Core.DatastructuresBenchmark.dll"
+            }
+```
+
+This defines a performance test called `datastructures` and executes it for .NET
+4.8, and .NET Core 3.1. The paths are relative to the base of the repository.
+
+### 4.3. Executing a Specific Performance Tests
+
+To run a specific performance test (running them all might take a significant
+amount of time, upwards of hours), it helps to be able to run only a specific
+test (which can take up to 30 minutes) to monitor for changes in the
+microbenchmarks (as well as to compare the performance between various .NET
+versions).
+
+```
+git rj perf datastructures
+```
+
+The benchmarks will run, and the result of the benchmark is a Markdown table,
+that can be easily copied into markdown documentation files.
+
+### 4.4. Printing the Last Results
+
+In case that the benchmark shouldn't be re-run, but only the last results should
+be reprinted:
+
+```cmd
+git rj perf -r datastructures
+```

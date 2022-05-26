@@ -1,27 +1,33 @@
-# RJCP Framework
+# RJCP Framework <!-- omit in toc -->
 
 The RJCP Framework is a collection of libraries for use with other projects.
 
-## Getting Started
+## 1. Getting Started
 
-### The Target Framework
+### 1.1. The Target Framework
 
 The target frameworks are the Desktop version of .NET (version 4.0 to 4.8) and
 .NET Core (.NET Standard 2.1 and .NET Core App 3.1 for unit tests).
 
-### Documentation
+### 1.2. Documentation
 
 Documentation is generally created using the Mark Down format. Look through the
 directories for files ending with the extension `.md`.
 
-## Compiling
+## 2. Compiling
 
-### Preconditions
+### 2.1. Frameworks
 
-Before compiling, you'll need .NET Core installed of course. Special
-requirements include:
+The tools in this collection compile for:
 
-* Update your NuGet repository path to include `RJCP.MSBuildTasks.nupkg`
+* .NET 4.0
+* .NET 4.5 and later, up to .NET 4.8
+* .NET Core Standard 2.1, .NET Core 3.1
+
+On Linux, you should install Mono, which installs the framework SDK for .NET 4.0
+and later, in addition to installing .NET Core 3.1.
+
+### 2.2. Preconditions
 
 When performing release builds on Windows:
 
@@ -33,10 +39,50 @@ When performing release builds on Windows:
 * If strongname signing is enabled, ensure that the file can be found
   (`rjcp.snk`).
 
-### Using RJ BUILD
+### 2.3. Checking Out
 
-Generally, the projects can be loaded and compiled with Visual Studio 2019. It
-uses the `dotnet` tool for building.
+This repository, `RJCP.base`, is the main repository that defines the directory
+structure, and through submodules, the configuration management. You don't need
+this repository to build, but it can help.
+
+If you check out a submodule directly, assuming the dependent submodules are in
+the correct paths, you can build local debug builds with the `dotnet build`
+command. This builds for all target frameworks, including .NET Desktop.
+
+This repository contains the global solution file, which is needed when
+compiling with Visual Studio 2019. If you load a solution file from a repository
+from a submodule, you should first build it with the `dotnet build` command,
+that builds properly all dependencies, then the solution for that submodule
+should also generally build. Loading an individual solution file can make it
+faster for development.
+
+Once you've checked out this repository:
+
+```cmd
+git config user.email "myemail@email.com"
+git config user.name "John Smith"
+```
+
+Add the `git-rj.py` tool to the path. The implementation is done using Python
+3.9, so you should have this, or a compatible version installed. There is a
+small script written in bash, called `git-rj` that should be executable next to
+it, that can simplify running the python script from Windows, MSys for Windows
+(GIT bash), or Linux.
+
+From the base directory of this repository:
+
+```cmd
+export PATH=$PATH:`pwd`/configmgr
+```
+
+Finally, initialize the repository, which will check out all the submodules and
+configure them for you:
+
+```cmd
+git rj init
+```
+
+### 2.4. Using RJ BUILD
 
 To compile from the command line, the `git-rj.py` command provides support.
 
@@ -65,7 +111,7 @@ You can run this on Windows or Linux, the specific command provided are slightly
 different to support development on both platforms. Releases are only supported
 on Windows.
 
-#### Configurations when Building
+#### 2.4.1. Configurations when Building
 
 The `git rj build` command also accespts the option `-c CONFIG` which can
 compile for a particular purpose. The configurations are defined in the
@@ -102,13 +148,18 @@ Rule of thumb:
     `InternalsVisibleTo`.
   * Final bild with `git rj build --release`.
 
-### NuGet Packages
+### 2.5. Further GIT RJ help
+
+You can run `git rj help` to get information. See the file
+[README.gitrj](configmgr/README.gitrj.md) for more help.
+
+### 2.6. NuGet Packages
 
 The output of the build in this repository are project binaries and NuGet
 packages. You can use these NuGet packages in your own repositories. You should
 *not* upload them to NuGet.
 
-## Questions
+## 3. Questions
 
 Questions about this project may be sent to the author at `Jason Curl
 <jcurl@arcor.de>.` Please be aware, this is non-paid work, and an answer very
