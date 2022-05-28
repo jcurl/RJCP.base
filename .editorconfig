@@ -1,6 +1,31 @@
 # Remove the line below if you want to inherit .editorconfig settings from higher directories
 root = true
 
+# Don't use tabs for indentation.
+[*]
+indent_style = space
+
+# JSON files
+[*.json]
+indent_size = 2
+
+# Powershell files
+[*.ps1]
+indent_size = 2
+
+# Shell script files
+[*.sh]
+end_of_line = lf
+indent_size = 2
+
+# XML config files
+[*.{props,targets,ruleset,config,nuspec,resx,vsixmanifest,vsct}]
+indent_size = 2
+
+# XML project files
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
+indent_size = 2
+
 # C# files
 [*.cs]
 
@@ -8,7 +33,6 @@ root = true
 
 # Indentation and spacing
 indent_size = 4
-indent_style = space
 tab_width = 4
 
 # New line preferences
@@ -103,6 +127,7 @@ csharp_style_prefer_index_operator = true:suggestion
 csharp_style_prefer_range_operator = true:suggestion
 csharp_style_unused_value_assignment_preference = discard_variable:suggestion
 csharp_style_unused_value_expression_statement_preference = discard_variable:silent
+csharp_style_prefer_local_over_anonymous_function = false
 
 # 'using' directive preferences
 csharp_using_directive_placement = inside_namespace:silent
@@ -199,8 +224,14 @@ dotnet_naming_style.begins_with_i.capitalization = pascal_case
 #### Sonar Lint Rules Disabling ####
 
 dotnet_diagnostic.S101.severity = none          # Rename to match Pascal rules
+dotnet_diagnostic.S125.severity = none          # Remove commented out code
 dotnet_diagnostic.S1066.severity = none         # Merge if statement with previous statement
+dotnet_diagnostic.S1168.severity = none         # Return an empty collection instead of null
+dotnet_diagnostic.S1905.severity = none         # Remove this unnecessary cast
+dotnet_diagnostic.S2344.severity = none         # Rename the enumeration to remove the Flags suffix
 dotnet_diagnostic.S2346.severity = none         # Rename enum value to None
 dotnet_diagnostic.S2699.severity = none         # Add at least one assertion to this test case
+dotnet_diagnostic.S3218.severity = none         # Rename this method to not shadow the outer class with the same name
+dotnet_diagnostic.S3358.severity = none         # Extract this nested ternary operator into an independent statement
 dotnet_diagnostic.S4070.severity = none         # Remove the 'FlagsAttribute' from this enum
 dotnet_diagnostic.S4136.severity = none         # All method overloads should be adjacent
