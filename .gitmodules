@@ -68,3 +68,8 @@
 	url = ../RJCP.DLL.Log.git
 	branch = master
 	ignore = untracked
+[submodule "framework/thread"]
+	path = framework/thread
+	url = ../RJCP.DLL.Thread.git
+	branch = master
+	ignore = untracked

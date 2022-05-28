@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RJCP.Framework", "RJCP.Framework", "{CA4E6C8A-5D80-4E34-A3F6-22F25E539457}"
 EndProject
@@ -142,6 +142,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DltDumpTest", "framework\log\apps\DltDump\test\DltDumpTest.csproj", "{9E11CDD3-C81C-472D-8919-C14FB9FB5139}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DltDumpBenchmark", "framework\log\apps\DltDump\perf\DltDumpBenchmark.csproj", "{886EB9CD-1958-4E85-BEB8-A44A3CC45D0B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RJCP.Threading", "RJCP.Threading", "{14023C14-C641-48B4-9701-3BDAC350CA60}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJCP.Threading", "framework\thread\code\RJCP.Threading.csproj", "{24FD47B6-F125-458F-9705-ADBA98508D95}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJCP.ThreadingTests", "framework\thread\test\ThreadTest\RJCP.ThreadingTests.csproj", "{E0B59B1A-8BDD-47FF-B60C-40038C2C7583}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJCP.Threading.TaskBenchmark", "framework\thread\test\TaskBenchmark\RJCP.Threading.TaskBenchmark.csproj", "{61CB3EB7-5583-4812-B495-262A84843A3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -337,6 +345,18 @@ Global
 		{886EB9CD-1958-4E85-BEB8-A44A3CC45D0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{886EB9CD-1958-4E85-BEB8-A44A3CC45D0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{886EB9CD-1958-4E85-BEB8-A44A3CC45D0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24FD47B6-F125-458F-9705-ADBA98508D95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24FD47B6-F125-458F-9705-ADBA98508D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24FD47B6-F125-458F-9705-ADBA98508D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24FD47B6-F125-458F-9705-ADBA98508D95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0B59B1A-8BDD-47FF-B60C-40038C2C7583}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0B59B1A-8BDD-47FF-B60C-40038C2C7583}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0B59B1A-8BDD-47FF-B60C-40038C2C7583}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0B59B1A-8BDD-47FF-B60C-40038C2C7583}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61CB3EB7-5583-4812-B495-262A84843A3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61CB3EB7-5583-4812-B495-262A84843A3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61CB3EB7-5583-4812-B495-262A84843A3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61CB3EB7-5583-4812-B495-262A84843A3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -411,6 +431,10 @@ Global
 		{3BBF6C35-E46E-43BC-950D-187277D2AD1D} = {BF569315-F0E9-48E6-954E-57CD601B7A71}
 		{9E11CDD3-C81C-472D-8919-C14FB9FB5139} = {BF569315-F0E9-48E6-954E-57CD601B7A71}
 		{886EB9CD-1958-4E85-BEB8-A44A3CC45D0B} = {BF569315-F0E9-48E6-954E-57CD601B7A71}
+		{14023C14-C641-48B4-9701-3BDAC350CA60} = {CA4E6C8A-5D80-4E34-A3F6-22F25E539457}
+		{24FD47B6-F125-458F-9705-ADBA98508D95} = {14023C14-C641-48B4-9701-3BDAC350CA60}
+		{E0B59B1A-8BDD-47FF-B60C-40038C2C7583} = {14023C14-C641-48B4-9701-3BDAC350CA60}
+		{61CB3EB7-5583-4812-B495-262A84843A3F} = {14023C14-C641-48B4-9701-3BDAC350CA60}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF5AFD9F-E6EE-487F-9EF1-BE7B7540BA86}
