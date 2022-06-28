@@ -18,14 +18,32 @@ directories for files ending with the extension `.md`.
 
 ### 2.1. Frameworks
 
-The tools in this collection compile for:
+The tools in this collection target the frameworks:
 
 * .NET 4.0
 * .NET 4.5 and later, up to .NET 4.8
 * .NET Core Standard 2.1, .NET Core 3.1
 
-On Linux, you should install Mono, which installs the framework SDK for .NET 4.0
-and later, in addition to installing .NET Core 3.1.
+#### 2.1.1. Linux
+
+To get .NET 4.0 SDK on Linux, install from
+[Mono](https://www.mono-project.com/download/stable/).
+
+You should install [.NET Core 3.1
+SDK](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu) for your
+Operating System.
+
+If your Operating System doesn't support .NET Core 3.1 (e.g. Ubuntu 22.04 LTS
+only supports .NET Core 6 and later), you should install the version that is
+supported. Th .NET Core 6 SDK is tested on Ubuntu 22.04 to still build .NET Core
+3.1 binaries. To run those binaries without the .NET 3.1 runtime, set the
+environment variable:
+
+```sh
+export DOTNET_ROLL_FORWARD=LatestMajor
+```
+
+This will tell the runtime to use the most up to date runtime available.
 
 ### 2.2. Preconditions
 
