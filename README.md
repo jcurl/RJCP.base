@@ -2,6 +2,24 @@
 
 The RJCP Framework is a collection of libraries for use with other projects.
 
+- [1. Getting Started](#1-getting-started)
+  - [1.1. The Target Framework](#11-the-target-framework)
+  - [1.2. Documentation](#12-documentation)
+- [2. Retrieving the Sources](#2-retrieving-the-sources)
+- [3. Build Environment](#3-build-environment)
+  - [3.1. Frameworks](#31-frameworks)
+  - [3.2. Windows](#32-windows)
+    - [3.2.1. Preconditions](#321-preconditions)
+  - [3.3. Linux](#33-linux)
+    - [3.3.1. Ubuntu 22.04 LTS](#331-ubuntu-2204-lts)
+      - [3.3.1.1. Problems on Ubuntu 22.04](#3311-problems-on-ubuntu-2204)
+- [4. Building](#4-building)
+  - [4.1. Using RJ BUILD](#41-using-rj-build)
+    - [4.1.1. Configurations when Building](#411-configurations-when-building)
+  - [4.2. Further GIT RJ help](#42-further-git-rj-help)
+  - [4.3. NuGet Packages](#43-nuget-packages)
+- [5. Questions](#5-questions)
+
 ## 1. Getting Started
 
 ### 1.1. The Target Framework
@@ -14,50 +32,7 @@ The target frameworks are the Desktop version of .NET (version 4.0 to 4.8) and
 Documentation is generally created using the Mark Down format. Look through the
 directories for files ending with the extension `.md`.
 
-## 2. Compiling
-
-### 2.1. Frameworks
-
-The tools in this collection target the frameworks:
-
-* .NET 4.0
-* .NET 4.5 and later, up to .NET 4.8
-* .NET Core Standard 2.1, .NET Core 3.1
-
-#### 2.1.1. Linux
-
-To get .NET 4.0 SDK on Linux, install from
-[Mono](https://www.mono-project.com/download/stable/).
-
-You should install [.NET Core 3.1
-SDK](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu) for your
-Operating System.
-
-If your Operating System doesn't support .NET Core 3.1 (e.g. Ubuntu 22.04 LTS
-only supports .NET Core 6 and later), you should install the version that is
-supported. Th .NET Core 6 SDK is tested on Ubuntu 22.04 to still build .NET Core
-3.1 binaries. To run those binaries without the .NET 3.1 runtime, set the
-environment variable:
-
-```sh
-export DOTNET_ROLL_FORWARD=LatestMajor
-```
-
-This will tell the runtime to use the most up to date runtime available.
-
-### 2.2. Preconditions
-
-When performing release builds on Windows:
-
-* Ensure that `signtool.exe` is in your path for release builds;
-* The file `signcert.crt` is the certificate that is sought for in the
-  certificate store of Windows. Update this file to match the signing
-  certificate to use (it's the public portion only). Ensure to import the
-  private portion certificate separately.
-* If strongname signing is enabled, ensure that the file can be found
-  (`rjcp.snk`).
-
-### 2.3. Checking Out
+## 2. Retrieving the Sources
 
 This repository, `RJCP.base`, is the main repository that defines the directory
 structure, and through submodules, the configuration management. You don't need
@@ -100,7 +75,78 @@ configure them for you:
 git rj init
 ```
 
-### 2.4. Using RJ BUILD
+## 3. Build Environment
+
+### 3.1. Frameworks
+
+The tools in this collection target the frameworks:
+
+* .NET 4.0
+* .NET 4.5 and later, up to .NET 4.8
+* .NET Core Standard 2.1, .NET Core 3.1
+
+### 3.2. Windows
+
+There are no problems observed when building on Windows 10 or 11 with the Visual
+Studio 2019 runtime environment which provides .NET 4.0-4.8 SDKs. Visual Studio
+2022 alone is not sufficient.
+
+#### 3.2.1. Preconditions
+
+When performing release builds on Windows:
+
+* Ensure that `signtool.exe` is in your path for release builds;
+* The file `signcert.crt` is the certificate that is sought for in the
+  certificate store of Windows. Update this file to match the signing
+  certificate to use (it's the public portion only). Ensure to import the
+  private portion certificate separately.
+* If strongname signing is enabled, ensure that the file can be found
+  (`rjcp.snk`).
+
+### 3.3. Linux
+
+To get .NET 4.0 SDK on Linux, install from
+[Mono](https://www.mono-project.com/download/stable/).
+
+You should install [.NET Core 3.1
+SDK](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu) for your
+Operating System.
+
+#### 3.3.1. Ubuntu 22.04 LTS
+
+If your Operating System doesn't support .NET Core 3.1 (e.g. Ubuntu 22.04 LTS
+only supports .NET Core 6 and later), you should install the version that is
+supported. Th .NET Core 6 SDK is tested on Ubuntu 22.04 to still build .NET Core
+3.1 binaries. To run those binaries without the .NET 3.1 runtime, set the
+environment variable:
+
+```sh
+export DOTNET_ROLL_FORWARD=LatestMajor
+```
+
+This will tell the runtime to use the most up to date runtime available.
+
+##### 3.3.1.1. Problems on Ubuntu 22.04
+
+Environment: .NET Core SDK 6.0 and
+[Mono](https://www.mono-project.com/download/stable/) for Ubuntu 20.04 LTS.
+
+Unit tests for .NET 4.x will not execute with the error:
+
+```sh
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+Testhost process exited with error: Cannot open assembly '/usr/lib/dotnet/dotnet6-6.0.109/sdk/6.0.109/Extensions/..//TestHost/testhost.x86.exe': No such file or directory.
+. Please check the diagnostic logs for more information.
+
+Test Run Aborted.
+```
+
+These errors were not observed on .NET SDK 3.1 and Ubuntu 18.04 LTS.
+
+## 4. Building
+
+### 4.1. Using RJ BUILD
 
 To compile from the command line, the `git-rj.py` command provides support.
 
@@ -129,7 +175,7 @@ You can run this on Windows or Linux, the specific command provided are slightly
 different to support development on both platforms. Releases are only supported
 on Windows.
 
-#### 2.4.1. Configurations when Building
+#### 4.1.1. Configurations when Building
 
 The `git rj build` command also accespts the option `-c CONFIG` which can
 compile for a particular purpose. The configurations are defined in the
@@ -166,18 +212,18 @@ Rule of thumb:
     `InternalsVisibleTo`.
   * Final bild with `git rj build --release`.
 
-### 2.5. Further GIT RJ help
+### 4.2. Further GIT RJ help
 
 You can run `git rj help` to get information. See the file
 [README.gitrj](configmgr/README.gitrj.md) for more help.
 
-### 2.6. NuGet Packages
+### 4.3. NuGet Packages
 
 The output of the build in this repository are project binaries and NuGet
 packages. You can use these NuGet packages in your own repositories. You should
 *not* upload them to NuGet.
 
-## 3. Questions
+## 5. Questions
 
 Questions about this project may be sent to the author at `Jason Curl
 <jcurl@arcor.de>.` Please be aware, this is non-paid work, and an answer very
