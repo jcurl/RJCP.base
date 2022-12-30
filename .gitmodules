@@ -73,3 +73,9 @@
 	url = ../RJCP.DLL.Thread.git
 	branch = master
 	ignore = untracked
+[submodule "framework/devicemgr"]
+	path = framework/devicemgr
+	url = ../RJCP.DLL.DeviceMgr.git
+	branch = master
+	ignore = untracked
+
