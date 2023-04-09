@@ -417,7 +417,6 @@
             base(asyncCallback, state, owner, operationId)
         { }
 
-
         // Field set when operation completes
         private TResult m_result = default;
 

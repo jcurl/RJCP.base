@@ -1,4 +1,4 @@
-# Buid Tasks for RJCP Framework Components <!-- omit in toc -->
+# Build Tasks for RJCP Framework Components <!-- omit in toc -->
 
 These Build Tasks are intended to support building the RJCP Framework Library.
 
@@ -35,7 +35,7 @@ binary on build or publish using the .NET SDK package format.
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RJCP.MSBuildTasks" Version="0.2.2" />
+    <PackageReference Include="RJCP.MSBuildTasks" Version="0.2.3" />
   </ItemGroup>
 
 </Project>

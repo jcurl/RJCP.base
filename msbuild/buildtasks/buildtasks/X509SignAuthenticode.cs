@@ -127,7 +127,7 @@
             if (storeLocation == StoreLocation.LocalMachine)
                 signToolArgs.Add("/sm");
             if (timeStampUri != null)
-                signToolArgs.AddRange(new[] { "/tr", timeStampUri.ToString() });
+                signToolArgs.AddRange(new[] { "/tr", timeStampUri.ToString(), "/td", "SHA256" });
             signToolArgs.Add(inputAssembly);
 
             RunProcess result = await signTool.RunAsync(signToolArgs.ToArray());

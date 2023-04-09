@@ -34,7 +34,6 @@ namespace RJCP.MSBuildTasks.Infrastructure
     // If we were to have a new SemVerX which derives from SemVer, then it inherits the comparison methods defined for
     // SemVer and the results would be consistent.
 
-
     /// <summary>
     /// Semantic Versioning 2.0.0.
     /// </summary>

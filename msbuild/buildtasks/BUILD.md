@@ -46,8 +46,8 @@ create a NuGet package that can then be used for inclusion in your own project.
    If you don't have the certificate with the private key installed in your
    certificate store, you'll likely end up with the error:
 
-   > C:\Users\jcurl\Documents\Programming\rjcp.base\msbuild\buildtasks\buildtasks\RJCP.MSBuildTasks.csproj(86,5): error : SignTool failed with exit code 1.
-   > C:\Users\jcurl\Documents\Programming\rjcp.base\msbuild\buildtasks\buildtasks\RJCP.MSBuildTasks.csproj(86,5): error : STDERR: SignTool Error: No certificates were found that met all the given criteria.
+   > C:\...\rjcp.base\msbuild\buildtasks\buildtasks\RJCP.MSBuildTasks.csproj(86,5): error : SignTool failed with exit code 1.
+   > C:\...\rjcp.base\msbuild\buildtasks\buildtasks\RJCP.MSBuildTasks.csproj(86,5): error : STDERR: SignTool Error: No certificates were found that met all the given criteria.
 
    To sign with your own certificate, overriding the one in this project, ensure
    that you've imported the private certificate (the certificate with the
@@ -79,7 +79,7 @@ The unit tests depends on `RJCP.DLL.CodeQuality`, which uses the NuGet package
 `RJCP.MSBuildTasks.nupkg` provided here. This is why you might not be able to
 build and run the tests in a single step.
 
-1. First build the `RJCP.MSBuildTasks.0.2.2.nupkg` library and put in a local
+1. First build the `RJCP.MSBuildTasks.0.2.3.nupkg` library and put in a local
    feed. The instructions for doing this are provided if the NuGet package isn't
    already available.
 2. To run the unit tests, which simulates the task and execution of the

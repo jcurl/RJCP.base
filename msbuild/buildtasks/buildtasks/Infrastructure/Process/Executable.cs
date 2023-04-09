@@ -283,7 +283,6 @@
                 m_Binary = binary;
             }
 
-
             public IEnumerator<string> GetEnumerator()
             {
                 return new FileEnumerator(this);

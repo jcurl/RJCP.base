@@ -14,10 +14,10 @@
     <RootNamespace>RJCP.MSBuildTasks</RootNamespace>
 
     <Authors>Jason Curl</Authors>
-    <Copyright>(C) 2018-2021, Jason Curl</Copyright>
+    <Copyright>(C) 2018-2023, Jason Curl</Copyright>
     <Company></Company>
     <Description>MSBuild Tasks for RJCP Framework Libraries.</Description>
-    <Version>0.2.2</Version>
+    <Version>0.2.3</Version>
 
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
