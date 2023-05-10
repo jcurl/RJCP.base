@@ -7,3 +7,4 @@ using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Style", "IDE0056:Use index operator", Justification = ".NET 4.8 Compatibility required")]
 [assembly: SuppressMessage("Style", "IDE0057:Use range operator", Justification = ".NET 4.8 Compatibility required")]
+[assembly: SuppressMessage("Style", "IDE0074:Use compound assignment", Justification = ".NET 4.8 Compatibility required")]

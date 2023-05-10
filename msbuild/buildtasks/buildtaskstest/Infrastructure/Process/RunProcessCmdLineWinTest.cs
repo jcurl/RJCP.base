@@ -102,7 +102,7 @@
                 Console.WriteLine($"Arg {i}: {args[i]}");
             }
 
-            Assert.That(args.Length, Is.EqualTo(expected.Length + 1));
+            Assert.That(args, Has.Length.EqualTo(expected.Length + 1));
             for (int i = 1; i < args.Length; i++) {
                 Assert.That(expected[i - 1], Is.EqualTo(args[i]));
             }

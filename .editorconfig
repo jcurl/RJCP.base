@@ -266,3 +266,7 @@ dotnet_diagnostic.S3218.severity = none         # Rename this method to not shad
 dotnet_diagnostic.S3358.severity = none         # Extract this nested ternary operator into an independent statement
 dotnet_diagnostic.S4070.severity = none         # Remove the 'FlagsAttribute' from this enum
 dotnet_diagnostic.S4136.severity = none         # All method overloads should be adjacent
+
+#### NUnit.Analyzer Rules
+
+dotnet_diagnostic.NUnit2045.severity = none     # Call independent Assert statements from inside an Assert.Multiple

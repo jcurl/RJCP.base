@@ -155,7 +155,7 @@
                 Assert.That(task.RevisionControlUser, Is.EqualTo(Environment.UserName));
 
                 // No label was given to check against, so no warning in case strict mode is enabled.
-                Assert.That(buildEngine.BuildWarningEventArgs.Count, Is.EqualTo(warning ? 1 : 0));
+                Assert.That(buildEngine.BuildWarningEventArgs, Has.Count.EqualTo(warning ? 1 : 0));
             }
         }
 

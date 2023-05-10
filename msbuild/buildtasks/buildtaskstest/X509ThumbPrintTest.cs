@@ -22,7 +22,7 @@
             buildEngine.DumpErrorEvents();
             Assert.That(result, Is.False);                                        // It failed
             Assert.That(task.ThumbPrint, Is.Empty);
-            Assert.That(buildEngine.BuildErrorEventArgs.Count, Is.EqualTo(1));    // And it logged an error message
+            Assert.That(buildEngine.BuildErrorEventArgs, Has.Count.EqualTo(1));    // And it logged an error message
             Assert.That(buildEngine.BuildErrorEventArgs[0].Message, Is.Not.Null.Or.Empty);
         }
 
@@ -39,7 +39,7 @@
             buildEngine.DumpErrorEvents();
             Assert.That(result, Is.False);                                        // It failed
             Assert.That(task.ThumbPrint, Is.Empty);
-            Assert.That(buildEngine.BuildErrorEventArgs.Count, Is.EqualTo(1));    // And it logged an error message
+            Assert.That(buildEngine.BuildErrorEventArgs, Has.Count.EqualTo(1));    // And it logged an error message
             Assert.That(buildEngine.BuildErrorEventArgs[0].Message, Is.Not.Null.Or.Empty);
         }
 
@@ -56,7 +56,7 @@
             buildEngine.DumpErrorEvents();
             Assert.That(result, Is.False);                                        // It failed
             Assert.That(task.ThumbPrint, Is.Empty);
-            Assert.That(buildEngine.BuildErrorEventArgs.Count, Is.EqualTo(1));    // And it logged an error message
+            Assert.That(buildEngine.BuildErrorEventArgs, Has.Count.EqualTo(1));    // And it logged an error message
             Assert.That(buildEngine.BuildErrorEventArgs[0].Message, Is.Not.Null.Or.Empty);
         }
 
@@ -73,7 +73,7 @@
             buildEngine.DumpErrorEvents();
             Assert.That(result, Is.False);                                        // It failed
             Assert.That(task.ThumbPrint, Is.Empty);
-            Assert.That(buildEngine.BuildErrorEventArgs.Count, Is.EqualTo(1));    // And it logged an error message
+            Assert.That(buildEngine.BuildErrorEventArgs, Has.Count.EqualTo(1));    // And it logged an error message
             Assert.That(buildEngine.BuildErrorEventArgs[0].Message, Is.Not.Null.Or.Empty);
         }
 
@@ -90,7 +90,7 @@
             buildEngine.DumpErrorEvents();
             Assert.That(result, Is.False);                                        // It failed
             Assert.That(task.ThumbPrint, Is.Empty);
-            Assert.That(buildEngine.BuildErrorEventArgs.Count, Is.EqualTo(1));    // And it logged an error message
+            Assert.That(buildEngine.BuildErrorEventArgs, Has.Count.EqualTo(1));    // And it logged an error message
             Assert.That(buildEngine.BuildErrorEventArgs[0].Message, Is.Not.Null.Or.Empty);
         }
 
@@ -107,7 +107,7 @@
             buildEngine.DumpErrorEvents();
             Assert.That(result, Is.True);                                        // It failed
             Assert.That(task.ThumbPrint, Is.EqualTo("2FDA16F7ADF7153E17D4BF3D36ADC514A736CDF4"));
-            Assert.That(buildEngine.BuildErrorEventArgs.Count, Is.EqualTo(0));   // And no error was logged
+            Assert.That(buildEngine.BuildErrorEventArgs, Is.Empty);   // And no error was logged
         }
     }
 }

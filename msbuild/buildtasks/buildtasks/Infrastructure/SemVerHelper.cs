@@ -56,7 +56,11 @@
         {
             int value;
             try {
+#if NETFRAMEWORK
                 value = int.Parse(version.Substring(cursor, length), NumberStyles.None, CultureInfo.InvariantCulture);
+#else
+                value = int.Parse(version.AsSpan(cursor, length), NumberStyles.None, CultureInfo.InvariantCulture);
+#endif
             } catch (FormatException e) {
                 throw new ArgumentException(Resources.Infra_SemVer_InvalidVersion, e);
             } catch (OverflowException e) {

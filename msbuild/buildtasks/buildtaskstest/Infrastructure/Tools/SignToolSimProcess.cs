@@ -28,18 +28,16 @@
 
                 signtool.LogStdOut("Done Adding Additional Store");
 
-                string thumbPrint = FindThumbPrint(args);
-                if (thumbPrint == null)
-                    throw new InvalidOperationException("No thumbprint found");
+                string thumbPrint = FindThumbPrint(args)
+                    ?? throw new InvalidOperationException("No thumbprint found");
                 if (!thumbPrint.Equals(signtool.ExpectedThumbPrint, StringComparison.OrdinalIgnoreCase)) {
                     // Thumbprint wasn't found in the current store.
                     signtool.LogStdErr("SignTool Error: No certificates were found that met all the given criteria.");
                     return 1;
                 }
 
-                string hashAlg = FindHashAlgorithm(args);
-                if (hashAlg == null)
-                    throw new InvalidOperationException("No hash algorithm specified");
+                string hashAlg = FindHashAlgorithm(args)
+                    ?? throw new InvalidOperationException("No hash algorithm specified");
                 if (!hashAlg.Equals("sha256", StringComparison.Ordinal))
                     throw new InvalidOperationException($"Invalid hash algorithm {hashAlg} requested");
 

@@ -13,7 +13,7 @@
         {
             RunProcess process = RunProcess.Run("cmd", "/c", "dir");
             Assert.That(process.ExitCode, Is.EqualTo(0));
-            Assert.That(process.StdOut.Count, Is.GreaterThan(0));
+            Assert.That(process.StdOut, Is.Not.Empty);
             Assert.That(process.Command, Is.EqualTo("cmd /c dir"));
 
             // Dump the contents for evaluation later
@@ -32,7 +32,7 @@
             string current = Environment.CurrentDirectory;
             RunProcess process = RunProcess.RunFrom("cmd", current, "/c", "dir");
             Assert.That(process.ExitCode, Is.EqualTo(0));
-            Assert.That(process.StdOut.Count, Is.GreaterThan(0));
+            Assert.That(process.StdOut, Is.Not.Empty);
 
             // Dump the contents for evaluation later
             foreach (string line in process.StdOut) {
@@ -66,7 +66,7 @@
             process.EndExecute(ar);
 
             Assert.That(process.ExitCode, Is.EqualTo(0));
-            Assert.That(process.StdOut.Count, Is.GreaterThan(0));
+            Assert.That(process.StdOut, Is.Not.Empty);
 
             // Dump the contents for evaluation later
             foreach (string line in process.StdOut) {
@@ -223,7 +223,7 @@
             process.EndExecute(ar);
 
             Assert.That(process.ExitCode, Is.EqualTo(0));
-            Assert.That(process.StdOut.Count, Is.GreaterThan(0));
+            Assert.That(process.StdOut, Is.Not.Empty);
 
             // Dump the contents for evaluation later
             foreach (string line in process.StdOut) {
@@ -257,7 +257,7 @@
         {
             await process.ExecuteAsync();
             Assert.That(process.ExitCode, Is.EqualTo(0));
-            Assert.That(process.StdOut.Count, Is.GreaterThan(0));
+            Assert.That(process.StdOut, Is.Not.Empty);
 
             // Dump the contents for evaluation later
             foreach (string line in process.StdOut) {
@@ -484,7 +484,7 @@
 
             RunProcess process = await RunProcess.RunFromAsync("cmd", current, "/c", "dir");
             Assert.That(process.ExitCode, Is.EqualTo(0));
-            Assert.That(process.StdOut.Count, Is.GreaterThan(0));
+            Assert.That(process.StdOut, Is.Not.Empty);
 
             // Dump the contents for evaluation later
             foreach (string line in process.StdOut) {
@@ -523,7 +523,7 @@
         {
             RunProcess process = await RunProcess.RunAsync("cmd", "/c", "dir");
             Assert.That(process.ExitCode, Is.EqualTo(0));
-            Assert.That(process.StdOut.Count, Is.GreaterThan(0));
+            Assert.That(process.StdOut, Is.Not.Empty);
 
             // Dump the contents for evaluation later
             foreach (string line in process.StdOut) {
