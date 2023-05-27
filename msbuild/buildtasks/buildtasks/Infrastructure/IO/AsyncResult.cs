@@ -2,6 +2,7 @@
 {
     using System;
     using System.Diagnostics;
+    using System.Runtime.ExceptionServices;
     using System.Threading;
 
     /// <summary>
@@ -96,7 +97,7 @@
         private ManualResetEvent m_AsyncWaitHandle;
 
         // Fields set when operation completes
-        private Exception m_Exception;
+        private ExceptionDispatchInfo m_Exception;
 
         /// <summary>
         /// The object which started the operation.
@@ -186,7 +187,7 @@
             if (prevState == StatePending) {
                 // Passing null for exception means no error occurred.
                 // This is the common case
-                m_Exception = exception;
+                m_Exception = exception == null ? null : ExceptionDispatchInfo.Capture(exception);
 
                 // Do any processing before completion.
                 this.Completing(exception, completedSynchronously);
@@ -273,7 +274,7 @@
             }
 
             // Operation is done: if an exception occurred, throw it
-            if (asyncResult.m_Exception != null) throw asyncResult.m_Exception;
+            if (asyncResult.m_Exception != null) asyncResult.m_Exception.Throw();
         }
 
         #region Implementation of IAsyncResult
