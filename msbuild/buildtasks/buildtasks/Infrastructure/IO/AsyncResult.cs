@@ -162,7 +162,7 @@
         /// </remarks>
         public bool Complete(Exception exception)
         {
-            return this.Complete(exception, false /*completedSynchronously*/);
+            return Complete(exception, false /*completedSynchronously*/);
         }
 
         /// <summary>
@@ -190,15 +190,15 @@
                 m_Exception = exception == null ? null : ExceptionDispatchInfo.Capture(exception);
 
                 // Do any processing before completion.
-                this.Completing(exception, completedSynchronously);
+                Completing(exception, completedSynchronously);
 
                 // If the event exists, set it
                 if (m_AsyncWaitHandle != null) m_AsyncWaitHandle.Set();
 
-                this.MakeCallback(m_AsyncCallback, this);
+                MakeCallback(m_AsyncCallback, this);
 
                 // Do any final processing after completion
-                this.Completed(exception, completedSynchronously);
+                Completed(exception, completedSynchronously);
 
                 result = true;
             }
@@ -243,14 +243,14 @@
         /// as when the object was instantiated.</param>
         /// <param name="operationId">The operation identifier. This should be the same string
         /// identifier as when the object was instantiated.</param>
-        /// <exception cref="System.ArgumentException">Result passed represents an operation not
+        /// <exception cref="ArgumentException">Result passed represents an operation not
         /// supported by this framework. Occurs as an IAsyncResult object not derived from this
         /// class was provided.</exception>
-        /// <exception cref="System.InvalidOperationException">End was called on a different object
+        /// <exception cref="InvalidOperationException">End was called on a different object
         /// than begin.</exception>
-        /// <exception cref="System.InvalidOperationException">End was called multiple times for this
+        /// <exception cref="InvalidOperationException">End was called multiple times for this
         /// operation.</exception>
-        /// <exception cref="System.ArgumentException">End operation type was different than Begin.</exception>
+        /// <exception cref="ArgumentException">End operation type was different than Begin.</exception>
         /// <remarks>
         /// Note that by calling this method, the semaphore is disposed, so that it can't be used again.
         /// </remarks>
