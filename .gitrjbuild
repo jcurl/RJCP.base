@@ -51,10 +51,10 @@
                 "pack": "dotnet pack --nologo -c Release --no-build --no-restore --include-source --include-symbols -o distribute/nuget ${project}",
                 "doc": "${msbuild} rjcp.shfbproj /t:Rebuild /verbosity:minimal /p:Configuration=Release /p:OutputPath=\"distribute\\Help\" /nologo"
             }
-		},
+        },
         "expansion": {
             "env": {
-                "project": "--nologo RJCP.Framework.sln",
+                "project": "RJCP.Framework.sln",
                 "authenticode": "/p:X509SigningCert=${CDIR}\\signcert.crt /p:X509TimeStampUri=http://timestamp.digicert.com",
                 "sname": "/p:SignAssembly=true /p:AssemblyOriginatorKeyFile=${CDIR}\\rjcp.snk",
                 "debugflag": "/p:CheckForOverflowUnderflow=true",
@@ -88,22 +88,22 @@
             "dev": {
                 "clean": "dotnet clean -c Debug ${project}",
                 "build": "dotnet build -c Debug ${project} ${debugflag}",
-                "test": "dotnet test --nologo -v q -c Debug --no-build --logger \"trx\" -v=q ${project}"
+                "test": "dotnet test --nologo -c Debug --no-build -f netcoreapp3.1 --logger=\"console;verbosity=quiet\" --logger=\"trx\" ${project}"
             },
             "devsn": {
                 "clean": "dotnet clean -c Debug ${project}",
                 "build": "dotnet build -c Debug ${project} ${debugflag} ${sname}",
-                "test": "dotnet test --nologo -v q -c Debug --no-build --logger \"trx\" -v=q ${project}"
+                "test": "dotnet test --nologo -c Debug --no-build -f netcoreapp3.1 --logger=\"console;verbosity=quiet\" --logger \"trx\" ${project}"
             },
             "preview": {
                 "clean": "dotnet clean -c Release ${project}",
                 "build": "dotnet build -c Release ${project}",
-                "test": "dotnet test --nologo -v q -c Release --no-build --logger \"trx\" ${project}"
+                "test": "dotnet test --nologo -c Release --no-build -f netcoreapp3.1 --logger=\"console;verbosity=quiet\" --logger \"trx\" ${project}"
             }
         },
         "expansion": {
             "env": {
-                "project": "--nologo RJCP.Framework-Linux.sln",
+                "project": "RJCP.Framework-Linux.sln",
                 "sname": "/p:SignAssembly=true /p:AssemblyOriginatorKeyFile=${CDIR}/rjcp.snk",
                 "debugflag": "/p:CheckForOverflowUnderflow=true"
             },
