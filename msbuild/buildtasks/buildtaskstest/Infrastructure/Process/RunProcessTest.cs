@@ -26,6 +26,25 @@
         }
 
         [Test]
+        [Platform(Include = "Unix")]
+        public void ProcessRunStaticLinux()
+        {
+            Console.WriteLine("Starting test");
+            RunProcess process = RunProcess.Run("/bin/sh", "-c", "ls -l");
+            Assert.That(process.ExitCode, Is.EqualTo(0));
+            Assert.That(process.StdOut, Is.Not.Empty);
+            Assert.That(process.Command, Is.EqualTo("/bin/sh -c \"ls -l\""));
+
+            // Dump the contents for evaluation later
+            foreach (string line in process.StdOut) {
+                Console.WriteLine("stdout: {0}", line);
+            }
+            foreach (string line in process.StdErr) {
+                Console.WriteLine("stderr: {0}", line);
+            }
+        }
+
+        [Test]
         [Platform(Include = "Win32")]
         public void ProcessRunFromStatic()
         {

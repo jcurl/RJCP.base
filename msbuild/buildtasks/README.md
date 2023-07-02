@@ -21,6 +21,8 @@ imported into the newer .NET SDK Project format.
 
 ## 2. Using this Library via NuGet
 
+### 2.1 Authenticode Signing
+
 The simplest way to consume this project is to include the NuGet package in your
 own project. This imports the target file and will automatically sign your
 binary on build or publish using the .NET SDK package format.
@@ -40,6 +42,17 @@ binary on build or publish using the .NET SDK package format.
 
 </Project>
 ```
+
+For more information see [signing.md](https://github.com/jcurl/RJCP.base/blob/release/buildtasks/v0.2.3/msbuild/buildtasks/docs/signing.md)
+
+### 2.2 GIT Release Management
+
+Enable embedding the GIT version in the file properties of your library or
+executable. Automatically set the version of your library dependent on the GIT
+revision. If the repository is not labelled, automatically add a suffix to
+indicate it is not an official build.
+
+For more information see [revision.md](https://github.com/jcurl/RJCP.base/blob/release/buildtasks/v0.2.4/msbuild/buildtasks/docs/revision.md)
 
 ## 3. Functionality Provided
 

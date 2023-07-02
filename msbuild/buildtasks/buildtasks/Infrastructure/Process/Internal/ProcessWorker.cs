@@ -4,14 +4,11 @@
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Threading;
+    using System.Threading.Tasks;
 
     internal sealed class ProcessWorker : IProcessWorker
     {
         private readonly Process m_Process;
-
-        private bool m_Started;
-        private bool m_DisposePending;
-        private readonly object m_DisposeSync = new object();
 
         public ProcessWorker(string command, string workingDir, string arguments)
         {
@@ -21,47 +18,129 @@
             m_Process.StartInfo.ErrorDialog = false;
             m_Process.StartInfo.UseShellExecute = false;
             m_Process.StartInfo.CreateNoWindow = true;
-            if (workingDir != null) m_Process.StartInfo.WorkingDirectory = workingDir;
+            if (workingDir != null)
+                m_Process.StartInfo.WorkingDirectory = workingDir;
             m_Process.StartInfo.RedirectStandardError = true;
             m_Process.StartInfo.RedirectStandardOutput = true;
             m_Process.StartInfo.RedirectStandardInput = false;
-            m_Process.OutputDataReceived += Process_OutputDataReceived;
-            m_Process.ErrorDataReceived += Process_ErrorDataReceived;
         }
 
+        /// <summary>
+        /// Get the exit code of the process.
+        /// </summary>
+        /// <remarks>
+        /// This property is undefind if the process has not yet terminated.
+        /// </remarks>
         public int ExitCode { get; private set; }
 
+        private Task m_MonitorProcess;
+        private Task m_MonitorOutput;
+
+        private readonly ManualResetEventSlim m_ProcessExited = new ManualResetEventSlim(false);
+        private readonly ManualResetEventSlim m_ProcessOutputClosed = new ManualResetEventSlim(false);
+        private readonly ManualResetEventSlim m_ProcessTerminated = new ManualResetEventSlim(false);
+
+        /// <summary>
+        /// Start the process and monitoring. Raise events as they occur.
+        /// </summary>
         public void Start()
         {
-            m_Process.Start();
-            m_Process.BeginOutputReadLine();
-            m_Process.BeginErrorReadLine();
-
-            // If ProcessExitEvent calls Dispose() while we still haven't finished Start(), then we need to now dispose
-            // the object.
-            lock (m_DisposeSync) {
-                m_Started = true;
-                if (m_DisposePending) m_Process.Dispose();
-            }
+            m_MonitorProcess = MonitorProcessAsync();
+            m_MonitorOutput = MonitorOutputAsync();
         }
 
+        private async Task MonitorProcessAsync()
+        {
+            m_Process.Start();
+            await Task.Run(() => {
+                bool processRunning = true;
+                while (processRunning) {
+                    processRunning = !m_Process.WaitForExit(2000);
+                    if (!processRunning) {
+                        ExitCode = m_Process.ExitCode;
+                        m_ProcessExited.Set();
+                        m_ProcessOutputClosed.Wait(10000);
+
+                        // We ensure this is set before the event, so that if the user disposes
+                        // within the event, we don't deadlock.
+                        m_ProcessTerminated.Set();
+                        OnProcessExitedEvent(this, new ProcessExitedEventArgs(ExitCode));
+                    }
+                }
+            });
+        }
+
+        private async Task MonitorOutputAsync()
+        {
+            Task<string>[] output = new Task<string>[2] {
+                m_Process.StandardOutput.ReadLineAsync(),
+                m_Process.StandardError.ReadLineAsync()
+            };
+
+            while (true) {
+                if (output[0] != null && output[1] != null) {
+                    await Task.WhenAny(output);
+                } else if (output[0] != null) {
+                    await output[0];
+                } else if (output[1] != null) {
+                    await output[1];
+                } else {
+                    break;
+                }
+
+                bool result = HandleOutputTask(output[0], out string line);
+                if (!result) {
+                    output[0] = null;
+                } else if (line != null) {
+                    OnOutputDataReceived(this, new ConsoleDataEventArgs(line));
+                    output[0] = m_Process.StandardOutput.ReadLineAsync();
+                }
+
+                result = HandleOutputTask(output[1], out line);
+                if (!result) {
+                    output[1] = null;
+                } else if (line != null) {
+                    OnErrorDataReceived(this, new ConsoleDataEventArgs(line));
+                    output[1] = m_Process.StandardError.ReadLineAsync();
+                }
+            }
+            m_ProcessOutputClosed.Set();
+        }
+
+        /// <summary>
+        /// Check the task result of ReadLineAsync().
+        /// </summary>
+        /// <param name="output">The task that may contain a result.</param>
+        /// <param name="line">The line that was retrieved. Is null in case the task wasn't yet finished.</param>
+        /// <returns>
+        /// Returns true if the output stream is not closed, false if the stream has reached the end.
+        /// When the stream has reached the end, you shouldn't query this stream any longer.
+        /// </returns>
+        private static bool HandleOutputTask(Task<string> output, out string line)
+        {
+            line = null;
+            if (output == null) return false;
+            if (output.IsFaulted) return false;
+            if (!output.IsCompleted) return true;
+
+            line = output.Result;
+            return line != null;
+        }
+
+        /// <summary>
+        /// Wait until the process and output is complete.
+        /// </summary>
+        /// <param name="timeout">The duration, in milliseconds, to wait for the process to terminate. Provide -1 to wait forever.</param>
+        /// <returns>Is true if the process has terminated, false otherwise.</returns>
         public bool Wait(int timeout)
         {
-            bool completed = m_Process.WaitForExit(timeout);
-            if (completed) {
-                ExitCode = m_Process.ExitCode;
-                OnProcessExitedEvent(this, new ProcessExitedEventArgs(ExitCode));
-            }
-            return completed;
+            return m_ProcessTerminated.Wait(timeout);
         }
-
-        private bool m_IsTerminated;
 
         public void Terminate()
         {
             try {
                 if (!m_Process.HasExited) {
-                    m_IsTerminated = true;
                     m_Process.Kill();
                 }
             } catch (InvalidOperationException) {
@@ -71,57 +150,11 @@
             }
         }
 
-        private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            if (e.Data != null) {
-                ConsoleDataEventArgs dataArgs = new ConsoleDataEventArgs(e.Data);
-                OnOutputDataReceived(sender, dataArgs);
-            }
-        }
-
-        private void Process_ErrorDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            if (e.Data != null) {
-                ConsoleDataEventArgs dataArgs = new ConsoleDataEventArgs(e.Data);
-                OnErrorDataReceived(sender, dataArgs);
-            }
-        }
-
         public event EventHandler<ConsoleDataEventArgs> OutputDataReceived;
 
         public event EventHandler<ConsoleDataEventArgs> ErrorDataReceived;
 
-        private int m_ProcessExitEventCount;
-
-        private event EventHandler<ProcessExitedEventArgs> LocalProcessExitEvent;
-
-        public event EventHandler<ProcessExitedEventArgs> ProcessExitEvent
-        {
-            add
-            {
-                m_ProcessExitEventCount++;
-                LocalProcessExitEvent += value;
-
-                if (m_ProcessExitEventCount == 1) {
-                    m_Process.EnableRaisingEvents = true;
-                    m_Process.Exited += Process_Exited;
-                }
-            }
-
-            remove
-            {
-                LocalProcessExitEvent -= value;
-            }
-        }
-
-        private void Process_Exited(object sender, EventArgs e)
-        {
-            if (m_IsTerminated) {
-                Wait(5000);
-            } else {
-                Wait(Timeout.Infinite);
-            }
-        }
+        public event EventHandler<ProcessExitedEventArgs> ProcessExitEvent;
 
         private void OnOutputDataReceived(object sender, ConsoleDataEventArgs e)
         {
@@ -137,21 +170,22 @@
 
         private void OnProcessExitedEvent(object sender, ProcessExitedEventArgs e)
         {
-            EventHandler<ProcessExitedEventArgs> handler = LocalProcessExitEvent;
+            EventHandler<ProcessExitedEventArgs> handler = ProcessExitEvent;
             if (handler != null) handler(sender, e);
         }
 
         public void Dispose()
         {
-            // If the user calls Dispose() while Start() is running (e.g. because they're calling it from within the
-            // ProcessExitEvent), then we need to delay the dispose until we've finished the actual start.
-            lock (m_DisposeSync) {
-                if (!m_Started) {
-                    m_DisposePending = true;
-                    return;
-                }
+            // This method may be called from OnProcessExitedEvent, which is in the thread
+            // from MonitorProcessAsync. We must be careful not to enter a deadlock.
+
+            if (!m_ProcessTerminated.IsSet) {
+                Terminate();
+                Wait(1000);
             }
             m_Process.Dispose();
+            m_ProcessExited.Dispose();
+            m_ProcessTerminated.Dispose();
         }
     }
 }
