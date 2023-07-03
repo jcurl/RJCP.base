@@ -24,7 +24,9 @@
     <file src="package\tools\RJCP.MSBuildTasks.props" target="tools\" />
     <file src="package\tools\RJCP.MSBuildTasks.targets" target="tools\" />
     <file src="bin\Release\net48\RJCP.MSBuildTasks.dll" target="tools\net48\" />
+    <file src="bin\Release\net48\RJCP.MSBuildTasks.pdb" target="tools\net48\" />
     <file src="bin\Release\netstandard2.1\RJCP.MSBuildTasks.dll" target="tools\netstandard2.1\" />
+    <file src="bin\Release\netstandard2.1\RJCP.MSBuildTasks.pdb" target="tools\netstandard2.1\" />
     <file src="../README.md" target="README.md" />
   </files>
 </package>
