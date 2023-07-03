@@ -17,7 +17,7 @@
     <Copyright>(C) 2018-2023, Jason Curl</Copyright>
     <Company></Company>
     <Description>MSBuild Tasks for RJCP Framework Libraries.</Description>
-    <Version>0.2.4</Version>
+    <Version>0.2.5</Version>
 
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>

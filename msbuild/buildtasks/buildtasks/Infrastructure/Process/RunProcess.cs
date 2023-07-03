@@ -517,7 +517,7 @@
             await executeTask;
         }
 
-        private class ProcessAsyncResult : IO.AsyncResultNoResult
+        private sealed class ProcessAsyncResult : IO.AsyncResultNoResult
         {
             public ProcessAsyncResult(AsyncCallback asyncCallback, object state, object owner, string operationId)
                 : base(asyncCallback, state, owner, operationId) { }
