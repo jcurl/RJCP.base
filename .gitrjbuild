@@ -18,6 +18,9 @@
             },
             "dltdump": {
                 "netcore31": "framework/log/apps/DltDump/perf/bin/Release/netcoreapp3.1/DltDumpBenchmark.dll"
+            },
+            "thread": {
+                "netcore31": "framework/thread/test/TaskBenchmark/bin/Release/netcoreapp3.1/RJCP.Threading.TaskBenchmark.dll"
             }
         }
     },
