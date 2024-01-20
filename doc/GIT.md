@@ -38,7 +38,7 @@ These are the commands used to create snapshots during the initial development
 phase for testing. As they're not official versions, they haven't been made
 tags, but are useful none-the-less during the development phase, or for just
 saving a commit that can be referenced to later by other documentation (e.g. a
-test that isn't suitable for commit, but contains a lesson learned anycase).
+test that isn't suitable for commit, but contains a lesson learned any case).
 
 ## Pushing the References
 
@@ -52,7 +52,7 @@ Then you can obtain the references as described above. The BitBucket UI will not
 show the references in the commit history, but they are there, if you want to
 look at them later.
 
-## Deleting the Remote Refernece
+## Deleting the Remote Reference
 
 In case the remote reference was pushed and it must be removed:
 
@@ -60,5 +60,5 @@ In case the remote reference was pushed and it must be removed:
 git push origin :refs/devtags/dotnet-XXX_TagNotes
 ```
 
-This will push an empty refernece, removing the remote reference. This allows
+This will push an empty reference, removing the remote reference. This allows
 you to update a new version of the reference.

@@ -40,9 +40,9 @@ can take a version and break it up into its constituents.
 
 This takes a version `x.y.z.b-suffix+meta` and breaks it up into three parts:
 
-* `VersionBase` becomes `x.y.z.b`, or `x.y.z` if b == 0;
-* `VersionSuffix` becomes `suffix` without the hyphen;
-* `VersionMeta` becomes `meta` without the plus.
+- `VersionBase` becomes `x.y.z.b`, or `x.y.z` if b == 0;
+- `VersionSuffix` becomes `suffix` without the hyphen;
+- `VersionMeta` becomes `meta` without the plus.
 
 ## 3. Revision Control
 
@@ -69,12 +69,12 @@ should be done by the target so it is easily customizable.
 
 Inputs to the task are:
 
-* `Type` - The type of revision control. Supported at this time is `git`.
-* `Path` - The directory path which to get information for. The example above is
+- `Type` - The type of revision control. Supported at this time is `git`.
+- `Path` - The directory path which to get information for. The example above is
   the directory where the project file is. Files outside of this project won't
   affect the results of revision control.
-* `Label` - If not empty, specifies that a check for this label should be made
-* `Strict` - If `yes`, `true`, `enabled`, then a warning is raised if the
+- `Label` - If not empty, specifies that a check for this label should be made
+- `Strict` - If `yes`, `true`, `enabled`, then a warning is raised if the
   revision control is dirty or the label doesn't match. This can be used to warn
   (or stop compilation) if the filesystem is dirty. Useful for release builds
   and extra sanity checks.

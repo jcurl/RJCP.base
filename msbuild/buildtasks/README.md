@@ -35,7 +35,7 @@ binary on build or publish using the .NET SDK package format.
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <X509SigningCert>signcert.crt</X509SigningCert>
   </PropertyGroup>
 

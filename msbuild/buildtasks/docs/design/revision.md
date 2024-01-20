@@ -30,8 +30,8 @@ ISourceControl provider = factory.Create("providername", "C:\Users\Me\sources\My
 
 The `providername` can be one of:
 
-* `auto` for automatic detection. At the moment this can only know about git.
-* `git` for a git controlled revision control system.
+- `auto` for automatic detection. At the moment this can only know about git.
+- `git` for a git controlled revision control system.
 
 ## 2. The GitProvider
 
@@ -47,26 +47,26 @@ subdirectory in the git repository.
 
 The following operations are performed:
 
-* `GetCurrentBranchAsync(path)`:
-  * Executes `git symbolic-ref -q --short HEAD`.
-  * The path is ignored as branches in GIT apply to the entire repository.
-* `GetCommitAsync(path)` and `GetCommitShortAsync(path)`:
-  * Executes `git log -1 --format=%H -- path`.
-  * This returns the last commit for the given path, not the current commit.
-* `GetCommitDateAsync`:
-  * Executes `git log -1 --format=%cI -- path`.
-  * This returns the last commit for the given path, not the current commit.
-* `IsDirtyAsync(path)`:
-  * Gets the commit of HEAD with `git show-ref -s HEAD`. This is to see if the
+- `GetCurrentBranchAsync(path)`:
+  - Executes `git symbolic-ref -q --short HEAD`.
+  - The path is ignored as branches in GIT apply to the entire repository.
+- `GetCommitAsync(path)` and `GetCommitShortAsync(path)`:
+  - Executes `git log -1 --format=%H -- path`.
+  - This returns the last commit for the given path, not the current commit.
+- `GetCommitDateAsync`:
+  - Executes `git log -1 --format=%cI -- path`.
+  - This returns the last commit for the given path, not the current commit.
+- `IsDirtyAsync(path)`:
+  - Gets the commit of HEAD with `git show-ref -s HEAD`. This is to see if the
     repository is empty or not. If it's empty, then it's dirty.
-  * Executes `git diff-index --quiet HEAD -- path`.
-  * This works for staged and unstaged changes, but files not in the tree are
+  - Executes `git diff-index --quiet HEAD -- path`.
+  - This works for staged and unstaged changes, but files not in the tree are
     ignored (so be careful, it will be clean if files are "forgotten" to be
     added)
-* `IsTaggedAsync(tag, path)`:
-  * Gets the commit of HEAD with `git show-ref -s HEAD`.
-  * Gets the commit of the tag with `git show-ref -s tag`.
-  * If they both exist, then it checks if the commits are the same for the given
+- `IsTaggedAsync(tag, path)`:
+  - Gets the commit of HEAD with `git show-ref -s HEAD`.
+  - Gets the commit of the tag with `git show-ref -s tag`.
+  - If they both exist, then it checks if the commits are the same for the given
     path with `git diff --quiet headcommit tagcommit -- path`.
 
 Because executing the GIT process can take time, the results are cached between

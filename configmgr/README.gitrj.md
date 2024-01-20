@@ -3,18 +3,18 @@
 The helper tool, `git-rj`, is to assist issuing similar commands to multiple
 repositories (submodules) at once. It supports the following:
 
-* `git rj version`: Get the version of the script, python and git
-* `git rj help`: Get basic help information
-* `git rj init`: Initialize the submodules, checkout the default branch and pull
-* `git rj pull`: Pull to the HEAD for the current branch for all repositories
-* `git rj fetch`: Fetch from all repositories
-* `git rj status`: Get the status for all repositories
-* `git rj clean`: Cleans all repositories
-* `git rj cobr`: Check out a branch on all repositories
-* `git rj shbr`: Show all branches on the repositories
-* `git rj rmbr`: Remove branches from the repositories
-* `git rj build`: Build from the root of the repository
-* `git rj perf`: Run some microbenchmarking tools
+- `git rj version`: Get the version of the script, python and git
+- `git rj help`: Get basic help information
+- `git rj init`: Initialize the submodules, checkout the default branch and pull
+- `git rj pull`: Pull to the HEAD for the current branch for all repositories
+- `git rj fetch`: Fetch from all repositories
+- `git rj status`: Get the status for all repositories
+- `git rj clean`: Cleans all repositories
+- `git rj cobr`: Check out a branch on all repositories
+- `git rj shbr`: Show all branches on the repositories
+- `git rj rmbr`: Remove branches from the repositories
+- `git rj build`: Build from the root of the repository
+- `git rj perf`: Run some microbenchmarking tools
 
 Table of Contents
 
@@ -125,8 +125,8 @@ script.
 
 To put the script in the path, you can:
 
-* Add the `configmgr` path from the repository into your path; or
-* Create a link from your `bin` directory to the `configmgr/git-rj` shell
+- Add the `configmgr` path from the repository into your path; or
+- Create a link from your `bin` directory to the `configmgr/git-rj` shell
   script.
 
 #### 1.4.1. Linking under Linux
@@ -218,7 +218,7 @@ git rj init -h
 usage: git rj init [-h] [-i] [-c] [-b] [-p] [-f]
 
 Initialize the modules for usage. This command, when given with no options,
-will initialize submodules (with git submodule updat --init), apply the top
+will initialize submodules (with git submodule update --init), apply the top
 level configuration on all repositories (taking your current user name and
 email address), and check out to the default branch for each submodule. It
 will then do a fast-forward only pull (with a force fetch update)
@@ -262,16 +262,16 @@ git rj init
 
 the command will:
 
-* Check that the git configuration `user.name` and `user.email` are set. If not,
+- Check that the git configuration `user.name` and `user.email` are set. If not,
   the user will be warned and asked to set them.
-* Initialize the submodules with the command `git submodule update --init`. This
+- Initialize the submodules with the command `git submodule update --init`. This
   will check out the commit. Often this is in detached mode and no branch is
   selected at this time.
-* Initialize the configuration to some sane defaults. This includes copying the
+- Initialize the configuration to some sane defaults. This includes copying the
   user name and email address to the submodules.
-* Switch to the default branch, as given in the `.gitmodules` file for that
+- Switch to the default branch, as given in the `.gitmodules` file for that
   repository. If this isn't changed, it's usually `master`.
-* Pull to the HEAD for the branch that is checked out.
+- Pull to the HEAD for the branch that is checked out.
 
 There are options to select if only a subset of these operations should be
 performed. Typically, the first time the command is executed, it should be run
@@ -279,12 +279,12 @@ without any options.
 
 The options are:
 
-* `--init`: Initialize the submodules
-* `--config`: Apply configuration settings to the submodules
-* `--checkout`: Check out the default branch, as given in the `.gitmodules`
+- `--init`: Initialize the submodules
+- `--config`: Apply configuration settings to the submodules
+- `--checkout`: Check out the default branch, as given in the `.gitmodules`
   file.
-* `--pull`: Pull all submodules.
-* `--force`: Apply the `--force` command check checking out, and pulling. This
+- `--pull`: Pull all submodules.
+- `--force`: Apply the `--force` command check checking out, and pulling. This
   can be used to help reset the state of the repository to a fresh check out.
 
 #### 2.1.1. Resetting the Repository to a Known State
@@ -375,33 +375,33 @@ The long version replies slightly differently
 
 A brief description of the information provided on each line:
 
-* The first is a set of codes.
-  * `M` or `-`: Indicates if the repository is dirty (modified).
-  * `T` or `t` or `-`: Indicates if the local branch is being tracked. `T`
+- The first is a set of codes.
+  - `M` or `-`: Indicates if the repository is dirty (modified).
+  - `T` or `t` or `-`: Indicates if the local branch is being tracked. `T`
     indicates the branch is being tracked, and the remote exists locally. `t`
     indicates the branch is being tracked, but the remote can't be found
     locally. `-` indicates that the branch is not being tracked.
-  * `P`: Indicates if the local branch has been modified with reference to the
+  - `P`: Indicates if the local branch has been modified with reference to the
     remote. This can only be obtained if the current branch is being tracked.
-  * `R`: Indicates if the current branch must be rebased, because the default
+  - `R`: Indicates if the current branch must be rebased, because the default
     branch on the remote has advanced since this branch was created (there's a
     fork).
-* Then the module path is shown. If the path is too long to fit, it is truncated
+- Then the module path is shown. If the path is too long to fit, it is truncated
   so that the most right paths are shown as much as possible.
-* A hash of the current commit. This is useful to copy the current configuration
+- A hash of the current commit. This is useful to copy the current configuration
   of the repositories.
-* The number of commits with reference to the default remote branch is shown
-  * `a` is the number of commits the current local branch is ahead of the
+- The number of commits with reference to the default remote branch is shown
+  - `a` is the number of commits the current local branch is ahead of the
     default remote (e.g. how many commits ahead `feature/mytopic` is to
     `origin/master`).
-  * `b` is the number of commits the current local branch is behind the default
+  - `b` is the number of commits the current local branch is behind the default
     remote (e.g. how many commits the `origin/master` is ahead of the base of
     the current local branch`). If this value is non-zero, a rebase or a merge
     is required.
-* Then the name of the local branches being referenced:
-  * The first `branch` is the local branch name, be it `master` or
+- Then the name of the local branches being referenced:
+  - The first `branch` is the local branch name, be it `master` or
     `feature/mytopic`.
-  * The second `remote` is the default branch, given in `.gitmodule` for the
+  - The second `remote` is the default branch, given in `.gitmodule` for the
     repository, mapped to the default remote (e.g. `origin/master`).
 
 #### 2.5.1. Modified Repository
@@ -591,9 +591,9 @@ will be empty.
 
 This says that the `.gitmodules` file has `bugfix/issuex` present, but:
 
-* there is no local branch that exists, and;
-  * no remote branch that has been fetched of that name; or
-  * or multiple remotes exist with that name and none have the remote `origin`.
+- there is no local branch that exists, and;
+  - no remote branch that has been fetched of that name; or
+  - or multiple remotes exist with that name and none have the remote `origin`.
 
 ### 2.6. Checking out a branch
 
@@ -868,14 +868,14 @@ file format.
 The top level element in the configuration file is the configuration (as
 determined by Python). The two most common configurations are:
 
-* Windows
-* Linux
+- Windows
+- Linux
 
 Within the platform system name are up to three blocks
 
-* "dev" for development builds;
-* "release" for release builds; and
-* "expansion" for variable expansion
+- "dev" for development builds;
+- "release" for release builds; and
+- "expansion" for variable expansion
 
 The "dev" and "release" may also contain a section called "expansion" which is
 the same, but for that specific configuration only when used.
@@ -889,10 +889,10 @@ compiler flags might be given between the two.
 
 Inside this section are up to four commands:
 
-* "build": the command to build the software
-* "test": the command to run unit tests for the software
-* "pack": the command to generate packages for the software
-* "doc": the command to generate documentation for the software
+- "build": the command to build the software
+- "test": the command to run unit tests for the software
+- "pack": the command to generate packages for the software
+- "doc": the command to generate documentation for the software
 
 Each command is the command that should be given to the Operating System to
 start a new process. You must be careful, that these commands are secure and do
@@ -909,9 +909,9 @@ execution.
 When a command contains an expansion, the expansion is first looked for in the
 following order:
 
-* An existing system environment variable (e.g. `${ProgramFiles}` or `${HOME}`);
+- An existing system environment variable (e.g. `${ProgramFiles}` or `${HOME}`);
   then
-* In the "expansion" block, under "env", and then the key is sought for a
+- In the "expansion" block, under "env", and then the key is sought for a
   variable
 
   ```json
@@ -922,7 +922,7 @@ following order:
   }
   ```
 
-* In the "expansion" block, under "tools", which is a list of directories to
+- In the "expansion" block, under "tools", which is a list of directories to
   look for a specific tool
 
   ```json
@@ -987,7 +987,7 @@ To run benchmarks:
 
 1. Build the software in release mode
 
-   ```
+   ```cmd
    git rj build -c preview
    ```
 
@@ -998,7 +998,7 @@ To run benchmarks:
    (laptops typically throttle the CPU very quickly to constrain temperatures,
    thus producing highly variable benchmark results)
 
-   ```
+   ```cmd
    git rj perf
    ```
 
@@ -1030,7 +1030,7 @@ test (which can take up to 30 minutes) to monitor for changes in the
 microbenchmarks (as well as to compare the performance between various .NET
 versions).
 
-```
+```cmd
 git rj perf datastructures
 ```
 

@@ -62,7 +62,7 @@ The `$(OS)` variable has the value `Windows_NT`.
 | net40                  | Library    | .dll      | .NETFramework             | v4.0                   |  X  |     | ''         |
 |                        | Exe        | .exe      |                           |                        |     |  X  | ''         |
 
-* (1) - Even though .NETStandard1.9 isn't provided by Microsoft, we see that the
+- (1) - Even though .NETStandard1.9 isn't provided by Microsoft, we see that the
   framework version is defined and that software compiles. This says we should
   check ranges used in the .NET Framework Version, and not specific comparisons.
 

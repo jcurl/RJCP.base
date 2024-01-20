@@ -176,12 +176,12 @@ The sequence of steps is the same for Windows, but would need different commands
 
 On Windows the following commands are useful:
 
-* Home Directory
-  * Linux: `$HOME`
-  * Windows `%USERPROFILE%`
-* Killing all processes
-  * Linux: `pkill -f dotnet`
-  * Windows: `taskkill /f /im dotnet.exe`
+- Home Directory
+  - Linux: `$HOME`
+  - Windows `%USERPROFILE%`
+- Killing all processes
+  - Linux: `pkill -f dotnet`
+  - Windows: `taskkill /f /im dotnet.exe`
 
 ### 4.2. Logging
 

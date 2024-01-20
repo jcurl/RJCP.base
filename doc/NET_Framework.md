@@ -1,7 +1,7 @@
 # Target Software and Unit Testing <!-- omit in toc -->
 
 The libraries in this project target various frameworks, from .NET 4.0 to .NET
-4.8 and .NET Standard 2.1 for .NET Core applications.
+4.8.1 and .NET Standard 2.1 for .NET Core applications.
 
 - [1. Multiple Target Support](#1-multiple-target-support)
   - [1.1. Building for .NET 4.0](#11-building-for-net-40)
@@ -61,15 +61,15 @@ commits with this `Issue:` field for details).
 
 The decision of the project is therefore that:
 
-* .NET 4.0, if suitable, is a target. This can be used by platforms that can run
+- .NET 4.0, if suitable, is a target. This can be used by platforms that can run
   .NET 4.0, such as Windows 2003, Windows XP, ReactOS, etc. This has the name
   "Legacy" in this project. The rationale is that if trivial to support, this
   platform should still be built for.
-* The next targetted version of .NET is the supported version of .NET, at this
+- The next targetted version of .NET is the supported version of .NET, at this
   point in time, it is .NET 4.6.2. Therefore, all other versions (.NET 4.5 to
   4.6.1) are removed. The rationale is that newer platforms, such as Windows 7
   can run .NET Framework software up to .NET 4.8.1.
-* Where possible, .NET Standard 2.1 should be targetting for .NET Core. Only if
+- Where possible, .NET Standard 2.1 should be targetting for .NET Core. Only if
   it is absolutely necessary, will a newer version of the .NET Core framework
   (e.g. .NET 6 LTS, or later) be targetted.
 

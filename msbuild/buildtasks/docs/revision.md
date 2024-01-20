@@ -112,7 +112,7 @@ your own task after version control information is obtained, refer to the next
 sections on examples for customization.
 
 When NuGet projects are consumed, the `RJCP.MSBuildTasks.props` file is normally
-included first, with the `RJCP.MSBuidlTasks.target` file included last.
+included first, with the `RJCP.MSBuildTasks.target` file included last.
 
 ### 4.1. Performing Actions Immediately Before the Revision Control Check
 
@@ -217,8 +217,8 @@ The `PackageVersion` is not set by the default targets provided by this library.
 This allows building packages that have correct dependencies.
 
 For example, by setting the `PackageVersion` to be the same as the project
-initially defined `Version`, all dependences from MSBuild are correctly
-calcuated and work. If the `PackageVersion` is set after
+initially defined `Version`, all dependencies from MSBuild are correctly
+calculated and work. If the `PackageVersion` is set after
 `CoreRevisionControlCheck`, the package versions is updated, but dependencies
 are not, thus resulting in broken packages.
 

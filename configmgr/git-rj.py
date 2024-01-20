@@ -1017,7 +1017,7 @@ class InitCommand:
         argparser = argparse.ArgumentParser(
             prog="git rj init",
             description="Initialize the modules for usage. This command, when given with "
-            "no options, will initialize submodules (with git submodule updat --init), "
+            "no options, will initialize submodules (with git submodule update --init), "
             "apply the top level configuration on all repositories (taking your current "
             "user name and email address), and check out to the default branch for each "
             "submodule. It will then do a fast-forward only pull (with a force fetch "
