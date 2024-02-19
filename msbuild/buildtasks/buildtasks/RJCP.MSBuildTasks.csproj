@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>net48;netstandard2.1</TargetFrameworks>
     <OutputType>Library</OutputType>
@@ -14,7 +12,7 @@
     <RootNamespace>RJCP.MSBuildTasks</RootNamespace>
 
     <Authors>Jason Curl</Authors>
-    <Copyright>(C) 2018-2023, Jason Curl</Copyright>
+    <Copyright>(C) 2018-2024, Jason Curl</Copyright>
     <Company></Company>
     <Description>MSBuild Tasks for RJCP Framework Libraries.</Description>
     <Version>0.2.5</Version>
@@ -30,13 +28,13 @@
     <RevisionControlLabel>release/buildtasks/v$(Version)</RevisionControlLabel>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug'">
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release'">
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <X509SigningCert>signcert.crt</X509SigningCert>
@@ -195,5 +193,4 @@
     <Message Importance="High" Text=" * Version        = $(Version)" />
     <Message Importance="High" Text=" * PackageVersion = $(PackageVersion)" />
   </Target>
-
 </Project>

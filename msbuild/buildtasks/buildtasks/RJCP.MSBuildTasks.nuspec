@@ -6,7 +6,7 @@
     <authors>$authors$</authors>
     <description>$description$</description>
     <license type="expression">MIT</license>
-    <projectUrl>https://github.com/jcurl</projectUrl>
+    <projectUrl>https://github.com/jcurl/RJCP.base</projectUrl>
     <developmentDependency>true</developmentDependency>
     <readme>README.md</readme>
     <dependencies>

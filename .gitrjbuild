@@ -3,24 +3,24 @@
         "perf": {
             "datastructures": {
                 "net48": "framework/datastructures/DatastructuresBenchmark/bin/Release/net48/RJCP.Core.DatastructuresBenchmark.exe",
-                "netcore31": "framework/datastructures/DatastructuresBenchmark/bin/Release/netcoreapp3.1/RJCP.Core.DatastructuresBenchmark.dll"
+                "netcore": "framework/datastructures/DatastructuresBenchmark/bin/Release/net60/RJCP.Core.DatastructuresBenchmark.dll"
             },
             "path": {
                 "net48": "framework/path/test/PathBenchmark/bin/Release/net48/RJCP.IO.PathBenchmark.exe",
-                "netcore31": "framework/path/test/PathBenchmark/bin/Release/netcoreapp3.1/RJCP.IO.PathBenchmark.dll"
+                "netcore": "framework/path/test/PathBenchmark/bin/Release/net60/RJCP.IO.PathBenchmark.dll"
             },
             "text": {
                 "net48": "framework/textutils/testbenchmark/bin/Release/net48/RJCP.Core.TextBenchmark.exe",
-                "netcore31": "framework/textutils/testbenchmark/bin/Release/netcoreapp3.1/RJCP.Core.TextBenchmark.dll"
+                "netcore": "framework/textutils/testbenchmark/bin/Release/net60/RJCP.Core.TextBenchmark.dll"
             },
             "dlt": {
-                "netcore31": "framework/log/TraceReader.Dlt/DltTraceReaderBenchmark/bin/Release/netcoreapp3.1/RJCP.Diagnostics.Log.DltBenchmark.dll"
+                "netcore": "framework/log/TraceReader.Dlt/DltTraceReaderBenchmark/bin/Release/net60/RJCP.Diagnostics.Log.DltBenchmark.dll"
             },
             "dltdump": {
-                "netcore31": "framework/log/apps/DltDump/perf/bin/Release/netcoreapp3.1/DltDumpBenchmark.dll"
+                "netcore": "framework/log/apps/DltDump/perf/bin/Release/net60/DltDumpBenchmark.dll"
             },
             "thread": {
-                "netcore31": "framework/thread/test/TaskBenchmark/bin/Release/netcoreapp3.1/RJCP.Threading.TaskBenchmark.dll"
+                "netcore": "framework/thread/test/TaskBenchmark/bin/Release/net60/RJCP.Threading.TaskBenchmark.dll"
             }
         }
     },
@@ -68,18 +68,18 @@
                     "exe": "msbuild.exe",
                     "x86": {
                         "path": [
-                            "${ProgramFiles}\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\",
-                            "${ProgramFiles}\\Microsoft Visual Studio\\2019\\Community\\MSBuild\\Current\\Bin\\",
-                            "${ProgramFiles}\\Microsoft Visual Studio\\2019\\Professional\\MSBuild\\Current\\Bin\\",
-                            "${ProgramFiles}\\Microsoft Visual Studio\\2019\\Enterprise\\MSBuild\\Current\\Bin\\"
+                            "${ProgramFiles}\\Microsoft Visual Studio\\2022\\BuildTools\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles}\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles}\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles}\\Microsoft Visual Studio\\2022\\Enterprise\\MSBuild\\Current\\Bin\\"
                         ]
                     },
                     "AMD64": {
                         "path": [
-                            "${ProgramFiles(x86)}\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\",
-                            "${ProgramFiles(x86)}\\Microsoft Visual Studio\\2019\\Community\\MSBuild\\Current\\Bin\\",
-                            "${ProgramFiles(x86)}\\Microsoft Visual Studio\\2019\\Professional\\MSBuild\\Current\\Bin\\",
-                            "${ProgramFiles(x86)}\\Microsoft Visual Studio\\2019\\Enterprise\\MSBuild\\Current\\Bin\\"
+                            "${ProgramFiles(x86)}\\Microsoft Visual Studio\\2022\\BuildTools\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles(x86)}\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles(x86)}\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles(x86)}\\Microsoft Visual Studio\\2022\\Enterprise\\MSBuild\\Current\\Bin\\"
                         ]
                     }
                 }
@@ -91,17 +91,17 @@
             "dev": {
                 "clean": "dotnet clean -c Debug ${project}",
                 "build": "dotnet build -c Debug ${project} ${debugflag}",
-                "test": "dotnet test --nologo -c Debug --no-build -f netcoreapp3.1 --logger=\"console;verbosity=quiet\" --logger=\"trx\" ${project}"
+                "test": "dotnet test --nologo -c Debug --no-build --logger=\"console;verbosity=quiet\" --logger=\"trx\" ${project}"
             },
             "devsn": {
                 "clean": "dotnet clean -c Debug ${project}",
                 "build": "dotnet build -c Debug ${project} ${debugflag} ${sname}",
-                "test": "dotnet test --nologo -c Debug --no-build -f netcoreapp3.1 --logger=\"console;verbosity=quiet\" --logger \"trx\" ${project}"
+                "test": "dotnet test --nologo -c Debug --no-build --logger=\"console;verbosity=quiet\" --logger \"trx\" ${project}"
             },
             "preview": {
                 "clean": "dotnet clean -c Release ${project}",
                 "build": "dotnet build -c Release ${project}",
-                "test": "dotnet test --nologo -c Release --no-build -f netcoreapp3.1 --logger=\"console;verbosity=quiet\" --logger \"trx\" ${project}"
+                "test": "dotnet test --nologo -c Release --no-build --logger=\"console;verbosity=quiet\" --logger \"trx\" ${project}"
             }
         },
         "expansion": {

@@ -1,4 +1,5 @@
 {
     "omnisharp.enableEditorConfigSupport": true,
-    "dotnet-test-explorer.testProjectPath": "RJCP.Framework.sln"
+    "dotnet-test-explorer.testProjectPath": "RJCP.Framework.sln",
+    "cmake.configureOnOpen": false
 }
