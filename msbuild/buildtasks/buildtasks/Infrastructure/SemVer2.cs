@@ -472,6 +472,7 @@ namespace RJCP.MSBuildTasks.Infrastructure
         /// </returns>
         public int CompareTo(object obj)
         {
+            if (obj is null) throw new ArgumentNullException(nameof(obj));
             if (!GetType().IsInstanceOfType(obj)) throw new ArgumentException(Resources.Infra_ObjectTypeNotCompatible);
             SemVer2 semObj = obj as SemVer2;
             return CompareTo(semObj);
