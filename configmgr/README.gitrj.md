@@ -1006,7 +1006,7 @@ To run benchmarks:
 
 ### 4.2. Defining a Performance Test
 
-The file `.gitrjbuild` contains a section called `perf` that defiens the
+The file `.gitrjbuild` contains a section called `perf` that defines the
 performance tests and the commands to execute. For example:
 
 ```json
@@ -1015,12 +1015,14 @@ performance tests and the commands to execute. For example:
         "perf": {
             "datastructures": {
                 "net48": "framework/datastructures/DatastructuresBenchmark/bin/Release/net48/RJCP.Core.DatastructuresBenchmark.exe",
-                "netcore31": "framework/datastructures/DatastructuresBenchmark/bin/Release/netcoreapp3.1/RJCP.Core.DatastructuresBenchmark.dll"
+                "net6": "framework/datastructures/DatastructuresBenchmark/bin/Release/net6.0/RJCP.Core.DatastructuresBenchmark.dll",
+                "net8": "framework/datastructures/DatastructuresBenchmark/bin/Release/net8.0/RJCP.Core.DatastructuresBenchmark.dll"
             }
 ```
 
 This defines a performance test called `datastructures` and executes it for .NET
-4.8, and .NET Core 3.1. The paths are relative to the base of the repository.
+4.8, .NET 6.0 and .NET 8.0. The paths are relative to the base of the
+repository.
 
 ### 4.3. Executing a Specific Performance Tests
 

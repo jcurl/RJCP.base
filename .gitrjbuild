@@ -3,24 +3,35 @@
         "perf": {
             "datastructures": {
                 "net48": "framework/datastructures/DatastructuresBenchmark/bin/Release/net48/RJCP.Core.DatastructuresBenchmark.exe",
-                "netcore": "framework/datastructures/DatastructuresBenchmark/bin/Release/net60/RJCP.Core.DatastructuresBenchmark.dll"
+                "net6": "framework/datastructures/DatastructuresBenchmark/bin/Release/net6.0/RJCP.Core.DatastructuresBenchmark.dll",
+                "net8": "framework/datastructures/DatastructuresBenchmark/bin/Release/net8.0/RJCP.Core.DatastructuresBenchmark.dll"
             },
             "path": {
                 "net48": "framework/path/test/PathBenchmark/bin/Release/net48/RJCP.IO.PathBenchmark.exe",
-                "netcore": "framework/path/test/PathBenchmark/bin/Release/net60/RJCP.IO.PathBenchmark.dll"
+                "net6": "framework/path/test/PathBenchmark/bin/Release/net6.0/RJCP.IO.PathBenchmark.dll",
+                "net8": "framework/path/test/PathBenchmark/bin/Release/net8.0/RJCP.IO.PathBenchmark.dll"
             },
             "text": {
                 "net48": "framework/textutils/testbenchmark/bin/Release/net48/RJCP.Core.TextBenchmark.exe",
-                "netcore": "framework/textutils/testbenchmark/bin/Release/net60/RJCP.Core.TextBenchmark.dll"
+                "net6": "framework/textutils/testbenchmark/bin/Release/net6.0/RJCP.Core.TextBenchmark.dll",
+                "net8": "framework/textutils/testbenchmark/bin/Release/net8.0/RJCP.Core.TextBenchmark.dll"
             },
             "dlt": {
-                "netcore": "framework/log/TraceReader.Dlt/DltTraceReaderBenchmark/bin/Release/net60/RJCP.Diagnostics.Log.DltBenchmark.dll"
+                "net6": "framework/log/TraceReader.Dlt/DltTraceReaderBenchmark/bin/Release/net6.0/RJCP.Diagnostics.Log.DltBenchmark.dll",
+                "net8": "framework/log/TraceReader.Dlt/DltTraceReaderBenchmark/bin/Release/net8.0/RJCP.Diagnostics.Log.DltBenchmark.dll"
             },
             "dltdump": {
-                "netcore": "framework/log/apps/DltDump/perf/bin/Release/net60/DltDumpBenchmark.dll"
+                "net6": "framework/log/apps/DltDump/perf/bin/Release/net6.0/DltDumpBenchmark.dll",
+                "net8": "framework/log/apps/DltDump/perf/bin/Release/net8.0/DltDumpBenchmark.dll"
             },
             "thread": {
-                "netcore": "framework/thread/test/TaskBenchmark/bin/Release/net60/RJCP.Threading.TaskBenchmark.dll"
+                "net6": "framework/thread/test/TaskBenchmark/bin/Release/net6.0/RJCP.Threading.TaskBenchmark.dll",
+                "net8": "framework/thread/test/TaskBenchmark/bin/Release/net8.0/RJCP.Threading.TaskBenchmark.dll"
+            },
+            "syscompat": {
+                "net48": "framework/environment/SysCompatPerf/bin/Release/net48/RJCP.Core.SysCompatBenchmark.exe",
+                "net6": "framework/environment/SysCompatPerf/bin/Release/net6.0/RJCP.Core.SysCompatBenchmark.dll",
+                "net8": "framework/environment/SysCompatPerf/bin/Release/net8.0/RJCP.Core.SysCompatBenchmark.dll"
             }
         }
     },

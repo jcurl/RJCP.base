@@ -2098,6 +2098,19 @@ class PerfCommand:
             props["Architecture"] = summaryxml.find("./Architecture").text
             props["HasRyuJit"] = summaryxml.find("./HasRyuJit").text
 
+    def _perftablesortrow(item):
+        if item[0] is None:
+            item1n = ""
+        else:
+            item1n = item[0].lower().replace("_", " ")
+
+        if item[1] is None:
+            item2n = ""
+        else:
+            item2n = item[1].lower().replace("_", " ")
+
+        return (item1n, item2n)
+
     def _printperf(self, prj, results, summary):
         # Choose from 'mean', 'media', 'stderr'
         perffields = [ "mean", "stderr" ]
@@ -2132,7 +2145,7 @@ class PerfCommand:
                 col += 1
 
         # Fill in the table
-        perftable = [ ]
+        tmpperftable = [ ]
         for type in results:
             for method in results[type]:
                 row = [ None ] * len(perftablehdr)
@@ -2144,7 +2157,10 @@ class PerfCommand:
                     for field in perffields:
                         row[col + entry] = results[type][method][name][field]
                         entry += 1
-                perftable.append(row)
+                tmpperftable.append(row)
+
+        # Sort the table by type, then method
+        perftable = sorted(tmpperftable, key=PerfCommand._perftablesortrow)
 
         # Print the framework configuration
         for field in perfrun.keys():
