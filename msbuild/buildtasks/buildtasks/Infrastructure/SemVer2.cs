@@ -389,6 +389,9 @@ namespace RJCP.MSBuildTasks.Infrastructure
             return true;
         }
 
+        private static readonly char[] BuildSep = new char[] { '-', '+' };
+        private static readonly char[] PatchSep = new char[] { '-', '.', '+' };
+
         private void InternalParseSemVer(string version)
         {
             bool build = false;
@@ -407,7 +410,7 @@ namespace RJCP.MSBuildTasks.Infrastructure
             if (cursor >= length) throw new ArgumentException(Resources.Infra_SemVer_InvalidVersion);
             cursor++;
 
-            m_Patch = SemVerHelper.ParseNumber(version, ref cursor, new char[] { '-', '.', '+' }, false);
+            m_Patch = SemVerHelper.ParseNumber(version, ref cursor, PatchSep, false);
             if (cursor < length) {
                 switch (version[cursor]) {
                 case '.':
@@ -424,7 +427,7 @@ namespace RJCP.MSBuildTasks.Infrastructure
             }
 
             if (build) {
-                m_Build = SemVerHelper.ParseNumber(version, ref cursor, new char[] { '-', '+' }, false);
+                m_Build = SemVerHelper.ParseNumber(version, ref cursor, BuildSep, false);
                 if (cursor < length) {
                     switch (version[cursor]) {
                     case '-':

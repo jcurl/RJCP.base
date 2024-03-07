@@ -13,9 +13,9 @@
         [Test]
         public void ExecuteNoCert()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
 
-            X509ThumbPrint task = new X509ThumbPrint {
+            X509ThumbPrint task = new() {
                 BuildEngine = buildEngine.BuildEngine
             };
             bool result = task.Execute();
@@ -29,9 +29,9 @@
         [Test]
         public void ExecuteEmptyCert()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
 
-            X509ThumbPrint task = new X509ThumbPrint {
+            X509ThumbPrint task = new() {
                 CertPath = "",
                 BuildEngine = buildEngine.BuildEngine
             };
@@ -46,9 +46,9 @@
         [Test]
         public void ExecuteWhiteSpaceCert()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
 
-            X509ThumbPrint task = new X509ThumbPrint {
+            X509ThumbPrint task = new() {
                 CertPath = " ",
                 BuildEngine = buildEngine.BuildEngine
             };
@@ -63,9 +63,9 @@
         [Test]
         public void ExecuteCertNotFound()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
 
-            X509ThumbPrint task = new X509ThumbPrint {
+            X509ThumbPrint task = new() {
                 CertPath = @"C:\foo\nocert.crt",
                 BuildEngine = buildEngine.BuildEngine
             };
@@ -80,9 +80,9 @@
         [Test]
         public void ExecuteInvalidCertificate()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
 
-            X509ThumbPrint task = new X509ThumbPrint {
+            X509ThumbPrint task = new() {
                 CertPath = InvalidCert,
                 BuildEngine = buildEngine.BuildEngine
             };
@@ -97,9 +97,9 @@
         [Test]
         public void ExecuteValidCertificate()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
 
-            X509ThumbPrint task = new X509ThumbPrint {
+            X509ThumbPrint task = new() {
                 CertPath = TestCert,
                 BuildEngine = buildEngine.BuildEngine
             };

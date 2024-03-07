@@ -107,7 +107,7 @@
 
         private static DateTime GetDateTime(int year, int month, int day, int hour, int minute, int second, double hourOffset)
         {
-            DateTime dateTime = new DateTime(year, month, day, hour, minute, second, DateTimeKind.Utc);
+            DateTime dateTime = new(year, month, day, hour, minute, second, DateTimeKind.Utc);
             return dateTime.AddHours(-hourOffset);
         }
 

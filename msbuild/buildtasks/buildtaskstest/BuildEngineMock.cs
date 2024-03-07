@@ -7,10 +7,10 @@
 
     internal class BuildEngineMock
     {
-        private readonly List<string> m_Messages = new List<string>();
-        private readonly List<BuildWarningEventArgs> m_Warnings = new List<BuildWarningEventArgs>();
-        private readonly List<BuildErrorEventArgs> m_Errors = new List<BuildErrorEventArgs>();
-        private readonly Mock<IBuildEngine> m_BuildEngineMock = new Mock<IBuildEngine>();
+        private readonly List<string> m_Messages = new();
+        private readonly List<BuildWarningEventArgs> m_Warnings = new();
+        private readonly List<BuildErrorEventArgs> m_Errors = new();
+        private readonly Mock<IBuildEngine> m_BuildEngineMock = new();
 
         public BuildEngineMock()
         {

@@ -18,7 +18,7 @@
         [Test]
         public void ZeroInitialCountWait()
         {
-            AsyncSemaphore sema = new AsyncSemaphore(0);
+            AsyncSemaphore sema = new(0);
             Task t = sema.WaitAsync();
             Assert.That(t.IsCompleted, Is.False);
             sema.Release();
@@ -28,7 +28,7 @@
         [Test]
         public void OneInitialCountWait()
         {
-            AsyncSemaphore sema = new AsyncSemaphore(1);
+            AsyncSemaphore sema = new(1);
             Task t1 = sema.WaitAsync();
             Assert.That(t1.IsCompleted, Is.True);
             sema.Release();
@@ -47,8 +47,8 @@
         [Test]
         public void MultipleInitialCountWait()
         {
-            List<Task> tasks = new List<Task>();
-            AsyncSemaphore sema = new AsyncSemaphore(10);
+            List<Task> tasks = new();
+            AsyncSemaphore sema = new(10);
 
             for (int i = 0; i < 11; i++) {
                 tasks.Add(sema.WaitAsync());
@@ -66,7 +66,7 @@
         [Test]
         public void MultipleWaitOrder()
         {
-            AsyncSemaphore sema = new AsyncSemaphore(0);
+            AsyncSemaphore sema = new(0);
             Task t1 = sema.WaitAsync();
             Assert.That(t1.IsCompleted, Is.False);
 

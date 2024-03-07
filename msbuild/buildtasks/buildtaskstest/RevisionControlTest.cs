@@ -12,9 +12,9 @@
         [Test]
         public void GitRepository()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             using (ScratchPad scratch = GitProviderRepo.GetRepo("normal-utc", out string repo)) {
-                RevisionControl task = new RevisionControl {
+                RevisionControl task = new() {
                     BuildEngine = buildEngine.BuildEngine,
                     Type = "git",
                     Path = repo,
@@ -39,9 +39,9 @@
         [Test]
         public void GitRepositoryNonUtc()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             using (ScratchPad scratch = GitProviderRepo.GetRepo("normal-eu", out string repo)) {
-                RevisionControl task = new RevisionControl {
+                RevisionControl task = new() {
                     BuildEngine = buildEngine.BuildEngine,
                     Type = "git",
                     Path = repo,
@@ -68,8 +68,8 @@
         [TestCase("  ", TestName = "InvalidPath_WhiteSpace")]
         public void InvalidPath(string path)
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
-            RevisionControl task = new RevisionControl {
+            BuildEngineMock buildEngine = new();
+            RevisionControl task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 Type = "git",
                 Path = path,
@@ -86,9 +86,9 @@
         [TestCase("foo", TestName = "InvalidType_Unknown")]
         public void InvalidType(string revisionType)
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             using (ScratchPad scratch = GitProviderRepo.GetRepo("normal-utc", out string repo)) {
-                RevisionControl task = new RevisionControl {
+                RevisionControl task = new() {
                     BuildEngine = buildEngine.BuildEngine,
                     Type = revisionType,
                     Path = repo,
@@ -103,9 +103,9 @@
         [TestCase("foo", TestName = "InvalidStrictMode_Unknown")]
         public void InvalidStrictMode(string strict)
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             using (ScratchPad scratch = GitProviderRepo.GetRepo("normal-utc", out string repo)) {
-                RevisionControl task = new RevisionControl {
+                RevisionControl task = new() {
                     BuildEngine = buildEngine.BuildEngine,
                     Type = "git",
                     Path = repo,
@@ -130,9 +130,9 @@
         [TestCase("yes", true, true, TestName = "GitRepositoryStrictMode_WarningInvalidLabel")]
         public void GitRepositoryStrictMode(string strict, bool withLabel, bool warning)
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             using (ScratchPad scratch = GitProviderRepo.GetRepo("normal-utc", out string repo)) {
-                RevisionControl task = new RevisionControl {
+                RevisionControl task = new() {
                     BuildEngine = buildEngine.BuildEngine,
                     Type = "git",
                     Path = repo,
@@ -162,9 +162,9 @@
         [Test]
         public void GitRepositoryNoRepo()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             using (ScratchPad scratch = GitProviderRepo.GetRepo("norepo", out string repo)) {
-                RevisionControl task = new RevisionControl {
+                RevisionControl task = new() {
                     BuildEngine = buildEngine.BuildEngine,
                     Type = "git",
                     Path = repo
@@ -179,11 +179,11 @@
         [Test]
         public void GitNotAvailable()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.GitToolAvailable = false;
 
-            RevisionControl task = new RevisionControl {
+            RevisionControl task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 Type = "git",
                 Path = Deploy.WorkDirectory

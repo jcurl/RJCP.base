@@ -82,7 +82,7 @@ The unit tests depends on `RJCP.DLL.CodeQuality`, which uses the NuGet package
 `RJCP.MSBuildTasks.nupkg` provided here. This is why you might not be able to
 build and run the tests in a single step.
 
-1. First build the `RJCP.MSBuildTasks.0.2.3.nupkg` library and put in a local
+1. First build the `RJCP.MSBuildTasks.0.2.5.nupkg` library and put in a local
    feed. The instructions for doing this are provided if the NuGet package isn't
    already available.
 2. To run the unit tests, which simulates the task and execution of the
@@ -128,7 +128,7 @@ The sequence of steps is the same for Windows, but would need different commands
    Ensure that you've added at least new files to git, else they'll be removed!
 
    ```sh
-   export NUGET_PACKAGE=$HOME/.nuget/packages/rjcp.msbuildtasks/0.2.3
+   export NUGET_PACKAGE=$HOME/.nuget/packages/rjcp.msbuildtasks/0.2.5
 
    git clean -xfd
    git rj clean

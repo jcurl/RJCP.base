@@ -15,7 +15,7 @@
 
         public void BasicSemVer(string version, int major, int minor, int patch)
         {
-            SemVer2 v = new SemVer2(version);
+            SemVer2 v = new(version);
             Assert.That(v.Major, Is.EqualTo(major));
             Assert.That(v.Minor, Is.EqualTo(minor));
             Assert.That(v.Patch, Is.EqualTo(patch));
@@ -31,7 +31,7 @@
         [TestCase("1.1.2.234", 1, 1, 2, 234)]
         public void SemVerWithBuild(string version, int major, int minor, int patch, int build)
         {
-            SemVer2 v = new SemVer2(version);
+            SemVer2 v = new(version);
             Assert.That(v.Major, Is.EqualTo(major));
             Assert.That(v.Minor, Is.EqualTo(minor));
             Assert.That(v.Patch, Is.EqualTo(patch));
@@ -49,7 +49,7 @@
         [TestCase("1.0.123-prex.2", 1, 0, 123, "prex.2")]
         public void SemVerWithPreRelease(string version, int major, int minor, int patch, string preRelease)
         {
-            SemVer2 v = new SemVer2(version);
+            SemVer2 v = new(version);
             Assert.That(v.Major, Is.EqualTo(major));
             Assert.That(v.Minor, Is.EqualTo(minor));
             Assert.That(v.Patch, Is.EqualTo(patch));
@@ -65,7 +65,7 @@
         [TestCase("1.1.2.234-beta", 1, 1, 2, 234, "beta")]
         public void SemVerWithBuildPreRelease(string version, int major, int minor, int patch, int build, string preRelease)
         {
-            SemVer2 v = new SemVer2(version);
+            SemVer2 v = new(version);
             Assert.That(v.Major, Is.EqualTo(major));
             Assert.That(v.Minor, Is.EqualTo(minor));
             Assert.That(v.Patch, Is.EqualTo(patch));
@@ -80,7 +80,7 @@
         [Test]
         public void SemVerWithNullPreRelease()
         {
-            SemVer2 v = new SemVer2(1, 0, 0, 0, null);
+            SemVer2 v = new(1, 0, 0, 0, null);
             Assert.That(v.ToString(), Is.EqualTo("1.0.0.0"));
             Assert.That(v.Major, Is.EqualTo(1));
             Assert.That(v.Minor, Is.EqualTo(0));
@@ -95,7 +95,7 @@
         [Test]
         public void SemVerWithNullPreReleaseAndMetaData()
         {
-            SemVer2 v = new SemVer2(1, 0, 0, 0, null, "meta");
+            SemVer2 v = new(1, 0, 0, 0, null, "meta");
             Assert.That(v.ToString(), Is.EqualTo("1.0.0.0+meta"));
             Assert.That(v.Major, Is.EqualTo(1));
             Assert.That(v.Minor, Is.EqualTo(0));
@@ -112,7 +112,7 @@
         [TestCase("1.1.2+beta.2", 1, 1, 2, "beta.2")]
         public void SemVerWithMetaData(string version, int major, int minor, int patch, string metaData)
         {
-            SemVer2 v = new SemVer2(version);
+            SemVer2 v = new(version);
             Assert.That(v.Major, Is.EqualTo(major));
             Assert.That(v.Minor, Is.EqualTo(minor));
             Assert.That(v.Patch, Is.EqualTo(patch));
@@ -128,7 +128,7 @@
         [TestCase("1.1.2.234+beta", 1, 1, 2, 234, "beta")]
         public void SemVerWithBuildMetaData(string version, int major, int minor, int patch, int build, string metaData)
         {
-            SemVer2 v = new SemVer2(version);
+            SemVer2 v = new(version);
             Assert.That(v.Major, Is.EqualTo(major));
             Assert.That(v.Minor, Is.EqualTo(minor));
             Assert.That(v.Patch, Is.EqualTo(patch));
@@ -145,7 +145,7 @@
         [TestCase("1.1.2.234-beta+ubuntu", 1, 1, 2, 234, "beta", "ubuntu")]
         public void SemVerWithBuildPreReleaseMetaData(string version, int major, int minor, int patch, int build, string preRelease, string metaData)
         {
-            SemVer2 v = new SemVer2(version);
+            SemVer2 v = new(version);
             Assert.That(v.Major, Is.EqualTo(major));
             Assert.That(v.Minor, Is.EqualTo(minor));
             Assert.That(v.Patch, Is.EqualTo(patch));
@@ -214,8 +214,8 @@
         [TestCase("2.1.0", "2.1.1")]
         public void Compare(string left, string right)
         {
-            SemVer2 leftVersion = new SemVer2(left);
-            SemVer2 rightVersion = new SemVer2(right);
+            SemVer2 leftVersion = new(left);
+            SemVer2 rightVersion = new(right);
 
             SemVer2 left2 = leftVersion;
             SemVer2 right2 = rightVersion;
@@ -239,8 +239,8 @@
         {
             SemVer2 vn1 = null;
             SemVer2 vn2 = null;
-            SemVer2 vv1 = new SemVer2("1.0.0");
-            SemVer2 vv2 = new SemVer2("2.0.0");
+            SemVer2 vv1 = new("1.0.0");
+            SemVer2 vv2 = new("2.0.0");
 
             Assert.That(vn1 == vn2);
             Assert.That(vn1 <= vn2);
@@ -257,8 +257,8 @@
         [TestCase("1.0.0-pre1+foo.1", "1.0.0-pre1+foo.2")]
         public void CompareEqual(string left, string right)
         {
-            SemVer2 leftVersion = new SemVer2(left);
-            SemVer2 rightVersion = new SemVer2(right);
+            SemVer2 leftVersion = new(left);
+            SemVer2 rightVersion = new(right);
 
             Assert.That(leftVersion == new SemVer2(left));
             Assert.That(rightVersion == new SemVer2(right));
@@ -277,8 +277,8 @@
         [Test]
         public void CompareSemVer()
         {
-            SemVer2 left = new SemVer2("0.4.0-alpha");
-            SemVer2 right = new SemVer2(0, 4, 0, 0, "alpha");
+            SemVer2 left = new("0.4.0-alpha");
+            SemVer2 right = new(0, 4, 0, 0, "alpha");
 
             Assert.That(left, Is.EqualTo(right));
         }

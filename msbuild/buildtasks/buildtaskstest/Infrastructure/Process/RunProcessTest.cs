@@ -67,7 +67,7 @@
         public void ProcessRunFromAsyncResult()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("cmd", current, new[] { "/c", "dir" });
+            RunProcess process = new("cmd", current, new[] { "/c", "dir" });
             ProcessRunFromAsyncResult(process);
         }
 
@@ -101,7 +101,7 @@
         public void ProcessRunFromAsyncResultTerminate()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("timeout.exe", current, new[] { "10" });
+            RunProcess process = new("timeout.exe", current, new[] { "10" });
             ProcessRunFromAsyncResultTerminate(process);
         }
 
@@ -134,7 +134,7 @@
         public void ProcessRunFromAsyncResultTerminateBefore()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("timeout.exe", current, new[] { "1" });
+            RunProcess process = new("timeout.exe", current, new[] { "1" });
             ProcessRunFromAsyncResultTerminateBefore(process);
         }
 
@@ -166,7 +166,7 @@
         public void ProcessRunFromAsyncResultTerminateAfter()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("timeout.exe", current, new[] { "1" });
+            RunProcess process = new("timeout.exe", current, new[] { "1" });
             ProcessRunFromAsyncResultTerminateAfter(process);
         }
 
@@ -194,7 +194,7 @@
         public void ProcessRunFromAsyncResultTerminateTwice()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("timeout.exe", current, new[] { "10" });
+            RunProcess process = new("timeout.exe", current, new[] { "10" });
             ProcessRunFromAsyncResultTerminateTwice(process);
         }
 
@@ -221,7 +221,7 @@
         public void ProcessRunFromGetStdOut()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("cmd", current, new[] { "/c", "dir" });
+            RunProcess process = new("cmd", current, new[] { "/c", "dir" });
             ProcessRunFromGetStdOut(process);
         }
 
@@ -260,7 +260,7 @@
         public async Task ProcessRunFromAsync()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("cmd", current, new[] { "/c", "dir" });
+            RunProcess process = new("cmd", current, new[] { "/c", "dir" });
             await ProcessRunFromAsync(process);
         }
 
@@ -293,7 +293,7 @@
         public void ProcessRunFromAsyncCancel()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("timeout.exe", current, new[] { "10" });
+            RunProcess process = new("timeout.exe", current, new[] { "10" });
             ProcessRunFromAsyncCancel(process);
         }
 
@@ -308,7 +308,7 @@
 
         private static void ProcessRunFromAsyncCancel(RunProcess process)
         {
-            using (CancellationTokenSource tokens = new CancellationTokenSource()) {
+            using (CancellationTokenSource tokens = new()) {
                 Task t = Task.Delay(100).ContinueWith((_) => { tokens.Cancel(); });
                 Assert.That(() => {
                     Task.WaitAll(process.ExecuteAsync(tokens.Token), t);
@@ -323,7 +323,7 @@
         public async Task ProcessRunFromAsyncCancelTerminateBefore()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("timeout.exe", current, new[] { "10" });
+            RunProcess process = new("timeout.exe", current, new[] { "10" });
             await ProcessRunFromAsyncCancelTerminateBefore(process);
         }
 
@@ -338,7 +338,7 @@
 
         private static async Task ProcessRunFromAsyncCancelTerminateBefore(RunProcess process)
         {
-            using (CancellationTokenSource tokens = new CancellationTokenSource()) {
+            using (CancellationTokenSource tokens = new()) {
                 process.Terminate();
                 await process.ExecuteAsync(tokens.Token);
                 Assert.That(process.ExitCode, Is.EqualTo(-1));
@@ -352,7 +352,7 @@
         public void ProcessRunFromAsyncCancelImmediatelyBefore()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("timeout.exe", current, new[] { "10" });
+            RunProcess process = new("timeout.exe", current, new[] { "10" });
             ProcessRunFromAsyncCancelImmediatelyBefore(process);
         }
 
@@ -368,7 +368,7 @@
 
         private static void ProcessRunFromAsyncCancelImmediatelyBefore(RunProcess process)
         {
-            using (CancellationTokenSource tokens = new CancellationTokenSource()) {
+            using (CancellationTokenSource tokens = new()) {
                 tokens.Cancel();
                 Assert.That(() => {
                     process.ExecuteAsync(tokens.Token).Wait();
@@ -384,7 +384,7 @@
         public void ProcessRunFromAsyncCancelImmediatelyAfter()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("timeout.exe", current, new[] { "10" });
+            RunProcess process = new("timeout.exe", current, new[] { "10" });
             ProcessRunFromAsyncCancelImmediatelyAfter(process);
         }
 
@@ -400,7 +400,7 @@
 
         private static void ProcessRunFromAsyncCancelImmediatelyAfter(RunProcess process)
         {
-            using (CancellationTokenSource tokens = new CancellationTokenSource()) {
+            using (CancellationTokenSource tokens = new()) {
                 Task t = process.ExecuteAsync(tokens.Token);
                 tokens.Cancel();
                 Assert.That(() => {
@@ -417,7 +417,7 @@
         public void ProcessRunFromAsyncCancelImmediatelyParallel()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("timeout.exe", current, new[] { "10" });
+            RunProcess process = new("timeout.exe", current, new[] { "10" });
             ProcessRunFromAsyncCancelImmediatelyParallel(process);
         }
 
@@ -433,7 +433,7 @@
 
         private static void ProcessRunFromAsyncCancelImmediatelyParallel(RunProcess process)
         {
-            using (CancellationTokenSource tokens = new CancellationTokenSource()) {
+            using (CancellationTokenSource tokens = new()) {
                 Task c = Task.Run(() => { tokens.Cancel(); });
                 Task p = process.ExecuteAsync(tokens.Token);
                 Assert.That(() => {
@@ -449,7 +449,7 @@
         public void ProcessRunFromAsyncTerminate()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("timeout.exe", current, new[] { "10" });
+            RunProcess process = new("timeout.exe", current, new[] { "10" });
             ProcessRunFromAsyncTerminate(process);
         }
 
@@ -475,7 +475,7 @@
         public async Task ProcessRunFromAsyncTerminateBefore()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("timeout.exe", current, new[] { "10" });
+            RunProcess process = new("timeout.exe", current, new[] { "10" });
             await ProcessRunFromAsyncTerminateBefore(process);
         }
 
@@ -521,7 +521,7 @@
         {
             string current = Environment.CurrentDirectory;
 
-            using (CancellationTokenSource tokens = new CancellationTokenSource()) {
+            using (CancellationTokenSource tokens = new()) {
                 Task<RunProcess> process = RunProcess.RunFromAsync("timeout.exe", current, new[] { "10" }, tokens.Token);
                 Task t = Task.Delay(100).ContinueWith((_) => { tokens.Cancel(); });
 
@@ -558,7 +558,7 @@
         [Timeout(2000)]
         public void ProcessRunAsyncStaticCancel()
         {
-            using (CancellationTokenSource tokens = new CancellationTokenSource()) {
+            using (CancellationTokenSource tokens = new()) {
                 Task<RunProcess> process = RunProcess.RunAsync("timeout.exe", new[] { "10" }, tokens.Token);
                 Task t = Task.Delay(100).ContinueWith((_) => { tokens.Cancel(); });
 
@@ -578,7 +578,7 @@
         public void ProcessExecuteTwice()
         {
             string currentDir = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("cmd", currentDir, new string[] { "/c", "dir" });
+            RunProcess process = new("cmd", currentDir, new string[] { "/c", "dir" });
             ProcessExecuteTwice(process);
         }
 
@@ -603,7 +603,7 @@
         public async Task ProcessExecuteAsyncTwice()
         {
             string currentDir = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("cmd", currentDir, new string[] { "/c", "dir" });
+            RunProcess process = new("cmd", currentDir, new string[] { "/c", "dir" });
             await ProcessExecuteAsyncTwice(process);
         }
 
@@ -628,7 +628,7 @@
         public async Task ProcessExecuteAsyncWithTokenTwice()
         {
             string currentDir = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("cmd", currentDir, new string[] { "/c", "dir" });
+            RunProcess process = new("cmd", currentDir, new string[] { "/c", "dir" });
             await ProcessExecuteAsyncWithTokenTwice(process);
         }
 
@@ -642,7 +642,7 @@
 
         private static async Task ProcessExecuteAsyncWithTokenTwice(RunProcess process)
         {
-            using (CancellationTokenSource tokens = new CancellationTokenSource()) {
+            using (CancellationTokenSource tokens = new()) {
                 await process.ExecuteAsync(tokens.Token);
                 Assert.That(async () => {
                     await process.ExecuteAsync(tokens.Token);
@@ -655,7 +655,7 @@
         public void ProcessBeginExecuteTwice()
         {
             string currentDir = Environment.CurrentDirectory;
-            RunProcess process = new RunProcess("cmd", currentDir, new string[] { "/c", "dir" });
+            RunProcess process = new("cmd", currentDir, new string[] { "/c", "dir" });
             ProcessBeginExecuteTwice(process);
         }
 

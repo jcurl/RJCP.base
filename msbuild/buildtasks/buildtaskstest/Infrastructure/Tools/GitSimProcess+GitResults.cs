@@ -61,7 +61,7 @@
 
     internal partial class GitSimProcess
     {
-        private readonly static Dictionary<string, GitResults> GitResults = new Dictionary<string, GitResults>() {
+        private readonly static Dictionary<string, GitResults> GitResults = new() {
             ["norepo"] = new GitResults {
                 HeadCommit = new GitResult(128, "fatal: Not a git repository (or any of the parent directories): .git"),
                 LastCommit = new GitResult(128, "fatal: Not a git repository (or any of the parent directories): .git"),

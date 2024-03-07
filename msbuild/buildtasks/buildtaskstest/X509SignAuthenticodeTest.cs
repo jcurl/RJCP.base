@@ -17,7 +17,7 @@
         [TestCase(false, TestName = "SignToolNotFound")]
         public void ExecuteSignDefault(bool available)
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             SignToolMock signTool;
             TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.SignToolAvailable = available;
@@ -26,7 +26,7 @@
                 signTool.ExpectedThumbPrint = "2fda16f7adf7153e17d4bf3d36adc514a736cdf4";
             };
 
-            X509SignAuthenticode task = new X509SignAuthenticode {
+            X509SignAuthenticode task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 CertPath = TestCert,
                 InputAssembly = SignArtifact
@@ -39,7 +39,7 @@
         [Test]
         public void ExecuteSignDefineStoreDefault()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             SignToolMock signTool;
             TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
@@ -47,7 +47,7 @@
                 signTool.ExpectedThumbPrint = "2fda16f7adf7153e17d4bf3d36adc514a736cdf4";
             };
 
-            X509SignAuthenticode task = new X509SignAuthenticode {
+            X509SignAuthenticode task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 CertPath = TestCert,
                 InputAssembly = SignArtifact,
@@ -62,7 +62,7 @@
         [Test]
         public void ExecuteSignStoreRoot()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             SignToolMock signTool;
             TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
@@ -71,7 +71,7 @@
                 signTool.ExpectedThumbPrint = "2fda16f7adf7153e17d4bf3d36adc514a736cdf4";
             };
 
-            X509SignAuthenticode task = new X509SignAuthenticode {
+            X509SignAuthenticode task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 CertPath = TestCert,
                 InputAssembly = SignArtifact,
@@ -85,7 +85,7 @@
         [Test]
         public void ExecuteSignStoreLocalMachine()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             SignToolMock signTool;
             TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
@@ -94,7 +94,7 @@
                 signTool.ExpectedThumbPrint = "2fda16f7adf7153e17d4bf3d36adc514a736cdf4";
             };
 
-            X509SignAuthenticode task = new X509SignAuthenticode {
+            X509SignAuthenticode task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 CertPath = TestCert,
                 InputAssembly = SignArtifact,
@@ -108,7 +108,7 @@
         [Test]
         public void ExecuteSignDefineStoreOther()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             SignToolMock signTool;
             TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
@@ -118,7 +118,7 @@
                 signTool.ExpectedThumbPrint = "2fda16f7adf7153e17d4bf3d36adc514a736cdf4";
             };
 
-            X509SignAuthenticode task = new X509SignAuthenticode {
+            X509SignAuthenticode task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 CertPath = TestCert,
                 InputAssembly = SignArtifact,
@@ -133,7 +133,7 @@
         [Test]
         public void ExecuteSignUknownThumbprint()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             SignToolMock signTool;
             TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
@@ -141,7 +141,7 @@
                 signTool.ExpectedThumbPrint = "SignToolThumbPrintUnknown";
             };
 
-            X509SignAuthenticode task = new X509SignAuthenticode {
+            X509SignAuthenticode task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 CertPath = TestCert,
                 InputAssembly = SignArtifact
@@ -154,7 +154,7 @@
         [Test]
         public void CertPathEmpty()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             SignToolMock signTool;
             TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
@@ -162,7 +162,7 @@
                 signTool.ExpectedThumbPrint = "2fda16f7adf7153e17d4bf3d36adc514a736cdf4";
             };
 
-            X509SignAuthenticode task = new X509SignAuthenticode {
+            X509SignAuthenticode task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 CertPath = "",
                 InputAssembly = SignArtifact
@@ -175,7 +175,7 @@
         [Test]
         public void CertPathNotFound()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             SignToolMock signTool;
             TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
@@ -183,7 +183,7 @@
                 signTool.ExpectedThumbPrint = "2fda16f7adf7153e17d4bf3d36adc514a736cdf4";
             };
 
-            X509SignAuthenticode task = new X509SignAuthenticode {
+            X509SignAuthenticode task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 CertPath = InexistentArtifact,
                 InputAssembly = SignArtifact
@@ -196,7 +196,7 @@
         [Test]
         public void CertPathInputAssemblyEmpty()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             SignToolMock signTool;
             TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
@@ -204,7 +204,7 @@
                 signTool.ExpectedThumbPrint = "2fda16f7adf7153e17d4bf3d36adc514a736cdf4";
             };
 
-            X509SignAuthenticode task = new X509SignAuthenticode {
+            X509SignAuthenticode task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 CertPath = TestCert,
                 InputAssembly = string.Empty
@@ -217,7 +217,7 @@
         [Test]
         public void CertPathInputAssemblyNotFound()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             SignToolMock signTool;
             TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
@@ -225,7 +225,7 @@
                 signTool.ExpectedThumbPrint = "2fda16f7adf7153e17d4bf3d36adc514a736cdf4";
             };
 
-            X509SignAuthenticode task = new X509SignAuthenticode {
+            X509SignAuthenticode task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 CertPath = TestCert,
                 InputAssembly = InexistentArtifact
@@ -238,7 +238,7 @@
         [Test]
         public void ExecuteSignWithTimeStampUri()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
+            BuildEngineMock buildEngine = new();
             SignToolMock signTool;
             TestToolFactory factory = TestToolFactory.InitToolFactory();
             factory.ToolCreatedEvent += (s, e) => {
@@ -247,7 +247,7 @@
                 signTool.ExpectedTimeStampUri = "http://localhost/";
             };
 
-            X509SignAuthenticode task = new X509SignAuthenticode {
+            X509SignAuthenticode task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 CertPath = TestCert,
                 InputAssembly = SignArtifact,

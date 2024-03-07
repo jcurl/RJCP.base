@@ -8,7 +8,7 @@
     {
         public static TestToolFactory InitToolFactory()
         {
-            TestToolFactory factory = new TestToolFactory();
+            TestToolFactory factory = new();
             ToolFactory.Instance = factory;
             return factory;
         }

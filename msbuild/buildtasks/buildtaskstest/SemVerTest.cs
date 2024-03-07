@@ -15,8 +15,8 @@
         [TestCase("0.0.0.0")]
         public void InvalidVersion(string version)
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
-            SemVer task = new SemVer() {
+            BuildEngineMock buildEngine = new();
+            SemVer task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 Version = version
             };
@@ -29,8 +29,8 @@
         [Test]
         public void GetSemVerConstituents()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
-            SemVer task = new SemVer() {
+            BuildEngineMock buildEngine = new();
+            SemVer task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 Version = "1.2.3"
             };
@@ -47,8 +47,8 @@
         [Test]
         public void GetSemVerConstituentsWithBuildZero()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
-            SemVer task = new SemVer() {
+            BuildEngineMock buildEngine = new();
+            SemVer task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 Version = "1.2.3.0"
             };
@@ -65,8 +65,8 @@
         [Test]
         public void GetSemVerConstituentsWithPreRelease()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
-            SemVer task = new SemVer() {
+            BuildEngineMock buildEngine = new();
+            SemVer task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 Version = "1.2.3-Preview.20210903"
             };
@@ -83,8 +83,8 @@
         [Test]
         public void GetSemVerConstituentsWithPreReleaseAndMeta()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
-            SemVer task = new SemVer() {
+            BuildEngineMock buildEngine = new();
+            SemVer task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 Version = "1.2.3-Preview.20210903+g1234567"
             };
@@ -101,8 +101,8 @@
         [Test]
         public void GetSemVerConstituentsWithMeta()
         {
-            BuildEngineMock buildEngine = new BuildEngineMock();
-            SemVer task = new SemVer() {
+            BuildEngineMock buildEngine = new();
+            SemVer task = new() {
                 BuildEngine = buildEngine.BuildEngine,
                 Version = "1.2.3+g1234567"
             };

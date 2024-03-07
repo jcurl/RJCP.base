@@ -43,7 +43,7 @@
         protected override async Task<RunProcess> ExecuteProcessAsync(string workDir, string[] arguments)
         {
             SignToolArguments = arguments;
-            SignToolSimProcess process = new SignToolSimProcess(SignTool, workDir,
+            SignToolSimProcess process = new(SignTool, workDir,
                 RunProcess.Windows.JoinCommandLine(arguments)) {
                 ExpectedThumbPrint = ExpectedThumbPrint,
                 ExpectedStoreLocation = ExpectedStoreLocation,
@@ -63,7 +63,7 @@
         protected override async Task<RunProcess> ExecuteProcessAsync(string workDir, string[] arguments, CancellationToken token)
         {
             SignToolArguments = arguments;
-            SignToolSimProcess process = new SignToolSimProcess(SignTool, workDir,
+            SignToolSimProcess process = new(SignTool, workDir,
                 RunProcess.Windows.JoinCommandLine(arguments)) {
                 ExpectedThumbPrint = ExpectedThumbPrint,
                 ExpectedStoreLocation = ExpectedStoreLocation,

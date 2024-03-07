@@ -10,14 +10,14 @@
         [Test]
         public void InitialValue()
         {
-            AsyncValue<string> value = new AsyncValue<string>();
+            AsyncValue<string> value = new();
             Assert.That(value.Complete.WaitAsync().IsCompleted, Is.False);
         }
 
         [Test]
         public void GetSetValue()
         {
-            AsyncValue<string> value = new AsyncValue<string>();
+            AsyncValue<string> value = new();
             Task<string> result = value.GetSetAsync(() => { return Task.FromResult("foo"); });
             Assert.That(result.IsCompleted, Is.True);
             Assert.That(result.Result, Is.EqualTo("foo"));
@@ -27,7 +27,7 @@
         public async Task GetSetValueWait()
         {
             int funcCount = 0;
-            AsyncValue<string> value = new AsyncValue<string>();
+            AsyncValue<string> value = new();
             Task<string> result1 = value.GetSetAsync(() => {
                 funcCount++;
                 return Task.Delay(50).ContinueWith((t) => { return "bar"; });
@@ -54,7 +54,7 @@
         [Timeout(10000)]
         public void GetSetAsyncException()
         {
-            AsyncValue<string> value = new AsyncValue<string>();
+            AsyncValue<string> value = new();
 
             // Setting the value the first time should raise an exception.
             Assert.That(async () => {
@@ -76,7 +76,7 @@
         [Test]
         public async Task GetThenSet()
         {
-            AsyncValue<string> value = new AsyncValue<string>();
+            AsyncValue<string> value = new();
             Task<string> result1 = value.GetAsync();
 
             // THere are two ways to wait for the result, through GetAsync(), and getting the value there, or by
@@ -98,7 +98,7 @@
         [Timeout(2000)]
         public void GetSynchronousNotSet()
         {
-            AsyncValue<string> value = new AsyncValue<string>();
+            AsyncValue<string> value = new();
             Task.Run(() => {
                 Thread.Sleep(250);
                 value.Set("Value");
@@ -112,7 +112,7 @@
         [Timeout(2000)]
         public void GetSynchronousSetPrior()
         {
-            AsyncValue<string> value = new AsyncValue<string>();
+            AsyncValue<string> value = new();
             value.Set("Value");
 
             string result = value.Get();
@@ -123,7 +123,7 @@
         [Timeout(2000)]
         public void GetSetSynchronous()
         {
-            AsyncValue<string> value = new AsyncValue<string>();
+            AsyncValue<string> value = new();
 
             string result1 = null;
             string result2;

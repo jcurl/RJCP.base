@@ -45,7 +45,7 @@
 
         protected override async Task<RunProcess> ExecuteProcessAsync(string workDir, string[] arguments)
         {
-            GitSimProcess process = new GitSimProcess(GitTool, workDir,
+            GitSimProcess process = new(GitTool, workDir,
                 RunProcess.Windows.JoinCommandLine(arguments)) {
                 VirtualTopLevel = VirtualTopLevel
             };
@@ -62,7 +62,7 @@
 
         protected override async Task<RunProcess> ExecuteProcessAsync(string workDir, string[] arguments, CancellationToken token)
         {
-            GitSimProcess process = new GitSimProcess(GitTool, workDir,
+            GitSimProcess process = new(GitTool, workDir,
                 RunProcess.Windows.JoinCommandLine(arguments)) {
                 VirtualTopLevel = VirtualTopLevel
             };
