@@ -25,17 +25,30 @@ RELEASE_BRANCH = "release/"
 DEFAULT_REMOTE = "origin"
 
 
+class bcolors:
+    BLACK = '\033[90m'
+    RED = '\033[91m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    BLUE = '\033[94m'
+    MAGENTA = '\033[95m'
+    CYAN = '\033[96m'
+    WHITE = '\033[97m'
+    ENDC = '\033[0m'
+
+
 class ProcessPipe(threading.Thread):
     """Print output from processes"""
     # https://gist.github.com/alfredodeza/dcea71d5c0234c54d9b1
 
-    def __init__(self, prefix=""):
+    def __init__(self, prefix="", match=None):
         threading.Thread.__init__(self)
         self.daemon = False
         self.fdRead, self.fdWrite = os.pipe()
         self.pipeReader = os.fdopen(self.fdRead)
         self.process = None
-        self.prefix=prefix
+        self.prefix = prefix
+        self.match = match
         self.start()
 
     def fileno(self):
@@ -44,7 +57,15 @@ class ProcessPipe(threading.Thread):
     def run(self):
         try:
             for line in iter(self.pipeReader.readline, ''):
-                print("{}{}".format(self.prefix, line.strip('\n')), flush=True)
+                pcol = ""
+                stripline = line.strip('\n')
+                if not self.match is None:
+                    for check, colour in self.match.items():
+                        if re.search(check, stripline):
+                            pcol = colour
+                            break
+
+                print("{}{}{}{}".format(self.prefix, pcol, stripline, bcolors.ENDC), flush=True)
         except:
             pass
 
@@ -79,12 +100,12 @@ class ProcessPipe(threading.Thread):
 class ProcessExe:
     """Execute a command"""
 
-    def __init__(self, cmd, cwd=None, check=True):
+    def __init__(self, cmd, cwd=None, check=True, match=None):
         shell = False
         if platform.system() == "Linux":
             shell = True
 
-        pipeout = ProcessPipe("OUT| ")
+        pipeout = ProcessPipe("OUT| ", match=match)
         pipeerr = ProcessPipe("ERR| ")
         try:
             process = subprocess.Popen(
@@ -112,9 +133,9 @@ class ProcessExe:
             )
 
     @ staticmethod
-    def run(cmd, cwd=None, check=True):
+    def run(cmd, cwd=None, check=True, match=None):
         """Run the command"""
-        process = ProcessExe(cmd, cwd, check)
+        process = ProcessExe(cmd, cwd, check, match)
         return process
 
 
@@ -1894,20 +1915,25 @@ class BuildCommand:
                 ProcessExe.run(expansion.expand(cmdconfig["clean"]))
                 print(flush=True)
             if self.arguments.build:
+                m = { r"warning (\S+)?: ": bcolors.YELLOW,
+                      r"error (\S+)?: ": bcolors.RED }
                 print("----------------------------------------------------------------------")
                 print("-- Building:", cplatform, self.arguments.config)
                 print("-- Command:", expansion.expand(cmdconfig["build"]))
                 print("----------------------------------------------------------------------")
                 print(flush=True)
-                ProcessExe.run(expansion.expand(cmdconfig["build"]))
+                ProcessExe.run(expansion.expand(cmdconfig["build"]), match=m)
                 print(flush=True)
             if self.arguments.test:
+                m = { r"Passed!\s+-\s+": bcolors.GREEN,
+                      r"Failed!\s+-\s+": bcolors.YELLOW,
+                      r"Results File:\s+": bcolors.BLUE }
                 print("----------------------------------------------------------------------")
                 print("-- Testing", cplatform, self.arguments.config)
                 print("-- Command:", expansion.expand(cmdconfig["test"]))
                 print("----------------------------------------------------------------------")
                 print(flush=True)
-                ProcessExe.run(expansion.expand(cmdconfig["test"]))
+                ProcessExe.run(expansion.expand(cmdconfig["test"]), match=m)
                 print(flush=True)
             if self.arguments.pack:
                 print("----------------------------------------------------------------------")
