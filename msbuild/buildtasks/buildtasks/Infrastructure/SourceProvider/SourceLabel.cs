@@ -11,6 +11,11 @@
         LabelMatch,
 
         /// <summary>
+        /// The user has provided an override that matches.
+        /// </summary>
+        LabelOverride,
+
+        /// <summary>
         /// The requested label is not found.
         /// </summary>
         LabelNotFound,

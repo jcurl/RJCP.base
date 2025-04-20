@@ -322,6 +322,15 @@ namespace RJCP.MSBuildTasks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Label &apos;{0}&apos; overridden..
+        /// </summary>
+        internal static string RevisionControl_LabelOverride {
+            get {
+                return ResourceManager.GetString("RevisionControl_LabelOverride", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Path provided doesn&apos;t exist..
         /// </summary>
         internal static string RevisionControl_PathDirectoryDoesntExist {

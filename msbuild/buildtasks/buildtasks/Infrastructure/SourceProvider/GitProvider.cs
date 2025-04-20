@@ -4,6 +4,7 @@
     using System.Globalization;
     using System.IO;
     using System.Threading.Tasks;
+    using Infrastructure.Config;
     using Infrastructure.Process;
     using Infrastructure.Threading.Tasks;
     using Infrastructure.Tools;
@@ -16,6 +17,7 @@
         private readonly Executable m_Git;
         private readonly string m_Path;
         private string m_TopLevelPath;
+        private IniFile m_Config;
 
         /// <summary>
         /// Gets the type of the revision control.
@@ -75,6 +77,7 @@
         private async Task SetTopLevelPathAsync()
         {
             m_TopLevelPath = await GetTopLevelPathAsync(m_Path);
+            m_Config = BuildFile.Find(m_TopLevelPath);
         }
 
         private async Task<string> GetTopLevelPathAsync(string path)
@@ -290,6 +293,22 @@
                 return SourceLabel.HeadNotFound;
             if (string.IsNullOrEmpty(commits[1]))
                 return SourceLabel.LabelNotFound;
+
+            // Check if the user provided an override in the file ".rjbuild" in the section [git-overrides], that has
+            // the key being the git hash which is the same as the current HEAD, and the values which are the possible
+            // tags to override.
+            if (m_Config is object) {
+                if (m_Config.TryGetValue("git-overrides", out IniSection section)) {
+                    if (section.TryGetValue(commits[0], out string tagList)) {
+                        string[] tags = tagList.Split(',');
+                        foreach (string foundTag in tags) {
+                            if (string.Compare(tag, foundTag.Trim(), StringComparison.OrdinalIgnoreCase) == 0) {
+                                return SourceLabel.LabelOverride;
+                            }
+                        }
+                    }
+                }
+            }
 
             // Special case, if the commit of what is currently checked out matches the tag, they're a match.
             if (commits[0] == commits[1]) return SourceLabel.LabelMatch;

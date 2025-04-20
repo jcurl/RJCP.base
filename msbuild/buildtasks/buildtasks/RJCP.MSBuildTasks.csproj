@@ -46,6 +46,10 @@
 
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Infrastructure\Config\BuildFile.cs" />
+    <Compile Include="Infrastructure\Config\IniFile.cs" />
+    <Compile Include="Infrastructure\Config\IniKeyPair.cs" />
+    <Compile Include="Infrastructure\Config\IniSection.cs" />
     <Compile Include="Infrastructure\IO\AsyncResult.cs" />
     <Compile Include="Infrastructure\Platform.cs" />
     <Compile Include="Infrastructure\Process\ConsoleDataEventArgs.cs" />
@@ -116,15 +120,9 @@
    -->
   <UsingTask TaskName="RJCP.MSBuildTasks.X509SignAuthenticode" AssemblyFile="$(_RJCP_MSBuildTasksAssembly)" />
 
-  <Target Name="X509SignAuthenticode" AfterTargets="Compile"
-          Condition="'$(OS)' == 'Windows_NT' and '$(X509SigningCert)' != ''">
-    <X509SignAuthenticode CertPath="$(X509SigningCert)"
-                          TimeStampUri="$(X509TimeStampUri)"
-                          InputAssembly="$(IntermediateOutputPath)$(TargetName)$(TargetExt)" />
-    <X509SignAuthenticode CertPath="$(X509SigningCert)"
-                          TimeStampUri="$(X509TimeStampUri)"
-                          InputAssembly="$(AppHostIntermediatePath)"
-                          Condition="'$(UseAppHost)' == 'true'" />
+  <Target Name="X509SignAuthenticode" AfterTargets="Compile" Condition="'$(OS)' == 'Windows_NT' and '$(X509SigningCert)' != ''">
+    <X509SignAuthenticode CertPath="$(X509SigningCert)" TimeStampUri="$(X509TimeStampUri)" InputAssembly="$(IntermediateOutputPath)$(TargetName)$(TargetExt)" />
+    <X509SignAuthenticode CertPath="$(X509SigningCert)" TimeStampUri="$(X509TimeStampUri)" InputAssembly="$(AppHostIntermediatePath)" Condition="'$(UseAppHost)' == 'true'" />
   </Target>
 
   <!-- Provide specific revision control information for this project. Your

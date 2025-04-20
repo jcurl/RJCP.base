@@ -11,6 +11,7 @@ required to your project.
 - [2. Version Processing](#2-version-processing)
 - [3. Revision Control](#3-revision-control)
   - [3.1. Getting Revision Control Information](#31-getting-revision-control-information)
+  - [3.2. Strict Control](#32-strict-control)
 
 ## 1. Using this assembly within MSBuild
 
@@ -81,3 +82,51 @@ Inputs to the task are:
 
 Outputs are details of the revision control. The meaning of these parameters are
 already defined in [Functional Description](../revision.md).
+
+### 3.2. Strict Control
+
+If building in `strict` mode, then this can be used to determine if the contents
+of the repository has changed since it was labelled. This allows minor changes
+outside of the directory of the sources with new commits, and if the git diff
+between the label and the current version haven't changed, the build is
+considered to be unmodified.
+
+A second mode exists, which is used to override builds. If you have multiple
+projects in the same repository, the strict mode will check that there are no
+changes to each repository. If there are changes however, and the user has
+manually compared the changes to ensure that there is no impact to the sources
+built, then an *override* can be created, that ignores the fact that there is a
+difference.
+
+You should not ignore differences when:
+- Code really has changed; or
+- Dependencies might have changed.
+
+This is used in the RJCP project to handle the generation of NuGet packages. If
+there are minor changes to the build tools, or to editor files, then this should
+not require a new release of a NuGet package.
+
+To create an override file:
+
+From the root directory (where the .gitrjbuild file is that describes the config
+for the `git rj` commands), create a new file called `.rjbuild`. This is a
+simple INI file that has the contents
+
+```ini
+[git-overrides]
+<hash> = label1,label2
+```
+
+Each key/value pair must be unique. The hash is the current HEAD of the
+repository being built. Get this by looking at the HEAD for the repository. It
+is the GIT SHA-1 hash.
+
+The values are the possible labels that can be overridden. If the current HEAD
+contains an entry matching the label being built, then differences are ignored
+and not reported as a warning. This can allow builds (with warn as error) to
+continue, because you, the user, have already confirmed that there are no code
+changes and everything is still compatible.
+
+As soon as there is a new commit on the repository, then the hash of HEAD
+changes, and the override is effectively removed, making the override very
+specific for the current commit.

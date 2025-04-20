@@ -52,6 +52,8 @@
   <ItemGroup>
     <Compile Include="BuildEngineMock.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Infrastructure\Config\IniFileTest.cs" />
+    <Compile Include="Infrastructure\Config\IniSectionTest.cs" />
     <Compile Include="Infrastructure\Process\GetDirSimProcess.cs" />
     <Compile Include="Infrastructure\Process\RunProcessCmdLineWinTest.cs" />
     <Compile Include="Infrastructure\Process\RunProcessTest.cs" />
@@ -88,5 +90,17 @@
     <Content Include="TestResource\InvalidCert.crt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="TestResource\Config\Test.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestResource\Config\TestDuplicate.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestResource\Config\TestEmptySection.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

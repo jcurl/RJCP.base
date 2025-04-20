@@ -240,6 +240,11 @@
 
                 switch (taskLabel.Result) {
                 case SourceLabel.LabelMatch:
+                    // Success
+                    break;
+                case SourceLabel.LabelOverride:
+                    // Success (Informational Message)
+                    Log.LogMessage(Resources.RevisionControl_LabelOverride, Label);
                     break;
                 case SourceLabel.LabelMissing:
                     Log.LogWarning(Resources.RevisionControl_LabelMissing);

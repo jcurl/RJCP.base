@@ -273,4 +273,7 @@
   <data name="RevisionControl_LabelDiffers" xml:space="preserve">
     <value>Contents modified since label '{0}'.</value>
   </data>
+  <data name="RevisionControl_LabelOverride" xml:space="preserve">
+    <value>Label '{0}' overridden.</value>
+  </data>
 </root>
