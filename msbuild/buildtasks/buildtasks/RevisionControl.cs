@@ -215,9 +215,7 @@
             Task<string> taskShortCommit = provider.GetCommitShortAsync(Path);
             Task<DateTime> taskTimeStamp = provider.GetCommitDateTimeAsync(Path);
             Task<bool> taskDirty = provider.IsDirtyAsync(Path);
-            Task<bool> taskLabel = string.IsNullOrWhiteSpace(Label) ?
-                Task.FromResult(false) :
-                provider.IsTaggedAsync(Label, Path);
+            Task<SourceLabel> taskLabel = provider.IsTaggedAsync(Label, Path);
             await Task.WhenAll(taskBranch, taskCommit, taskShortCommit, taskTimeStamp, taskDirty, taskLabel);
 
             RevisionControlBranch = taskBranch.Result;
@@ -225,21 +223,33 @@
             RevisionControlCommitShort = taskShortCommit.Result;
             RevisionControlDateTime = taskTimeStamp.Result.ToUniversalTime().ToString("yyyyMMdd\\THHmmss");
             RevisionControlDirty = taskDirty.Result.ToString();
-            RevisionControlTagged = taskLabel.Result.ToString();
+            RevisionControlTagged = (taskLabel.Result == SourceLabel.LabelMatch).ToString();
             RevisionControlHost = Environment.MachineName;
             RevisionControlUser = Environment.UserName;
+
+            switch (taskLabel.Result) {
+            case SourceLabel.HeadNotFound:
+                Log.LogWarning(Resources.RevisionControl_HeadNotFound);
+                break;
+            }
 
             if (StrictMode) {
                 if (taskDirty.Result) {
                     Log.LogWarning(Resources.RevisionControl_IsDirty, Path);
                 }
 
-                if (!taskLabel.Result) {
-                    if (!string.IsNullOrWhiteSpace(Label)) {
-                        Log.LogWarning(Resources.RevisionControl_NotLabelled, Label, Path);
-                    } else {
-                        Log.LogWarning(Resources.RevisionControl_LabelNotDefined);
-                    }
+                switch (taskLabel.Result) {
+                case SourceLabel.LabelMatch:
+                    break;
+                case SourceLabel.LabelMissing:
+                    Log.LogWarning(Resources.RevisionControl_LabelMissing);
+                    break;
+                case SourceLabel.LabelNotFound:
+                    Log.LogWarning(Resources.RevisionControl_LabelNotFound, Label);
+                    break;
+                case SourceLabel.LabelDiffers:
+                    Log.LogWarning(Resources.RevisionControl_LabelDiffers, Label);
+                    break;
                 }
             }
 

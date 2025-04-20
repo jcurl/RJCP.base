@@ -252,12 +252,6 @@
   <data name="RevisionControl_IsDirty" xml:space="preserve">
     <value>Revision Control Filesystem indicates files have been modified. Please check in. Path is '{0}'.</value>
   </data>
-  <data name="RevisionControl_NotLabelled" xml:space="preserve">
-    <value>Label '{0}' not found in Revision Control, or contents have changed. Path is '{1}'.</value>
-  </data>
-  <data name="RevisionControl_LabelNotDefined" xml:space="preserve">
-    <value>No label provided in project file and strict mode is enabled.</value>
-  </data>
   <data name="SemVer_VersionNotProvided" xml:space="preserve">
     <value>The version parameter is empty.</value>
   </data>
@@ -266,5 +260,17 @@
   </data>
   <data name="Arg_UnknownValue" xml:space="preserve">
     <value>Unknown value provided</value>
+  </data>
+  <data name="RevisionControl_LabelMissing" xml:space="preserve">
+    <value>No label provided in project file and strict mode is enabled.</value>
+  </data>
+  <data name="RevisionControl_LabelNotFound" xml:space="preserve">
+    <value>Label '{0}' not found in revision control.</value>
+  </data>
+  <data name="RevisionControl_HeadNotFound" xml:space="preserve">
+    <value>HEAD cannot be determined.</value>
+  </data>
+  <data name="RevisionControl_LabelDiffers" xml:space="preserve">
+    <value>Contents modified since label '{0}'.</value>
   </data>
 </root>

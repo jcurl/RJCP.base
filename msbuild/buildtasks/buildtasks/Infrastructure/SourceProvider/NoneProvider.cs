@@ -39,9 +39,9 @@
             return Task.FromResult(false);
         }
 
-        public Task<bool> IsTaggedAsync(string tag, string path)
+        public Task<SourceLabel> IsTaggedAsync(string tag, string path)
         {
-            return Task.FromResult(true);
+            return Task.FromResult(SourceLabel.LabelMatch);
         }
     }
 }

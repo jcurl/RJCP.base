@@ -101,7 +101,7 @@
                     Is.True);
 
                 Assert.That(await gitprovider.IsTaggedAsync("mytag", "."),
-                    Is.False);
+                    Is.Not.EqualTo(SourceLabel.LabelMatch));
             }
         }
 
@@ -135,7 +135,7 @@
                     Is.False);
 
                 Assert.That(await gitprovider.IsTaggedAsync("mytag", "."),
-                    Is.False);
+                    Is.Not.EqualTo(SourceLabel.LabelMatch));
             }
         }
 
@@ -163,7 +163,7 @@
                     Is.False);
 
                 Assert.That(await gitprovider.IsTaggedAsync("mytag", "."),
-                    Is.False);
+                    Is.Not.EqualTo(SourceLabel.LabelMatch));
             }
         }
 
@@ -191,7 +191,7 @@
                     Is.False);
 
                 Assert.That(await gitprovider.IsTaggedAsync("mytag", "."),
-                    Is.False);
+                    Is.Not.EqualTo(SourceLabel.LabelMatch));
             }
         }
 
@@ -219,7 +219,7 @@
                     Is.False);
 
                 Assert.That(await gitprovider.IsTaggedAsync("mytag", "."),
-                    Is.True);  // We've checked out to this tag
+                    Is.EqualTo(SourceLabel.LabelMatch));  // We've checked out to this tag
             }
         }
 
@@ -247,7 +247,7 @@
                     Is.True);
 
                 Assert.That(await gitprovider.IsTaggedAsync("mytag", "."),
-                    Is.False);
+                    Is.Not.EqualTo(SourceLabel.LabelMatch));
             }
         }
 
@@ -275,7 +275,7 @@
                     Is.True);
 
                 Assert.That(await gitprovider.IsTaggedAsync("mytag", "."),
-                    Is.False);
+                    Is.Not.EqualTo(SourceLabel.LabelMatch));
             }
         }
 
@@ -303,7 +303,7 @@
                     Is.False);
 
                 Assert.That(await gitprovider.IsTaggedAsync("mytag", "."),
-                    Is.True);
+                    Is.EqualTo(SourceLabel.LabelMatch));
             }
         }
 
@@ -331,7 +331,7 @@
                     Is.False);
 
                 Assert.That(await gitprovider.IsTaggedAsync("mytag", "."),
-                    Is.False);
+                    Is.Not.EqualTo(SourceLabel.LabelMatch));
             }
         }
 
@@ -376,7 +376,7 @@
                     Is.False);
 
                 Assert.That(await gitprovider.IsTaggedAsync("mytag", "."),
-                    Is.False);
+                    Is.Not.EqualTo(SourceLabel.LabelMatch));
 
                 gitCount = git.GitExecutions;
 
@@ -401,7 +401,7 @@
                     Is.False);
 
                 Assert.That(await gitprovider.IsTaggedAsync("mytag", "."),
-                    Is.False);
+                    Is.Not.EqualTo(SourceLabel.LabelMatch));
 
                 // Everything should have been cached, so there shouldn't be any new calls.
                 Assert.That(git.GitExecutions, Is.EqualTo(gitCount));
@@ -411,7 +411,7 @@
                 //
 
                 Assert.That(await gitprovider.IsTaggedAsync("mytag2", "."),
-                    Is.False);
+                    Is.Not.EqualTo(SourceLabel.LabelMatch));
 
                 // Only one new query is needed because of the new tag. This tag doesn't exist, so it won't diff.
                 Assert.That(git.GitExecutions - gitCount, Is.EqualTo(1));
@@ -422,7 +422,7 @@
                 //
 
                 Assert.That(await gitprovider.IsTaggedAsync("mytag2", "config"),
-                    Is.False);
+                    Is.Not.EqualTo(SourceLabel.LabelMatch));
 
                 // No new queries are made with this call, as the tag 'mytag2' never existed.
                 Assert.That(git.GitExecutions - gitCount, Is.EqualTo(0));
@@ -470,7 +470,7 @@
                     Is.False);
 
                 Assert.That(await gitprovider.IsTaggedAsync("mytag", "."),
-                    Is.True);
+                    Is.EqualTo(SourceLabel.LabelMatch));
 
                 gitCount = git.GitExecutions;
 
@@ -495,7 +495,7 @@
                     Is.False);
 
                 Assert.That(await gitprovider.IsTaggedAsync("mytag", "."),
-                    Is.True);
+                    Is.EqualTo(SourceLabel.LabelMatch));
 
                 // Everything should have been cached, so there shouldn't be any new calls.
                 Assert.That(git.GitExecutions, Is.EqualTo(gitCount));
@@ -505,7 +505,7 @@
                 //
 
                 Assert.That(await gitprovider.IsTaggedAsync("mytag2", "."),
-                    Is.True);
+                    Is.EqualTo(SourceLabel.LabelMatch));
 
                 // Only one new query is needed because of the new tag. The tag 'mytag2' has the same commit as 'mytag'
                 // and so no further queries are needed.
@@ -517,7 +517,7 @@
                 //
 
                 Assert.That(await gitprovider.IsTaggedAsync("mytag2", "config"),
-                    Is.True);
+                    Is.EqualTo(SourceLabel.LabelMatch));
 
                 // The tag 'mytag2' is cached, but the path is different, so we should expect a new diff.
                 Assert.That(git.GitExecutions - gitCount, Is.EqualTo(1));

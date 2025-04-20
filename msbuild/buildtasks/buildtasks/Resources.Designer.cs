@@ -19,7 +19,7 @@ namespace RJCP.MSBuildTasks {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -277,6 +277,15 @@ namespace RJCP.MSBuildTasks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HEAD cannot be determined..
+        /// </summary>
+        internal static string RevisionControl_HeadNotFound {
+            get {
+                return ResourceManager.GetString("RevisionControl_HeadNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Revision Control Filesystem indicates files have been modified. Please check in. Path is &apos;{0}&apos;..
         /// </summary>
         internal static string RevisionControl_IsDirty {
@@ -286,20 +295,29 @@ namespace RJCP.MSBuildTasks {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No label provided in project file and strict mode is enabled..
+        ///   Looks up a localized string similar to Contents modified since label &apos;{0}&apos;..
         /// </summary>
-        internal static string RevisionControl_LabelNotDefined {
+        internal static string RevisionControl_LabelDiffers {
             get {
-                return ResourceManager.GetString("RevisionControl_LabelNotDefined", resourceCulture);
+                return ResourceManager.GetString("RevisionControl_LabelDiffers", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Label &apos;{0}&apos; not found in Revision Control, or contents have changed. Path is &apos;{1}&apos;..
+        ///   Looks up a localized string similar to No label provided in project file and strict mode is enabled..
         /// </summary>
-        internal static string RevisionControl_NotLabelled {
+        internal static string RevisionControl_LabelMissing {
             get {
-                return ResourceManager.GetString("RevisionControl_NotLabelled", resourceCulture);
+                return ResourceManager.GetString("RevisionControl_LabelMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Label &apos;{0}&apos; not found in revision control..
+        /// </summary>
+        internal static string RevisionControl_LabelNotFound {
+            get {
+                return ResourceManager.GetString("RevisionControl_LabelNotFound", resourceCulture);
             }
         }
         

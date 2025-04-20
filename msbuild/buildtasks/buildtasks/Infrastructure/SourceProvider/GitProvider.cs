@@ -278,20 +278,24 @@
         /// commit, it ensures that there are no differences between the current commit and the tag so that commits
         /// outside of the path don't result in false-negatives.
         /// </remarks>
-        public async Task<bool> IsTaggedAsync(string tag, string path)
+        public async Task<SourceLabel> IsTaggedAsync(string tag, string path)
         {
+            if (string.IsNullOrWhiteSpace(tag)) return SourceLabel.LabelMissing;
+
             Task<string> headCommit = GetHeadCommit();
             Task<string> tagCommit = GetTagInternalAsync(tag);
             string[] commits = await Task.WhenAll(headCommit, tagCommit);
 
-            if (string.IsNullOrEmpty(commits[0]) || string.IsNullOrEmpty(commits[1]))
-                return false;
+            if (string.IsNullOrEmpty(commits[0]))
+                return SourceLabel.HeadNotFound;
+            if (string.IsNullOrEmpty(commits[1]))
+                return SourceLabel.LabelNotFound;
 
             // Special case, if the commit of what is currently checked out matches the tag, they're a match.
-            if (commits[0] == commits[1]) return true;
+            if (commits[0] == commits[1]) return SourceLabel.LabelMatch;
 
             bool diff = await GetDiffInternalAsync(path, commits[0], commits[1]);
-            return !diff;
+            return diff ? SourceLabel.LabelDiffers : SourceLabel.LabelMatch;
         }
 
         private readonly AsyncValue<string> m_HeadCommit = new AsyncValue<string>();

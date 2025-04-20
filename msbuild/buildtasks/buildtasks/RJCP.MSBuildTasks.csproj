@@ -65,6 +65,7 @@
     <Compile Include="Infrastructure\SourceProvider\NoneProvider.cs" />
     <Compile Include="Infrastructure\SourceProvider\NoneSourceFactory.cs" />
     <Compile Include="Infrastructure\SourceProvider\SourceFactory.cs" />
+    <Compile Include="Infrastructure\SourceProvider\SourceLabel.cs" />
     <Compile Include="Infrastructure\SourceProvider\SourceProviderException.cs" />
     <Compile Include="Infrastructure\SourceProvider\UnknownSourceProviderException.cs" />
     <Compile Include="Infrastructure\Threading\Tasks\AsyncCache.cs" />

@@ -65,6 +65,6 @@
         /// <see langword="true"/> if the specified tag exists, and the path given matches the contents of the tag;
         /// otherwise, <see langword="false"/>.
         /// </returns>
-        Task<bool> IsTaggedAsync(string tag, string path);
+        Task<SourceLabel> IsTaggedAsync(string tag, string path);
     }
 }
