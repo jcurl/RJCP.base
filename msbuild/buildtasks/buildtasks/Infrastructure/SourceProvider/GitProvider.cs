@@ -47,7 +47,7 @@
         /// <remarks>
         /// This method creates the object, as opposed to a constructor, so that it can be done asynchronously.
         /// </remarks>
-        internal async static Task<GitProvider> CreateAsync(string path)
+        internal static async Task<GitProvider> CreateAsync(string path)
         {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
@@ -331,7 +331,7 @@
         private Task<bool> GetDiffInternalAsync(string path, string commit1, string commit2)
         {
             return m_Diffs.GetSetAsync((path, commit1, commit2), async () => {
-                RunProcess git = await m_Git.RunFromAsync(m_TopLevelPath, "diff", "--quiet", commit1, commit2, "--", path);
+                RunProcess git = await m_Git.RunFromAsync(m_TopLevelPath, "diff", "--quiet", commit1, commit2, "--", path, ":(exclude,glob)**/.editorconfig");
                 if (git.ExitCode == 0) return false;
                 if (git.ExitCode == 1) return true;
                 throw new RunProcessException(Resources.Git_UnexpectedOutput, git);

@@ -119,9 +119,9 @@
 
         private static int GitGetDiff(GitSimProcess git, GitResults sim, string[] arguments)
         {
-            // git diff --quiet commit tagcommit -- path
+            // git diff --quiet commit tagcommit -- path PATHSPEC
 
-            if (arguments.Length != 6) {
+            if (arguments.Length <= 6) {
                 git.LogStdOut("fatal: Error in arguments");
                 return 128;
             }
