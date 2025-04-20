@@ -82,7 +82,7 @@ The unit tests depends on `RJCP.DLL.CodeQuality`, which uses the NuGet package
 `RJCP.MSBuildTasks.nupkg` provided here. This is why you might not be able to
 build and run the tests in a single step.
 
-1. First build the `RJCP.MSBuildTasks.0.2.5.nupkg` library and put in a local
+1. First build the `RJCP.MSBuildTasks.0.x.x.nupkg` library and put in a local
    feed. The instructions for doing this are provided if the NuGet package isn't
    already available.
 2. To run the unit tests, which simulates the task and execution of the
@@ -94,9 +94,15 @@ build and run the tests in a single step.
    dotnet test
    ```
 
-Please be sure to run the unit tests under Windows. Other environments, such as
-MSYS2 might have similar commands, like `timeout.exe` that have different
-behaviour under PowerShell for Windows.
+The test cases uses our own binary `stimeout.exe` which is prebuilt for Windows
+11 machines on 64-bit. Ensure this binary is in the system path before running
+the test cases.
+
+e.g. on PowerShell:
+
+```cmd
+$env:PATH += ";D:\rjcp.base\msbuild\buildtasks\stimeout\x64\Release"
+```
 
 ### 3.2. Integration Tests
 

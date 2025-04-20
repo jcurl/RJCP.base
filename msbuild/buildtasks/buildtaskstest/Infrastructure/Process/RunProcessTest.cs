@@ -7,6 +7,8 @@
 
     public class RunProcessTest
     {
+        const string Timeout = "stimeout.exe";
+
         [Test]
         [Platform(Include = "Win32")]
         public void ProcessRunStatic()
@@ -101,7 +103,7 @@
         public void ProcessRunFromAsyncResultTerminate()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new("timeout.exe", current, new[] { "10" });
+            RunProcess process = new(Timeout, current, new[] { "10" });
             ProcessRunFromAsyncResultTerminate(process);
         }
 
@@ -109,7 +111,7 @@
         public void ProcessSimRunFromAsyncResultTerminate()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new TimeoutSimProcess("timeout.exe", current, "10");
+            RunProcess process = new TimeoutSimProcess(Timeout, current, "10");
             ProcessRunFromAsyncResultTerminate(process);
         }
 
@@ -134,7 +136,7 @@
         public void ProcessRunFromAsyncResultTerminateBefore()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new("timeout.exe", current, new[] { "1" });
+            RunProcess process = new(Timeout, current, new[] { "1" });
             ProcessRunFromAsyncResultTerminateBefore(process);
         }
 
@@ -142,7 +144,7 @@
         public void ProcessSimRunFromAsyncResultTerminateBefore()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new TimeoutSimProcess("timeout.exe", current, "1");
+            RunProcess process = new TimeoutSimProcess(Timeout, current, "1");
             ProcessRunFromAsyncResultTerminateBefore(process);
         }
 
@@ -166,7 +168,7 @@
         public void ProcessRunFromAsyncResultTerminateAfter()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new("timeout.exe", current, new[] { "1" });
+            RunProcess process = new(Timeout, current, new[] { "1" });
             ProcessRunFromAsyncResultTerminateAfter(process);
         }
 
@@ -174,7 +176,7 @@
         public void ProcessSimRunFromAsyncResultTerminateAfter()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new TimeoutSimProcess("timeout.exe", current, "1");
+            RunProcess process = new TimeoutSimProcess(Timeout, current, "1");
             ProcessRunFromAsyncResultTerminateAfter(process);
         }
 
@@ -194,7 +196,7 @@
         public void ProcessRunFromAsyncResultTerminateTwice()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new("timeout.exe", current, new[] { "10" });
+            RunProcess process = new(Timeout, current, new[] { "10" });
             ProcessRunFromAsyncResultTerminateTwice(process);
         }
 
@@ -202,7 +204,7 @@
         public void ProcessSimRunFromAsyncResultTerminateTwice()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new TimeoutSimProcess("timeout.exe", current, "10");
+            RunProcess process = new TimeoutSimProcess(Timeout, current, "10");
             ProcessRunFromAsyncResultTerminateTwice(process);
         }
 
@@ -293,7 +295,7 @@
         public void ProcessRunFromAsyncCancel()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new("timeout.exe", current, new[] { "10" });
+            RunProcess process = new(Timeout, current, new[] { "10" });
             ProcessRunFromAsyncCancel(process);
         }
 
@@ -302,7 +304,7 @@
         public void ProcesssIMRunFromAsyncCancel()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new TimeoutSimProcess("timeout.exe", current, "10");
+            RunProcess process = new TimeoutSimProcess(Timeout, current, "10");
             ProcessRunFromAsyncCancel(process);
         }
 
@@ -323,7 +325,7 @@
         public async Task ProcessRunFromAsyncCancelTerminateBefore()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new("timeout.exe", current, new[] { "10" });
+            RunProcess process = new(Timeout, current, new[] { "10" });
             await ProcessRunFromAsyncCancelTerminateBefore(process);
         }
 
@@ -332,7 +334,7 @@
         public async Task ProcessSimRunFromAsyncCancelTerminateBefore()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new TimeoutSimProcess("timeout.exe", current, "10");
+            RunProcess process = new TimeoutSimProcess(Timeout, current, "10");
             await ProcessRunFromAsyncCancelTerminateBefore(process);
         }
 
@@ -352,7 +354,7 @@
         public void ProcessRunFromAsyncCancelImmediatelyBefore()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new("timeout.exe", current, new[] { "10" });
+            RunProcess process = new(Timeout, current, new[] { "10" });
             ProcessRunFromAsyncCancelImmediatelyBefore(process);
         }
 
@@ -362,7 +364,7 @@
         public void ProcessSimRunFromAsyncCancelImmediatelyBefore()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new TimeoutSimProcess("timeout.exe", current, "10");
+            RunProcess process = new TimeoutSimProcess(Timeout, current, "10");
             ProcessRunFromAsyncCancelImmediatelyBefore(process);
         }
 
@@ -384,7 +386,7 @@
         public void ProcessRunFromAsyncCancelImmediatelyAfter()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new("timeout.exe", current, new[] { "10" });
+            RunProcess process = new(Timeout, current, new[] { "10" });
             ProcessRunFromAsyncCancelImmediatelyAfter(process);
         }
 
@@ -394,7 +396,7 @@
         public void ProcessSimRunFromAsyncCancelImmediatelyAfter()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new TimeoutSimProcess("timeout.exe", current, "10");
+            RunProcess process = new TimeoutSimProcess(Timeout, current, "10");
             ProcessRunFromAsyncCancelImmediatelyAfter(process);
         }
 
@@ -417,7 +419,7 @@
         public void ProcessRunFromAsyncCancelImmediatelyParallel()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new("timeout.exe", current, new[] { "10" });
+            RunProcess process = new(Timeout, current, new[] { "10" });
             ProcessRunFromAsyncCancelImmediatelyParallel(process);
         }
 
@@ -427,7 +429,7 @@
         public void ProcessSimRunFromAsyncCancelImmediatelyParallel()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new TimeoutSimProcess("timeout.exe", current, "10");
+            RunProcess process = new TimeoutSimProcess(Timeout, current, "10");
             ProcessRunFromAsyncCancelImmediatelyParallel(process);
         }
 
@@ -449,7 +451,7 @@
         public void ProcessRunFromAsyncTerminate()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new("timeout.exe", current, new[] { "10" });
+            RunProcess process = new(Timeout, current, new[] { "10" });
             ProcessRunFromAsyncTerminate(process);
         }
 
@@ -458,7 +460,7 @@
         public void ProcessSimRunFromAsyncTerminate()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new TimeoutSimProcess("timeout.exe", current, "10");
+            RunProcess process = new TimeoutSimProcess(Timeout, current, "10");
             ProcessRunFromAsyncTerminate(process);
         }
 
@@ -475,7 +477,7 @@
         public async Task ProcessRunFromAsyncTerminateBefore()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new("timeout.exe", current, new[] { "10" });
+            RunProcess process = new(Timeout, current, new[] { "10" });
             await ProcessRunFromAsyncTerminateBefore(process);
         }
 
@@ -484,7 +486,7 @@
         public async Task ProcessRimRunFromAsyncTerminateBefore()
         {
             string current = Environment.CurrentDirectory;
-            RunProcess process = new TimeoutSimProcess("timeout.exe", current, "10");
+            RunProcess process = new TimeoutSimProcess(Timeout, current, "10");
             await ProcessRunFromAsyncTerminateBefore(process);
         }
 
@@ -522,7 +524,7 @@
             string current = Environment.CurrentDirectory;
 
             using (CancellationTokenSource tokens = new()) {
-                Task<RunProcess> process = RunProcess.RunFromAsync("timeout.exe", current, new[] { "10" }, tokens.Token);
+                Task<RunProcess> process = RunProcess.RunFromAsync(Timeout, current, new[] { "10" }, tokens.Token);
                 Task t = Task.Delay(100).ContinueWith((_) => { tokens.Cancel(); });
 
                 Assert.That(() => {
@@ -559,7 +561,7 @@
         public void ProcessRunAsyncStaticCancel()
         {
             using (CancellationTokenSource tokens = new()) {
-                Task<RunProcess> process = RunProcess.RunAsync("timeout.exe", new[] { "10" }, tokens.Token);
+                Task<RunProcess> process = RunProcess.RunAsync(Timeout, new[] { "10" }, tokens.Token);
                 Task t = Task.Delay(100).ContinueWith((_) => { tokens.Cancel(); });
 
                 Assert.That(() => {
