@@ -69,7 +69,13 @@
         {
             bool storeOption = false;
             foreach (string arg in args) {
-                if (storeOption) return (StoreName)Enum.Parse(typeof(StoreName), arg, true);
+                if (storeOption)
+#if NETFRAMEWORK
+                    return (StoreName)Enum.Parse(typeof(StoreName), arg, true);
+#else
+                    return  Enum.Parse<StoreName>(arg, true);
+#endif
+
                 if (arg.Equals("/s", StringComparison.Ordinal)) storeOption = true;
             }
             return StoreName.My;

@@ -45,7 +45,11 @@
             get { return m_StoreName.ToString(); }
             set
             {
+#if NETFRAMEWORK
                 m_StoreName = (StoreName)Enum.Parse(typeof(StoreName), value, true);
+#else
+                m_StoreName = Enum.Parse<StoreName>(value, true);
+#endif
             }
         }
 
@@ -58,7 +62,11 @@
             get { return m_StoreLocation.ToString(); }
             set
             {
+#if NETFRAMEWORK
                 m_StoreLocation = (StoreLocation)Enum.Parse(typeof(StoreLocation), value, true);
+#else
+                m_StoreLocation = Enum.Parse<StoreLocation>(value, true);
+#endif
             }
         }
 
