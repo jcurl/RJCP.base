@@ -1,19 +1,29 @@
 [git-overrides]
-;CPUID
-1c0c36f67895cba1c4fd1cb55a1c8a9726d78d93 = release/v0.8.1
-;Datastructures
-9c511cc61dcc7ccbc05b5a5dbde1dc033c2f6873 = release/v0.2.1
-;Environment
-834350fd91bdb101350ea8a71982206872807871 = release/syscomp/v0.2.0,release/v0.3.0
-;Path
-065c0078d452853d577d181067bbdfe4a410d675 = release/v0.2.1
-;SerialPortStream
-1a4190738580f64ea5894450a1d1e559ea37e213 = release/virt/v3.0.1
-;Text Utils
-6e094c8db5ef63d891068c58082b7a53c79dd76a = release/v0.5.1
-;Thread
-b8fd6466a6a7166a61164f4396806f395773429e = release/v0.2.1
-;Trace
-a9b9668b590b3b6948cb549469b6782c265ef8f3 = release/v0.2.1
-;XML
-7e1b28da180dc3a26c11728976c0de34b5fa105c = release/v0.2.1
+; BufferIO - Analyser updates
+f7f3bb4871ba0e317bf33fa0f079c9d121e49163 = release/v0.2.2
+; CommandLine - Analyser updates
+2ca617c93ca03d4603a66321726a9bd87022b10a = release/v0.9.1
+; CPUID - Analyzer updates
+2f6b49774a9d56881e1adc1875acf712648a4c60 = release/v0.8.1
+; CrashReporter - Analyzer updates
+fbe570ce057e308dd30d565c9b67e5ac3ab300f6 = release/v0.5.2
+; Datastructures - Analyzer updates
+471b0d51e8167561c9121f86e6488596722f80b9 = release/v0.2.1
+; Environment - Analyzer updates
+c118a7539435a40036dd9d380e3de75e160d6da2 = release/syscomp/v0.2.0,release/v0.3.0,release/ver/v0.3.1
+; Log - Analyzer updates
+6947cd41405669879e92588b85a102d1a5690014 = release/dlt/v0.8.2,release/dltdump/v1.0.2,release/v0.8.2
+; CodeQuality - Analyzer updates
+e7ee9db1d435fcb80abb6c3a0312ce9295a46c88 = release/v0.6.2
+; Path - Analyzer updates
+1a714ed6e875b549b1fd1be048aa18c98e7beff1 = release/v0.2.1
+; SerialPortStream - Analyzer updates
+865b933a24c7a28bdd2533b810b19b89e54a7886 = release/v3.0.2,release/virt/v3.0.1
+; Text Utils - Analyzer updates
+de9d1c51494040295b0d92fcf688fa8b7cc7bb92 = release/v0.5.1
+; Thread - Analyzer updates
+03ba104c7a0c94583456a0eb00e7f5260e236ce8 = release/v0.2.1
+; Trace - Analyzer updates
+3a8b3fcd0628a9b7eb8250ceac11ee42a9e6f9b9 = release/v0.2.1
+; XML - Analyzer updates
+2cb37d2f4620fbb52bb4ed7ffc0464778d98a4ad = release/v0.2.1
