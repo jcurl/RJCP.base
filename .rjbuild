@@ -18,7 +18,7 @@ e7ee9db1d435fcb80abb6c3a0312ce9295a46c88 = release/v0.6.2
 ; Path - Analyzer updates
 1a714ed6e875b549b1fd1be048aa18c98e7beff1 = release/v0.2.1
 ; SerialPortStream - Analyzer updates
-865b933a24c7a28bdd2533b810b19b89e54a7886 = release/v3.0.2,release/virt/v3.0.1
+21f60c99621f8d1a6d83a51a9ca2fde6cc22f65e = release/virt/v3.0.1
 ; Text Utils - Analyzer updates
 de9d1c51494040295b0d92fcf688fa8b7cc7bb92 = release/v0.5.1
 ; Thread - Analyzer updates
