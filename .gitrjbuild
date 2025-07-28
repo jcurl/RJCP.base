@@ -41,29 +41,29 @@
                 "clean": "dotnet clean -c Debug ${project}",
                 "build": "dotnet build -c Debug ${project} ${debugflag}",
                 "test": "dotnet test --nologo -v q -c Debug --no-build --logger \"trx\" ${project}",
-                "pack": "dotnet pack --nologo -c Debug --no-build --no-restore --include-source --include-symbols -o distribute/nuget/debug ${project}",
-                "doc": "${msbuild} rjcp.shfbproj /t:Rebuild /verbosity:minimal /p:Configuration=Debug /p:OutputPath=\"distribute\\Help\" /nologo"
+                "pack": "dotnet pack --nologo -c Debug --no-build --no-restore --include-source --include-symbols -o distribute/debug/nuget ${project}",
+                "doc": "${msbuild} RJCP.Documentation.sln /t:Rebuild /verbosity:minimal /p:Configuration=Debug /p:OutputPath=\"..\\distribute\\debug\\Help\" /nologo"
             },
             "devsn": {
                 "clean": "dotnet clean -c Debug ${project}",
                 "build": "dotnet build -c Debug ${project} ${debugflag} ${sname}",
                 "test": "dotnet test --nologo -v q -c Debug --no-build --logger \"trx\" ${project}",
-                "pack": "dotnet pack --nologo -c Debug --no-build --no-restore --include-source --include-symbols -o distribute/nuget/debug ${project}",
-                "doc": "${msbuild} rjcp.shfbproj /t:Rebuild /verbosity:minimal /p:Configuration=Debug /p:OutputPath=\"distribute\\Help\" /nologo"
+                "pack": "dotnet pack --nologo -c Debug --no-build --no-restore --include-source --include-symbols -o distribute/debug/nuget ${project}",
+                "doc": "${msbuild} RJCP.Documentation.sln /t:Rebuild /verbosity:minimal /p:Configuration=Debug /p:OutputPath=\"..\\distribute\\debug\\Help\" /nologo"
             },
             "preview": {
                 "clean": "dotnet clean -c Release ${project}",
                 "build": "dotnet build -c Release ${project}",
                 "test": "dotnet test --nologo -v q -c Release --no-build --logger \"trx\" ${project}",
-                "pack": "dotnet pack --nologo -c Release --no-build --no-restore --include-source --include-symbols -o distribute/nuget ${project}",
-                "doc": "${msbuild} rjcp.shfbproj /t:Rebuild /verbosity:minimal /p:Configuration=Release /p:OutputPath=\"distribute\\Help\" /nologo"
+                "pack": "dotnet pack --nologo -c Release --no-build --no-restore --include-source --include-symbols -o distribute/preview/nuget ${project}",
+                "doc": "${msbuild} RJCP.Documentation.sln /t:Rebuild /verbosity:minimal /p:Configuration=Release /p:OutputPath=\"..\\distribute\\preview\\Help\" /nologo"
             },
             "release": {
                 "clean": "dotnet clean -c Release ${project}",
                 "build": "dotnet build -c Release ${project} ${warnflag} ${authenticode} ${sname}",
                 "test": "dotnet test --nologo -v q -c Release --no-build --logger \"trx\" --results-directory \"distribute\\TestResults\" ${project}",
-                "pack": "dotnet pack --nologo -c Release --no-build --no-restore --include-source --include-symbols -o distribute/nuget ${project}",
-                "doc": "${msbuild} rjcp.shfbproj /t:Rebuild /verbosity:minimal /p:Configuration=Release /p:OutputPath=\"distribute\\Help\" /nologo"
+                "pack": "dotnet pack --nologo -c Release --no-build --no-restore --include-source --include-symbols -o distribute/release/nuget ${project}",
+                "doc": "${msbuild} RJCP.Documentation.sln /t:Rebuild /verbosity:minimal /p:Configuration=Release /p:OutputPath=\"..\\distrubute\\release\\Help\" /nologo"
             }
         },
         "expansion": {
@@ -87,10 +87,10 @@
                     },
                     "AMD64": {
                         "path": [
-                            "${ProgramFiles(x86)}\\Microsoft Visual Studio\\2022\\BuildTools\\MSBuild\\Current\\Bin\\",
-                            "${ProgramFiles(x86)}\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\",
-                            "${ProgramFiles(x86)}\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\",
-                            "${ProgramFiles(x86)}\\Microsoft Visual Studio\\2022\\Enterprise\\MSBuild\\Current\\Bin\\"
+                            "${ProgramFiles}\\Microsoft Visual Studio\\2022\\BuildTools\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles}\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles}\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles}\\Microsoft Visual Studio\\2022\\Enterprise\\MSBuild\\Current\\Bin\\"
                         ]
                     }
                 }

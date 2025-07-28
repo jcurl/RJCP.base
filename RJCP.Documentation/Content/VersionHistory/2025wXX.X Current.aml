@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="401b9f50-28c7-480e-a38f-e636e7fa7754" revisionNumber="1">
+    <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <introduction>
+            <para>Version 2025wXX.XX was released on [Date].</para>
+        </introduction>
+
+        <section>
+            <title>Changes in this Release</title>
+            <content>
+                <para>Built with [Win 11 22631.5262 (23H2)] and [SDK 9.0.203].</para>
+
+                <list class="bullet">
+                    <listItem>
+                        <para>RJCP.Diagnostics.CpuId v0.8.2</para>
+                        <list class="bullet">
+                            <listItem>
+                                <para>Support CPUID intrinsics (DOTNET-1038)</para>
+                            </listItem>
+                            <listItem>
+                                <para>Introduce specifying the core (DOTNET-1061)</para>
+                            </listItem>
+                        </list>
+                    </listItem>
+                    <listItem>
+                        <para>RJCP.Core.Environment.Version v0.3.2</para>
+                        <list class="bullet">
+                            <listItem>
+                                <para><literal>WinVersion</literal>: Update for Win11 24H2 (DOTNET-1039)</para>
+                            </listItem>
+                            <listItem>
+                                <para><literal>WinVersion</literal>: Update for WinServer 2025 (DOTNET-1041)</para>
+                            </listItem>
+                            <listItem>
+                                <para><literal>WinVersion</literal>: Extend new Windows Product Info (DOTNET-1042)</para>
+                            </listItem>
+                            <listItem>
+                                <para><literal>WinVersion</literal>: Correctly detect x86 (DOTNET-1048)</para>
+                            </listItem>
+                            <listItem>
+                                <para><literal>WinVersion</literal>: Query using a factory (DOTNET-1044)</para>
+                            </listItem>
+                            <listItem>
+                                <para><literal>WinVersion</literal>: Add detection for Windows 2000, NT 4.0, NT 3.51 (DOTNET-1051)</para>
+                            </listItem>
+                            <listItem>
+                                <para><literal>WinVersion</literal>: Remove <literal>IsExtendedPropsSet</literal> (DOTNET-1051)</para>
+                            </listItem>
+                            <listItem>
+                                <para><literal>WinVersion</literal>: Read XML for MBCS for Win9x (DOTNET-1052)</para>
+                            </listItem>
+                            <listItem>
+                                <para><literal>WinVersion</literal>: Add further dumps (DOTNET-1050)</para>
+                            </listItem>
+                            <listItem>
+                                <para><literal>WinVersion</literal>: Rework <literal>ProductInfo</literal> (Home now correctly reported) (DOTNET-1053)</para>
+                            </listItem>
+                            <listItem>
+                                <para><literal>WinVersion</literal>: Server Essentials isn't only 2011 (DOTNET-1055)</para>
+                            </listItem>
+                            <listItem>
+                                <para><literal>WinVersion</literal>: Windows Server doesn't need "10" or "11" (DOTNET-1054)</para>
+                            </listItem>
+                            <listItem>
+                                <para><literal>WinVersion</literal>: Add Windows Server 23H2 (DOTNET-1057)</para>
+                            </listItem>
+                            <listItem>
+                                <para><literal>WinVersion</literal>: Rework Windows 9x (DOTNET-1059)</para>
+                            </listItem>
+                        </list>
+                    </listItem>
+                </list>
+            </content>
+        </section>
+
+        <relatedTopics>
+            <link xlink:href="10f19c0c-7a6d-40a8-a637-a6bcb1f08cda" />
+        </relatedTopics>
+    </developerConceptualDocument>
+</topic>

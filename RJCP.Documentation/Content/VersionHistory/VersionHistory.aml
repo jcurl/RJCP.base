@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="10f19c0c-7a6d-40a8-a637-a6bcb1f08cda" revisionNumber="1">
+    <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <introduction>
+            <para>The topics in this section describe the various changes made to the RJCP project over the
+life of the project.</para>
+        </introduction>
+
+        <section>
+            <title>Version History</title>
+            <content>
+                <para>Select a version below to see a description of its changes.</para>
+
+                <list class="bullet">
+                    <listItem>
+                        <para><link xlink:href="401b9f50-28c7-480e-a38f-e636e7fa7754" /></para>
+                    </listItem>
+                    <listItem>
+                        <para><link xlink:href="92757fc5-357d-4466-89d3-ae4ff3a32736" /></para>
+                    </listItem>
+                    <listItem>
+                        <para><link xlink:href="400ef256-c84a-42ff-a017-c1fde02d4a4d" /></para>
+                    </listItem>
+                    <listItem>
+                        <para><link xlink:href="e4d963f1-9376-4968-b6d0-c38e2f1169e9" /></para>
+                    </listItem>
+                </list>
+            </content>
+        </section>
+
+        <relatedTopics>
+            <link xlink:href="a1ce1a8d-c655-48c0-b8a4-fc20aa71b12c" />
+        </relatedTopics>
+
+    </developerConceptualDocument>
+</topic>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="92757fc5-357d-4466-89d3-ae4ff3a32736" revisionNumber="1">
+    <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <introduction>
+            <para>Version 2025w18.6 was released on 3rd May 2025.</para>
+        </introduction>
+
+        <section>
+            <title>Changes in this Release</title>
+            <content>
+                <para>Built with Win 11 22631.5262 (23H2) and SDK 9.0.203.</para>
+
+                <list class="bullet">
+                    <listItem>
+                        <para>RJCP.IO.Device v0.8.3</para>
+                        <list class="bullet">
+                            <listItem>
+                                <para>Don't refresh children more than once (DOTNET-1031)</para>
+                            </listItem>
+                            <listItem>
+                                <para>Reset internal cache on getting the device list (DOTNET-1032)</para>
+                            </listItem>
+                            <listItem>
+                                <para>Refresh now properly detects inserted devices (DOTNET-1033)</para>
+                            </listItem>
+                            <listItem>
+                                <para>Remove internal usage of <literal>SafeDevInst</literal> (DOTNET-1036)</para>
+                            </listItem>
+                        </list>
+                    </listItem>
+                    <listItem>
+                        <para>RJCP.SerialPortStream v3.0.3</para>
+                        <list class="bullet">
+                            <listItem>
+                                <para>PL2303 writes now wait for completion (DOTNET-1030)</para>
+                            </listItem>
+                        </list>
+                    </listItem>
+                </list>
+            </content>
+        </section>
+
+        <relatedTopics>
+            <link xlink:href="10f19c0c-7a6d-40a8-a637-a6bcb1f08cda" />
+        </relatedTopics>
+    </developerConceptualDocument>
+</topic>

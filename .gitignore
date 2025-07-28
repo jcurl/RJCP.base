@@ -4,7 +4,7 @@ bin/
 obj/
 legacy/
 TestResults/
-/Help/
+/RJCP.Documentation/Help/
 /distribute/
 *~
 *.user

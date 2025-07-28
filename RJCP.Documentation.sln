@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36301.6 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "RJCP.Documentation", "RJCP.Documentation\RJCP.Documentation.shfbproj", "{FB313280-FD4F-4EEF-B7ED-550D95A433F0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB313280-FD4F-4EEF-B7ED-550D95A433F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB313280-FD4F-4EEF-B7ED-550D95A433F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB313280-FD4F-4EEF-B7ED-550D95A433F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB313280-FD4F-4EEF-B7ED-550D95A433F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CDA8F46A-1211-44D2-867F-2D9C3C942D6F}
+	EndGlobalSection
+EndGlobal

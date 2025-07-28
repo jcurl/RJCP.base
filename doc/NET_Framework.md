@@ -18,10 +18,6 @@ feature available in .NET Core SDK build projects.
 
 ### 1.1. Building for .NET 4.0
 
-Visual Studio 2022 and later now omit the SDKs for .NET 4.0 to .NET 4.5.1. To
-get these targets, one must install Visual Studio 2019, or similar work loads
-that contain the target libraries.
-
 So long as there is an available platform to build for .NET 4.0 and later, this
 project will continue to do so. In the case that it is not possible to build all
 targets within a single invocation (especially when generating the NuGet

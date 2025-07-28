@@ -32,6 +32,9 @@ The target frameworks are the Desktop version of .NET (version 4.0 to 4.8.1) and
 Documentation is generally created using the Mark Down format. Look through the
 directories for files ending with the extension `.md`.
 
+API documentation and version history is also maintained using MAML in the
+`RJCP.Documentation` folder.
+
 ## 2. Retrieving the Sources
 
 This repository, `RJCP.base`, is the main repository that defines the directory
@@ -110,9 +113,9 @@ When performing release builds on Windows:
 To get .NET 4.0 SDK on Linux, install from
 [Mono](https://www.mono-project.com/download/stable/).
 
-You should install [.NET Core 3.1
-SDK](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu) for your
-Operating System, or later.
+You should install [.NET Core 6.0
+SDK](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-install)
+for your Operating System, or later.
 
 #### 3.3.1. Ubuntu 22.04 LTS
 
@@ -168,7 +171,7 @@ The options:
   - You must have built prior in release mode with `dotnet build -c Release`
   - To build the documentation
     - HTML Help Compiler 1.4 installation
-    - SHFB 2020.3.6.0 or later for .NET Framework (not .NET Core)
+    - SHFB 2025.3.22 or later for .NET Core.
     - Visual Studio Build Tools (msbuild)
 - `git rj build --release` - Build, test, package and create documentation in
   release mode.

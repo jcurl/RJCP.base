@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Import the common properties to support NuGet restore -->
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <!-- A target framework version is required by Visual Studio.  It can be any version with a targeting pack installed. -->
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <!-- The configuration and platform will be used to determine which assemblies to include from solution and
+				 project documentation sources -->
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>fb313280-fd4f-4eef-b7ed-550d95a433f0</ProjectGuid>
+    <SHFBSchemaVersion>2017.9.26.0</SHFBSchemaVersion>
+    <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual Studio adds them anyway -->
+    <AssemblyName>RJCP.Documentation</AssemblyName>
+    <RootNamespace>RJCP.Documentation</RootNamespace>
+    <Name>RJCP.Documentation</Name>
+    <!-- SHFB properties -->
+    <FrameworkVersion>.NET Core/.NET Standard/.NET 5.0+</FrameworkVersion>
+    <OutputPath>.\Help\</OutputPath>
+    <HtmlHelpName>RJCP Documentation</HtmlHelpName>
+    <Language>en-US</Language>
+    <TransformComponentArguments>
+      <Argument Key="logoFile" Value="Help.png" xmlns="" />
+      <Argument Key="logoHeight" Value="" xmlns="" />
+      <Argument Key="logoWidth" Value="" xmlns="" />
+      <Argument Key="logoAltText" Value="" xmlns="" />
+      <Argument Key="logoPlacement" Value="left" xmlns="" />
+      <Argument Key="logoAlignment" Value="left" xmlns="" />
+      <Argument Key="maxVersionParts" Value="" xmlns="" />
+    </TransformComponentArguments>
+    <DocumentationSources Condition=" '$(Configuration)' == 'Release' ">
+      <DocumentationSource sourceFile="..\framework\cpuid\CpuId\bin\Release\net8.0\RJCP.Diagnostics.CpuId.dll" />
+      <DocumentationSource sourceFile="..\framework\cpuid\CpuId\bin\Release\net8.0\RJCP.Diagnostics.CpuId.xml" />
+      <DocumentationSource sourceFile="..\framework\bufferio\BufferIO\bin\Release\net8.0\RJCP.IO.Buffer.dll" />
+      <DocumentationSource sourceFile="..\framework\bufferio\BufferIO\bin\Release\net8.0\RJCP.IO.Buffer.xml" />
+      <DocumentationSource sourceFile="..\framework\commandline\code\bin\Release\net8.0\RJCP.Core.CommandLine.dll" />
+      <DocumentationSource sourceFile="..\framework\commandline\code\bin\Release\net8.0\RJCP.Core.CommandLine.xml" />
+      <DocumentationSource sourceFile="..\framework\crashreporter\CrashReporter\bin\Release\net8.0\RJCP.Diagnostics.CrashReporter.dll" />
+      <DocumentationSource sourceFile="..\framework\crashreporter\CrashReporter\bin\Release\net8.0\RJCP.Diagnostics.CrashReporter.xml" />
+      <DocumentationSource sourceFile="..\framework\datastructures\Datastructures\bin\Release\net8.0\RJCP.Core.Datastructures.dll" />
+      <DocumentationSource sourceFile="..\framework\datastructures\Datastructures\bin\Release\net8.0\RJCP.Core.Datastructures.xml" />
+      <DocumentationSource sourceFile="..\framework\devicemgr\DeviceMgr\bin\Release\net8.0\RJCP.IO.Device.dll" />
+      <DocumentationSource sourceFile="..\framework\devicemgr\DeviceMgr\bin\Release\net8.0\RJCP.IO.Device.xml" />
+      <DocumentationSource sourceFile="..\framework\environment\Environment\bin\Release\net8.0\RJCP.Core.Environment.dll" />
+      <DocumentationSource sourceFile="..\framework\environment\Environment\bin\Release\net8.0\RJCP.Core.Environment.xml" />
+      <DocumentationSource sourceFile="..\framework\environment\EnvironmentVersion\bin\Release\net8.0\RJCP.Core.Environment.Version.dll" />
+      <DocumentationSource sourceFile="..\framework\environment\EnvironmentVersion\bin\Release\net8.0\RJCP.Core.Environment.Version.xml" />
+      <DocumentationSource sourceFile="..\framework\environment\SysCompat\bin\Release\net8.0\RJCP.Core.SysCompat.dll" />
+      <DocumentationSource sourceFile="..\framework\environment\SysCompat\bin\Release\net8.0\RJCP.Core.SysCompat.xml" />
+      <DocumentationSource sourceFile="..\framework\log\TraceReader.Core\TraceReader\bin\Release\net8.0\RJCP.Diagnostics.Log.dll" />
+      <DocumentationSource sourceFile="..\framework\log\TraceReader.Core\TraceReader\bin\Release\net8.0\RJCP.Diagnostics.Log.xml" />
+      <DocumentationSource sourceFile="..\framework\log\TraceReader.Dlt\DltTraceReader\bin\Release\net8.0\RJCP.Diagnostics.Log.Dlt.dll" />
+      <DocumentationSource sourceFile="..\framework\log\TraceReader.Dlt\DltTraceReader\bin\Release\net8.0\RJCP.Diagnostics.Log.Dlt.xml" />
+      <DocumentationSource sourceFile="..\framework\nunitextensions\CodeQuality\bin\Release\net8.0\RJCP.CodeQuality.dll" />
+      <DocumentationSource sourceFile="..\framework\nunitextensions\CodeQuality\bin\Release\net8.0\RJCP.CodeQuality.xml" />
+      <DocumentationSource sourceFile="..\framework\path\code\bin\Release\net8.0\RJCP.IO.Path.dll" />
+      <DocumentationSource sourceFile="..\framework\path\code\bin\Release\net8.0\RJCP.IO.Path.xml" />
+      <DocumentationSource sourceFile="..\framework\serialportstream\code\bin\Release\net8.0\RJCP.SerialPortStream.dll" />
+      <DocumentationSource sourceFile="..\framework\serialportstream\code\bin\Release\net8.0\RJCP.SerialPortStream.xml" />
+      <DocumentationSource sourceFile="..\framework\textutils\code\bin\Release\net8.0\RJCP.Core.Text.dll" />
+      <DocumentationSource sourceFile="..\framework\textutils\code\bin\Release\net8.0\RJCP.Core.Text.xml" />
+      <DocumentationSource sourceFile="..\framework\thread\code\bin\Release\net8.0\RJCP.Threading.dll" />
+      <DocumentationSource sourceFile="..\framework\thread\code\bin\Release\net8.0\RJCP.Threading.xml" />
+      <DocumentationSource sourceFile="..\framework\trace\Trace\bin\Release\net8.0\RJCP.Diagnostics.Trace.dll" />
+      <DocumentationSource sourceFile="..\framework\trace\Trace\bin\Release\net8.0\RJCP.Diagnostics.Trace.xml" />
+      <DocumentationSource sourceFile="..\framework\volumedevinfo\VolumeDeviceInfo\bin\Release\net8.0\RJCP.IO.VolumeDeviceInfo.dll" />
+      <DocumentationSource sourceFile="..\framework\volumedevinfo\VolumeDeviceInfo\bin\Release\net8.0\RJCP.IO.VolumeDeviceInfo.xml" />
+      <DocumentationSource sourceFile="..\framework\xml\Xml\bin\Release\net8.0\RJCP.Core.Xml.dll" />
+      <DocumentationSource sourceFile="..\framework\xml\Xml\bin\Release\net8.0\RJCP.Core.Xml.xml" />
+    </DocumentationSources>
+    <DocumentationSources Condition=" '$(Configuration)' == 'Debug' ">
+      <DocumentationSource sourceFile="..\framework\cpuid\CpuId\bin\Debug\net8.0\RJCP.Diagnostics.CpuId.dll" />
+      <DocumentationSource sourceFile="..\framework\cpuid\CpuId\bin\Debug\net8.0\RJCP.Diagnostics.CpuId.xml" />
+      <DocumentationSource sourceFile="..\framework\bufferio\BufferIO\bin\Debug\net8.0\RJCP.IO.Buffer.dll" />
+      <DocumentationSource sourceFile="..\framework\bufferio\BufferIO\bin\Debug\net8.0\RJCP.IO.Buffer.xml" />
+      <DocumentationSource sourceFile="..\framework\commandline\code\bin\Debug\net8.0\RJCP.Core.CommandLine.dll" />
+      <DocumentationSource sourceFile="..\framework\commandline\code\bin\Debug\net8.0\RJCP.Core.CommandLine.xml" />
+      <DocumentationSource sourceFile="..\framework\crashreporter\CrashReporter\bin\Debug\net8.0\RJCP.Diagnostics.CrashReporter.dll" />
+      <DocumentationSource sourceFile="..\framework\crashreporter\CrashReporter\bin\Debug\net8.0\RJCP.Diagnostics.CrashReporter.xml" />
+      <DocumentationSource sourceFile="..\framework\datastructures\Datastructures\bin\Debug\net8.0\RJCP.Core.Datastructures.dll" />
+      <DocumentationSource sourceFile="..\framework\datastructures\Datastructures\bin\Debug\net8.0\RJCP.Core.Datastructures.xml" />
+      <DocumentationSource sourceFile="..\framework\devicemgr\DeviceMgr\bin\Debug\net8.0\RJCP.IO.Device.dll" />
+      <DocumentationSource sourceFile="..\framework\devicemgr\DeviceMgr\bin\Debug\net8.0\RJCP.IO.Device.xml" />
+      <DocumentationSource sourceFile="..\framework\environment\Environment\bin\Debug\net8.0\RJCP.Core.Environment.dll" />
+      <DocumentationSource sourceFile="..\framework\environment\Environment\bin\Debug\net8.0\RJCP.Core.Environment.xml" />
+      <DocumentationSource sourceFile="..\framework\environment\EnvironmentVersion\bin\Debug\net8.0\RJCP.Core.Environment.Version.dll" />
+      <DocumentationSource sourceFile="..\framework\environment\EnvironmentVersion\bin\Debug\net8.0\RJCP.Core.Environment.Version.xml" />
+      <DocumentationSource sourceFile="..\framework\environment\SysCompat\bin\Debug\net8.0\RJCP.Core.SysCompat.dll" />
+      <DocumentationSource sourceFile="..\framework\environment\SysCompat\bin\Debug\net8.0\RJCP.Core.SysCompat.xml" />
+      <DocumentationSource sourceFile="..\framework\log\TraceReader.Core\TraceReader\bin\Debug\net8.0\RJCP.Diagnostics.Log.dll" />
+      <DocumentationSource sourceFile="..\framework\log\TraceReader.Core\TraceReader\bin\Debug\net8.0\RJCP.Diagnostics.Log.xml" />
+      <DocumentationSource sourceFile="..\framework\log\TraceReader.Dlt\DltTraceReader\bin\Debug\net8.0\RJCP.Diagnostics.Log.Dlt.dll" />
+      <DocumentationSource sourceFile="..\framework\log\TraceReader.Dlt\DltTraceReader\bin\Debug\net8.0\RJCP.Diagnostics.Log.Dlt.xml" />
+      <DocumentationSource sourceFile="..\framework\nunitextensions\CodeQuality\bin\Debug\net8.0\RJCP.CodeQuality.dll" />
+      <DocumentationSource sourceFile="..\framework\nunitextensions\CodeQuality\bin\Debug\net8.0\RJCP.CodeQuality.xml" />
+      <DocumentationSource sourceFile="..\framework\path\code\bin\Debug\net8.0\RJCP.IO.Path.dll" />
+      <DocumentationSource sourceFile="..\framework\path\code\bin\Debug\net8.0\RJCP.IO.Path.xml" />
+      <DocumentationSource sourceFile="..\framework\serialportstream\code\bin\Debug\net8.0\RJCP.SerialPortStream.dll" />
+      <DocumentationSource sourceFile="..\framework\serialportstream\code\bin\Debug\net8.0\RJCP.SerialPortStream.xml" />
+      <DocumentationSource sourceFile="..\framework\textutils\code\bin\Debug\net8.0\RJCP.Core.Text.dll" />
+      <DocumentationSource sourceFile="..\framework\textutils\code\bin\Debug\net8.0\RJCP.Core.Text.xml" />
+      <DocumentationSource sourceFile="..\framework\thread\code\bin\Debug\net8.0\RJCP.Threading.dll" />
+      <DocumentationSource sourceFile="..\framework\thread\code\bin\Debug\net8.0\RJCP.Threading.xml" />
+      <DocumentationSource sourceFile="..\framework\trace\Trace\bin\Debug\net8.0\RJCP.Diagnostics.Trace.dll" />
+      <DocumentationSource sourceFile="..\framework\trace\Trace\bin\Debug\net8.0\RJCP.Diagnostics.Trace.xml" />
+      <DocumentationSource sourceFile="..\framework\volumedevinfo\VolumeDeviceInfo\bin\Debug\net8.0\RJCP.IO.VolumeDeviceInfo.dll" />
+      <DocumentationSource sourceFile="..\framework\volumedevinfo\VolumeDeviceInfo\bin\Debug\net8.0\RJCP.IO.VolumeDeviceInfo.xml" />
+      <DocumentationSource sourceFile="..\framework\xml\Xml\bin\Debug\net8.0\RJCP.Core.Xml.dll" />
+      <DocumentationSource sourceFile="..\framework\xml\Xml\bin\Debug\net8.0\RJCP.Core.Xml.xml" />
+    </DocumentationSources>
+    <HelpFileFormat>MSHelpViewer, Website</HelpFileFormat>
+    <SyntaxFilters>C#, Visual Basic, Managed C++</SyntaxFilters>
+    <PresentationStyle>VS2013</PresentationStyle>
+    <CleanIntermediates>True</CleanIntermediates>
+    <KeepLogFile>True</KeepLogFile>
+    <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
+    <IndentHtml>False</IndentHtml>
+    <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
+    <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
+    <HelpTitle>RJCP Project Documentation</HelpTitle>
+    <HelpFileVersion>2025w18.6</HelpFileVersion>
+    <NamingMethod>Guid</NamingMethod>
+    <ContentPlacement>AboveNamespaces</ContentPlacement>
+    <RootNamespaceContainer>False</RootNamespaceContainer>
+    <NamespaceGrouping>False</NamespaceGrouping>
+    <MaximumGroupParts>2</MaximumGroupParts>
+    <Preliminary>False</Preliminary>
+    <CopyrightHref>%28C%29 Jason Curl, 2012-2025</CopyrightHref>
+    <SdkLinkTarget>Blank</SdkLinkTarget>
+    <CatalogProductId>VS</CatalogProductId>
+    <CatalogVersion>100</CatalogVersion>
+    <VendorName>RJCP</VendorName>
+    <ProductTitle>RJCP</ProductTitle>
+    <TocOrder>-1</TocOrder>
+    <TocParentId>-1</TocParentId>
+    <TocParentVersion>100</TocParentVersion>
+    <TopicVersion>100</TopicVersion>
+    <MSHelpViewerSdkLinkType>Msdn</MSHelpViewerSdkLinkType>
+    <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, TypeParameter, AutoDocumentDispose</MissingTags>
+    <ComponentConfigurations>
+      <ComponentConfig id="Code Block Component" enabled="True" xmlns="">
+        <component id="Code Block Component">
+          <!-- Base path for relative filenames in source attributes (optional) -->
+          <basePath value="{@HtmlEncProjectFolder}" />
+          <!-- Base output paths for the files (required).  These should match the parent folder of the output path
+	 of the HTML files (see each of the SaveComponent instances in the configuration files). -->
+          <outputPaths>
+	{@HelpFormatOutputPaths}
+</outputPaths>
+          <!-- Allow missing source files (Optional).  If omitted, it will generate errors if referenced source files
+	 are missing. -->
+          <allowMissingSource value="false" />
+          <!-- Remove region markers from imported code blocks.  If omitted, region markers in imported code blocks
+	 are left alone. -->
+          <removeRegionMarkers value="false" />
+          <!-- Code colorizer options (required).
+	 Attributes:
+		Language syntax configuration file (required)
+		XSLT style sheet file (required)
+		CSS style sheet file (required)
+		Script file (required)
+		Disabled (optional, leading whitespace normalization only)
+		Default language (optional)
+		Enable line numbering (optional)
+		Enable outlining (optional)
+		Keep XML comment "see" tags within the code (optional)
+		Tab size override (optional, 0 = Use syntax file setting)
+		Use language name as default title (optional) -->
+          <colorizer syntaxFile="{@CoreComponentsFolder}Colorizer\highlight.xml" styleFile="{@CoreComponentsFolder}Colorizer\highlight.xsl" stylesheet="{@CoreComponentsFolder}Colorizer\highlight.css" scriptFile="{@CoreComponentsFolder}Colorizer\highlight.js" disabled="{@DisableCodeBlockComponent}" language="cs" numberLines="false" outlining="false" keepSeeTags="false" tabSize="0" defaultTitle="true" />
+        </component>
+      </ComponentConfig>
+    </ComponentConfigurations>
+    <PlugInConfigurations>
+    </PlugInConfigurations>
+    <HtmlSdkLinkType>Msdn</HtmlSdkLinkType>
+    <BinaryTOC>True</BinaryTOC>
+    <IncludeFavorites>False</IncludeFavorites>
+    <WebsiteSdkLinkType>Msdn</WebsiteSdkLinkType>
+    <AppendMarkdownFileExtensionsToUrls>False</AppendMarkdownFileExtensionsToUrls>
+  </PropertyGroup>
+  <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
+			 the build.  The others are optional common platform types that may appear. -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Win32' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Win32' ">
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Content" />
+    <Folder Include="Content\VersionHistory" />
+    <Folder Include="icons" />
+    <Folder Include="media" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\RJCP.Reference.aml" />
+    <None Include="Content\VersionHistory\2024w10.6.aml" />
+    <None Include="Content\VersionHistory\2025w16.7.aml" />
+    <None Include="Content\VersionHistory\2025w18.6.aml" />
+    <None Include="Content\VersionHistory\2025wXX.X Current.aml" />
+    <None Include="Content\VersionHistory\VersionHistory.aml" />
+    <None Include="Content\Welcome.aml" />
+    <None Include="Content\RJCP.Root.aml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ContentLayout Include="ContentLayout.content" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons\Help.png" />
+  </ItemGroup>
+  <!-- Import the common build targets during NuGet restore because before the packages are being installed, $(SHFBROOT) is not set yet -->
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="'$(MSBuildRestoreSessionId)' != ''" />
+  <!-- Import the SHFB build targets during build -->
+  <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" Condition="'$(MSBuildRestoreSessionId)' == ''" />
+  <!-- The pre-build and post-build event properties must appear *after* the targets file import in order to be
+			 evaluated correctly. -->
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+</Project>
