@@ -1862,6 +1862,26 @@ class BuildCommand:
             # If we clean, make sure we build before we test
             self.arguments.build = True
 
+    def _execute(self, name: str, platform: str, config: str, expansion, commands, match=None):
+        print("----------------------------------------------------------------------")
+        print(f"-- {name}:", platform, config)
+        if isinstance(commands, (str)):
+            print("-- Command:", expansion.expand(commands))
+        else:
+            for cmd in commands:
+                print("-- Command:", expansion.expand(cmd))
+        print("----------------------------------------------------------------------")
+        print(flush=True)
+
+        if isinstance(commands, (str)):
+            ProcessExe.run(expansion.expand(commands), match=match)
+            print(flush=True)
+        else:
+            for cmd in commands:
+                print("-- Command:", expansion.expand(cmd))
+                ProcessExe.run(expansion.expand(cmd), match=match)
+                print(flush=True)
+
     def execute(self):
         if (not os.path.isfile(".gitrjbuild")):
             raise CommandError("Execute from the top-most directory, or ensure the '.gitrjbuild' file exists.")
@@ -1907,50 +1927,20 @@ class BuildCommand:
 
         try:
             if self.arguments.clean:
-                print("----------------------------------------------------------------------")
-                print("-- Cleaning:", cplatform, self.arguments.config)
-                print("-- Command:", expansion.expand(cmdconfig["clean"]))
-                print("----------------------------------------------------------------------")
-                print(flush=True)
-                ProcessExe.run(expansion.expand(cmdconfig["clean"]))
-                print(flush=True)
+                self._execute("Cleaning", cplatform, self.arguments.config, expansion, cmdconfig["clean"])
             if self.arguments.build:
                 m = { r"warning (\S+)?: ": bcolors.YELLOW,
                       r"error (\S+)?: ": bcolors.RED }
-                print("----------------------------------------------------------------------")
-                print("-- Building:", cplatform, self.arguments.config)
-                print("-- Command:", expansion.expand(cmdconfig["build"]))
-                print("----------------------------------------------------------------------")
-                print(flush=True)
-                ProcessExe.run(expansion.expand(cmdconfig["build"]), match=m)
-                print(flush=True)
+                self._execute("Building", cplatform, self.arguments.config, expansion, cmdconfig["build"], match=m)
             if self.arguments.test:
                 m = { r"Passed!\s+-\s+": bcolors.GREEN,
                       r"Failed!\s+-\s+": bcolors.YELLOW,
                       r"Results File:\s+": bcolors.BLUE }
-                print("----------------------------------------------------------------------")
-                print("-- Testing", cplatform, self.arguments.config)
-                print("-- Command:", expansion.expand(cmdconfig["test"]))
-                print("----------------------------------------------------------------------")
-                print(flush=True)
-                ProcessExe.run(expansion.expand(cmdconfig["test"]), match=m)
-                print(flush=True)
+                self._execute("Testing", cplatform, self.arguments.config, expansion, cmdconfig["test"], match=m)
             if self.arguments.pack:
-                print("----------------------------------------------------------------------")
-                print("-- Packaging", cplatform, self.arguments.config)
-                print("-- Command:", expansion.expand(cmdconfig["pack"]))
-                print("----------------------------------------------------------------------")
-                print(flush=True)
-                ProcessExe.run(expansion.expand(cmdconfig["pack"]))
-                print(flush=True)
+                self._execute("Packaging", cplatform, self.arguments.config, expansion, cmdconfig["pack"])
             if self.arguments.doc:
-                print("----------------------------------------------------------------------")
-                print("-- Generating Documentation", cplatform, self.arguments.config)
-                print("-- Command:", expansion.expand(cmdconfig["doc"]))
-                print("----------------------------------------------------------------------")
-                print(flush=True)
-                ProcessExe.run(expansion.expand(cmdconfig["doc"]))
-                print(flush=True)
+                self._execute("Generating Documentation", cplatform, self.arguments.config, expansion, cmdconfig["doc"])
         except subprocess.CalledProcessError as ex:
             print("")
             print("----------------------------------------------------------------------")
