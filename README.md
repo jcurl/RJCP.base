@@ -5,6 +5,7 @@ The RJCP Framework is a collection of libraries for use with other projects.
 - [1. Getting Started](#1-getting-started)
   - [1.1. The Target Framework](#11-the-target-framework)
   - [1.2. Documentation](#12-documentation)
+    - [1.2.1. API Documentation (Sandcastle)](#121-api-documentation-sandcastle)
 - [2. Retrieving the Sources](#2-retrieving-the-sources)
 - [3. Build Environment](#3-build-environment)
   - [3.1. Frameworks](#31-frameworks)
@@ -32,8 +33,23 @@ The target frameworks are the Desktop version of .NET (version 4.0 to 4.8.1) and
 Documentation is generally created using the Mark Down format. Look through the
 directories for files ending with the extension `.md`.
 
+#### 1.2.1. API Documentation (Sandcastle)
+
 API documentation and version history is also maintained using MAML in the
 `RJCP.Documentation` folder.
+
+A SandCastle 2025.3.22 plugin is written that fixes the table of contents for
+MSHA/MSHC outputs. When building documentation, the plugin must first be built.
+
+```sh
+$ dotnet build -c Debug RJCP.Sandcastle.Plugin.sln
+Restore complete (1.1s)
+  RJCP.Sandcastle.Plugin.HelpId succeeded (2.3s) → RJCP.Sandcastle.Plugin\HelpId\bin\Debug\net48\RJCP.Sandcastle.Plugin.HelpId.dll
+
+$ dotnet build -c Release RJCP.Sandcastle.Plugin.sln
+Restore complete (1.1s)
+  RJCP.Sandcastle.Plugin.HelpId succeeded (0.7s) → RJCP.Sandcastle.Plugin\HelpId\bin\Release\netstandard2.0\RJCP.Sandcastle.Plugin.HelpId.dll
+```
 
 ## 2. Retrieving the Sources
 

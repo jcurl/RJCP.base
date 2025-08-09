@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "RJCP.Sandcastle.Plugin.HelpId": {
+      "commandName": "Executable",
+      "executablePath": "$(SHFBROOT)\\Tools\\SandcastleBuilderGUI.exe"
+    }
+  }
+}

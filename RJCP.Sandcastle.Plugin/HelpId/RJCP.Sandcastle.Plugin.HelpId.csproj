@@ -1,0 +1,78 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <!-- See the help topic https://ewsoftware.github.io/SHFB/html/d7b0528c-c75a-477b-9445-db6d2c55dbcb.htm
+       for information on why conditional target frameworks are used. -->
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <!-- Use the full framework for debugging -->
+    <TargetFramework>net48</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <!-- Use .NET Standard for release builds -->
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateAssemblyVersionAttribute>False</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute>False</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>False</GenerateAssemblyInformationalVersionAttribute>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <RootNamespace>RJCP.Sandcastle.Plugin</RootNamespace>
+    <AssemblyName>RJCP.Sandcastle.Plugin</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Product>RJCP.Sandcastle.Plugin</Product>
+    <Title>HelpId Plug-In</Title>
+    <Description>A Sandcastle Help File Builder plug-in</Description>
+    <Version>1.0.0.0</Version>
+    <Authors>Jason Curl</Authors>
+    <Company></Company>
+    <PackageIconUrl></PackageIconUrl>
+    <PackageIcon></PackageIcon>
+    <RepositoryUrl></RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>RJCP.Sandcastle.Plugin SHFB sandcastle plug-in</PackageTags>
+    <PackageProjectUrl></PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <IsTool>true</IsTool>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <ContentTargetFolders>tools\</ContentTargetFolders>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <LangVersion>10</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="build\RJCP.Sandcastle.Plugin.props">
+      <Pack>true</Pack>
+      <PackagePath>build\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EWSoftware.Sandcastle.Core" Version="2025.3.22" />
+    <PackageReference Include="EWSoftware.SandcastleBuilder.Utils" Version="2025.3.22" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.11" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="HelpIdPlugIn.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Topics\ParentTopic.cs" />
+    <Compile Include="Topics\HelpTopicFile.cs" />
+    <Compile Include="Topics\TableOfContents.cs" />
+    <Compile Include="Topics\RenameAction.cs" />
+  </ItemGroup>
+
+  <!-- TODO: If you have a project with configuration forms, you can include it in this package by
+             manually adding the assemblies needed for them here.  This keeps the platform-specific UI elements
+             isolated and allows the component to work with MSBuild and dotnet build.
+  <ItemGroup>
+    <None Include="..\RJCP.Plugin.HelpIdUI\bin\$(Configuration)\net472\RJCP.Plugin.HelpIdUI.dll">
+      <Pack>true</Pack>
+      <PackagePath>tools\</PackagePath>
+      <Visible>false</Visible>
+    </None>
+  </ItemGroup>
+  -->
+</Project>
