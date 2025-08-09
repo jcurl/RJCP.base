@@ -162,7 +162,7 @@ class GitExe:
 
         if (process.returncode != 0):
             if (GITDEBUGLEVEL > 0):
-                prcwd = os.path.relpath(cwd) if cwd != None else "."
+                prcwd = os.path.relpath(cwd) if cwd is not None else "."
                 if (check):
                     print("GITERR: {} ({})".format(
                         " ".join(self.args), prcwd))
@@ -190,7 +190,7 @@ class GitExe:
                 )
         else:
             if (GITDEBUGLEVEL > 0):
-                prcwd = os.path.relpath(cwd) if cwd != None else "."
+                prcwd = os.path.relpath(cwd) if cwd is not None else "."
                 print("GITCMD: ", " ".join(self.args), end="")
                 print(" ({})".format(prcwd))
                 if (GITDEBUGLEVEL > 1):
@@ -212,7 +212,7 @@ class GitExe:
     @ classmethod
     def version(cls):
         """Get the current GIT version"""
-        if (cls._version == None):
+        if (cls._version is None):
             gitexe = GitExe.run(["version"])
             cls._version = gitexe.stdout[0]
         return cls._version
@@ -223,7 +223,7 @@ class GitModule:
 
     def __init__(self, relpath, cwd=None):
         self._relpath = relpath
-        if (cwd == None):
+        if (cwd is None):
             cwd = os.getcwd()
         self._path = os.path.realpath(os.path.join(cwd, relpath))
 
@@ -278,7 +278,7 @@ class GitModule:
 
     def top_level(self):
         """Get the top level folder path for this repository"""
-        if (self._toplevel == None):
+        if (self._toplevel is None):
             try:
                 git_top = GitExe.run(
                     ["rev-parse", "--show-toplevel"],
@@ -292,7 +292,7 @@ class GitModule:
 
     def get_git_user_name(self):
         """Get the configured user name for this repository"""
-        if (self._username == None):
+        if (self._username is None):
             try:
                 git_config = GitExe.run(
                     ["config", "user.name"],
@@ -309,7 +309,7 @@ class GitModule:
 
     def get_git_user_email(self):
         """Get the configured user email for this repository"""
-        if (self._useremail == None):
+        if (self._useremail is None):
             try:
                 git_config = GitExe.run(
                     ["config", "user.email"],
@@ -359,7 +359,7 @@ class GitModule:
                     cwd=self.top_level()
                 )
         except subprocess.CalledProcessError as ex:
-            if (exception != None):
+            if (exception is not None):
                 exception = ex
 
         try:
@@ -374,7 +374,7 @@ class GitModule:
                     cwd=self.top_level()
                 )
         except subprocess.CalledProcessError as ex:
-            if (exception != None):
+            if (exception is not None):
                 exception = ex
 
         try:
@@ -383,7 +383,7 @@ class GitModule:
                 cwd=self.top_level()
             )
         except subprocess.CalledProcessError as ex:
-            if (exception != None):
+            if (exception is not None):
                 exception = ex
 
         try:
@@ -392,10 +392,10 @@ class GitModule:
                 cwd=self.top_level()
             )
         except subprocess.CalledProcessError as ex:
-            if (exception != None):
+            if (exception is not None):
                 exception = ex
 
-        if (exception != None):
+        if (exception is not None):
             raise GitError(exception, errors=exception)
 
     def get_current_branch(self):
@@ -419,15 +419,15 @@ class GitModule:
             return None
 
     def checkout_branch(self, branch=None, force=False):
-        if (branch == None):
-            if (self.default_branch == None):
+        if (branch is None):
+            if (self.default_branch is None):
                 return
             branch = self.default_branch
 
         try:
             if (not force):
                 current_branch = self.get_current_branch()
-                if (current_branch == None or branch != current_branch):
+                if (current_branch is None or branch != current_branch):
                     GitExe.run(
                         ["checkout", branch],
                         cwd=self.top_level()
@@ -445,7 +445,7 @@ class GitModule:
 
         If no reference is given, or it doesn't exist, then None is returned.
         """
-        if (gitref == None):
+        if (gitref is None):
             return None
         try:
             git = GitExe.run(
@@ -466,7 +466,7 @@ class GitModule:
         """
 
         try:
-            if (gitref == None):
+            if (gitref is None):
                 git = GitExe.run(["show-ref"], cwd=self.top_level())
             else:
                 git = GitExe.run(["show-ref", gitref], cwd=self.top_level())
@@ -474,7 +474,7 @@ class GitModule:
             refs = []
             for entry in git.stdout:
                 m = self._RE_SHOWREF.match(entry)
-                if (m != None):
+                if (m is not None):
                     refhash = m.group(1)
                     refname = m.group(2)
                     refs.append((refhash, refname))
@@ -484,7 +484,7 @@ class GitModule:
 
     def get_branch_default_remote(self, branch):
         """Get the name of the default remote for the given branch"""
-        if (branch == None):
+        if (branch is None):
             return None
 
         try:
@@ -538,7 +538,7 @@ class GitModule:
                 remote = None
                 branch = None
 
-            if (branch != None):
+            if (branch is not None):
                 if (not remote in remotes):
                     remotes[remote] = {branch}
                 else:
@@ -562,7 +562,7 @@ class GitModule:
         branches = {}
         for line in git_config.stdout:
             m = self._RE_BRANCH_REMOTE_KEY.match(line)
-            if (m != None):
+            if (m is not None):
                 branch = m.group(1)
                 remote = m.group(2)
                 branches[branch] = remote
@@ -578,7 +578,7 @@ class GitModule:
         return False
 
     def get_merge_base(self, current, base):
-        if (current == None or base == None):
+        if (current is None or base is None):
             return None
 
         try:
@@ -591,7 +591,7 @@ class GitModule:
             return None
 
     def get_count_commits(self, current, base):
-        if (current == None or base == None):
+        if (current is None or base is None):
             return None
 
         try:
@@ -651,11 +651,11 @@ class GitModule:
             raise GitError(ex, errors=ex)
 
     def delete_branch(self, branch, remote=None):
-        if (branch == None):
+        if (branch is None):
             return
 
         try:
-            if (remote == None):
+            if (remote is None):
                 GitExe.run(
                     ["branch", "-D", branch],
                     cwd=self.top_level()
@@ -690,7 +690,7 @@ class GitModules:
         """Get the top level directory for the super project"""
 
         top_super = None
-        if (self._toplevel == None):
+        if (self._toplevel is None):
             try:
                 git_super = GitExe.run(
                     ["rev-parse", "--show-superproject-working-tree"],
@@ -703,7 +703,7 @@ class GitModules:
                 # repo.
                 pass
 
-            if (top_super == None):
+            if (top_super is None):
                 try:
                     git_top = GitExe.run(
                         ["rev-parse", "--show-toplevel"],
@@ -714,14 +714,14 @@ class GitModules:
                     self._toplevel = None
             else:
                 self._toplevel = \
-                    os.path.realpath(top_super) if top_super != None else None
+                    os.path.realpath(top_super) if top_super is not None else None
 
         return self._toplevel
 
     def at_base(self):
         """Check if we're at the top level git repository, and not in some submodule"""
         git_toplevel = self.top_level()
-        if (git_toplevel == None):
+        if (git_toplevel is None):
             return False
 
         git_cwd = os.getcwd()
@@ -736,7 +736,7 @@ class GitModules:
         if (not os.path.isfile(configfile)):
             return []
 
-        if (self._modules == None):
+        if (self._modules is None):
             git_modules = GitExe.run(
                 ["config", "--file", ".gitmodules", "--list"],
                 cwd=self.top_level()
@@ -744,7 +744,7 @@ class GitModules:
             module_configs = {}
             for line in git_modules.stdout:
                 m = self._RE_SUBMODULE_KEY.match(line)
-                if (m != None):
+                if (m is not None):
                     mk = m.group(1)
                     if (mk in module_configs):
                         module_config = module_configs[mk]
@@ -863,11 +863,11 @@ class Expansion:
             return False
 
         def _envLookup(symbol):
-            if self.expansion != None and "env" in self.expansion:
+            if self.expansion is not None and "env" in self.expansion:
                 if symbol in self.expansion["env"]:
                     return self.expansion["env"][symbol]
 
-            if self.defexpansion != None and "env" in self.defexpansion:
+            if self.defexpansion is not None and "env" in self.defexpansion:
                 if symbol in self.defexpansion["env"]:
                     return self.defexpansion["env"][symbol]
 
@@ -875,15 +875,15 @@ class Expansion:
 
         def _toolLookup(symbol):
             block = None
-            if self.expansion != None and "tools" in self.expansion:
+            if self.expansion is not None and "tools" in self.expansion:
                 if symbol in self.expansion["tools"]:
                     block = self.expansion["tools"][symbol]
 
-            if self.defexpansion != None and "tools" in self.defexpansion:
+            if self.defexpansion is not None and "tools" in self.defexpansion:
                 if symbol in self.defexpansion["tools"]:
                     block = self.defexpansion["tools"][symbol]
 
-            if block == None:
+            if block is None:
                 raise CommandError(f"No tools defined for '{symbol}'")
 
             if not "exe" in block:
@@ -904,7 +904,7 @@ class Expansion:
             for path in archblock["path"]:
                 localfound = dict()
                 exppath = _parse(localfound, path)
-                if exppath != None:
+                if exppath is not None:
                     testpath = f"{exppath}{exename}"
                     if os.path.isfile(testpath):
                         return f"\"{testpath}\""
@@ -917,7 +917,7 @@ class Expansion:
             charpos = 0
 
             for c in expstring:
-                if symbolstart == None:
+                if symbolstart is None:
                     if c == '$':
                         symbolstart = charpos
                     else:
@@ -945,7 +945,7 @@ class Expansion:
                             symbolstart = None
 
                             var = os.getenv(variable)
-                            if (var != None):
+                            if (var is not None):
                                 # We don't expand environment strings further
                                 resultstring = resultstring + var
                             else:
@@ -954,12 +954,12 @@ class Expansion:
 
                                 # Simple substitution
                                 newexpstring = _envLookup(variable)
-                                if (newexpstring != None):
+                                if (newexpstring is not None):
                                     resultstring = resultstring + _parse(symbolsfound, newexpstring)
                                 else:
                                     # Or tool lookup
                                     newexpstring = _toolLookup(variable)
-                                    if newexpstring != None:
+                                    if newexpstring is not None:
                                         resultstring = resultstring + newexpstring
 
                     elif not _validchar(charpos - symbolstart + 2, c):
@@ -1153,14 +1153,14 @@ class PullCommand:
         execute_lock = threading.Lock()
 
         def _execute(module, name=None, recurse=True, force=False):
-            if (name == None):
+            if (name is None):
                 name = module.path()
             try:
                 remote = module.get_tracking_branch_from_head()
-                if (remote == None):
+                if (remote is None):
                     raise GitError("Not on a tracking branch, can't pull")
                 branch = module.get_current_branch()
-                if (branch == None):
+                if (branch is None):
                     raise GitError("No branch to pull / reset to")
 
                 if (not force):
@@ -1210,7 +1210,7 @@ class FetchCommand:
         execute_lock = threading.Lock()
 
         def _execute(module, name=None, force=False, recurse=True):
-            if (name == None):
+            if (name is None):
                 name = module.path()
             try:
                 module.fetch(force=force, recurse=recurse)
@@ -1253,7 +1253,7 @@ class CleanCommand:
         execute_lock = threading.Lock()
 
         def _execute(module, name=None):
-            if (name == None):
+            if (name is None):
                 name = module.path()
             try:
                 module.clean()
@@ -1298,19 +1298,19 @@ class StatusCommand:
         def _get_current_branch(module):
             current_branch = module.get_current_branch()
             current_hash = module.get_current_hash()
-            if (current_branch == None and current_hash == None):
+            if (current_branch is None and current_hash is None):
                 return None
 
-            if (current_hash == None):
+            if (current_hash is None):
                 current_hash = "0000000000000000000000000000000000000000"
             return (current_hash, current_branch)
 
         def _get_destination_branch(module):
-            if (module.default_branch == None):
+            if (module.default_branch is None):
                 return None
 
             default_refs = module.get_ref_hashes(module.default_branch)
-            if (default_refs == None):
+            if (default_refs is None):
                 return None
 
             # Gets the local branch's tracking remote. If there's no local
@@ -1330,13 +1330,13 @@ class StatusCommand:
                 if (ref[1] == f"refs/heads/{module.default_branch}"):
                     local = (ref[0], module.default_branch)
                 else:
-                    if (default_remote != None):
+                    if (default_remote is not None):
                         if (ref[1] == f"refs/remotes/{default_remote}/{module.default_branch}"):
                             remote = (ref[0],
                                       f"{default_remote}/{module.default_branch}")
                     else:
                         if (ref[1].startswith("refs/remotes/")):
-                            if (remote == None):
+                            if (remote is None):
                                 # Take the first remote always.
                                 if (ref[1].startswith(f"refs/remotes/{DEFAULT_REMOTE}/")):
                                     origin_found = True
@@ -1353,9 +1353,9 @@ class StatusCommand:
                 remote = None
 
             # See section 2.5.7 of the README.gitrj.md
-            if (local == None):
+            if (local is None):
                 return remote
-            if (default_remote == None or remote == None):
+            if (default_remote is None or remote is None):
                 return local
             return remote
 
@@ -1368,10 +1368,10 @@ class StatusCommand:
                 # repository
                 current = _get_current_branch(module)
                 isdirty = module.get_is_dirty() \
-                    if current != None else None
+                    if current is not None else None
                 remote = _get_destination_branch(module)
                 tracking = module.get_tracking_branch_from_head()
-                if (remote == None):
+                if (remote is None):
                     mergebase = None
                     commits = None
                     behind = None
@@ -1383,7 +1383,7 @@ class StatusCommand:
                     rebase = not (mergebase == remote[0])
 
                 out_name = name \
-                    if name != None \
+                    if name is not None \
                     else module.printable_path(module_len)
                 out_hash = current[0] \
                     if self.arguments.long \
@@ -1393,7 +1393,7 @@ class StatusCommand:
                 trackcode = "-"
                 if (tracking):
                     tracking_hash = module.get_ref_hash(tracking)
-                    if (tracking_hash == None):
+                    if (tracking_hash is None):
                         # Current branch is being tracked, but remote doesn't exist
                         trackcode = "t"
                     else:
@@ -1419,10 +1419,10 @@ class StatusCommand:
                               "R" if rebase else "-",
                               out_name, module_len,
                               out_hash,
-                              commits if commits != None else "-",
-                              behind if behind != None else "-",
-                              current[1] if current != None else "-",
-                              remote[1] if remote != None else module.default_branch
+                              commits if commits is not None else "-",
+                              behind if behind is not None else "-",
+                              current[1] if current is not None else "-",
+                              remote[1] if remote is not None else module.default_branch
                           ), flush=True)
                     if (push_required):
                         print("   Local Branch: {} (by {} commit{})".format(
@@ -1473,7 +1473,7 @@ class CobrCommand:
         execute_lock = threading.Lock()
 
         def _execute(module, name=None, default=None, recurse=True):
-            if (name == None):
+            if (name is None):
                 name = module.path()
 
             # No force:
@@ -1483,7 +1483,7 @@ class CobrCommand:
             actual = None
 
             current_branch = module.get_current_branch()
-            if (self.arguments.branch != None):
+            if (self.arguments.branch is not None):
                 try:
                     if (self.arguments.force or current_branch != self.arguments.branch):
                         module.checkout_branch(
@@ -1493,7 +1493,7 @@ class CobrCommand:
                 except GitError:
                     pass
 
-            if (actual == None and default != None):
+            if (actual is None and default is not None):
                 try:
                     if (self.arguments.force or current_branch != default):
                         module.checkout_branch(
@@ -1503,7 +1503,7 @@ class CobrCommand:
                 except GitError:
                     pass
 
-                if (actual == None and DEFAULT_BRANCH != None):
+                if (actual is None and DEFAULT_BRANCH is not None):
                     try:
                         if (self.arguments.force or current_branch != DEFAULT_BRANCH):
                             module.checkout_branch(
@@ -1518,13 +1518,13 @@ class CobrCommand:
                     module.pull(force=self.arguments.force, recurse=recurse)
             except GitError as ex:
                 with execute_lock:
-                    pbranch = actual if actual != None else current_branch
+                    pbranch = actual if actual is not None else current_branch
                     print("\033[35;1mModule:\033[0;35m {}...\033[0m Pull FAILED. {}\n{}"
                           .format(name, pbranch, str(ex)), flush=True)
                 return
 
             with execute_lock:
-                if (actual == None):
+                if (actual is None):
                     print(f"\033[35;1mModule:\033[0;35m {name}...\033[0m NONE.",
                           flush=True)
                 else:
@@ -1536,7 +1536,7 @@ class CobrCommand:
         # Check out the base repository, only if a branch is given. If none is
         # given, then use the current branch, and check out all submodules
         # dependend on the default branch for each submodule
-        if (self.arguments.branch != None):
+        if (self.arguments.branch is not None):
             _execute(base_module, name="base", default=None, recurse=False)
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
@@ -1599,18 +1599,18 @@ class ShbrCommand:
                     branch = None
 
                 if (not self.arguments.show_release):
-                    if (branch != None and branch.startswith(RELEASE_BRANCH)):
+                    if (branch is not None and branch.startswith(RELEASE_BRANCH)):
                         remote = None
                         branch = None
 
                 with execute_lock:
-                    if (branch != None):
+                    if (branch is not None):
                         if (not remote in remotes):
                             remotes[remote] = {branch}
                         else:
                             remotes[remote].add(branch)
 
-                        if (remote != None):
+                        if (remote is not None):
                             if (not branch in branches):
                                 branches[branch] = {remote}
                             else:
@@ -1620,7 +1620,7 @@ class ShbrCommand:
             if (not remote in remotes):
                 return
 
-            if (remote == None):
+            if (remote is None):
                 print("Local:")
                 for branch in sorted(remotes[None]):
                     if (not branch in branches):
@@ -1647,7 +1647,7 @@ class ShbrCommand:
         print_remotes = []
         _print_remotes(None)
         for remote in remotes:
-            if (remote != None):
+            if (remote is not None):
                 if (remote == DEFAULT_REMOTE):
                     _print_remotes(DEFAULT_REMOTE)
                 else:
@@ -1687,7 +1687,7 @@ class RmbrCommand:
             self.arguments.local = True
 
         if ((self.arguments.local or self.arguments.remote)
-                and (self.arguments.branch == None or len(self.arguments.branch) == 0)):
+                and (self.arguments.branch is None or len(self.arguments.branch) == 0)):
             raise ArgumentError("Must specify at least one branch when "
                                 "using option --local or --remote")
 
@@ -1702,7 +1702,7 @@ class RmbrCommand:
         execute_lock = threading.Lock()
 
         def _execute(module, local, remote, prune, name=None, branches=None):
-            if (name == None):
+            if (name is None):
                 name = module.path()
 
             # To prune, we get a list of all the branches locally. If the branch
@@ -1738,7 +1738,7 @@ class RmbrCommand:
                     to_delete[remote].add(branch)
 
             for remote_ref in remote_refs:
-                if (remote_ref == None):
+                if (remote_ref is None):
                     if (local):
                         for branch in branches:
                             _add_to_delete_check(remote_ref, branch)
@@ -1751,7 +1751,7 @@ class RmbrCommand:
                                 if ((not default_remote in remote_refs or
                                      not branch in remote_refs[default_remote]) and
                                         not branch in safe_branches):
-                                    if (prune_branches == None or branch in prune_branches):
+                                    if (prune_branches is None or branch in prune_branches):
                                         _add_to_delete(remote_ref, branch)
                 else:
                     if (remote):
@@ -1792,7 +1792,7 @@ class RmbrCommand:
                           .format(name), flush=True)
                     for remote in deleted_success:
                         branches = " ".join(deleted_success[remote])
-                        if (remote == None):
+                        if (remote is None):
                             print(f"  (local) => {branches}")
                         else:
                             print(f"  {remote} => {branches}")
@@ -1878,10 +1878,10 @@ class BuildCommand:
             raise CommandError(f"Platform '{cplatform}' not present in the configuration file '.gitrjbuild'.")
 
         if self.arguments.release:
-            if self.arguments.config == None:
+            if self.arguments.config is None:
                 self.arguments.config = "release"
         else:
-            if self.arguments.config == None:
+            if self.arguments.config is None:
                 self.arguments.config = "dev"
 
         if not self.arguments.config in config[cplatform]["build"]:
@@ -2089,28 +2089,28 @@ class PerfCommand:
         for c in root.findall("./Benchmarks/BenchmarkCase"):
             type = c.find("./Type").text
             method = c.find("./Method").text
-            mean = c.find("./Statistics/Mean").text if c.find("./Statistics/Mean") != None else None
-            median = c.find("./Statistics/Median").text if c.find("./Statistics/Median") != None else None
-            stderr = c.find("./Statistics/StandardError").text if c.find("./Statistics/StandardError") != None else None
+            mean = c.find("./Statistics/Mean").text if c.find("./Statistics/Mean") is not None else None
+            median = c.find("./Statistics/Median").text if c.find("./Statistics/Median") is not None else None
+            stderr = c.find("./Statistics/StandardError").text if c.find("./Statistics/StandardError") is not None else None
 
             dtype = results.get(type)
-            if dtype == None:
+            if dtype is None:
                 results[type] = { }
                 dtype = results[type]
             dmethod = dtype.get(method)
-            if dmethod == None:
+            if dmethod is None:
                 dtype[method] = { }
                 dmethod = dtype[method]
             dname = dmethod.get(name)
-            if dname == None:
+            if dname is None:
                 dmethod[name] = { }
                 dname = dmethod[name]
-            dname["mean"] = "{:.2f}".format(float(mean)) if mean != None else "-"
-            dname["median"] = "{:.2f}".format(float(median)) if median != None else "-"
-            dname["stderr"] = "{:.2f}".format(float(stderr)) if stderr != None else "-"
+            dname["mean"] = "{:.2f}".format(float(mean)) if mean is not None else "-"
+            dname["median"] = "{:.2f}".format(float(median)) if median is not None else "-"
+            dname["stderr"] = "{:.2f}".format(float(stderr)) if stderr is not None else "-"
 
         summaryxml = root.find("./HostEnvironmentInfo")
-        if summary.get(name) == None:
+        if summary.get(name) is None:
             summary[name] = { }
             props = summary[name]
             props["BenchmarkDotNetCaption"] = summaryxml.find("./BenchmarkDotNetCaption").text
@@ -2146,7 +2146,7 @@ class PerfCommand:
         for type in results:
             for method in results[type]:
                 for name in results[type][method]:
-                    if perfrun.get(name) == None:
+                    if perfrun.get(name) is None:
                         perfrun[name] = True
 
         perftablehdr = [ f"Project '{prj}' Type", "Method" ]
@@ -2154,7 +2154,7 @@ class PerfCommand:
         perfruncol = { }
         for field in perfrun.keys():
             fieldnamematch = re.match(r"Benchmark\.(\S+)", field)
-            if (fieldnamematch == None):
+            if (fieldnamematch is None):
                 fieldname = field
             else:
                 fieldname = fieldnamematch.group(1)
