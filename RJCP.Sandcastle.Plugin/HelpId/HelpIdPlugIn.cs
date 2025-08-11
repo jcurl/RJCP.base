@@ -94,7 +94,7 @@ namespace RJCP.Sandcastle.Plugin
             XmlDocument toc = new();
             using (XmlReader reader = XmlReader.Create(tocFileName, settings)) {
                 toc.Load(reader);
-                XmlNode root = toc.SelectSingleNode("topics");
+                XmlNode root = toc.SelectSingleNode("/topics");
                 if (root is null) {
                     m_Builder.ReportWarning("RJCP001",
                         "Topic file missing root node 'topics'");

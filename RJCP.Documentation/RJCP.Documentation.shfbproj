@@ -105,11 +105,6 @@
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, TypeParameter, AutoDocumentDispose</MissingTags>
     <ComponentConfigurations>
     </ComponentConfigurations>
-    <PlugInConfigurations>
-      <PlugInConfig id="RJCP MSHC Namespace Rewriter" enabled="True">
-        <configuration />
-      </PlugInConfig>
-    </PlugInConfigurations>
     <HtmlSdkLinkType>Msdn</HtmlSdkLinkType>
     <BinaryTOC>True</BinaryTOC>
     <IncludeFavorites>False</IncludeFavorites>
@@ -117,6 +112,26 @@
     <AppendMarkdownFileExtensionsToUrls>False</AppendMarkdownFileExtensionsToUrls>
     <WarnOnMissingSourceContext>False</WarnOnMissingSourceContext>
   </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <PlugInConfigurations>
+      <PlugInConfig id="RJCP MSHC Namespace Rewriter" enabled="True">
+        <configuration />
+      </PlugInConfig>
+    </PlugInConfigurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <PlugInConfigurations>
+      <PlugInConfig id="RJCP MSHC Namespace Rewriter" enabled="True">
+        <configuration />
+      </PlugInConfig>
+      <PlugInConfig id="RJCP Ignore Duplicate Components" enabled="True">
+        <configuration />
+      </PlugInConfig>
+    </PlugInConfigurations>
+  </PropertyGroup>
+
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
        the build.  The others are optional common platform types that may appear. -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
