@@ -37,7 +37,7 @@ create a NuGet package that can then be used for inclusion in your own project.
    from is in git.
 
    ```cmd
-   $Env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64"
+   $Env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x64"
    ```
 
    Then build the release version:

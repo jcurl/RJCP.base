@@ -45,8 +45,8 @@
     <ProjectReference Include="..\buildtasks\RJCP.MSBuildTasks.csproj" />
     <ProjectReference Include="..\..\..\framework\nunitextensions\CodeQuality\RJCP.CodeQuality.csproj" />
 
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="16.10.0" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.10.0" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="16.11.6" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.11.6" />
   </ItemGroup>
 
   <ItemGroup>

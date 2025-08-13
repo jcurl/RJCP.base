@@ -195,6 +195,13 @@
             }
         }
 
+        private bool IsTagged(SourceLabel result)
+        {
+            return
+                result == SourceLabel.LabelMatch ||
+                result == SourceLabel.LabelOverride;
+        }
+
         private async Task<bool> ExecuteAsync()
         {
             ISourceControl provider = null;
@@ -223,7 +230,7 @@
             RevisionControlCommitShort = taskShortCommit.Result;
             RevisionControlDateTime = taskTimeStamp.Result.ToUniversalTime().ToString("yyyyMMdd\\THHmmss");
             RevisionControlDirty = taskDirty.Result.ToString();
-            RevisionControlTagged = (taskLabel.Result == SourceLabel.LabelMatch).ToString();
+            RevisionControlTagged = IsTagged(taskLabel.Result).ToString();
             RevisionControlHost = Environment.MachineName;
             RevisionControlUser = Environment.UserName;
 
