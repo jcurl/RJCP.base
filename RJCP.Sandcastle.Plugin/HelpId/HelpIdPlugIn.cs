@@ -34,7 +34,10 @@ namespace RJCP.Sandcastle.Plugin
         // The mappings are hard-coded. For future versions, we could consider loading in the mappings from a
         // configuration file.
         private readonly Dictionary<string, string> m_TopicMap = new() {
-            { "N:System", "N:_RJCP.System" }
+            { "N:System", "N:_RJCP.System" },
+            { "N:System.Diagnostics.CodeAnalysis", "N:_RJCP.System.Diagnostics.CodeAnalysis" },
+            { "N:System.Runtime.CompilerServices", "N:_RJCP.System.Runtime.CompilerServices" },
+            { "N:System.Runtime.Versioning", "N:_RJCP.System.Runtime.Versioning" }
         };
 
         /// <summary>

@@ -19,7 +19,7 @@
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <RootNamespace>RJCP.Sandcastle.Plugin</RootNamespace>
     <AssemblyName>RJCP.Sandcastle.Plugin</AssemblyName>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Product>RJCP.Sandcastle.Plugin</Product>
     <Title>HelpId Plug-In</Title>
     <Description>A Sandcastle Help File Builder plug-in</Description>
