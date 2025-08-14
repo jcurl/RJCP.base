@@ -2,13 +2,13 @@
 <topic id="401b9f50-28c7-480e-a38f-e636e7fa7754" revisionNumber="1">
     <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
         <introduction>
-            <para>Version 2025wXX.XX was released on [Date].</para>
+            <para>Version 2025w33.4 was released on 14th August 2025.</para>
         </introduction>
 
         <section>
             <title>Changes in this Release</title>
             <content>
-                <para>Built with [Win 11 22631.5262 (23H2)] and [SDK 9.0.203].</para>
+                <para>Built with Win 11 26100.4770 (24H2) and SDK 9.0.302.</para>
 
                 <list class="bullet">
                     <listItem>

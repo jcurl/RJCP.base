@@ -1,29 +1,29 @@
 [git-overrides]
 ; BufferIO - Analyser updates
-f7f3bb4871ba0e317bf33fa0f079c9d121e49163 = release/v0.2.2
+1af9b2179d9f2d1e4aa8376a83d65dec999d0673 = release/v0.2.2
 ; CommandLine - Analyser updates
-2ca617c93ca03d4603a66321726a9bd87022b10a = release/v0.9.1
-; CPUID - Analyzer updates
-2f6b49774a9d56881e1adc1875acf712648a4c60 = release/v0.8.1
+b9405044f83981cfe3b5e93c1724a11ff8964485 = release/v0.9.1
 ; CrashReporter - Analyzer updates
-fbe570ce057e308dd30d565c9b67e5ac3ab300f6 = release/v0.5.2
+3e7ffdab9aabddf04fa55c38ea146627556ae391 = release/v0.5.2
 ; Datastructures - Analyzer updates
-471b0d51e8167561c9121f86e6488596722f80b9 = release/v0.2.1
+b76e14e5f917e3f4a7572644ee3dc74bd717d665 = release/v0.2.1
+; Device Manager - Documentation updates
+2f4e4252afd429a70d48bcd8059e678b55792453 = release/v0.8.3
 ; Environment - Analyzer updates
-c118a7539435a40036dd9d380e3de75e160d6da2 = release/syscomp/v0.2.0,release/v0.3.0,release/ver/v0.3.1
-; Log - Analyzer updates
-6947cd41405669879e92588b85a102d1a5690014 = release/dlt/v0.8.2,release/dltdump/v1.0.2,release/v0.8.2
-; CodeQuality - Analyzer updates
-e7ee9db1d435fcb80abb6c3a0312ce9295a46c88 = release/v0.6.2
+87d98d184637e1ee643503efc8d0c29a6b72d52c = release/syscomp/v0.2.0,release/v0.3.0
+; Log - Documentation updates
+da247e468dd16eb4bbbbc66689ed91556248375d = release/dlt/v0.8.2,release/dltdump/v1.0.2,release/v0.8.2
+; CodeQuality - Documentation updates
+9088cc611b1de50e9522b9df8879de08cf2bca9d = release/v0.6.2
 ; Path - Analyzer updates
-1a714ed6e875b549b1fd1be048aa18c98e7beff1 = release/v0.2.1
+467abe507573416c0771c2e205288b81d4866723 = release/v0.2.1
 ; SerialPortStream - Analyzer updates
-21f60c99621f8d1a6d83a51a9ca2fde6cc22f65e = release/virt/v3.0.1
+0e522cb1397a80b51602be1d4a7867ff5761bbeb = release/v3.0.3,release/virt/v3.0.1
 ; Text Utils - Analyzer updates
-de9d1c51494040295b0d92fcf688fa8b7cc7bb92 = release/v0.5.1
+1b6db41b8701a7d5312dfc5fdaa29ee69cf6fc2b = release/v0.5.1
 ; Thread - Analyzer updates
-03ba104c7a0c94583456a0eb00e7f5260e236ce8 = release/v0.2.1
+fbc8390dc362631c5aaec3253522c50aa8681671 = release/v0.2.1
 ; Trace - Analyzer updates
-3a8b3fcd0628a9b7eb8250ceac11ee42a9e6f9b9 = release/v0.2.1
+53376246d3551507ccd548eb85150ab464b31acb = release/v0.2.1
 ; XML - Analyzer updates
-2cb37d2f4620fbb52bb4ed7ffc0464778d98a4ad = release/v0.2.1
+f218fc3a7c2081d17af87e741bc6c99dc6504653 = release/v0.2.1

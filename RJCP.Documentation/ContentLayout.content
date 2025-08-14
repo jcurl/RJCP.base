@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Topics>
   <Topic id="b93976ed-759f-4fee-aedf-a7a4918f5edc" visible="False" isMSHVRoot="true" title="RJCP Project Documentation" />
-  <Topic id="a1ce1a8d-c655-48c0-b8a4-fc20aa71b12c" visible="True" isSelected="true" title="Welcome to the RJCP Documentation Project">
+  <Topic id="a1ce1a8d-c655-48c0-b8a4-fc20aa71b12c" visible="True" title="Welcome to the RJCP Documentation Project">
     <HelpKeywords>
       <HelpKeyword index="K" term="RJCP, Welcome" />
     </HelpKeywords>
@@ -10,9 +10,9 @@
     <HelpKeywords>
       <HelpKeyword index="K" term="RJCP, version, history" />
     </HelpKeywords>
-    <Topic id="401b9f50-28c7-480e-a38f-e636e7fa7754" visible="True" title="Version 2025wXX.X">
+    <Topic id="401b9f50-28c7-480e-a38f-e636e7fa7754" visible="True" isSelected="true" title="Version 2025w33.4">
       <HelpKeywords>
-        <HelpKeyword index="K" term="RJCP, version, 2025wXX.X" />
+        <HelpKeyword index="K" term="RJCP, version, 2025w33.4" />
       </HelpKeywords>
     </Topic>
     <Topic id="92757fc5-357d-4466-89d3-ae4ff3a32736" visible="True" title="Version 2025w18.6">

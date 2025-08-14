@@ -74,7 +74,7 @@
                 "pack": "dotnet pack --nologo -c Release --no-build --no-restore --include-source --include-symbols -o distribute/release/nuget ${project}",
                 "doc": [
                     "dotnet build -c Release ${docplugin}",
-                    "${msbuild} ${docproject} /t:Rebuild /verbosity:minimal /p:Configuration=Release /p:OutputPath=\"..\\distrubute\\release\\Help\" /nologo"
+                    "${msbuild} ${docproject} /t:Rebuild /verbosity:minimal /p:Configuration=Release /p:OutputPath=\"..\\distribute\\release\\Help\" /nologo"
                 ]
             }
         },
