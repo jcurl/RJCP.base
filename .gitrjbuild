@@ -39,7 +39,7 @@
         "build": {
             "dev": {
                 "clean": "dotnet clean -c Debug ${project}",
-                "build": "dotnet build -c Debug ${project} ${debugflag}",
+                "build": "dotnet build -c Debug ${project} ${debugflag} ${ignoresdk}",
                 "test": "dotnet test --nologo -v q -c Debug --no-build --logger \"trx\" ${project}",
                 "pack": "dotnet pack --nologo -c Debug --no-build --no-restore --include-source --include-symbols -o distribute/debug/nuget ${project}",
                 "doc": [
@@ -49,7 +49,7 @@
             },
             "devsn": {
                 "clean": "dotnet clean -c Debug ${project}",
-                "build": "dotnet build -c Debug ${project} ${debugflag} ${sname}",
+                "build": "dotnet build -c Debug ${project} ${debugflag} ${ignoresdk} ${sname}",
                 "test": "dotnet test --nologo -v q -c Debug --no-build --logger \"trx\" ${project}",
                 "pack": "dotnet pack --nologo -c Debug --no-build --no-restore --include-source --include-symbols -o distribute/debug/nuget ${project}",
                 "doc": [
@@ -59,7 +59,7 @@
             },
             "preview": {
                 "clean": "dotnet clean -c Release ${project}",
-                "build": "dotnet build -c Release ${project}",
+                "build": "dotnet build -c Release ${project} ${ignoresdk}",
                 "test": "dotnet test --nologo -v q -c Release --no-build --logger \"trx\" ${project}",
                 "pack": "dotnet pack --nologo -c Release --no-build --no-restore --include-source --include-symbols -o distribute/preview/nuget ${project}",
                 "doc": [
@@ -69,7 +69,7 @@
             },
             "release": {
                 "clean": "dotnet clean -c Release ${project}",
-                "build": "dotnet build -c Release ${project} ${warnflag} ${authenticode} ${sname}",
+                "build": "dotnet build -c Release ${project} ${ignoresdk} ${warnflag} ${authenticode} ${sname}",
                 "test": "dotnet test --nologo -v q -c Release --no-build --logger \"trx\" --results-directory \"distribute\\TestResults\" ${project}",
                 "pack": "dotnet pack --nologo -c Release --no-build --no-restore --include-source --include-symbols -o distribute/release/nuget ${project}",
                 "doc": [
@@ -86,7 +86,8 @@
                 "authenticode": "/p:X509SigningCert=${CDIR}\\signcert.crt /p:X509TimeStampUri=http://timestamp.digicert.com",
                 "sname": "/p:SignAssembly=true /p:AssemblyOriginatorKeyFile=${CDIR}\\rjcp.snk",
                 "debugflag": "/p:CheckForOverflowUnderflow=true",
-                "warnflag": "/warnaserror"
+                "warnflag": "/warnaserror",
+				"ignoresdk": "/p:CheckEolTargetFramework=false"
             },
             "tools": {
                 "msbuild": {
@@ -115,17 +116,17 @@
         "build": {
             "dev": {
                 "clean": "dotnet clean -c Debug ${project}",
-                "build": "dotnet build -c Debug ${project} ${debugflag}",
+                "build": "dotnet build -c Debug ${project} ${debugflag} ${ignoresdk}",
                 "test": "dotnet test --nologo -c Debug --no-build --logger=\"console;verbosity=quiet\" --logger=\"trx\" ${project}"
             },
             "devsn": {
                 "clean": "dotnet clean -c Debug ${project}",
-                "build": "dotnet build -c Debug ${project} ${debugflag} ${sname}",
+                "build": "dotnet build -c Debug ${project} ${debugflag} ${ignoresdk} ${sname}",
                 "test": "dotnet test --nologo -c Debug --no-build --logger=\"console;verbosity=quiet\" --logger \"trx\" ${project}"
             },
             "preview": {
                 "clean": "dotnet clean -c Release ${project}",
-                "build": "dotnet build -c Release ${project}",
+                "build": "dotnet build -c Release ${project} ${ignoresdk}",
                 "test": "dotnet test --nologo -c Release --no-build --logger=\"console;verbosity=quiet\" --logger \"trx\" ${project}"
             }
         },
@@ -133,7 +134,8 @@
             "env": {
                 "project": "RJCP.Framework-Linux.sln",
                 "sname": "/p:SignAssembly=true /p:AssemblyOriginatorKeyFile=${CDIR}/rjcp.snk",
-                "debugflag": "/p:CheckForOverflowUnderflow=true"
+                "debugflag": "/p:CheckForOverflowUnderflow=true",
+				"ignoresdk": "/p:CheckEolTargetFramework=false"
             },
             "tools": {
                 "msbuild": {
