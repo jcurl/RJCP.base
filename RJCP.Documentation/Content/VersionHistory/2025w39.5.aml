@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="31345784-8279-43b9-96eb-ec479a1c7d27" revisionNumber="1">
+    <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <introduction>
+            <para>Version 2025w39.5 was released on 26th September 2025.</para>
+        </introduction>
+
+        <section>
+            <title>Changes in this Release</title>
+            <content>
+                <para>Built with Win 11 22631.5909 (23H2) and SDK 9.0.305.</para>
+
+                <list class="bullet">
+                    <listItem>
+                        <para>RJCP.IO.Ports.SerialPortStream v3.0.4</para>
+                        <list class="bullet">
+                            <listItem>
+                                <para>Update test frameworks dependencies (DOTNET-1077)</para>
+                            </listItem>
+                        </list>
+                    </listItem>
+                </list>
+            </content>
+        </section>
+
+        <relatedTopics>
+            <link xlink:href="10f19c0c-7a6d-40a8-a637-a6bcb1f08cda" />
+        </relatedTopics>
+    </developerConceptualDocument>
+</topic>

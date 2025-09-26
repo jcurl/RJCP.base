@@ -10,6 +10,11 @@
     <HelpKeywords>
       <HelpKeyword index="K" term="RJCP, version, history" />
     </HelpKeywords>
+    <Topic id="31345784-8279-43b9-96eb-ec479a1c7d27" visible="True" isSelected="true" title="Version 2025w39.5">
+      <HelpKeywords>
+        <HelpKeyword index="K" term="RJCP, version, 2025w39.5" />
+      </HelpKeywords>
+    </Topic>
     <Topic id="401b9f50-28c7-480e-a38f-e636e7fa7754" visible="True" isSelected="true" title="Version 2025w33.4">
       <HelpKeywords>
         <HelpKeyword index="K" term="RJCP, version, 2025w33.4" />

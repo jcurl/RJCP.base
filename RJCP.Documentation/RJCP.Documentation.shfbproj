@@ -179,6 +179,7 @@
     <None Include="Content\VersionHistory\2025w16.7.aml" />
     <None Include="Content\VersionHistory\2025w18.6.aml" />
     <None Include="Content\VersionHistory\2025w33.4.aml" />
+    <None Include="Content\VersionHistory\2025w39.5.aml" />
     <None Include="Content\VersionHistory\VersionHistory.aml" />
     <None Include="Content\Welcome.aml" />
     <None Include="Content\RJCP.Root.aml" />

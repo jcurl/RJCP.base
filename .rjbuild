@@ -1,29 +1,31 @@
 [git-overrides]
 ; BufferIO - Analyser updates
-1af9b2179d9f2d1e4aa8376a83d65dec999d0673 = release/v0.2.2
+bdccc11140d1d76095ab880bc4a229cf56f3ec84 = release/v0.2.2
 ; CommandLine - Analyser updates
-b9405044f83981cfe3b5e93c1724a11ff8964485 = release/v0.9.1
+95a1daeedb469e712075135c99e8ffd99fafc8b8 = release/v0.9.1
+; CpuID - Bugfix, doesn't affect release
+c9d73ede6b227f87d13a16e34bbf01c840cdf24f = release/v0.8.2
 ; CrashReporter - Analyzer updates
-3e7ffdab9aabddf04fa55c38ea146627556ae391 = release/v0.5.2
+cf6dbe48729b039ce27c331f110accbcf1d25c35 = release/v0.5.2
 ; Datastructures - Analyzer updates
-b76e14e5f917e3f4a7572644ee3dc74bd717d665 = release/v0.2.1
+f0922be4f3048736e71f6b3a186e46e533b8d92c = release/v0.2.1
 ; Device Manager - Documentation updates
-2f4e4252afd429a70d48bcd8059e678b55792453 = release/v0.8.3
+3207bfa1e71a04637b2ad701686bc5f486372236 = release/v0.8.3
 ; Environment - Analyzer updates
-87d98d184637e1ee643503efc8d0c29a6b72d52c = release/syscomp/v0.2.0,release/v0.3.0
+db630858139300729a664394175d213ed5b97e05 = release/syscomp/v0.2.0,release/v0.3.0
 ; Log - Documentation updates
-da247e468dd16eb4bbbbc66689ed91556248375d = release/dlt/v0.8.2,release/dltdump/v1.0.2,release/v0.8.2
+26d5a4d16b89d0d08a66dc60d649fef9006a602e = release/dlt/v0.8.2,release/dltdump/v1.0.2,release/v0.8.2
 ; CodeQuality - Documentation updates
-9088cc611b1de50e9522b9df8879de08cf2bca9d = release/v0.6.2
+2d92bc7f8e3ff857efc02fd171735bee145423df = release/v0.6.2
 ; Path - Analyzer updates
-467abe507573416c0771c2e205288b81d4866723 = release/v0.2.1
+f6df71a9ad06a807d35d8d21c443f2147490c3a0 = release/v0.2.1
 ; SerialPortStream - Analyzer updates
-0e522cb1397a80b51602be1d4a7867ff5761bbeb = release/v3.0.3,release/virt/v3.0.1
+01b3f2f582cb9a04048ea3558c190f865e722011 = release/virt/v3.0.1
 ; Text Utils - Analyzer updates
-1b6db41b8701a7d5312dfc5fdaa29ee69cf6fc2b = release/v0.5.1
+4733d651155f94517320b65d60c2c9d21fac7b96 = release/v0.5.1
 ; Thread - Analyzer updates
-fbc8390dc362631c5aaec3253522c50aa8681671 = release/v0.2.1
+ca3720bfc6e69c78bbbbb0c5007b79b6cedf18c5 = release/v0.2.1
 ; Trace - Analyzer updates
-53376246d3551507ccd548eb85150ab464b31acb = release/v0.2.1
+192e8dd3068b18aac222248b97f3635ce975e87d = release/v0.2.1
 ; XML - Analyzer updates
-f218fc3a7c2081d17af87e741bc6c99dc6504653 = release/v0.2.1
+d7b20f26f5615cda51ae46435d89b7ca6fee51b9 = release/v0.2.1
