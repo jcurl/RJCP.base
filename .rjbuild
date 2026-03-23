@@ -1,31 +1,31 @@
 [git-overrides]
 ; BufferIO - Analyser updates
-bdccc11140d1d76095ab880bc4a229cf56f3ec84 = release/v0.2.2
+; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx = release/v0.x.x
 ; CommandLine - Analyser updates
-95a1daeedb469e712075135c99e8ffd99fafc8b8 = release/v0.9.1
+; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx = release/v0.x.x
 ; CpuID - Bugfix, doesn't affect release
-c9d73ede6b227f87d13a16e34bbf01c840cdf24f = release/v0.8.2
+; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx = release/v0.x.x
 ; CrashReporter - Analyzer updates
-cf6dbe48729b039ce27c331f110accbcf1d25c35 = release/v0.5.2
+; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx = release/v0.x.x
 ; Datastructures - Analyzer updates
-f0922be4f3048736e71f6b3a186e46e533b8d92c = release/v0.2.1
+; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx = release/v0.x.x
 ; Device Manager - Documentation updates
-3207bfa1e71a04637b2ad701686bc5f486372236 = release/v0.8.3
+; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx = release/v0.x.x
 ; Environment - Analyzer updates
-db630858139300729a664394175d213ed5b97e05 = release/syscomp/v0.2.0,release/v0.3.0
+; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx = release/v0.x.x
 ; Log - Documentation updates
-26d5a4d16b89d0d08a66dc60d649fef9006a602e = release/dlt/v0.8.2,release/dltdump/v1.0.2,release/v0.8.2
+; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx = release/v0.x.x
 ; CodeQuality - Documentation updates
-2d92bc7f8e3ff857efc02fd171735bee145423df = release/v0.6.2
+; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx = release/v0.x.x
 ; Path - Analyzer updates
-f6df71a9ad06a807d35d8d21c443f2147490c3a0 = release/v0.2.1
+; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx = release/v0.x.x
 ; SerialPortStream - Analyzer updates
-01b3f2f582cb9a04048ea3558c190f865e722011 = release/virt/v3.0.1
+; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx = release/v0.x.x
 ; Text Utils - Analyzer updates
-4733d651155f94517320b65d60c2c9d21fac7b96 = release/v0.5.1
+; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx = release/v0.x.x
 ; Thread - Analyzer updates
-ca3720bfc6e69c78bbbbb0c5007b79b6cedf18c5 = release/v0.2.1
+; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx = release/v0.x.x
 ; Trace - Analyzer updates
-192e8dd3068b18aac222248b97f3635ce975e87d = release/v0.2.1
+; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx = release/v0.x.x
 ; XML - Analyzer updates
-d7b20f26f5615cda51ae46435d89b7ca6fee51b9 = release/v0.2.1
+; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx = release/v0.x.x

@@ -2,7 +2,7 @@
 <topic id="a1ce1a8d-c655-48c0-b8a4-fc20aa71b12c" revisionNumber="1">
     <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
         <introduction>
-            <para>Welcome to the RJCP Documentation. This provides API documentation for the latest .NET Core built assemblies, at this time is .NET Core 8.0.</para>
+            <para>Welcome to the RJCP Documentation. This provides API documentation for the latest .NET Core built assemblies, at this time is .NET Core 10.0, 8.0, 6.0.</para>
         </introduction>
 
         <section>
@@ -12,84 +12,90 @@
 
                 <para>A summary of all the components that are provided, and their current versions:</para>
 
-                <list class="bullet">
-                    <listItem>
-                        <para>RJCP.IO.Buffer v0.2.2</para>
-                        <para>Manages copy buffers for I/O.</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.Core.CommandLine v0.9.1</para>
-                        <para>Command line parsing using reflection.</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.Diagnostics.CpuId v0.8.1</para>
-                        <para>Read CPUID information on Windows for x86 machines.</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.Diagnostics.CrashReporter v0.5.2</para>
-                        <para>Capture core dumps on exceptions and timeouts.</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.Core.Datastructures v0.2.1</para>
-                        <para>Collection of useful algorithms and datastructures.</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.IO.Device v0.8.3</para>
-                        <para>Query devices on Windows</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.Core.Environment v0.3.0</para>
-                        <para>Information about the environment.</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.Core.Environment.Version v0.3.1</para>
-                        <para>Get Windows and .NET version information.</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.Core.SysCompat v0.2.0</para>
-                        <para>Allow some .NET 8.0 features also in .NET Framework projects.</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.Diagnostics.Log v0.8.2</para>
-                        <para>Log and Trace parsing framework.</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.Diagnostics.Log.Dlt v0.8.2</para>
-                        <para>Log and Trace parsing for AutoSAR R19-11 (DLTv1).</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.CodeQuality v0.6.2</para>
-                        <para>Support library for unit testing with NUnit.</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.IO.Path v0.2.1</para>
-                        <para>File name and path parsing.</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.SerialPortStream v3.0.3</para>
-                        <para>Talk with the serial port on Linux and Windows.</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.SerialPortStream.Virtual v3.0.1</para>
-                        <para>Virtual serial ports, intended for testing your protocols with injection.</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.Core.Text v0.5.1</para>
-                        <para>Text processing routines, with an "sprintf" equivalent.</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.Threading v0.2.1</para>
-                        <para>Basic threading support utilities.</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.Diagnostics.Trace v0.2.1</para>
-                        <para>Combine tracing in one project for .NET Framework and .NET Core.</para>
-                    </listItem>
-                    <listItem>
-                        <para>RJCP.Core.Xml v0.2.1</para>
-                        <para>Parse XML with less memory impact.</para>
-                    </listItem>
-                </list>
+                <table>
+                    <tableHeader>
+                        <row>
+                            <entry>Component</entry>
+                            <entry>Description</entry>
+                        </row>
+                    </tableHeader>
+                    <row>
+                        <entry>RJCP.CodeQuality v0.6.3</entry>
+                        <entry>Support library for unit testing with NUnit.</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.Core.CommandLine v0.9.2</entry>
+                        <entry>Command line parsing using reflection.</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.Core.Datastructures v0.2.2</entry>
+                        <entry>Collection of useful algorithms and datastructures.</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.Core.Environment v0.3.1</entry>
+                        <entry>Information about the environment.</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.Core.Environment.Version v0.3.3</entry>
+                        <entry>Get Windows and .NET version information.</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.Core.SysCompat v0.2.1</entry>
+                        <entry>Allow some .NET 8.0 features also in .NET Framework projects.</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.Core.Text v0.5.2</entry>
+                        <entry>Text processing routines, with an "sprintf" equivalent.</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.Core.Xml v0.2.2</entry>
+                        <entry>Parse XML with less memory impact.</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.Diagnostics.CpuId v0.8.3</entry>
+                        <entry>Read CPUID information on Windows for x86 machines.</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.Diagnostics.CrashReporter v0.5.3</entry>
+                        <entry>Capture core dumps on exceptions and timeouts.</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.Diagnostics.Log v0.8.3</entry>
+                        <entry>Log and Trace parsing framework.</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.Diagnostics.Log.Dlt v0.8.3</entry>
+                        <entry>Log and Trace parsing for AutoSAR R19-11 (DLTv1).</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.Diagnostics.Trace v0.2.2</entry>
+                        <entry>Combine tracing in one project for .NET Framework and .NET Core.</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.IO.Buffer v0.2.3</entry>
+                        <entry>Manages copy buffers for I/O.</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.IO.Device v0.8.4</entry>
+                        <entry>Query devices on Windows</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.IO.Path v0.2.2</entry>
+                        <entry>File name and path parsing.</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.SerialPortStream v3.0.5</entry>
+                        <entry>Talk with the serial port on Linux and Windows.</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.SerialPortStream.Virtual v3.0.2</entry>
+                        <entry>Virtual serial ports, intended for testing your protocols with injection.</entry>
+                    </row>
+                    <row>
+                        <entry>RJCP.Threading v0.3.0</entry>
+                        <entry>Basic threading support utilities.</entry>
+                    </row>
+                </table>
             </content>
         </section>
 

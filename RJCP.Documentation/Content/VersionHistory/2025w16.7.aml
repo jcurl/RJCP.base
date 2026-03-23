@@ -14,82 +14,58 @@
                     <listItem>
                         <para>RJCP.IO.Buffer v0.2.2</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Use ConfigureAwait(false) where appropriate (DOTNET-1012)</para>
-                            </listItem>
+                            <listItem>Use ConfigureAwait(false) where appropriate (DOTNET-1012)</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.CodeQuality v0.6.2</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Use <literal>ConfigureAwait(false)</literal> where appropriate (DOTNET-1012)</para>
-                            </listItem>
+                            <listItem>Use <literal>ConfigureAwait(false)</literal> where appropriate (DOTNET-1012)</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Core.CommandLine v0.9.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Support <literal>ITerminalOut.WriteLine()</literal> (DOTNET-1008)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Get a default constructor (DOTNET-1009)</para>
-                            </listItem>
+                            <listItem>Support <literal>ITerminalOut.WriteLine()</literal> (DOTNET-1008)</listItem>
+                            <listItem>Get a default constructor (DOTNET-1009)</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Diagnostics.CrashReporter v0.5.2</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Use <literal>ConfigureAwait(false)</literal> where appropriate (DOTNET-1012)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Remove support for dumping providers asynchronously (DOTNET-1014)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Local copy of DotNetZip used for .NET 4.0 images, fix CVE-2024-48510 (DOTNET-1022)</para>
-                            </listItem>
+                            <listItem>Use <literal>ConfigureAwait(false)</literal> where appropriate (DOTNET-1012)</listItem>
+                            <listItem>Remove support for dumping providers asynchronously (DOTNET-1014)</listItem>
+                            <listItem>Local copy of DotNetZip used for .NET 4.0 images, fix CVE-2024-48510 (DOTNET-1022)</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.IO.Device v0.8.2</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Reduce GC overhead when refreshing devices (DOTNET-1021)</para>
-                            </listItem>
+                            <listItem>Reduce GC overhead when refreshing devices (DOTNET-1021)</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Core.Environment.Version v0.3.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para><literal>WinVersion</literal>: Update for Win11 23H2 (DOTNET-1015)</para>
-                            </listItem>
+                            <listItem><literal>WinVersion</literal>: Update for Win11 23H2 (DOTNET-1015)</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Diagnostics.Log v0.8.2</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Use <literal>ConfigureAwait(false)</literal> where appropriate (DOTNET-1012)</para>
-                            </listItem>
+                            <listItem>Use <literal>ConfigureAwait(false)</literal> where appropriate (DOTNET-1012)</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Diagnostics.Log.Dlt v0.8.2</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Use <literal>ConfigureAwait(false)</literal> where appropriate (DOTNET-1012)</para>
-                            </listItem>
+                            <listItem>Use <literal>ConfigureAwait(false)</literal> where appropriate (DOTNET-1012)</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.SerialPortStream v3.0.2</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Use <literal>ConfigureAwait(false)</literal> where appropriate (DOTNET-1012)</para>
-                            </listItem>
+                            <listItem>Use <literal>ConfigureAwait(false)</literal> where appropriate (DOTNET-1012)</listItem>
                         </list>
                     </listItem>
                 </list>

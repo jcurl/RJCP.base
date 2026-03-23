@@ -14,26 +14,16 @@
                     <listItem>
                         <para>RJCP.IO.Device v0.8.3</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Don't refresh children more than once (DOTNET-1031)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Reset internal cache on getting the device list (DOTNET-1032)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Refresh now properly detects inserted devices (DOTNET-1033)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Remove internal usage of <literal>SafeDevInst</literal> (DOTNET-1036)</para>
-                            </listItem>
+                            <listItem>Don't refresh children more than once (DOTNET-1031)</listItem>
+                            <listItem>Reset internal cache on getting the device list (DOTNET-1032)</listItem>
+                            <listItem>Refresh now properly detects inserted devices (DOTNET-1033)</listItem>
+                            <listItem>Remove internal usage of <literal>SafeDevInst</literal> (DOTNET-1036)</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.SerialPortStream v3.0.3</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>PL2303 writes now wait for completion (DOTNET-1030)</para>
-                            </listItem>
+                            <listItem>PL2303 writes now wait for completion (DOTNET-1030)</listItem>
                         </list>
                     </listItem>
                 </list>

@@ -14,489 +14,227 @@
                     <listItem>
                         <para>RJCP.IO.Buffer v0.2.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Upgrade from .NET 4.5 to .NET 4.6.2 (DOTNET-827)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
+                            <listItem>Upgrade from .NET 4.5 to .NET 4.6.2 (DOTNET-827).</listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.CodeQuality v0.6.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Implement <literal>SparseStream</literal> for testing and simulating data inputs (DOTNET-872)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>SimpleStream</literal>: Provide a stream that does nothing (DOTNET-873)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>SimpleStream</literal>: Extend with constructors to set <literal>StreamMode</literal> (DOTNET-934)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>WriteOnlyStream</literal>: New class for testing streams that are not readable (DOTNET-873)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Streams: Provide <literal>Dispose</literal> checking (DOTNET-862)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Stream Extensions: Provide <literal>ReadStream</literal> that copies into a byte array (DOTNET-875)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>ReadLimitStream</literal>: Provide a stream reader that reads less data than requested (DOTNET-874)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
+                            <listItem>Implement <literal>SparseStream</literal> for testing and simulating data inputs (DOTNET-872).</listItem>
+                            <listItem><literal>SimpleStream</literal>: Provide a stream that does nothing (DOTNET-873).</listItem>
+                            <listItem><literal>SimpleStream</literal>: Extend with constructors to set <literal>StreamMode</literal> (DOTNET-934).</listItem>
+                            <listItem><literal>WriteOnlyStream</literal>: New class for testing streams that are not readable (DOTNET-873).</listItem>
+                            <listItem>Streams: Provide <literal>Dispose</literal> checking (DOTNET-862).</listItem>
+                            <listItem>Stream Extensions: Provide <literal>ReadStream</literal> that copies into a byte array (DOTNET-875).</listItem>
+                            <listItem><literal>ReadLimitStream</literal>: Provide a stream reader that reads less data than requested (DOTNET-874).</listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Core.CommandLine v0.9.0</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Disallow <literal>-</literal>, <literal>+</literal> and <literal>_</literal> for short options (DOTNET-919)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Properly raise <literal>OptionException</literal> on setting properties (DOTNET-913)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Check property and field is writable (DOTNET-912)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Don't use <literal>OptionException</literal> for errors on the options class (DOTNET-920)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>Terminal</literal>: Provide a <literal>ConsoleTerminal</literal> and <literal>VirtualTerminal</literal> to abstract the console, for testing (DOTNET-911)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>ConsoleTerminal</literal>: Add an event on writes (DOTNET-923)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Relax non-option arguments on the command line for Unix/Windows (DOTNET-929)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Expose strings for command line options (DOTNET-930)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Strengthen checks for redirection on .NET 4.0 (DOTNET-932)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Use Unix style on Cygwin (DOTNET-931)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
+                            <listItem>Disallow <literal>-</literal>, <literal>+</literal> and <literal>_</literal> for short options (DOTNET-919).</listItem>
+                            <listItem>Properly raise <literal>OptionException</literal> on setting properties (DOTNET-913).</listItem>
+                            <listItem>Check property and field is writable (DOTNET-912).</listItem>
+                            <listItem>Don't use <literal>OptionException</literal> for errors on the options class (DOTNET-920).</listItem>
+                            <listItem><literal>Terminal</literal>: Provide a <literal>ConsoleTerminal</literal> and <literal>VirtualTerminal</literal> to abstract the console, for testing (DOTNET-911).</listItem>
+                            <listItem><literal>ConsoleTerminal</literal>: Add an event on writes (DOTNET-923).</listItem>
+                            <listItem>Relax non-option arguments on the command line for Unix/Windows (DOTNET-929).</listItem>
+                            <listItem>Expose strings for command line options (DOTNET-930).</listItem>
+                            <listItem>Strengthen checks for redirection on .NET 4.0 (DOTNET-932).</listItem>
+                            <listItem>Use Unix style on Cygwin (DOTNET-931).</listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Diagnostics.CpuId v0.8.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Properly set the number of partitions (DOTNET-878)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Interpret Intel CPUID EAX 18h for TLB structure on modern Intel processors (DOTNET-302)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Intel CPUID Leaf 1fh: Add the Die Group (DOTNET-474)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Update Intel CPUID.EAX=07h feature flags (DOTNET-882)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Update AMD CPUID feature flags (DOTNET-882)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>CpuFeatures</literal> now has more descriptive information (DOTNET-883)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add more feature bits from AMD doc June 2023 (DOTNET-884)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Fix AMD extended checks infinite loop and add 0x80000020 (DOTNET-884)</para>
-                            </listItem>
-                            <listItem>
-                                <para>CPUID AMD: Fix feature bits to use names from AMD documentation (DOTNET-887)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Allow different descriptions for AMD and Intel (DOTNET-885)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Extend Intel features up to 1Fh (DOTNET-890)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Fix incorrect calculation of Performance Features (DOTNET-888)</para>
-                            </listItem>
-                            <listItem>
-                                <para>CPUID DLL: Reimplement in C++17 (DOTNET-888)</para>
-                            </listItem>
-                            <listItem>
-                                <para>CPUID DLL: Use alternatives to <literal>GetCurrentProcessorNumber()</literal> for Windows XP (DOTNET-309)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add Intel BIG.little architecture (DOTNET-891)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Calculate the AMD64 Feature Level (DOTNET-903)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
+                            <listItem>Properly set the number of partitions (DOTNET-878).</listItem>
+                            <listItem>Interpret Intel CPUID EAX 18h for TLB structure on modern Intel processors (DOTNET-302).</listItem>
+                            <listItem>Intel CPUID Leaf 1fh: Add the Die Group (DOTNET-474).</listItem>
+                            <listItem>Update Intel CPUID.EAX=07h feature flags (DOTNET-882).</listItem>
+                            <listItem>Update AMD CPUID feature flags (DOTNET-882).</listItem>
+                            <listItem><literal>CpuFeatures</literal> now has more descriptive information (DOTNET-883).</listItem>
+                            <listItem>Add more feature bits from AMD doc June 2023 (DOTNET-884).</listItem>
+                            <listItem>Fix AMD extended checks infinite loop and add 0x80000020 (DOTNET-884).</listItem>
+                            <listItem>CPUID AMD: Fix feature bits to use names from AMD documentation (DOTNET-887).</listItem>
+                            <listItem>Allow different descriptions for AMD and Intel (DOTNET-885).</listItem>
+                            <listItem>Extend Intel features up to 1Fh (DOTNET-890).</listItem>
+                            <listItem>Fix incorrect calculation of Performance Features (DOTNET-888).</listItem>
+                            <listItem>CPUID DLL: Reimplement in C++17 (DOTNET-888).</listItem>
+                            <listItem>CPUID DLL: Use alternatives to <literal>GetCurrentProcessorNumber()</literal> for Windows XP (DOTNET-309).</listItem>
+                            <listItem>Add Intel BIG.little architecture (DOTNET-891).</listItem>
+                            <listItem>Calculate the AMD64 Feature Level (DOTNET-903).</listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Diagnostics.CrashReporter v0.5.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Upgrade from .NET 4.5 to .NET 4.6.2 (DOTNET-827)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Remove <literal>CodeBase</literal> for <literal>AssemblyDump</literal> (.NET Core) (DOTNET-944)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Correctly Dispose Process (DOTNET-946)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Only delete old files if they're at least five minutes old (DOTNET-969)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Enable NetFX runtime info on .NET 4.8 (DOTNET-976)</para>
-                            </listItem>
-                            <listItem>
-                                <para>CrashReporter .NET Version: Detect newer versions and Mono (DOTNET-847)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Provide Assembly TargetFramework and Config (DOTNET-980)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
+                            <listItem>Upgrade from .NET 4.5 to .NET 4.6.2 (DOTNET-827).</listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem>Remove <literal>CodeBase</literal> for <literal>AssemblyDump</literal> (.NET Core) (DOTNET-944).</listItem>
+                            <listItem>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938).</listItem>
+                            <listItem>Correctly Dispose Process (DOTNET-946).</listItem>
+                            <listItem>Only delete old files if they're at least five minutes old (DOTNET-969).</listItem>
+                            <listItem>Enable NetFX runtime info on .NET 4.8 (DOTNET-976).</listItem>
+                            <listItem>CrashReporter .NET Version: Detect newer versions and Mono (DOTNET-847).</listItem>
+                            <listItem>Provide Assembly TargetFramework and Config (DOTNET-980).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Core.Datastructures v0.2.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Upgrade from .NET 4.5 to .NET 4.6.2 (DOTNET-827)</para>
-                            </listItem>
-                            <listItem>
-                                <para>BitOperations: Aggressive Inlining should be for .NET 4.6.2 as well (DOTNET-871)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>Result</literal>: Set stack frame on exceptions (DOTNET-867)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>Result</literal>: Prevent inlining of frames when capturing an exception (DOTNET-981)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>Result</literal>: Don't set the exception stacktrace if it already has one (DOTNET-992)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>SemVer</literal>: Raise <literal>ArgumentNullException</literal> on comparing <literal>SemVer</literal> (DOTNET-)1003</para>
-                            </listItem>
+                            <listItem>Upgrade from .NET 4.5 to .NET 4.6.2 (DOTNET-827).</listItem>
+                            <listItem>BitOperations: Aggressive Inlining should be for .NET 4.6.2 as well (DOTNET-871).</listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem><literal>Result</literal>: Set stack frame on exceptions (DOTNET-867).</listItem>
+                            <listItem><literal>Result</literal>: Prevent inlining of frames when capturing an exception (DOTNET-981).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
+                            <listItem><literal>Result</literal>: Don't set the exception stacktrace if it already has one (DOTNET-992).</listItem>
+                            <listItem><literal>SemVer</literal>: Raise <literal>ArgumentNullException</literal> on comparing <literal>SemVer</literal> (DOTNET-)1003.</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.IO.Device v0.8.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Upgrade from .NET 4.5 to .NET 4.6.2 (DOTNET-827)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
+                            <listItem>Upgrade from .NET 4.5 to .NET 4.6.2 (DOTNET-827).</listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Core.Environment v0.3.0</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Removed <literal>NetVersion</literal> and <literal>WinVersion</literal> to <literal>RJCP.Core.Environment.Version</literal> v0.3.0 to here (DOTNET-851)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>Platform</literal>: Add function to test if binary is running from a Cygwin Shell (DOTNET-931)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Platform methods now <literal>SupportedOSPlatform</literal> (DOTNET-938)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
+                            <listItem>Removed <literal>NetVersion</literal> and <literal>WinVersion</literal> to <literal>RJCP.Core.Environment.Version</literal> v0.3.0 to here (DOTNET-851).</listItem>
+                            <listItem><literal>Platform</literal>: Add function to test if binary is running from a Cygwin Shell (DOTNET-931).</listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem>Platform methods now <literal>SupportedOSPlatform</literal> (DOTNET-938).</listItem>
+                            <listItem>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Core.Environment.Version v0.3.0</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>New assembly, classes moved from <literal>RJCP.Core.Environment</literal> v0.2.0 to here (DOTNET-851)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>NetVersion</literal>: Provide the Target Version as a <literal>Version</literal> object (DOTNET-842)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>NetVersion</literal>: Rework API for Framework and Install version (DOTNET-845)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>NetVersion</literal>: Detect vanilla .NET 3.0 on Windows XP (DOTNET-844)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>NetVersion</literal>: Apply the <literal>Increment</literal> registry property to the install version (DOTNET-846)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>NetVersion</literal>: Search for Mono 4.2.1 and later (DOTNET-848)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>NetVersion</literal>: Search for Mono 1.x to 4.0.3 (DOTNET-849)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>NetVersion</literal>: Only return one current runtime (DOTNET-850)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>NetVersion</literal>: Use the current MonoRuntime to also determine the installed location (DOTNET-851)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>NetVersion</literal>: Search the path on Windows for other installations of Mono (DOTNET-858)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>NetVersion</literal>: Use the current MonoRuntime on Linux to also determine the installed location (DOTNET-863)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Enable NetFX runtime info on .NET 4.8 (DOTNET-976)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
+                            <listItem>New assembly, classes moved from <literal>RJCP.Core.Environment</literal> v0.2.0 to here (DOTNET-851).</listItem>
+                            <listItem><literal>NetVersion</literal>: Provide the Target Version as a <literal>Version</literal> object (DOTNET-842).</listItem>
+                            <listItem><literal>NetVersion</literal>: Rework API for Framework and Install version (DOTNET-845).</listItem>
+                            <listItem><literal>NetVersion</literal>: Detect vanilla .NET 3.0 on Windows XP (DOTNET-844).</listItem>
+                            <listItem><literal>NetVersion</literal>: Apply the <literal>Increment</literal> registry property to the install version (DOTNET-846).</listItem>
+                            <listItem><literal>NetVersion</literal>: Search for Mono 4.2.1 and later (DOTNET-848).</listItem>
+                            <listItem><literal>NetVersion</literal>: Search for Mono 1.x to 4.0.3 (DOTNET-849).</listItem>
+                            <listItem><literal>NetVersion</literal>: Only return one current runtime (DOTNET-850).</listItem>
+                            <listItem><literal>NetVersion</literal>: Use the current MonoRuntime to also determine the installed location (DOTNET-851).</listItem>
+                            <listItem><literal>NetVersion</literal>: Search the path on Windows for other installations of Mono (DOTNET-858).</listItem>
+                            <listItem><literal>NetVersion</literal>: Use the current MonoRuntime on Linux to also determine the installed location (DOTNET-863).</listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938).</listItem>
+                            <listItem>Enable NetFX runtime info on .NET 4.8 (DOTNET-976).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Core.SysCompat v0.2.0</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Add <literal>RJCP.Core.SysCompat</literal> for .NET Framework (<literal>OSPlatformAttribute</literal>) .NET Framework, .NET Core 6.0 (DOTNET-938)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Provide <literal>ThrowHelpers</literal> (DOTNET-989, DOTNET-990)</para>
-                            </listItem>
+                            <listItem>Add <literal>RJCP.Core.SysCompat</literal> for .NET Framework (<literal>OSPlatformAttribute</literal>) .NET Framework, .NET Core 6.0 (DOTNET-938).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
+                            <listItem>Provide <literal>ThrowHelpers</literal> (DOTNET-989, DOTNET-990).</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Diagnostics.Log v0.8.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Diagnostics.Log.Dlt v0.8.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Provide performance optimisations (DOTNET-833)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Mark common secondary warnings as Verbose (DOTNET-922)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Workaround corrupted verbose with no arguments (DOTNET-921)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
+                            <listItem>Provide performance optimisations (DOTNET-833).</listItem>
+                            <listItem>Mark common secondary warnings as Verbose (DOTNET-922).</listItem>
+                            <listItem>Workaround corrupted verbose with no arguments (DOTNET-921).</listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.IO.Path v0.2.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para><literal>FileSystemNodeInfo</literal>: Allow comparison of two paths if they resolve to the same path (DOTNET-852)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>FileSystemNodeInfo</literal>: Fix resolution of symlinks on Linux and Windows (DOTNET-852)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>FileSystemNodeInfo</literal>: Recurse on Windows XP (DOTNET-852)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>FileExecutable</literal> (<literal>WinExecutable</literal>): A mechanism to test if a file is an executable (DOTNET-856)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>UnixElfExecutable</literal>: Read an ELF file (DOTNET-857)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>FileInfo</literal>: Provide extra debugging (DOTNET-865)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>FileSystemNodeInfo</literal>: The <literal>Path</literal> property should rely on the file system (DOTNET-866)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>FileInfo</literal>: Allow the path <literal>.</literal> (DOTNET-868)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>Path</literal>: Return concrete types instead of parent types (DOTNET-905)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>FileSystemNodeInfo</literal>: Introduce a new property that provides extended information (DOTNET-897)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
+                            <listItem><literal>FileSystemNodeInfo</literal>: Allow comparison of two paths if they resolve to the same path (DOTNET-852).</listItem>
+                            <listItem><literal>FileSystemNodeInfo</literal>: Fix resolution of symlinks on Linux and Windows (DOTNET-852).</listItem>
+                            <listItem><literal>FileSystemNodeInfo</literal>: Recurse on Windows XP (DOTNET-852).</listItem>
+                            <listItem><literal>FileExecutable</literal> (<literal>WinExecutable</literal>): A mechanism to test if a file is an executable (DOTNET-856).</listItem>
+                            <listItem><literal>UnixElfExecutable</literal>: Read an ELF file (DOTNET-857).</listItem>
+                            <listItem><literal>FileInfo</literal>: Provide extra debugging (DOTNET-865).</listItem>
+                            <listItem><literal>FileSystemNodeInfo</literal>: The <literal>Path</literal> property should rely on the file system (DOTNET-866).</listItem>
+                            <listItem><literal>FileInfo</literal>: Allow the path <literal>.</literal> (DOTNET-868).</listItem>
+                            <listItem><literal>Path</literal>: Return concrete types instead of parent types (DOTNET-905).</listItem>
+                            <listItem><literal>FileSystemNodeInfo</literal>: Introduce a new property that provides extended information (DOTNET-897).</listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.SerialPortStream v3.0.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Remove the interface (DOTNET-823)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Upgrade from .NET 4.5 to .NET 4.6.2 (DOTNET-827)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Don't close the port on <literal>ERROR_HANDLE_EOF</literal> (DOTNET-975)</para>
-                            </listItem>
+                            <listItem>Remove the interface (DOTNET-823).</listItem>
+                            <listItem>Upgrade from .NET 4.5 to .NET 4.6.2 (DOTNET-827).</listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem>Annotate methods with <literal>SupportedOSPlatform</literal> (DOTNET-938).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
+                            <listItem>Don't close the port on <literal>ERROR_HANDLE_EOF</literal> (DOTNET-975).</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.SerialPortStream.Virtual v3.0.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Upgrade from .NET 4.5 to .NET 4.6.2 (DOTNET-827)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
+                            <listItem>Upgrade from .NET 4.5 to .NET 4.6.2 (DOTNET-827).</listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Core.Text v0.5.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>SPrintF: Generate tables and replace in code (DOTNET-829)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
+                            <listItem>SPrintF: Generate tables and replace in code (DOTNET-829).</listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Threading v0.2.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para><literal>TaskGroup</literal>: Remove asynchronous behaviour of <literal>TaskCompletionSource</literal> (DOTNET-970)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem><literal>TaskGroup</literal>: Remove asynchronous behaviour of <literal>TaskCompletionSource</literal> (DOTNET-970).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Diagnostics.Trace v0.2.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
                         </list>
                     </listItem>
                     <listItem>
                         <para>RJCP.Core.Xml v0.2.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Upgrade to .NET Core 6.0 (DOTNET-936)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Add .NET 8.0 target (DOTNET-982)</para>
-                            </listItem>
-                            <listItem>
-                                <para>Fix possible <literal>NullReferenceException</literal> on <literal>OnProcessUnknownElement</literal> (DOTNET-832)</para>
-                            </listItem>
+                            <listItem>Upgrade to .NET Core 6.0 (DOTNET-936).</listItem>
+                            <listItem>Add .NET 8.0 target (DOTNET-982).</listItem>
+                            <listItem>Fix possible <literal>NullReferenceException</literal> on <literal>OnProcessUnknownElement</literal> (DOTNET-832).</listItem>
                         </list>
                     </listItem>
                 </list>

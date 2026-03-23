@@ -46,14 +46,14 @@
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <HelpTitle>RJCP Project Documentation</HelpTitle>
-    <HelpFileVersion>2025w18.6</HelpFileVersion>
+    <HelpFileVersion>2026wXX.X</HelpFileVersion>
     <NamingMethod>Guid</NamingMethod>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <RootNamespaceContainer>False</RootNamespaceContainer>
     <NamespaceGrouping>False</NamespaceGrouping>
     <MaximumGroupParts>2</MaximumGroupParts>
     <Preliminary>False</Preliminary>
-    <CopyrightHref>%28C%29 Jason Curl, 2012-2025</CopyrightHref>
+    <CopyrightHref>%28C%29 Jason Curl, 2012-2026</CopyrightHref>
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <CatalogProductId>VS</CatalogProductId>
     <CatalogVersion>100</CatalogVersion>

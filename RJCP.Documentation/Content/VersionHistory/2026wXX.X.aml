@@ -2,21 +2,64 @@
 <topic id="976ad827-eeb4-4300-ba3b-a2e9dc25fc7c" revisionNumber="1">
     <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
         <introduction>
-            <para>Version 2026wXX.X was released on XXth Blanktember 2026.</para>
+            <para>Version 2026w12.7 was released on 22nd March 2026.</para>
         </introduction>
 
         <section>
             <title>Changes in this Release</title>
             <content>
-                <para>Built with Win 11 22631.5909 (23H2) and SDK 9.0.305.</para>
+                <para>Built with Win 11 26200.8037 (25H2) and SDK 10.0.101.</para>
 
                 <list class="bullet">
                     <listItem>
+                        <para>All modules are updated for .NET 10.0 (DOTNET-1094). References to Microsoft packages updated to require the minimum version for easier integration into other projects.</para>
+                        <list class="bullet">
+                            <listItem>RJCP.CodeQuality v0.6.3.</listItem>
+                            <listItem>RJCP.Core.CommandLine v0.9.2.</listItem>
+                            <listItem>RJCP.Core.Datastructures v0.2.2.</listItem>
+                            <listItem>RJCP.Core.Environment v0.3.1.</listItem>
+                            <listItem>RJCP.Core.Environment.Version v0.3.3.</listItem>
+                            <listItem>RJCP.Core.SysCompat v0.2.1.</listItem>
+                            <listItem>RJCP.Core.Text v0.5.2.</listItem>
+                            <listItem>RJCP.Core.Xml v0.2.2.</listItem>
+                            <listItem>RJCP.Diagnostics.CpuId v0.8.3.</listItem>
+                            <listItem>RJCP.Diagnostics.CrashReporter v0.5.3.</listItem>
+                            <listItem>RJCP.Diagnostics.Log v0.8.3.</listItem>
+                            <listItem>RJCP.Diagnostics.Log.Dlt v0.8.3.</listItem>
+                        </list>
+                    </listItem>
+                    <listItem>
+                        <para>RJCP.CodeQuality v0.6.3</para>
+                        <list class="bullet">
+                            <listItem>Fix crash in accessing <literal>Deploy.Workdir</literal> (DOTNET-1096).</listItem>
+                        </list>
+                    </listItem>
+                    <listItem>
+                        <para>RJCP.Core.Environment.Version v0.3.3</para>
+                        <list class="bullet">
+                            <listItem>Update for Windows 11 25H2 (DOTNET-1079).</listItem>
+                        </list>
+                    </listItem>
+                    <listItem>
                         <para>RJCP.Core.SysCompat v0.2.1</para>
                         <list class="bullet">
-                            <listItem>
-                                <para>Add <literal>ThrowHelper</literal> checks for <literal>IList</literal>.</para>
-                            </listItem>
+                            <listItem>Add <literal>ThrowHelper</literal> checks for <literal>IList</literal>.</listItem>
+                            <listItem>Add <literal>EnumExt</literal> for .NET Framework / Core compatibility (DOTNET-1101).</listItem>
+                            <listItem>Add <literal>MarshalExt</literal> for .NET Framework / Core compatibility (DOTNET-1101).</listItem>
+                        </list>
+                    </listItem>
+                    <listItem>
+                        <para>RJCP.Threading v0.3.0</para>
+                        <list class="bullet">
+                            <listItem>Add <literal>RunProcess</literal> class for .NET 4.6.2 and later (DOTNET-1086).</listItem>
+                            <listItem>Add <literal>Executable</literal> wrapper for <literal>RunProcess</literal> (DOTNET-1088).</listItem>
+                        </list>
+                    </listItem>
+                    <listItem>
+                        <para>RJCP.Diagnostics.Trace v0.2.2</para>
+                        <list class="bullet">
+                            <listItem>Use lowest package version from <literal>Microsoft.Extensions</literal> so users don't need to force upgrade (DOTNET-1093).</listItem>
+                            <listItem>Add overloads for <literal>id</literal> in <literal>LogSource.TraceEvent</literal> (DOTNET-1093).</listItem>
                         </list>
                     </listItem>
                 </list>
