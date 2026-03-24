@@ -12,7 +12,7 @@ The RJCP Framework is a collection of libraries for use with other projects.
   - [3.2. Windows](#32-windows)
     - [3.2.1. Preconditions](#321-preconditions)
   - [3.3. Linux](#33-linux)
-    - [3.3.1. Ubuntu 22.04 LTS](#331-ubuntu-2204-lts)
+    - [3.3.1. Ubuntu 2.04 LTS](#331-ubuntu-204-lts)
       - [3.3.1.1. Problems on Ubuntu 22.04](#3311-problems-on-ubuntu-2204)
 - [4. Building](#4-building)
   - [4.1. Using RJ BUILD](#41-using-rj-build)
@@ -26,7 +26,7 @@ The RJCP Framework is a collection of libraries for use with other projects.
 ### 1.1. The Target Framework
 
 The target frameworks are the Desktop version of .NET (version 4.0 to 4.8.1) and
-.NET Core (.NET Standard 2.1 and .NET Core App 3.1 for unit tests).
+.NET Core 6.0, 8.0, 10.0.
 
 ### 1.2. Documentation
 
@@ -40,6 +40,16 @@ API documentation and version history is also maintained using MAML in the
 
 A SandCastle 2025.3.22 plugin is written that fixes the table of contents for
 MSHA/MSHC outputs. When building documentation, the plugin must first be built.
+Generally on release, a copy of the Documentation build is provided on the
+`RJCP.base` repository.
+
+Recommended is to use the `git rj` tool part of this repository:
+
+```sh
+$ git rj build --doc
+```
+
+Manual builds require the plugin for Sandcastle (built automatically above):
 
 ```sh
 $ dotnet build -c Debug RJCP.Sandcastle.Plugin.sln
@@ -62,7 +72,7 @@ the correct paths, you can build local debug builds with the `dotnet build`
 command. This builds for all target frameworks, including .NET Desktop.
 
 This repository contains the global solution file, which is needed when
-compiling with Visual Studio 2022. If you load a solution file from a repository
+compiling with Visual Studio 2026. If you load a solution file from a repository
 from a submodule, you should first build it with the `dotnet build` command,
 that builds properly all dependencies, then the solution for that submodule
 should also generally build. Loading an individual solution file can make it
@@ -102,15 +112,17 @@ The tools in this collection target the frameworks:
 
 - .NET 4.0
 - .NET 4.6.2 and later, up to .NET 4.8.1
-- .NET Core Standard 2.1, .NET Core 3.1, .NET 6.0 (partial)
+- .NET Core 6.0, 8.0, 10.0
+  - You will need to download the .NET SDKs for each. The "out of support"
+    modules are still being maintained by this project to run on older Operating
+    Systems.
 
 ### 3.2. Windows
 
 There are no problems observed when building on Windows 10 or 11 with the Visual
-Studio 2022 (17.6 or later tested) runtime environment which provides .NET
-4.0-4.8.1 SDKs. It appears later versions of the SDK with Visual Studio 2022
-allows targetting for .NET 4.0 without having the target pack (e.g. from Visual
-Studio 2019) installed.
+Studio 2026 (18.4 or later tested) runtime environment which provides .NET
+4.0-4.8 SDKs. It appears later versions of the SDK with Visual Studio 2026
+allows targetting for .NET 4.0 without having the target pack.
 
 #### 3.2.1. Preconditions
 
@@ -130,16 +142,14 @@ To get .NET 4.0 SDK on Linux, install from
 [Mono](https://www.mono-project.com/download/stable/).
 
 You should install [.NET Core 6.0
-SDK](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-install)
-for your Operating System, or later.
+SDK](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-install),
+.NET Core 8.0, .NET Core 10.0 for your Operating System, or later.
 
-#### 3.3.1. Ubuntu 22.04 LTS
+#### 3.3.1. Ubuntu 2.04 LTS
 
-If your Operating System doesn't support .NET Core 3.1 (e.g. Ubuntu 22.04 LTS
-only supports .NET Core 6 and later), you should install the version that is
-supported. Th .NET Core 8 SDK is tested on Ubuntu 22.04 to still build .NET Core
-3.1 binaries. To run those binaries without the .NET 3.1 runtime, set the
-environment variable:
+If your Operating System doesn't support older .NET Core, you should install the
+version that is supported. To run those binaries without the older runtime, set
+the environment variable:
 
 ```sh
 export DOTNET_ROLL_FORWARD=LatestMajor
@@ -148,6 +158,8 @@ export DOTNET_ROLL_FORWARD=LatestMajor
 This will tell the runtime to use the most up to date runtime available.
 
 ##### 3.3.1.1. Problems on Ubuntu 22.04
+
+**This information may be out of date**.
 
 Environment: .NET Core SDK 6.0 and
 [Mono](https://www.mono-project.com/download/stable/) for Ubuntu 20.04 LTS
