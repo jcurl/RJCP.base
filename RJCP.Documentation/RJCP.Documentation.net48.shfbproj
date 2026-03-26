@@ -46,7 +46,7 @@
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <HelpTitle>RJCP Project Documentation</HelpTitle>
-    <HelpFileVersion>2026wXX.X</HelpFileVersion>
+    <HelpFileVersion>2026w13.4</HelpFileVersion>
     <NamingMethod>Guid</NamingMethod>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <RootNamespaceContainer>False</RootNamespaceContainer>
