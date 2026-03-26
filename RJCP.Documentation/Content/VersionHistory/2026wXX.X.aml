@@ -2,7 +2,7 @@
 <topic id="976ad827-eeb4-4300-ba3b-a2e9dc25fc7c" revisionNumber="1">
     <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
         <introduction>
-            <para>Version 2026w12.7 was released on 22nd March 2026.</para>
+            <para>Version 2026w13.4 was released on 26nd March 2026.</para>
         </introduction>
 
         <section>
@@ -26,6 +26,12 @@
                             <listItem>RJCP.Diagnostics.CrashReporter v0.5.3.</listItem>
                             <listItem>RJCP.Diagnostics.Log v0.8.3.</listItem>
                             <listItem>RJCP.Diagnostics.Log.Dlt v0.8.3.</listItem>
+                            <listItem>RJCP.IO.Buffer v0.2.3</listItem>
+                            <listItem>RJCP.IO.Device v0.8.4</listItem>
+                            <listItem>RJCP.IO.Path v0.2.2</listItem>
+                            <listItem>RJCP.SerialPortStream v3.0.5</listItem>
+                            <listItem>RJCP.SerialPortStream.Virtual v3.0.2</listItem>
+                            <listItem>RJCP.Threading v0.3.0</listItem>
                         </list>
                     </listItem>
                     <listItem>
@@ -49,17 +55,24 @@
                         </list>
                     </listItem>
                     <listItem>
-                        <para>RJCP.Threading v0.3.0</para>
-                        <list class="bullet">
-                            <listItem>Add <literal>RunProcess</literal> class for .NET 4.6.2 and later (DOTNET-1086).</listItem>
-                            <listItem>Add <literal>Executable</literal> wrapper for <literal>RunProcess</literal> (DOTNET-1088).</listItem>
-                        </list>
-                    </listItem>
-                    <listItem>
                         <para>RJCP.Diagnostics.Trace v0.2.2</para>
                         <list class="bullet">
                             <listItem>Use lowest package version from <literal>Microsoft.Extensions</literal> so users don't need to force upgrade (DOTNET-1093).</listItem>
                             <listItem>Add overloads for <literal>id</literal> in <literal>LogSource.TraceEvent</literal> (DOTNET-1093).</listItem>
+                        </list>
+                    </listItem>
+                    <listItem>
+                        <para>RJCP.SerialPortStream v3.0.5</para>
+                        <list class="bullet">
+                            <listItem><literal>GetPortNames</literal> shouldn't show disconnected devices (DOTNET-1085).</listItem>
+                            <listItem>Add <literal>Executable</literal> wrapper for <literal>RunProcess</literal> (DOTNET-1088).</listItem>
+                        </list>
+                    </listItem>
+                    <listItem>
+                        <para>RJCP.Threading v0.3.0</para>
+                        <list class="bullet">
+                            <listItem>Add <literal>RunProcess</literal> class for .NET 4.6.2 and later (DOTNET-1086).</listItem>
+                            <listItem>Add <literal>Executable</literal> wrapper for <literal>RunProcess</literal> (DOTNET-1088).</listItem>
                         </list>
                     </listItem>
                 </list>
