@@ -944,7 +944,11 @@ class Expansion:
 
                             symbolstart = None
 
-                            var = os.getenv(variable)
+                            if variable == "CWD":
+                                var = os.getcwd()
+                            else:
+                                var = os.getenv(variable)
+
                             if (var is not None):
                                 # We don't expand environment strings further
                                 resultstring = resultstring + var

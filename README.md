@@ -12,7 +12,7 @@ The RJCP Framework is a collection of libraries for use with other projects.
   - [3.2. Windows](#32-windows)
     - [3.2.1. Preconditions](#321-preconditions)
   - [3.3. Linux](#33-linux)
-    - [3.3.1. Ubuntu 2.04 LTS](#331-ubuntu-204-lts)
+    - [3.3.1. Ubuntu 22.04 LTS](#331-ubuntu-2204-lts)
       - [3.3.1.1. Problems on Ubuntu 22.04](#3311-problems-on-ubuntu-2204)
 - [4. Building](#4-building)
   - [4.1. Using RJ BUILD](#41-using-rj-build)
@@ -38,28 +38,8 @@ directories for files ending with the extension `.md`.
 API documentation and version history is also maintained using MAML in the
 `RJCP.Documentation` folder.
 
-A SandCastle 2025.3.22 plugin is written that fixes the table of contents for
-MSHA/MSHC outputs. When building documentation, the plugin must first be built.
-Generally on release, a copy of the Documentation build is provided on the
-`RJCP.base` repository.
-
-Recommended is to use the `git rj` tool part of this repository:
-
-```sh
-$ git rj build --doc
-```
-
-Manual builds require the plugin for Sandcastle (built automatically above):
-
-```sh
-$ dotnet build -c Debug RJCP.Sandcastle.Plugin.sln
-Restore complete (1.1s)
-  RJCP.Sandcastle.Plugin.HelpId succeeded (2.3s) → RJCP.Sandcastle.Plugin\HelpId\bin\Debug\net48\RJCP.Sandcastle.Plugin.HelpId.dll
-
-$ dotnet build -c Release RJCP.Sandcastle.Plugin.sln
-Restore complete (1.1s)
-  RJCP.Sandcastle.Plugin.HelpId succeeded (0.7s) → RJCP.Sandcastle.Plugin\HelpId\bin\Release\netstandard2.0\RJCP.Sandcastle.Plugin.HelpId.dll
-```
+See [README.md](./RJCP.Documentation/README.md) for information about buiding
+with Sandcastle.
 
 ## 2. Retrieving the Sources
 
@@ -116,13 +96,15 @@ The tools in this collection target the frameworks:
   - You will need to download the .NET SDKs for each. The "out of support"
     modules are still being maintained by this project to run on older Operating
     Systems.
+  - My `RJCP.Core.SysCompat` module tries to minimise the differences between
+    newer .NET Core frameworks, and older .NET Framework SDKs.
 
 ### 3.2. Windows
 
 There are no problems observed when building on Windows 10 or 11 with the Visual
 Studio 2026 (18.4 or later tested) runtime environment which provides .NET
 4.0-4.8 SDKs. It appears later versions of the SDK with Visual Studio 2026
-allows targetting for .NET 4.0 without having the target pack.
+allows targetting for .NET 4.0 without requiring the target pack.
 
 #### 3.2.1. Preconditions
 
@@ -145,7 +127,7 @@ You should install [.NET Core 6.0
 SDK](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-install),
 .NET Core 8.0, .NET Core 10.0 for your Operating System, or later.
 
-#### 3.3.1. Ubuntu 2.04 LTS
+#### 3.3.1. Ubuntu 22.04 LTS
 
 If your Operating System doesn't support older .NET Core, you should install the
 version that is supported. To run those binaries without the older runtime, set
@@ -177,7 +159,8 @@ Testhost process exited with error: Cannot open assembly '/usr/lib/dotnet/dotnet
 Test Run Aborted.
 ```
 
-These errors were not observed on .NET SDK 3.1 and Ubuntu 18.04 LTS.
+These errors were not observed on .NET SDK 3.1 and Ubuntu 18.04 LTS. They may no
+longer be present with newer .NET Core 10.0 SDKs.
 
 ## 4. Building
 
@@ -199,7 +182,7 @@ The options:
   - You must have built prior in release mode with `dotnet build -c Release`
   - To build the documentation
     - HTML Help Compiler 1.4 installation
-    - SHFB 2025.3.22 or later for .NET Core.
+    - SHFB 2026.3.29 for .NET Core. Please use this exact version.
     - Visual Studio Build Tools (msbuild)
 - `git rj build --release` - Build, test, package and create documentation in
   release mode.

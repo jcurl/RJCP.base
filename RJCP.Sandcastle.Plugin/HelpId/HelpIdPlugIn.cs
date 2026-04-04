@@ -5,12 +5,13 @@ namespace RJCP.Sandcastle.Plugin
     using System.IO;
     using System.Xml;
     using System.Xml.Linq;
-    using SandcastleBuilder.Utils.BuildComponent;
-    using SandcastleBuilder.Utils.BuildEngine;
     using Topics;
 
+    using global::Sandcastle.Core.PlugIn;
+    using global::Sandcastle.Core.BuildEngine;
+
     // Namespace already uses "sandcastle"
-    using HelpFileFormats = global::Sandcastle.Core.HelpFileFormats;
+    using HelpFileFormats = global::Sandcastle.Core.Project.HelpFileFormats;
 
     /// <summary>
     /// Plug-in to rename topics to avoid overlap with System topics.
@@ -29,7 +30,7 @@ namespace RJCP.Sandcastle.Plugin
             new ExecutionPoint(BuildStep.BuildTopics, ExecutionBehaviors.After)
         };
 
-        private BuildProcess m_Builder;
+        private IBuildProcess m_Builder;
 
         // The mappings are hard-coded. For future versions, we could consider loading in the mappings from a
         // configuration file.
@@ -51,7 +52,7 @@ namespace RJCP.Sandcastle.Plugin
         /// </summary>
         /// <param name="buildProcess">A reference to the current build process.</param>
         /// <param name="configuration">The configuration data that the plug-in should use to initialize itself.</param>
-        public void Initialize(BuildProcess buildProcess, XElement configuration)
+        public void Initialize(IBuildProcess buildProcess, XElement configuration)
         {
             if (buildProcess.CurrentProject.HelpFileFormat.HasFlag(HelpFileFormats.MSHelpViewer)) {
                 m_Builder = buildProcess;

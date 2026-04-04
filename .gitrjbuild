@@ -44,7 +44,7 @@
                 "pack": "dotnet pack --nologo -c Debug --no-build --no-restore --include-source --include-symbols -o distribute/debug/nuget ${project}",
                 "doc": [
                     "dotnet build -c Debug ${docplugin}",
-                    "${msbuild} ${docproject} /t:Rebuild /verbosity:minimal /p:Configuration=Debug /p:OutputPath=\"..\\distribute\\debug\\Help\" /nologo"
+                    "${msbuild} ${docproject} /t:Rebuild /verbosity:minimal /p:Configuration=Debug /p:CustomBeforeSHFBTargets=\"${CWD}\\${docdir}\\override.dev.proj\" /nologo"
                 ]
             },
             "devsn": {
@@ -54,7 +54,7 @@
                 "pack": "dotnet pack --nologo -c Debug --no-build --no-restore --include-source --include-symbols -o distribute/debug/nuget ${project}",
                 "doc": [
                     "dotnet build -c Debug ${docplugin}",
-                    "${msbuild} ${docproject} /t:Rebuild /verbosity:minimal /p:Configuration=Debug /p:OutputPath=\"..\\distribute\\debug\\Help\" /nologo"
+                    "${msbuild} ${docproject} /t:Rebuild /verbosity:minimal /p:Configuration=Debug /p:CustomBeforeSHFBTargets=\"${CWD}\\${docdir}\\override.devsn.proj\" /nologo"
                 ]
             },
             "preview": {
@@ -64,7 +64,7 @@
                 "pack": "dotnet pack --nologo -c Release --no-build --no-restore --include-source --include-symbols -o distribute/preview/nuget ${project}",
                 "doc": [
                     "dotnet build -c Release ${docplugin}",
-                    "${msbuild} ${docproject} /t:Rebuild /verbosity:minimal /p:Configuration=Release /p:OutputPath=\"..\\distribute\\preview\\Help\" /nologo"
+                    "${msbuild} ${docproject} /bl /t:Rebuild /verbosity:minimal /p:Configuration=Release /p:CustomBeforeSHFBTargets=\"${CWD}\\${docdir}\\override.preview.proj\" /nologo"
                 ]
             },
             "release": {
@@ -74,13 +74,14 @@
                 "pack": "dotnet pack --nologo -c Release --no-build --no-restore --include-source --include-symbols -o distribute/release/nuget ${project}",
                 "doc": [
                     "dotnet build -c Release ${docplugin}",
-                    "${msbuild} ${docproject} /t:Rebuild /verbosity:minimal /p:Configuration=Release /p:OutputPath=\"..\\distribute\\release\\Help\" /nologo"
+                    "${msbuild} ${docproject} /t:Rebuild /verbosity:minimal /p:Configuration=Release /p:CustomBeforeSHFBTargets=\"${CWD}\\${docdir}\\override.release.proj\" /nologo"
                 ]
             }
         },
         "expansion": {
             "env": {
                 "project": "RJCP.Framework.sln",
+                "docdir": "RJCP.Documentation",
                 "docproject": "RJCP.Documentation.sln",
                 "docplugin": "RJCP.Sandcastle.Plugin.sln",
                 "authenticode": "/p:X509SigningCert=${CDIR}\\signcert.crt /p:X509TimeStampUri=http://timestamp.digicert.com",
@@ -94,18 +95,18 @@
                     "exe": "msbuild.exe",
                     "x86": {
                         "path": [
-                            "${ProgramFiles}\\Microsoft Visual Studio\\2022\\BuildTools\\MSBuild\\Current\\Bin\\",
-                            "${ProgramFiles}\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\",
-                            "${ProgramFiles}\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\",
-                            "${ProgramFiles}\\Microsoft Visual Studio\\2022\\Enterprise\\MSBuild\\Current\\Bin\\"
+                            "${ProgramFiles}\\Microsoft Visual Studio\\18\\BuildTools\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles}\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles}\\Microsoft Visual Studio\\18\\Professional\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles}\\Microsoft Visual Studio\\18\\Enterprise\\MSBuild\\Current\\Bin\\"
                         ]
                     },
                     "AMD64": {
                         "path": [
-                            "${ProgramFiles}\\Microsoft Visual Studio\\2022\\BuildTools\\MSBuild\\Current\\Bin\\",
-                            "${ProgramFiles}\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\",
-                            "${ProgramFiles}\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\",
-                            "${ProgramFiles}\\Microsoft Visual Studio\\2022\\Enterprise\\MSBuild\\Current\\Bin\\"
+                            "${ProgramFiles}\\Microsoft Visual Studio\\18\\BuildTools\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles}\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles}\\Microsoft Visual Studio\\18\\Professional\\MSBuild\\Current\\Bin\\",
+                            "${ProgramFiles}\\Microsoft Visual Studio\\18\\Enterprise\\MSBuild\\Current\\Bin\\"
                         ]
                     }
                 }

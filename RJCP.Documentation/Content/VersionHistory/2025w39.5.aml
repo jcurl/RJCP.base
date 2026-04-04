@@ -14,7 +14,7 @@
                     <listItem>
                         <para>RJCP.IO.Ports.SerialPortStream v3.0.4</para>
                         <list class="bullet">
-                            <listItem>Update test frameworks dependencies (DOTNET-1077)</listItem>
+                            <listItem>Update test frameworks dependencies (DOTNET-1077).</listItem>
                         </list>
                     </listItem>
                 </list>

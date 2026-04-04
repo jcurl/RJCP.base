@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 [assembly: ComVisible(false)]
 
-[assembly: CLSCompliant(true)]
+[assembly: CLSCompliant(false)]
 
 // Resources contained within the assembly are English
 [assembly: NeutralResourcesLanguage("en")]
@@ -25,5 +25,5 @@ internal static partial class AssemblyInfo
     public const string ProductVersion = "1.0.0.0";
 
     // Assembly copyright information
-    public const string Copyright = "Copyright \xA9 2025, Jason Curl, All Rights Reserved.";
+    public const string Copyright = "Copyright \xA9 2025-2026, Jason Curl, All Rights Reserved.";
 }

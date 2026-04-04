@@ -5,8 +5,9 @@
     using System.IO;
     using System.Xml;
     using System.Xml.Linq;
-    using SandcastleBuilder.Utils.BuildComponent;
-    using SandcastleBuilder.Utils.BuildEngine;
+
+    using global::Sandcastle.Core.PlugIn;
+    using global::Sandcastle.Core.BuildEngine;
 
     [HelpFileBuilderPlugInExport("RJCP Ignore Duplicate Components",
         Version = AssemblyInfo.ProductVersion,
@@ -20,7 +21,7 @@
             new ExecutionPoint(BuildStep.CreateBuildAssemblerConfigs, ExecutionBehaviors.After)
         };
 
-        private BuildProcess m_Builder;
+        private IBuildProcess m_Builder;
 
         /// <summary>
         /// This read-only property returns a collection of execution points that define when the plug-in should
@@ -33,7 +34,7 @@
         /// </summary>
         /// <param name="buildProcess">A reference to the current build process.</param>
         /// <param name="configuration">The configuration data that the plug-in should use to initialize itself.</param>
-        public void Initialize(BuildProcess buildProcess, XElement configuration)
+        public void Initialize(IBuildProcess buildProcess, XElement configuration)
         {
             m_Builder = buildProcess;
             if (m_Builder is null) return;

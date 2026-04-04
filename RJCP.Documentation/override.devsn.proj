@@ -1,0 +1,14 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <OutputPath>..\distribute\debug\Help\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Add the overridden properties as the value of the SubstitutionTags property -->
+    <SubstitutionTags>$(SubstitutionTags);OutputPath=$(OutputPath)</SubstitutionTags>
+  </PropertyGroup>
+
+  <Target Name="BeforeBuildHelp">
+    <Message Text="BeforeBuildHelp override executed" />
+  </Target>
+</Project>
